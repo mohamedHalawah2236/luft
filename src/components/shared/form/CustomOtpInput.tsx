@@ -1,0 +1,89 @@
+import React from 'react';
+
+import { useFormContext } from 'react-hook-form';
+
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+} from '@/components/ui/input-otp';
+
+import { cn } from '@/lib/utils';
+
+type CustomOtpInputProps = {
+  fieldName: string;
+  numOfDigits: number;
+  label?: string;
+  disabled?: boolean;
+};
+
+export default function CustomOtpInput({
+  numOfDigits,
+  fieldName,
+  label,
+  disabled,
+}: CustomOtpInputProps) {
+  const { formState, control, watch } = useFormContext();
+  const { isSubmitting, errors } = formState;
+  const hasError = errors[fieldName];
+  const otpValue = watch(fieldName) as string;
+
+  return (
+    <FormField
+      control={control}
+      name={fieldName}
+      render={({ field }) => (
+        <FormItem>
+          {label && (
+            <FormLabel
+              className={cn('ms-4 text-base font-bold text-grayish-900', {
+                'text-error-500': hasError,
+              })}
+            >
+              {label}
+            </FormLabel>
+          )}
+          <FormControl>
+            <InputOTP
+              maxLength={numOfDigits}
+              disabled={isSubmitting || disabled}
+              className='!w-full'
+              {...field}
+            >
+              <InputOTPGroup
+                dir='ltr'
+                style={{ direction: 'ltr' }}
+                className='flex items-center gap-2 px-0.5'
+              >
+                {Array.from({ length: numOfDigits }).map((_, i) => {
+                  const fieldHasValue = otpValue[i];
+                  return (
+                    <InputOTPSlot
+                      key={'digit' + i}
+                      index={i}
+                      className={cn(
+                        'size-14 rounded-lg border-[1.4px] text-2xl font-medium text-grayish-900',
+                        {
+                          'border-grayish-900 text-grayish-900': fieldHasValue,
+                          'border-error-500 text-error-500': hasError,
+                        },
+                      )}
+                    />
+                  );
+                })}
+              </InputOTPGroup>
+            </InputOTP>
+          </FormControl>
+          <FormMessage className='ms-4 text-error-500' />
+        </FormItem>
+      )}
+    />
+  );
+}

@@ -1,0 +1,108 @@
+{
+  "common": {
+    "labels": {
+      "email": "Email",
+      "password": "New Password",
+      "confirmPassword": "Confirm New password",
+      "firstName": "First name",
+      "lastName": "Last name"
+    },
+    "placeholders": {
+      "email": "Enter your email Address",
+      "password": "Enter your new password",
+      "confirmPassword": "confirm your new password",
+      "firstName": "Enter your first name",
+      "lastName": "Enter your last name"
+    },
+    "validations": {
+      "email": {
+        "required": "Email is required",
+        "invalid": "Email is not valid"
+      },
+      "password": {
+        "required": "Password is required",
+        "min": "Password must be at least 8 characters",
+        "invalid": "Password must include one uppercase letter, one number, and one special character"
+      },
+      "confirmPassword": {
+        "required": "Confirm password is required",
+        "mismatch": "Passwords do not match"
+      },
+      "firstName": {
+        "required": "First name is required",
+        "invalid": "First name must contain letters only"
+      },
+      "lastName": {
+        "required": "Last name is required",
+        "invalid": "Last name must contain letters only"
+      },
+      "otp": {
+        "required": "OTP is required",
+        "invalidLength": "OTP must be complete"
+      }
+    },
+    "buttons": {
+      "continue": "Continue",
+      "backToLogin": "Back to Log in",
+      "retrySignup": "Retry Signup",
+      "login": "Login",
+      "logout": "Logout"
+    },
+    "toaster": {
+      "otpSent": "OTP is sent to your email",
+      "failedToSendOtp": "Failed to send OTP please try again"
+    }
+  },
+  "auth": {
+    "banner": {
+      "description": "Special stays, thoughtful care",
+      "ratedBy": "rated by {numOfGuests}+ Guests on"
+    },
+    "login": {
+      "title": "Log in to your account",
+      "description": "Hey, Enter your details to get sign into your account",
+      "buttonLabel": "Log in",
+      "forgetPasswordLink": "Forget Password",
+      "orLoginWith": "Or Log in with",
+      "dontHaveAccount": "Don't have an account?",
+      "signupLink": "Sign up"
+    },
+    "signup": {
+      "title": "Create account",
+      "description": "Just a few details to create your account.",
+      "alreadyHaveAccount": "Already have an account?",
+      "loginLink": "Sign in",
+      "setPassword": {
+        "title": "Set your password",
+        "description": "Your password helps keep your account secure.",
+        "buttonLabel": "Create account"
+      },
+      "havingTrouble": "having trouble signing up?"
+    },
+    "forgetPassword": {
+      "title": "Forgot Password",
+      "description": "Enter the email address associated with your account to receive a password reset link.",
+      "buttonLabel": "Send Reset Link",
+      "verifyOTP": "Verify OTP",
+      "setPassword": {
+        "title": "Create a New Password",
+        "description": "Enter a new password below. ",
+        "buttonLabel": "Reset Password"
+      }
+    },
+    "verifyOTP": {
+      "title": "OTP Sent",
+      "description": "A {numOfDigits}-digit verification code was sent to {userEmail}",
+      "buttonLabel": "Send Reset Link",
+      "resendBtn": "Resend",
+      "resendIn": "Resend in",
+      "didntGetCode": "Didn’t get the code?"
+    }
+  },
+  "footer": {
+    "powerBy": "Powered by",
+    "copyright": "© {year} Luft Stay. All rights reserved."
+  },
+  "bookFreeConsultation": "Book Free Consultation",
+  "messageUs": "Message Us"
+}
