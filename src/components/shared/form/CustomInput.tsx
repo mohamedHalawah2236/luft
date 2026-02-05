@@ -83,11 +83,7 @@ function CustomInput({
       name={fieldName}
       render={({ field }) => (
         <FormItem className={formItemClassName}>
-          <FormLabel
-            className={cn('ms-4 text-sm text-grayish-900', {
-              'text-error-500': hasError,
-            })}
-          >
+          <FormLabel className={cn('ms-4 text-sm text-grayish-900')}>
             {label}
             {required && <span className='ms-1'>&#42;</span>}
           </FormLabel>
