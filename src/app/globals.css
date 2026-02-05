@@ -161,26 +161,26 @@
 
     --ps-neutral-30: #fcfcfc;
     --ps-neutral-50: #ececec;
-    --ps-neutral-100: #c4c3c3;
-    --ps-neutral-200: #a7a7a6;
-    --ps-neutral-300: #7f7e7e;
-    --ps-neutral-400: #666565;
-    --ps-neutral-500: #403f3e;
-    --ps-neutral-600: #3a3938;
-    --ps-neutral-700: #2d2d2c;
-    --ps-neutral-800: #232322;
-    --ps-neutral-900: #1b1a1a;
+    --ps-neutral-100: #c4c4c4;
+    --ps-neutral-200: #a8a8a8;
+    --ps-neutral-300: #808080;
+    --ps-neutral-400: #676767;
+    --ps-neutral-500: #414141;
+    --ps-neutral-600: #3b3b3b;
+    --ps-neutral-700: #2e2e2e;
+    --ps-neutral-800: #242424;
+    --ps-neutral-900: #1b1b1b;
 
-    --error-50: #fdebeb;
-    --error-100: #f9c2c2;
-    --error-200: #f7a5a5;
-    --error-300: #f37c7c;
-    --error-400: #f16262;
-    --error-500: #ed3b3b;
-    --error-600: #d83636;
-    --error-700: #a82a2a;
-    --error-800: #822020;
-    --error-900: #641919;
+    --error-50: #f7e8e8;
+    --error-100: #e7b8b8;
+    --error-200: #dc9696;
+    --error-300: #cb6666;
+    --error-400: #c14949;
+    --error-500: #b21b1b;
+    --error-600: #a21919;
+    --error-700: #7e1313;
+    --error-800: #620f0f;
+    --error-900: #4b0b0b;
 
     --success-50: #e9f5eb;
     --success-100: #badfc0;
