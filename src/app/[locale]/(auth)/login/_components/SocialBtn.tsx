@@ -26,7 +26,7 @@ export default function SocialBtn({
       onClick={onClick}
     >
       {icon}
-      <span>{label}</span>
+      <span className='max-sm:text-sm'>{label}</span>
     </Button>
   );
 }

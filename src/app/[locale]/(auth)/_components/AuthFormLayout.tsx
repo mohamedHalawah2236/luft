@@ -29,8 +29,12 @@ export default function AuthFormLayout({
   return (
     <div className='flex flex-col gap-8'>
       <div className='flex flex-col gap-2'>
-        <h2 className='text-[2rem] font-medium text-grayish-900'>{title}</h2>
-        <p className='text-lg font-normal text-grayish-400'>{description}</p>
+        <h2 className='text-[2rem] font-medium text-grayish-900 max-sm:text-2xl'>
+          {title}
+        </h2>
+        <p className='text-lg font-normal text-grayish-400 max-sm:text-base'>
+          {description}
+        </p>
       </div>
       <div className='flex flex-col gap-8'>
         <div className='relative flex flex-col gap-4'>
