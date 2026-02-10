@@ -28,6 +28,7 @@ type CustomInputProps = {
   disabled?: boolean;
   isNumberAsAString?: boolean;
   required?: boolean;
+  showAllErrors?: boolean;
 };
 
 function CustomInput({
@@ -40,6 +41,7 @@ function CustomInput({
   disabled = false,
   isNumberAsAString = false,
   required,
+  showAllErrors,
 }: CustomInputProps) {
   const { formState, control, watch } = useFormContext();
   const { isSubmitting, errors } = formState;
@@ -107,7 +109,10 @@ function CustomInput({
               }
             />
           </FormControl>
-          <FormMessage className='ms-4 text-error-500' />
+          <FormMessage
+            showAllErrors={showAllErrors}
+            className='ms-4 text-error-500'
+          />
         </FormItem>
       )}
     />

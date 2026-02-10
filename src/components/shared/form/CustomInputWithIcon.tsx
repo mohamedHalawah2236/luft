@@ -47,6 +47,7 @@ function CustomInputWithIcon({
   required,
   icon,
   iconAlign,
+  showAllErrors,
 }: CustomInputWithIconProps) {
   const { formState, control, watch } = useFormContext();
   const { isSubmitting, errors } = formState;
@@ -129,7 +130,10 @@ function CustomInputWithIcon({
               )}
             </InputGroup>
           </FormControl>
-          <FormMessage className='ms-4 text-error-500' />
+          <FormMessage
+            showAllErrors={showAllErrors}
+            className='ms-4 text-error-500'
+          />
         </FormItem>
       )}
     />

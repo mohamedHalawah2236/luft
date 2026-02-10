@@ -18,6 +18,7 @@ export default function CustomPasswordInput(props: CustomPasswordInputProps) {
   return (
     <CustomInputWithIcon
       {...props}
+      showAllErrors={true}
       type={showPassword ? 'text' : 'password'}
       icon={
         <button

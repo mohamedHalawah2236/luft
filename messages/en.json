@@ -21,8 +21,10 @@
       },
       "password": {
         "required": "Password is required",
-        "min": "Password must be at least 8 characters",
-        "invalid": "Password must include one uppercase letter, one number, and one special character"
+        "length": "Password must be 8 to 20 characters",
+        "uppercase": "Password must include one uppercase letter",
+        "number": "Password must include one number",
+        "specialCharacter": "Password must include one special character"
       },
       "confirmPassword": {
         "required": "Confirm password is required",

@@ -14,7 +14,8 @@ import { Form } from '@/components/ui/form';
 
 import AuthFormLayout from './AuthFormLayout';
 
-import { isValidPassword } from '@/lib/utils';
+import { PASSWORD_REGEX } from '@/constants';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 
 type SetPasswordFormProps = Omit<
@@ -41,10 +42,35 @@ export default function SetPasswordForm({
 
   const formSchema = z
     .object({
-      password: z
-        .string()
-        .min(8, tCommon('validations.password.min'))
-        .refine(isValidPassword, tCommon('validations.password.invalid')),
+      password: z.string().superRefine((password, ctx) => {
+        if (password.length < 8 || password.length > 20) {
+          ctx.addIssue({
+            code: 'custom',
+            message: tCommon('validations.password.length'),
+          });
+        }
+
+        if (!PASSWORD_REGEX.number.test(password)) {
+          ctx.addIssue({
+            code: 'custom',
+            message: tCommon('validations.password.number'),
+          });
+        }
+
+        if (!PASSWORD_REGEX.special.test(password)) {
+          ctx.addIssue({
+            code: 'custom',
+            message: tCommon('validations.password.specialCharacter'),
+          });
+        }
+
+        if (!PASSWORD_REGEX.uppercase.test(password)) {
+          ctx.addIssue({
+            code: 'custom',
+            message: tCommon('validations.password.uppercase'),
+          });
+        }
+      }),
       confirm_password: z
         .string()
         .min(1, tCommon('validations.confirmPassword.required')),
@@ -60,6 +86,7 @@ export default function SetPasswordForm({
       password: '',
       confirm_password: '',
     },
+    criteriaMode: 'all',
   });
 
   const { mutateAsync, isSuccess } = useMutation({
