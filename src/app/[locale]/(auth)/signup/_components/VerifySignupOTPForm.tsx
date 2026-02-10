@@ -47,8 +47,12 @@ export default function VerifySignupOTPForm({
 
   const formSchema = z.object({
     code: z
-      .string({ required_error: tCommon('validations.otp.required') })
-      .min(+numOfDigits, { message: tCommon('validations.otp.invalidLength') }),
+      .string()
+      .min(1, { message: tCommon('validations.otp.required') })
+      .refine(
+        (otp) => otp.length === +numOfDigits,
+        tCommon('validations.otp.invalidLength'),
+      ),
     identifier: z
       .string({ required_error: tCommon('validations.firstName.required') })
       .min(1, { message: tCommon('validations.firstName.required') }),
