@@ -65,7 +65,7 @@ export default function CustomOtpInput({
                       key={'digit' + i}
                       index={i}
                       className={cn(
-                        'size-10 rounded-lg border-[1.4px] text-lg font-medium text-grayish-900 lg:size-14 lg:text-2xl',
+                        'size-10 rounded-lg border-[1.4px] text-lg font-medium text-grayish-900 md:size-14 lg:text-2xl',
                         {
                           'border-grayish-900 text-grayish-900': fieldHasValue,
                           'border-error-500 text-error-500': hasError,
