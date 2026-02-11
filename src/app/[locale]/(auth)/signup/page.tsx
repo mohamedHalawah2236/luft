@@ -10,8 +10,8 @@ import VerifySignupOTPForm from './_components/VerifySignupOTPForm';
 import { UserSignupData } from '@/types/auth';
 
 export default function CreateAccountPage() {
-  const [isOtpSent, setIsOtpSent] = useState(true);
-  const [isOtpVerified, setIsOtpVerified] = useState(true);
+  const [isOtpSent, setIsOtpSent] = useState(false);
+  const [isOtpVerified, setIsOtpVerified] = useState(false);
   const [userData, setUserData] = useState<UserSignupData>({
     firstName: '',
     lastName: '',
