@@ -7,11 +7,10 @@ import { useTranslations } from 'next-intl';
 import { useMutation } from '@tanstack/react-query';
 
 import ConfirmModal from '@/components/shared/ConfirmModal';
-import { Button } from '@/components/ui/button';
 
 import { logout } from '@/api/auth';
 
-export default function LogoutNavBtn({ token }: { token: string }) {
+export default function useLogout({ token }: { token: string }) {
   const t = useTranslations('common');
   const tLogout = useTranslations('auth.logout');
 
@@ -26,8 +25,8 @@ export default function LogoutNavBtn({ token }: { token: string }) {
     },
   });
 
-  return (
-    <>
+  return {
+    ConfirmLogoutModal: () => (
       <ConfirmModal
         isOpen={isConfirmOpen}
         onConfirm={mutate}
@@ -38,14 +37,7 @@ export default function LogoutNavBtn({ token }: { token: string }) {
           {tLogout('confirm')}
         </p>
       </ConfirmModal>
-      <Button
-        type='button'
-        variant='link'
-        onClick={() => setIsConfirmOpen(true)}
-        disabled={isPending || isSuccess}
-      >
-        {t('buttons.logout')}
-      </Button>
-    </>
-  );
+    ),
+    logout: () => setIsConfirmOpen(true),
+  };
 }

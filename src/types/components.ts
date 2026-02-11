@@ -13,3 +13,20 @@ export type ModalProps = {
   headerClassName?: string;
   footerClassName?: string;
 };
+
+export type DropDownItem = {
+  label: string;
+  icon?: ReactNode;
+  iconAlign?: 'start' | 'end';
+  className?: string;
+  onClick: () => void;
+  disabled?: boolean;
+};
+
+export type DropdownProps = {
+  items: DropDownItem[];
+  trigger: ReactNode;
+  className?: string;
+  itemClassName?: string;
+  align?: 'start' | 'end' | 'center';
+};

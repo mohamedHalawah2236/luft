@@ -5,6 +5,7 @@ import { DefaultSession, getServerSession } from 'next-auth';
 
 import LoginNavBtn from './LoginNavBtn';
 import LogoutNavBtn from './LogoutNavBtn';
+import UserDropdown from './UserDropdown';
 
 import { isLoggedIn } from '@/utils';
 
@@ -13,11 +14,12 @@ import QueryClientProvider from '@/providers/QueryClientProvider';
 
 export default async function Navbar() {
   const isAuth = await isLoggedIn();
-  const session = (await getServerSession(
-    authOptions,
-  )) as DefaultSession['user'] & {
+  const session = (await getServerSession(authOptions)) as DefaultSession & {
     accessToken: string;
   };
+
+  const userName = session?.user?.name;
+  const token = session.accessToken;
 
   return (
     <div className='flex items-center justify-between bg-white px-8 py-3.5 lg:px-[4.5rem]'>
@@ -29,7 +31,10 @@ export default async function Navbar() {
       />
       <QueryClientProvider>
         {isAuth ? (
-          <LogoutNavBtn token={session.accessToken} />
+          <>
+            <UserDropdown {...{ userName, token }} />
+            <LogoutNavBtn token={session.accessToken} />
+          </>
         ) : (
           <LoginNavBtn />
         )}
