@@ -95,7 +95,7 @@ function CustomInput({
               type={type}
               disabled={isSubmitting || disabled}
               className={cn(
-                'h-12 rounded-2xl border-[1.5px] border-grayish-100 bg-white px-4 py-3 text-grayish-900 outline-none transition-all placeholder:text-grayish-400 hover:border-grayish-300 focus-visible:border-grayish-900 focus-visible:ring-0 disabled:border-grayish-100 disabled:bg-grayish-50',
+                'h-12 rounded-2xl border-[1.5px] border-grayish-100 px-4 py-3 text-grayish-900 outline-none transition-all placeholder:text-grayish-400 hover:border-grayish-300 focus-visible:border-grayish-900 focus-visible:ring-0 disabled:border-grayish-100 disabled:bg-grayish-50',
                 {
                   'border-grayish-300': hasValue,
                   'border-error-500 text-error-500 placeholder:text-error-500 hover:border-error-400 focus-visible:border-error-500 focus-visible:text-error-500':

@@ -11,7 +11,7 @@ import { UserSignupData } from '@/types/auth';
 
 export default function CreateAccountPage() {
   const [isOtpSent, setIsOtpSent] = useState(true);
-  const [isOtpVerified, setIsOtpVerified] = useState(false);
+  const [isOtpVerified, setIsOtpVerified] = useState(true);
   const [userData, setUserData] = useState<UserSignupData>({
     firstName: '',
     lastName: '',

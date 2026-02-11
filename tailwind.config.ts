@@ -9,13 +9,10 @@ export default {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    fontFamily: {
-      Unna: ['Unna'],
-      OpenSans: ['Open Sans'],
-      Almarai: ['Almarai'],
-      Inter: ['Inter', 'var(--font-inter)'],
-    },
     extend: {
+      fontFamily: {
+        switzer: ['var(--font-switzer)'],
+      },
       screens: {
         '2xs': '320px',
         xs: '480px',

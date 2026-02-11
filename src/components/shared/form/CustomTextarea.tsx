@@ -37,7 +37,7 @@ function CustomTextarea({
           <FormControl>
             <Textarea
               placeholder={placeholder}
-              className='min-h-48 resize-none rounded-2xl border-secondary-100 bg-white px-4 py-4 placeholder:text-primary-400 hover:bg-neutral-100'
+              className='min-h-48 resize-none rounded-2xl border-secondary-100 px-4 py-4 placeholder:text-primary-400 hover:bg-neutral-100'
               {...field}
               disabled={isSubmitting || disabled}
             />

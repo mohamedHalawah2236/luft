@@ -45,10 +45,7 @@ const CustomPhoneInput = ({
               {...field}
               defaultCountry='EG'
               disabled={isSubmitting || disabled}
-              className={cn(
-                'rounded-2xl bg-white hover:bg-neutral-100',
-                className,
-              )}
+              className={cn('rounded-2xl', className)}
               dir={locale === 'ar' ? 'rtl' : 'ltr'}
             />
           </FormControl>

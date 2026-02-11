@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import { Almarai, Inter, Open_Sans, Unna } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
@@ -7,30 +6,10 @@ import { getMessages } from 'next-intl/server';
 import ConnectionListener from '@/components/ConnectionListener';
 import { Toaster } from '@/components/ui/sonner';
 
+import { switzer } from '@/fonts/fonts';
 import { Locale } from '@/i18n/i18n.config';
 import { routing } from '@/i18n/routing';
 import { siteConfig } from '@/www/config/site';
-
-const openSans = Open_Sans({
-  variable: '--font-open-sans',
-  subsets: ['latin'],
-});
-
-const unna = Unna({
-  variable: '--font-unna',
-  subsets: ['latin'],
-  weight: '400',
-});
-const almarai = Almarai({
-  variable: '--font-almarai',
-  subsets: ['latin'],
-  weight: '400',
-});
-
-const inter = Inter({
-  variable: '--font-inter',
-  subsets: ['latin'],
-});
 
 export const metadata: Metadata = {
   title: {
@@ -110,9 +89,9 @@ export default async function LocaleLayout({
       dir={locale === 'en' ? 'ltr' : 'rtl'}
     >
       <body
-        className={`${openSans.variable} ${unna.variable} ${almarai.variable} ${inter.variable} mx-auto h-dvh w-dvw max-w-[1920px] overflow-hidden bg-grayish-30 antialiased`}
+        className={`${switzer.variable} font-switzer mx-auto h-dvh w-dvw max-w-[1920px] overflow-hidden bg-grayish-30 antialiased`}
         style={{
-          fontFamily: inter.style.fontFamily,
+          fontFamily: switzer.style.fontFamily,
         }}
       >
         <NextIntlClientProvider messages={messages}>
