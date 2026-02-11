@@ -48,7 +48,9 @@
       "backToLogin": "Back to Log in",
       "retrySignup": "Retry Signup",
       "login": "Login",
-      "logout": "Logout"
+      "logout": "Logout",
+      "confirm": "Confirm",
+      "cancel": "Cancel"
     },
     "toaster": {
       "otpSent": "OTP is sent to your email",
@@ -100,6 +102,9 @@
       "resendBtn": "Resend",
       "resendIn": "Resend in",
       "didntGetCode": "Didn’t get the code?"
+    },
+    "logout": {
+      "confirm": "Are you sure you want to log out?"
     }
   },
   "footer": {
