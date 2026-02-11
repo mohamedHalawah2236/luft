@@ -15,24 +15,22 @@ export default function ForgetPasswordPage() {
 
   const isOtpVerified = !!validationKey;
 
-  if (!isOtpSent)
-    return (
-      <div className='flex flex-col'>
+  return (
+    <div className='flex flex-col'>
+      {!isOtpSent ? (
         <ForgetPasswordForm
           setIsOtpSent={setIsOtpSent}
           setUserEmail={setUserEmail}
         />
-        <BackToLoginLink />
-      </div>
-    );
-
-  if (!isOtpVerified)
-    return (
-      <VerifyForgetPasswordOTPForm
-        setValidationKey={setValidationKey}
-        userEmail={userEmail || ''}
-      />
-    );
-
-  return <ResetPasswordForm validationKey={validationKey} />;
+      ) : !isOtpVerified ? (
+        <VerifyForgetPasswordOTPForm
+          setValidationKey={setValidationKey}
+          userEmail={userEmail || ''}
+        />
+      ) : (
+        <ResetPasswordForm validationKey={validationKey} />
+      )}
+      <BackToLoginLink />
+    </div>
+  );
 }
