@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react';
 
+import { SetState } from '.';
+
 export type ModalProps = {
   isOpen?: boolean;
   onClose?: () => void;
@@ -25,8 +27,11 @@ export type DropDownItem = {
 
 export type DropdownProps = {
   items: DropDownItem[];
+  align?: 'start' | 'end' | 'center';
   trigger: ReactNode;
   className?: string;
+  triggerClassName?: string;
   itemClassName?: string;
-  align?: 'start' | 'end' | 'center';
+  isOpen?: boolean;
+  setIsopen?: SetState<boolean>;
 };
