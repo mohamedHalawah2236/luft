@@ -1,27 +1,27 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 
 import { ChevronDown, Heart, Key, Settings } from 'lucide-react';
 
 import Dropdown from '@/components/shared/Dropdown';
 
-import useLogout from '@/hooks/useLogout';
+import ConfirmLogoutModal from './logout/ConfirmLogoutModal';
 
 import { DropDownItem } from '@/types/components';
 
-export default function UserDropdown({
-  userName,
-  token,
-}: {
+type UserDropdownProps = {
   userName: string;
   token: string;
-}) {
+};
+
+export default function UserDropdown({ userName, token }: UserDropdownProps) {
   const firstName = userName?.split(' ')[0];
   const lastName = userName?.split(' ')[1];
   const firstNameLetter = firstName?.[0];
   const lastNameLetter = lastName?.[0];
 
-  const { ConfirmLogoutModal, logout } = useLogout({ token });
+  const [isConfirmLogoutOpen, setIsConfirmLogoutOpen] = useState(false);
+
   const userItems: DropDownItem[] = [
     {
       label: 'Account Settings',
@@ -43,7 +43,7 @@ export default function UserDropdown({
     },
     {
       label: 'Logout',
-      onClick: logout,
+      onClick: () => setIsConfirmLogoutOpen(true),
       className: '',
     },
   ];
@@ -66,9 +66,11 @@ export default function UserDropdown({
           </div>
         }
       />
-      <ConfirmLogoutModal />
+      <ConfirmLogoutModal
+        token={token}
+        isOpen={isConfirmLogoutOpen}
+        setIsOpen={setIsConfirmLogoutOpen}
+      />
     </>
   );
 }
-
-export function DropdownMenuIcons() {}

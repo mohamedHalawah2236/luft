@@ -35,7 +35,7 @@ export default function ConfirmModal({
     >
       <div className='flex w-full flex-col items-center gap-7'>
         <div>{children}</div>
-        <div className='flex items-center gap-3 max-sm:w-full max-sm:flex-col'>
+        <div className='flex items-center gap-3 py-1 max-sm:w-full max-sm:flex-col'>
           <Button
             className='w-24 min-w-fit font-medium max-sm:w-full'
             disabled={isActionsDisabled}

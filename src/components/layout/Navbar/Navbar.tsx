@@ -18,8 +18,8 @@ export default async function Navbar() {
     accessToken: string;
   };
 
-  const userName = session?.user?.name;
-  const token = session.accessToken;
+  const userName = session?.user?.name ?? '';
+  const token = session?.accessToken ?? '';
 
   return (
     <div className='flex items-center justify-between bg-white px-8 py-3.5 lg:px-[4.5rem]'>
@@ -33,7 +33,7 @@ export default async function Navbar() {
         {isAuth ? (
           <>
             <UserDropdown {...{ userName, token }} />
-            <LogoutNavBtn token={session.accessToken} />
+            {/* <LogoutNavBtn token={session.accessToken} /> */}
           </>
         ) : (
           <LoginNavBtn />

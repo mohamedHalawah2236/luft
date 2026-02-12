@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react';
+
 import { Locale } from '@/i18n/i18n.config';
 
 export type Params = Promise<{ locale: Locale }>;
@@ -16,3 +18,5 @@ export type ApiResponse<T> = {
   message: string;
   result: T;
 };
+
+export type SetState<T> = Dispatch<SetStateAction<T>>;
