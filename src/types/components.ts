@@ -35,3 +35,8 @@ export type DropdownProps = {
   isOpen?: boolean;
   setIsopen?: SetState<boolean>;
 };
+
+export type NavLinkProps = {
+  title: string;
+  href: string;
+};

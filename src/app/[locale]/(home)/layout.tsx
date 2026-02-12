@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 
 import Footer from '@/components/layout/Footer';
-import Navbar from '@/components/layout/Navbar/Navbar';
+import Navbar from '@/components/layout/Navbar';
 import RatingByHeader from '@/components/layout/Navbar/RatingByHeader';
 
 export default function AppLayout({ children }: { children: ReactNode }) {
