@@ -2,21 +2,27 @@ import React from 'react';
 
 import StarIcon from '@/components/icons/StarIcon';
 
-import { cn } from '@/lib/utils';
-
-export default function AppRate({
-  rate,
-  className,
-  starClassName,
-}: {
+type AppRateProps = {
   rate: number;
-  className?: string;
-  starClassName?: string;
-}) {
+  color?: string;
+  textClassName?: string;
+};
+
+export default function AppRate({ rate, color, textClassName }: AppRateProps) {
   return (
-    <div className={cn('flex gap-0.5 text-white', className)}>
-      <StarIcon className={cn('size-5 fill-white', starClassName)} />
-      <span>{rate}</span>
+    <div className='flex items-center gap-0.5'>
+      <StarIcon
+        fill={color}
+        className={`size-5`}
+      />
+      <span
+        className={textClassName}
+        style={{
+          color,
+        }}
+      >
+        {rate}
+      </span>
     </div>
   );
 }

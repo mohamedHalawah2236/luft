@@ -9,6 +9,7 @@ export type SearchParams = Promise<{
 
 export type IconProps = {
   className?: string;
+  fill?: string;
 };
 
 export type ApiResponse<T> = {

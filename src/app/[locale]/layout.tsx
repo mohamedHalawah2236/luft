@@ -93,9 +93,7 @@ export default async function LocaleLayout({
       >
         <NextIntlClientProvider messages={messages}>
           <ConnectionListener />
-          {/* <Navbar /> */}
           {children}
-          {/* <Footer /> */}
           <Toaster
             position={locale === 'en' ? 'bottom-left' : 'bottom-right'}
             closeButton
