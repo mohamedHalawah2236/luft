@@ -13,7 +13,7 @@ import ContactItem from './ContactItem';
 import FooterLink from './FooterLink';
 import SocialMediaItem from './SocialMediaItem';
 
-import { getNavLinks } from '@/constants/navLinks';
+import { getNavLinks } from '@/constants/nav';
 
 type SocialLink = {
   icon: ReactNode;

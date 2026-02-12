@@ -4,7 +4,7 @@ import { getTranslations } from 'next-intl/server';
 
 import NavLink from './NavLink';
 
-import { getNavLinks } from '@/constants/navLinks';
+import { getNavLinks } from '@/constants/nav';
 
 export default async function NavLinks() {
   const t = await getTranslations('common.labels');
