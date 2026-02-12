@@ -21,7 +21,7 @@ export default async function NavLinks() {
     },
     {
       title: 'About Us',
-      href: '/about-us',
+      href: '/about',
     },
     {
       title: 'Contact Us',

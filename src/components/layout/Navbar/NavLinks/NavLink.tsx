@@ -11,7 +11,7 @@ import { cn } from '@/lib/utils';
 export default function NavLink({ title, href }: NavLinkProps) {
   const pathname = usePathname();
   const pathnameWithoutLocale = pathname.split('/').slice(2).join('/');
-  const currPathname = pathnameWithoutLocale || '/';
+  const currPathname = `/${pathnameWithoutLocale}`;
 
   const isActive = currPathname === href;
 
