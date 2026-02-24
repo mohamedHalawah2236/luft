@@ -32,19 +32,20 @@ export default function ConfirmModal({
         'w-4/12 min-w-fit gap-0 p-6 max-sm:w-full',
         modalProps.className,
       )}
+      onClose={onCancel}
     >
       <div className='flex w-full flex-col items-center gap-7'>
         <div>{children}</div>
-        <div className='flex items-center gap-3 max-sm:w-full max-sm:flex-col'>
+        <div className='flex w-full items-center gap-3 max-sm:flex-col'>
           <Button
-            className='w-24 min-w-fit font-medium max-sm:w-full'
+            className='w-24 min-w-fit flex-1 font-medium max-sm:w-full'
             disabled={isActionsDisabled}
             onClick={onConfirm}
           >
             {t('confirm')}
           </Button>
           <Button
-            className='w-24 min-w-fit font-medium max-sm:w-full'
+            className='w-24 min-w-fit flex-1 font-medium max-sm:w-full'
             disabled={isActionsDisabled}
             variant='outline'
             onClick={onCancel}

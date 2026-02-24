@@ -41,7 +41,7 @@ export const Modal = ({
         forceMount
         className={cn(
           'flex max-h-[95%] max-w-[90%] flex-col !overflow-hidden rounded-xl bg-grayish-50 p-0',
-          '[&>button>svg]:text-grayish-900',
+          '[&>button>svg]:size-6 [&>button>svg]:text-grayish-900',
           {
             '[&>button]:hidden': !onClose,
           },
