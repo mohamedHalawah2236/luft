@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 
+import Image from 'next/image';
 import { signOut } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 
@@ -34,9 +35,18 @@ export default function LogoutNavBtn({ token }: { token: string }) {
         onCancel={() => setIsConfirmOpen(false)}
         isActionsDisabled={isPending || isSuccess}
       >
-        <p className='text-2xl font-medium text-error-600 max-md:text-xl'>
-          {tLogout('confirm')}{' '}
-        </p>
+        <div className='flex flex-col items-center gap-6'>
+          <Image
+            src='images/auth/logoutConfirm.png'
+            alt='Logout'
+            width={98.73619842529297}
+            height={185}
+          />
+          <div className='flex flex-col items-center gap-2 text-center'>
+            <h4 className='text-xl font-medium'>{tLogout('title')}</h4>
+            <p className='text-neutral-400'>{tLogout('logBack')}</p>
+          </div>
+        </div>
       </ConfirmModal>
       <Button
         type='button'

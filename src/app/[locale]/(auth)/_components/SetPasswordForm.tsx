@@ -121,8 +121,8 @@ export default function SetPasswordForm({
           <CustomPasswordInput
             required
             fieldName='password'
-            label={tCommon('labels.password')}
-            placeholder={tCommon('placeholders.password')}
+            label={tCommon('labels.newPassword')}
+            placeholder={tCommon('placeholders.newPassword')}
           />
           <CustomPasswordInput
             required
