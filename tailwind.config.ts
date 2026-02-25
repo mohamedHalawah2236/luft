@@ -10,6 +10,17 @@ export default {
   ],
   theme: {
     extend: {
+      container: {
+        center: true,
+        screens: {
+          '2xl': '1440px',
+        },
+        padding: {
+          DEFAULT: '16px',
+          md: '24px',
+          lg: '71px',
+        },
+      },
       fontFamily: {
         switzer: ['var(--font-switzer)'],
       },
@@ -158,7 +169,7 @@ export default {
     },
   },
   corePlugins: {
-    container: false,
+    container: true,
   },
   plugins: [tailwindcssAnimate],
 } satisfies Config;

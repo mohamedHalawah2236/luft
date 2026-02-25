@@ -85,9 +85,9 @@ function CustomInput({
       name={fieldName}
       render={({ field }) => (
         <FormItem className={formItemClassName}>
-          <FormLabel className={cn('ms-4 text-sm text-grayish-900')}>
+          <FormLabel className={cn(' text-neutral-900 ')}>
             {label}
-            {required && <span className='ms-1'>&#42;</span>}
+            {required && <span className='ms-1 '>&#42;</span>}
           </FormLabel>
           <FormControl>
             <Input

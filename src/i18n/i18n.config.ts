@@ -1,6 +1,6 @@
 export const i18n = {
   // A list of all locales that are supported
-  locales: ['en', 'ar'],
+  locales: ['en', 'it'],
 
   // Used when no locale matches
   defaultLocale: 'en',

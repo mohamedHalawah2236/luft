@@ -1,8 +1,10 @@
+import HeroSection from "./_components/HeroSection";
+
 const Home = async () => {
   return (
-    <>
-      <div>Home Page</div>
-    </>
+    <section className="container pt-6 md:pt-10 lg:pt-[136px]">
+      <HeroSection />
+    </section>
   );
 };
 export default Home;
