@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 
-import { Menu } from 'lucide-react';
+import { Heart, Key, Menu, Settings } from 'lucide-react';
 
 import {
   Sheet,
@@ -10,7 +10,7 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 
-import UserSetting from './UserSetting';
+import UserLink from './UserSetting';
 
 import { getNavLinks } from '@/constants/nav';
 
@@ -38,7 +38,21 @@ async function MobileNavSheet() {
           </div>
           <hr className='text-grayish-100' />
           <div className='flex flex-col gap-[1.1rem]'>
-            <UserSetting />
+            <UserLink
+              label='Account Settings'
+              icon={<Settings className='!size-6 stroke-grayish-900' />}
+              href='settings'
+            />
+            <UserLink
+              label='My Reservations'
+              icon={<Key className='!size-6 stroke-grayish-900' />}
+              href='reservations'
+            />
+            <UserLink
+              label='Wishlist'
+              icon={<Heart className='!size-6 fill-grayish-900' />}
+              href='whishlist'
+            />
           </div>
         </div>
         <SheetFooter></SheetFooter>

@@ -1,15 +1,22 @@
 import React, { ReactNode } from 'react';
 
-type UserSettingProps = {
+import Link from 'next/link';
+
+type UserLinkProps = {
   label: string;
   icon: ReactNode;
+  href: string;
 };
 
-export default function UserSetting({ label, icon }: UserSettingProps) {
+export default function UserLink({ label, icon, href }: UserLinkProps) {
   return (
-    <div className='flex items-center gap-2'>
+    <Link
+      type='button'
+      className='flex items-center gap-2'
+      href={href}
+    >
       {icon}
       <span>{label}</span>
-    </div>
+    </Link>
   );
 }
