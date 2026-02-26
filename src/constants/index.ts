@@ -14,3 +14,7 @@ export const PASSWORD_REGEX = {
   number: /\d/,
   special: /[^A-Za-z0-9]/,
 } as const;
+
+import { getTranslations } from 'next-intl/server';
+
+export type TFunction = Awaited<ReturnType<typeof getTranslations>>;
