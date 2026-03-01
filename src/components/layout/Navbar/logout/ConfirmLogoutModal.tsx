@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 
+import Image from 'next/image';
 import { signOut } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 
@@ -11,7 +12,6 @@ import ConfirmModal from '@/components/shared/ConfirmModal';
 import { SetState } from '@/types';
 
 import { logout } from '@/api/auth';
-import Image from 'next/image';
 
 type ConfirmLogoutModalProps = {
   token: string;
@@ -24,7 +24,6 @@ export default function ConfirmLogoutModal({
   isOpen,
   setIsOpen,
 }: ConfirmLogoutModalProps) {
-  const t = useTranslations('common');
   const tLogout = useTranslations('auth.logout');
 
   const { mutate, isPending, isSuccess } = useMutation({

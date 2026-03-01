@@ -1,45 +1,19 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 
 import { getTranslations } from 'next-intl/server';
 
-import FacebookIcon from '@/components/icons/FacebookIcon';
-import InstgramIcon from '@/components/icons/InstgramIcon';
-import LinkedInIcon from '@/components/icons/LinkedInIcon';
 import Logo from '@/components/icons/Logo';
-import XIcon from '@/components/icons/XIcon';
 import RatedByGuests from '@/components/shared/RatedByGuests';
 
 import ContactItem from './ContactItem';
 import FooterLink from './FooterLink';
 import SocialMediaItem from './SocialMediaItem';
 
+import { socialLinks } from '@/constants/links';
 import { getNavLinks } from '@/constants/nav';
-
-type SocialLink = {
-  icon: ReactNode;
-  link: string;
-};
 
 export default async function Footer() {
   const t = await getTranslations();
-  const socialLinks: SocialLink[] = [
-    {
-      icon: <InstgramIcon />,
-      link: '',
-    },
-    {
-      icon: <FacebookIcon />,
-      link: '',
-    },
-    {
-      icon: <LinkedInIcon />,
-      link: '',
-    },
-    {
-      icon: <XIcon />,
-      link: '',
-    },
-  ];
 
   const navLinks = getNavLinks(t);
 

@@ -40,3 +40,8 @@ export type NavLinkProps = {
   title: string;
   href: string;
 };
+
+export type SelectOption = {
+  label: string;
+  value: string;
+};
