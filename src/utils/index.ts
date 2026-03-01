@@ -1,5 +1,7 @@
 import { getServerSession } from 'next-auth';
 
+import { Direction } from '@/types';
+
 import { authOptions } from '@/lib/auth';
 
 export const handleDownloadDocument = async (
@@ -32,4 +34,8 @@ export const handleDownloadDocument = async (
 export const isLoggedIn = async () => {
   const session = await getServerSession(authOptions);
   return !!session;
+};
+
+export const getDirection = (): Direction => {
+  return document.documentElement.dir === 'rtl' ? 'rtl' : 'ltr';
 };

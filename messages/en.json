@@ -6,7 +6,9 @@
       "newPassword": "New Password",
       "confirmPassword": "Confirm New password",
       "firstName": "First name",
-      "lastName": "Last name"
+      "lastName": "Last name",
+      "contact": "Contact Us",
+      "menu": "Menu"
     },
     "placeholders": {
       "email": "Enter your email Address",
@@ -58,7 +60,17 @@
       "otpSent": "OTP is sent to your email",
       "failedToSendOtp": "Failed to send OTP please try again"
     },
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "navLinks": {
+      "home": "Home",
+      "owners": "For Owners",
+      "about": "About Us",
+      "contact": "Contact Us",
+      "settings": "Account Settings",
+      "reservations": "My Reservations",
+      "wishlist": "Wishlist"
+    },
+    "logout": "Logout"
   },
   "auth": {
     "banner": {
@@ -111,8 +123,9 @@
     }
   },
   "footer": {
-    "powerBy": "Powered by",
-    "copyright": "© {year} Luft Stay. All rights reserved."
+    "termsOfService": "Terms of service",
+    "allRightsReserved": "All Rights Reserved © 2025 Luft Stay .",
+    "tagline": "إقامات مميزة — منازل مختارة بعناية، وخدمة مدروسة، ورعاية كونسيرج عند الحاجة."
   },
   "connection": {
     "lost": "No internet connection",

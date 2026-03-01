@@ -21,3 +21,5 @@ export type ApiResponse<T> = {
 };
 
 export type SetState<T> = Dispatch<SetStateAction<T>>;
+
+export type Direction = 'ltr' | 'rtl';

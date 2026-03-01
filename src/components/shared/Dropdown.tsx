@@ -9,6 +9,8 @@ import {
 
 import { DropdownProps } from '@/types/components';
 
+import { getDirection } from '@/utils';
+
 import { cn } from '@/lib/utils';
 
 export default function Dropdown({
@@ -21,10 +23,13 @@ export default function Dropdown({
   isOpen,
   setIsopen,
 }: DropdownProps) {
+  const dir = getDirection();
+
   return (
     <DropdownMenu
       open={isOpen}
       onOpenChange={setIsopen}
+      dir={dir}
     >
       <DropdownMenuTrigger className={triggerClassName}>
         {trigger}
@@ -49,7 +54,8 @@ export default function Dropdown({
               onClick={onClick}
             >
               {iconAlign === 'start' && icon}
-              {label} {iconAlign === 'end' && icon}
+              <span>{label}</span>
+              {iconAlign === 'end' && icon}
             </DropdownMenuItem>
           ),
         )}

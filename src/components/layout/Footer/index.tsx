@@ -24,8 +24,7 @@ export default async function Footer() {
         <div className='flex flex-col gap-6'>
           <Logo className='h-[3.75rem] w-[8.75rem] fill-white' />
           <p className='text-lg text-grayish-100 md:max-w-[21rem]'>
-            Stays made special — curated homes, thoughtful service, and
-            concierge care when you need it.
+            {t('footer.tagline')}
           </p>
           <div className='flex flex-col gap-6 max-sm:hidden'>
             <RatedByGuests
@@ -45,7 +44,7 @@ export default async function Footer() {
 
         {/* Second Column */}
         <div className='flex flex-col gap-2'>
-          <span className='text-sm leading-6'>Menu</span>
+          <span className='text-sm leading-6'>{t('common.labels.menu')}</span>
           <div className='flex flex-col gap-4'>
             {navLinks.map(({ title, href }) => (
               <FooterLink
@@ -59,11 +58,11 @@ export default async function Footer() {
         {/* Third Column */}
         <div className='flex flex-col gap-4 max-sm:mt-6'>
           <ContactItem
-            label='Contact Us'
+            label={t('common.labels.contact')}
             value='+02 123 432 9955'
           />
           <ContactItem
-            label='Email'
+            label={t('common.labels.email')}
             value='luftstay@email.com'
           />
         </div>
@@ -85,8 +84,8 @@ export default async function Footer() {
       </div>
 
       <div className='flex items-center justify-between border-t border-grayish-600 pt-7 text-sm leading-6'>
-        <p>Terms of service</p>
-        <p>All Rights Reserved © 2025 Luft Stay .</p>
+        <p>{t('footer.termsOfService')}</p>
+        <p>{t('footer.allRightsReserved')}</p>
       </div>
     </div>
   );

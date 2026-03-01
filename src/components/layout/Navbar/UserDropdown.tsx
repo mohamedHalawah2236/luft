@@ -1,8 +1,11 @@
 'use client';
 import React, { useState } from 'react';
 
-import { ChevronDown, Heart, Key, Settings } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
+import { ChevronDown, Heart, Settings } from 'lucide-react';
+
+import KeyIcon from '@/components/icons/KeyIcon';
 import Dropdown from '@/components/shared/Dropdown';
 
 import ConfirmLogoutModal from './logout/ConfirmLogoutModal';
@@ -17,6 +20,7 @@ type UserDropdownProps = {
 };
 
 export default function UserDropdown({ userName, token }: UserDropdownProps) {
+  const t = useTranslations('common');
   const firstName = userName?.split(' ')[0];
   const lastName = userName?.split(' ')[1];
   const firstNameLetter = firstName?.[0];
@@ -27,25 +31,25 @@ export default function UserDropdown({ userName, token }: UserDropdownProps) {
 
   const userItems: DropDownItem[] = [
     {
-      label: 'Account Settings',
+      label: t('navLinks.settings'),
       disabled: true,
       onClick: () => {},
       icon: <Settings className='!size-5' />,
     },
     {
-      label: 'My Reservations',
+      label: t('navLinks.reservations'),
       disabled: true,
       onClick: () => {},
-      icon: <Key className='!size-5' />,
+      icon: <KeyIcon className='!size-5' />,
     },
     {
-      label: 'Wishlist',
+      label: t('navLinks.wishlist'),
       disabled: true,
       onClick: () => {},
       icon: <Heart className='!size-5 fill-grayish-900' />,
     },
     {
-      label: 'Logout',
+      label: t('logout'),
       onClick: () => setIsConfirmLogoutOpen(true),
       className: 'mt-4',
     },

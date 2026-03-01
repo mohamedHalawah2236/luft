@@ -4,19 +4,19 @@ import { NavLinkProps } from '@/types/components';
 
 export const getNavLinks = (t: TFunction): NavLinkProps[] => [
   {
-    title: 'Home',
+    title: t('common.navLinks.home'),
     href: '/',
   },
   {
-    title: 'For Owners',
+    title: t('common.navLinks.owners'),
     href: '/owners',
   },
   {
-    title: 'About Us',
+    title: t('common.navLinks.about'),
     href: '/about',
   },
   {
-    title: 'Contact Us',
+    title: t('common.navLinks.contact'),
     href: '/contact',
   },
 ];

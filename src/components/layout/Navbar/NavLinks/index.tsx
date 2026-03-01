@@ -7,8 +7,7 @@ import NavLink from './NavLink';
 import { getNavLinks } from '@/constants/nav';
 
 export default async function NavLinks() {
-  const t = await getTranslations('common.labels');
-  console.log(t('email'));
+  const t = await getTranslations();
 
   const navLinks = getNavLinks(t);
 
