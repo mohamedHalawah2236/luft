@@ -1,5 +1,5 @@
 import { getServerSession } from 'next-auth';
-import { getSession } from 'next-auth/react';
+import { getSession, signOut } from 'next-auth/react';
 
 import { i18n } from '@/i18n/i18n.config';
 import { authOptions } from '@/lib/auth';
@@ -57,6 +57,14 @@ export async function getAllData(endpoint: string, options: RequestInit = {}) {
   });
 
   if (!res.ok) {
+    if (res.status === 401) {
+      signOut({
+        redirect: true,
+        callbackUrl: '/login',
+      });
+      throw new Error('401 Unauthorized');
+    }
+
     throw new Error(
       `Failed to retrieve data from ${endpoint}, status code: ${res.status}`,
     );
@@ -94,6 +102,14 @@ export async function postData(endpoint: string, options: RequestInit = {}) {
   });
 
   if (!res.ok) {
+    if (res.status === 401) {
+      signOut({
+        redirect: true,
+        callbackUrl: '/login',
+      });
+      throw new Error('401 Unauthorized');
+    }
+
     throw new Error(`HTTP error! Status: ${res.status}`);
   }
 
