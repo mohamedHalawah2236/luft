@@ -44,7 +44,6 @@ export default function ProfileForm() {
   const { isFetching, isFetched, data } = useQuery<GetUserProfileRes>({
     queryKey: ['settings'],
     queryFn: getProfileData,
-    refetchOnWindowFocus: false,
   });
 
   const userData = data?.result;
