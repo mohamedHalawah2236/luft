@@ -28,14 +28,15 @@ export default function ProfileImgInput({
 
   const file = watch('file');
   const uploadedImgUrl = file ? URL.createObjectURL(file) : '';
+  const previewImage = uploadedImgUrl || image;
 
   return (
     <div className={cn('relative', className)}>
       {isLoading ? (
         <Skeleton className='size-[7.5rem] rounded-full' />
-      ) : image ? (
+      ) : previewImage ? (
         <img
-          src={uploadedImgUrl || image}
+          src={previewImage}
           className='size-[7.5rem] rounded-full border border-grayish-50 object-cover'
         />
       ) : (
