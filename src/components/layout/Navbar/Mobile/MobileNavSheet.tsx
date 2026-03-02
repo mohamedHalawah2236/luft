@@ -57,7 +57,7 @@ async function MobileNavSheet() {
             <UserLink
               label='Account Settings'
               icon={<GearIcon className='!size-6 fill-grayish-500' />}
-              href='settings'
+              href='/settings'
             />
             <UserLink
               label='My Reservations'
