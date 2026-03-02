@@ -134,6 +134,10 @@
     "lost": "No internet connection",
     "restored": "Connection restored"
   },
+  "settings": {
+    "title": "Account Settings",
+    "description": "Setup and edit your account profile"
+  },
   "bookFreeConsultation": "Book Free Consultation",
   "messageUs": "Message Us"
 }
