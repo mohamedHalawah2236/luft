@@ -12,14 +12,20 @@ import ConfirmLogoutModal from './logout/ConfirmLogoutModal';
 
 import { DropDownItem } from '@/types/components';
 
+import { Dir } from '@/i18n/i18n.config';
 import { cn } from '@/lib/utils';
 
 type UserDropdownProps = {
   userName: string;
   token: string;
+  dir?: Dir;
 };
 
-export default function UserDropdown({ userName, token }: UserDropdownProps) {
+export default function UserDropdown({
+  userName,
+  token,
+  dir,
+}: UserDropdownProps) {
   const t = useTranslations('common');
   const firstName = userName?.split(' ')[0];
   const lastName = userName?.split(' ')[1];
@@ -64,6 +70,7 @@ export default function UserDropdown({ userName, token }: UserDropdownProps) {
 
       <div className='max-sm:hidden'>
         <Dropdown
+          dir={dir}
           isOpen={isDropdownOpen}
           setIsopen={setisDropdownOpen}
           items={userItems}

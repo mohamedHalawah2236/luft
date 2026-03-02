@@ -2,6 +2,8 @@ import type { ReactNode } from 'react';
 
 import { SetState } from '.';
 
+import { Dir } from '@/i18n/i18n.config';
+
 export type ModalProps = {
   isOpen?: boolean;
   onClose?: () => void;
@@ -34,6 +36,7 @@ export type DropdownProps = {
   itemClassName?: string;
   isOpen?: boolean;
   setIsopen?: SetState<boolean>;
+  dir?: Dir;
 };
 
 export type NavLinkProps = {

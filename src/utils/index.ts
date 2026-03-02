@@ -35,7 +35,3 @@ export const isLoggedIn = async () => {
   const session = await getServerSession(authOptions);
   return !!session;
 };
-
-export const getDirection = (): Direction => {
-  return document.documentElement.dir === 'rtl' ? 'rtl' : 'ltr';
-};

@@ -9,8 +9,6 @@ import {
 
 import { DropdownProps } from '@/types/components';
 
-import { getDirection } from '@/utils';
-
 import { cn } from '@/lib/utils';
 
 export default function Dropdown({
@@ -22,9 +20,8 @@ export default function Dropdown({
   triggerClassName,
   isOpen,
   setIsopen,
+  dir,
 }: DropdownProps) {
-  const dir = getDirection();
-
   return (
     <DropdownMenu
       open={isOpen}
