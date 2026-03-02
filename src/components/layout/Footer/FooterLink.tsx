@@ -18,7 +18,7 @@ export default function FooterLink({ title, href }: NavLinkProps) {
   return (
     <Link
       href={href}
-      className={cn('text-lg text-grayish-100', {
+      className={cn('text-grayish-100 sm:text-lg', {
         'font-medium text-grayish-30': isActive,
       })}
     >

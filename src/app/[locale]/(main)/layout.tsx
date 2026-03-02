@@ -14,7 +14,9 @@ export default function AppLayout({ children }: { children: ReactNode }) {
         />
       </div>
       <Navbar />
-      <div className='flex flex-1 items-center justify-center'>{children}</div>
+      <main className='container flex flex-1 items-center justify-center'>
+        {children}
+      </main>
       <Footer />
     </div>
   );

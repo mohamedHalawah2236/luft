@@ -2,6 +2,7 @@
   "common": {
     "labels": {
       "email": "Email",
+      "phone": "Phone Number",
       "password": "Password",
       "newPassword": "New Password",
       "confirmPassword": "Confirm New password",
@@ -16,7 +17,8 @@
       "password": "Enter your password",
       "confirmPassword": "confirm your new password",
       "firstName": "Enter your first name",
-      "lastName": "Enter your last name"
+      "lastName": "Enter your last name",
+      "phone": "Enter your Phone Number"
     },
     "validations": {
       "email": {
@@ -54,7 +56,8 @@
       "login": "Login",
       "logout": "Logout",
       "confirm": "Confirm",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "save": "Save"
     },
     "toaster": {
       "otpSent": "OTP is sent to your email",

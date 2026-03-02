@@ -1,4 +1,8 @@
+import { getServerSession } from 'next-auth';
+import { getSession } from 'next-auth/react';
+
 import { i18n } from '@/i18n/i18n.config';
+import { authOptions } from '@/lib/auth';
 import { getCurrLocale } from '@/lib/utils';
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -29,8 +33,28 @@ export function deleteSearchParams(paramName: string, paramValue: string) {
   return `?${searchParams.toString()}`;
 }
 
-export async function getAllData(endpoint: string, options: any = {}) {
-  const res = await fetch(`${apiUrl}/${endpoint}`, options);
+const getToken = async () => {
+  const isServer = typeof window === 'undefined';
+
+  if (isServer) {
+    const session = await getServerSession(authOptions);
+    return session?.accessToken;
+  }
+
+  const session = await getSession();
+  return session?.accessToken;
+};
+
+export async function getAllData(endpoint: string, options: RequestInit = {}) {
+  const token = await getToken();
+
+  const res = await fetch(`${apiUrl}/${endpoint}`, {
+    ...options,
+    headers: {
+      ...(options.headers || {}),
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
+  });
 
   if (!res.ok) {
     throw new Error(
@@ -59,12 +83,13 @@ export async function getAllDataParallel(
 }
 
 export async function postData(endpoint: string, options: RequestInit = {}) {
+  const token = await getToken();
+
   const res = await fetch(`${apiUrl}/${endpoint}`, {
     ...options,
     headers: {
-      'Content-Type': 'application/json',
-      Language: getCurrLocale() ?? i18n.defaultLocale,
-      ...options.headers,
+      ...(options.headers || {}),
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
     },
   });
 
