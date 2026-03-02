@@ -24,13 +24,10 @@ export default function ProfileImgInput({
   isLoading,
   className,
 }: ProfileImgInputProps) {
-  const { getValues, setValue } = useFormContext<ProfileFormData>();
+  const { watch, setValue } = useFormContext<ProfileFormData>();
 
-  const file = getValues('file');
+  const file = watch('file');
   const uploadedImgUrl = file ? URL.createObjectURL(file) : '';
-
-  console.log(uploadedImgUrl);
-  console.log(image);
 
   return (
     <div className={cn('relative', className)}>
