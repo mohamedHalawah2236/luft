@@ -28,3 +28,38 @@ export const updateUserProfile = (
     accessToken,
   );
 };
+
+export const sendOtp = (accessToken: string | undefined) => {
+  return postData(
+    'api/auth/send-otp',
+    {
+      body: JSON.stringify({
+        identifier: 'string',
+        // Change type and otpPurpose based on phone or email
+        otpPurpose: 1,
+        type: 1,
+      }),
+      method: 'POST',
+    },
+    accessToken,
+  );
+};
+
+export const changeUserEmailOrPone = (
+  otp: string,
+  accessToken: string | undefined,
+) => {
+  return postData(
+    'api/auth/update-email-or-phone',
+    {
+      body: JSON.stringify({
+        newIdentifier: 'string',
+        // Change type and otpPurpose based on phone or email
+        type: 1,
+        otpCode: otp,
+      }),
+      method: 'POST',
+    },
+    accessToken,
+  );
+};

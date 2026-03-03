@@ -60,7 +60,8 @@
       "confirm": "Confirm",
       "cancel": "Cancel",
       "save": "Save",
-      "refetch": "Refetch"
+      "refetch": "Refetch",
+      "change":"Change"
     },
     "toaster": {
       "otpSent": "OTP is sent to your email",

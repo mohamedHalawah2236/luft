@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { useTranslations } from 'next-intl';
 
@@ -23,6 +23,7 @@ import { GetUserProfileRes, ProfileFormData } from '@/types/settings';
 
 import { getProfileData, updateUserProfile } from '@/api/settings';
 import { zodResolver } from '@hookform/resolvers/zod';
+import ChangeEmailForm from './ChangeEmail/ChangeEmailForm';
 
 type ProfileFormProps = {
   accessToken: string | undefined;
@@ -125,7 +126,8 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
           </div>
         </div>
         <EditableField
-          editForm={<></>}
+          formTitle='Change Email'
+          editForm={<ChangeEmailForm />}
           fieldName='email'
           label={tCommon('labels.email')}
           placeholder={
@@ -133,6 +135,7 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
           }
         />
         <EditableField
+          formTitle='Change phone number'
           editForm={<></>}
           fieldName='phone'
           label={tCommon('labels.phone')}
@@ -141,6 +144,7 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
           }
         />
         <EditableField
+          formTitle='Change Password'
           editForm={<></>}
           fieldName='password'
           label={tCommon('labels.password')}

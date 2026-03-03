@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { useFormContext } from 'react-hook-form';
 
 import {
@@ -59,7 +57,7 @@ export default function CustomOtpInput({
                 className='flex items-center gap-2 px-0.5'
               >
                 {Array.from({ length: numOfDigits }).map((_, i) => {
-                  const fieldHasValue = otpValue[i];
+                  const fieldHasValue = field.value[i];
                   return (
                     <InputOTPSlot
                       key={'digit' + i}
