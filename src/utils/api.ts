@@ -33,26 +33,16 @@ export function deleteSearchParams(paramName: string, paramValue: string) {
   return `?${searchParams.toString()}`;
 }
 
-const getToken = async () => {
-  const isServer = typeof window === 'undefined';
-
-  if (isServer) {
-    const session = await getServerSession(authOptions);
-    return session?.accessToken;
-  }
-
-  const session = await getSession();
-  return session?.accessToken;
-};
-
-export async function getAllData(endpoint: string, options: RequestInit = {}) {
-  const token = await getToken();
-
+export async function getAllData(
+  endpoint: string,
+  options: RequestInit = {},
+  accessToken?: string,
+) {
   const res = await fetch(`${apiUrl}/${endpoint}`, {
     ...options,
     headers: {
       ...(options.headers || {}),
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
     },
   });
 
@@ -90,14 +80,16 @@ export async function getAllDataParallel(
   return res;
 }
 
-export async function postData(endpoint: string, options: RequestInit = {}) {
-  const token = await getToken();
-
+export async function postData(
+  endpoint: string,
+  options: RequestInit = {},
+  accessToken?: string,
+) {
   const res = await fetch(`${apiUrl}/${endpoint}`, {
     ...options,
     headers: {
       ...(options.headers || {}),
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
     },
   });
 

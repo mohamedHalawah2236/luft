@@ -1,11 +1,14 @@
 import React from 'react';
 
 import Link from 'next/link';
+import { getServerSession } from 'next-auth';
 import { getTranslations } from 'next-intl/server';
 
 import { CircleChevronLeftIcon, CircleChevronRightIcon } from 'lucide-react';
 
 import ProfileForm from './_components/ProfileForm';
+
+import { authOptions } from '@/lib/auth';
 
 export default async function SettingsPage({
   params,
@@ -15,6 +18,8 @@ export default async function SettingsPage({
   const t = await getTranslations('settings');
   const { locale } = await params;
   const isRtl = locale === 'ar';
+  const session = await getServerSession(authOptions);
+  const accessToken = session?.accessToken;
 
   return (
     <div className='flex w-full gap-8 max-md:flex-col max-md:gap-6 max-md:py-20 max-sm:pb-40 max-sm:pt-6 md:py-14'>
@@ -46,7 +51,7 @@ export default async function SettingsPage({
           {t('description')}
         </p>
 
-        <ProfileForm />
+        <ProfileForm accessToken={accessToken} />
       </div>
     </div>
   );

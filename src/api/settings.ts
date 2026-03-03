@@ -2,7 +2,8 @@ import { ProfileFormData } from '@/types/settings';
 
 import { getAllData, postData } from '@/utils/api';
 
-export const getProfileData = () => getAllData('api/auth/view-profile');
+export const getProfileData = (accessToken?: string) =>
+  getAllData('api/auth/view-profile', undefined, accessToken);
 
 export const updateUserProfile = (data: ProfileFormData) => {
   const formData = new FormData();

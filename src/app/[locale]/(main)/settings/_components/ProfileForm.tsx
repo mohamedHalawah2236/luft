@@ -21,7 +21,11 @@ import { GetUserProfileRes } from '@/types/settings';
 import { getProfileData, updateUserProfile } from '@/api/settings';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-export default function ProfileForm() {
+export default function ProfileForm({
+  accessToken,
+}: {
+  accessToken: string | undefined;
+}) {
   const tCommon = useTranslations('common');
 
   const formSchema = z.object({
@@ -43,7 +47,7 @@ export default function ProfileForm() {
 
   const { isFetching, isFetched, data } = useQuery<GetUserProfileRes>({
     queryKey: ['settings'],
-    queryFn: getProfileData,
+    queryFn: () => getProfileData(accessToken),
   });
 
   const userData = data?.result;
