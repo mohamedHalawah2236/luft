@@ -45,7 +45,7 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
     mode: 'onChange',
   });
 
-  const { isFetching, isFetched, data, isRefetching, isLoading } =
+  const { isFetching, isFetched, data, isLoading } =
     useQuery<GetUserProfileRes>({
       queryKey: [profileFormQueryKey],
       queryFn: () => getProfileData(accessToken),
@@ -76,7 +76,7 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
       email: userData?.email,
       file: null,
     });
-  }, [form, isFetched, userData, isRefetching, isPending]);
+  }, [form, isFetched, userData, isLoading]);
 
   const isFormValid = form.formState.isValid;
   const isFormDirty = form.formState.isDirty;

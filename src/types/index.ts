@@ -1,8 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 
-import { Locale } from '@/i18n/i18n.config';
-
-export type Params = Promise<{ locale: Locale }>;
+export type Params = Promise<{ locale: string }>;
 export type SearchParams = Promise<{
   [key: string]: string | string[] | undefined;
 }>;

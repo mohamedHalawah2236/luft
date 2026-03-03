@@ -1,7 +1,5 @@
 import { getServerSession } from 'next-auth';
 
-import { Direction } from '@/types';
-
 import { authOptions } from '@/lib/auth';
 
 export const handleDownloadDocument = async (

@@ -7,7 +7,7 @@ import {
   VerifyOtpPreregisterFormData,
 } from '@/types/auth';
 
-import { nextApiFetch, postData } from '@/utils/api';
+import { postData } from '@/utils/api';
 
 export const sendOtpPreregister = async (userData: SignupFormData) =>
   postData('api/auth/register/send-otp-preregister', {

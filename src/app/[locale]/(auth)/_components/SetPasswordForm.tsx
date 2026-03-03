@@ -25,7 +25,7 @@ type SetPasswordFormProps = Omit<
   onSubmit: (values: {
     password: string;
     confirm_password: string;
-  }) => Promise<any>;
+  }) => Promise<unknown>;
   onSubmissionSuccess?: (data: unknown) => void;
 };
 

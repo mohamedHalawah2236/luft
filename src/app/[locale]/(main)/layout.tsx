@@ -11,7 +11,7 @@ export default async function AppLayout({
   params,
 }: {
   children: ReactNode;
-  params: Promise<{ locale: Locale }>;
+  params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
 
@@ -23,7 +23,7 @@ export default async function AppLayout({
           color='var(--ps-neutral-900)'
         />
       </div>
-      <Navbar locale={locale} />
+      <Navbar locale={locale as Locale} />
       <main className='container flex flex-1 items-center justify-center'>
         {children}
       </main>

@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getServerSession } from 'next-auth';
-import { SessionProvider } from 'next-auth/react';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 
@@ -98,7 +97,7 @@ export default async function LocaleLayout({
         className={`${switzer.variable} mx-auto h-dvh w-dvw max-w-[1920px] overflow-hidden bg-grayish-30 font-switzer antialiased`}
       >
         <NextIntlClientProvider messages={messages}>
-          <Providers session={session}>
+          <Providers session={session!}>
             <ConnectionListener />
             {children}
             <Toaster

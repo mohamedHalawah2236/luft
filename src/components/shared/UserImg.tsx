@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { DefaultSession } from 'next-auth';
-import { getSession, useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 
 import { cn } from '@/lib/utils';
 

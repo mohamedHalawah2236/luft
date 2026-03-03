@@ -1,8 +1,6 @@
-import { getServerSession } from 'next-auth';
-import { getSession, signOut } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
 
 import { i18n } from '@/i18n/i18n.config';
-import { authOptions } from '@/lib/auth';
 import { getCurrLocale } from '@/lib/utils';
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
