@@ -61,7 +61,7 @@
       "cancel": "Cancel",
       "save": "Save",
       "refetch": "Refetch",
-      "change":"Change"
+      "change": "Change"
     },
     "toaster": {
       "otpSent": "OTP is sent to your email",
@@ -142,7 +142,16 @@
   },
   "settings": {
     "title": "Account Settings",
-    "description": "Setup and edit your account profile"
+    "description": "Setup and edit your account profile",
+    "titles": {
+      "changeEmail": "Change Email",
+      "changePhone": "Change phone number",
+      "changePassword": "Change Password",
+      "newEmailOtpSent": "Verify your new email addresse"
+    },
+    "descriptions": {
+      "otpSent": "A {numOfDigits}-digit verification code was sent to {identifier}"
+    }
   },
   "bookFreeConsultation": "Book Free Consultation",
   "messageUs": "Message Us"

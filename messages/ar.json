@@ -144,7 +144,16 @@
   },
   "settings": {
     "title": "إعدادات الحساب",
-    "description": "قم بإعداد وتعديل ملفك الشخصي"
+    "description": "قم بإعداد وتعديل ملفك الشخصي",
+    "titles": {
+      "changeEmail": "تغيير البريد الإلكتروني",
+      "changePhone": "تغيير رقم الهاتف",
+      "changePassword": "تغيير كلمة المرور",
+      "newEmailOtpSent": "تم إرسال رمز تحقق إلى بريدك الإلكتروني الجديد"
+    },
+    "descriptions": {
+      "otpSent": "تم إرسال رمز تحقق مكوّن من {numOfDigits} أرقام إلى {identifier}"
+    }
   },
   "bookFreeConsultation": "احجز استشارة مجانية",
   "messageUs": "راسلنا"

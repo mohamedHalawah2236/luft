@@ -32,6 +32,7 @@ export default function VerifyOTPForm({ identifier }: VerifyOTPFormProps) {
 
   const tCommon = useTranslations('common');
   const t = useTranslations('auth.verifyOTP');
+  const tSettings = useTranslations('settings');
 
   const [isResendDisabled, setIsResendDisabled] = useState(true);
 
@@ -102,8 +103,11 @@ export default function VerifyOTPForm({ identifier }: VerifyOTPFormProps) {
     <Form {...form}>
       <form onSubmit={onFormSubmit}>
         <FieldFormLayout
-          title={t('title')}
-          description={t('description', { numOfDigits, userEmail: identifier })}
+          title={tSettings('titles.newEmailOtpSent')}
+          description={tSettings('descriptions.otpSent', {
+            numOfDigits,
+            identifier,
+          })}
           submitBtnLabel={tCommon('buttons.change')}
           serverError={serverError}
           className='gap-8'
