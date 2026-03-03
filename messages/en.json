@@ -57,7 +57,8 @@
       "logout": "Logout",
       "confirm": "Confirm",
       "cancel": "Cancel",
-      "save": "Save"
+      "save": "Save",
+      "refetch": "Refetch"
     },
     "toaster": {
       "otpSent": "OTP is sent to your email",
