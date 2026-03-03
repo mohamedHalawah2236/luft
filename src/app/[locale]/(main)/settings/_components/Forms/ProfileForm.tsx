@@ -24,11 +24,11 @@ import { GetUserProfileRes, ProfileFormData } from '@/types/settings';
 import { getProfileData, updateUserProfile } from '@/api/settings';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-export default function ProfileForm({
-  accessToken,
-}: {
+type ProfileFormProps = {
   accessToken: string | undefined;
-}) {
+};
+
+export default function ProfileForm({ accessToken }: ProfileFormProps) {
   const tCommon = useTranslations('common');
   const tRoot = useTranslations('');
 
@@ -55,12 +55,7 @@ export default function ProfileForm({
 
   const queryClient = useQueryClient();
 
-  const { mutateAsync, isPending } = useMutation<
-    undefined,
-    undefined,
-    ProfileFormData,
-    undefined
-  >({
+  const { mutateAsync, isPending } = useMutation({
     mutationFn: (values: ProfileFormData) =>
       updateUserProfile(values, accessToken),
     onSuccess: () => {
