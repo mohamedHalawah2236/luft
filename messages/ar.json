@@ -76,7 +76,8 @@
       "reservations": "حجوزاتي",
       "wishlist": "قائمة المفضلة"
     },
-    "logout": "تسجيل الخروج"
+    "logout": "تسجيل الخروج",
+    "currency": "العملة"
   },
   "auth": {
     "banner": {

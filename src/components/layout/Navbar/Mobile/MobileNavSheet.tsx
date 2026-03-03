@@ -9,6 +9,7 @@ import KeyIcon from '@/components/icons/KeyIcon';
 import RatedByGuests from '@/components/shared/RatedByGuests';
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetFooter,
   SheetTrigger,
@@ -39,34 +40,41 @@ async function MobileNavSheet() {
       <SheetTrigger>
         <Menu className='size-6' />
       </SheetTrigger>
-      <SheetContent className='flex w-10/12 flex-col justify-between overflow-auto bg-white p-0'>
+      <SheetContent className='flex w-10/12 flex-col justify-between overflow-auto bg-white p-0 [&>button]:end-4 [&>button]:right-auto [&>button]:w-fit'>
         <div className='flex flex-col gap-4 px-4 pt-4'>
           <div className='flex flex-col gap-4'>
             {navLinks.map(({ title, href }) => (
-              <Link
-                href={href}
+              <SheetClose
+                asChild
                 key={title + 'mobileSidebar'}
-                className='text-grayish-900'
               >
-                {title}
-              </Link>
+                <Link
+                  href={href}
+                  className='text-grayish-900'
+                >
+                  {title}
+                </Link>
+              </SheetClose>
             ))}
           </div>
           <hr className='text-grayish-100' />
           <div className='flex flex-col gap-[1.1rem]'>
             <UserLink
-              label='Account Settings'
+              label={t('common.navLinks.settings')}
               icon={<GearIcon className='!size-6 fill-grayish-500' />}
               href='/settings'
             />
+
             <UserLink
-              label='My Reservations'
+              label={t('common.navLinks.reservations')}
               icon={<KeyIcon className='!size-6 fill-grayish-500' />}
               href='reservations'
             />
             <UserLink
-              label='Wishlist'
-              icon={<Heart className='!size-6 fill-grayish-500' />}
+              label={t('common.navLinks.wishlist')}
+              icon={
+                <Heart className='!size-6 fill-grayish-500 stroke-grayish-500' />
+              }
               href='whishlist'
             />
           </div>
@@ -89,8 +97,8 @@ async function MobileNavSheet() {
           </div>
           <hr className='my-2 text-grayish-100' />
           <div className='flex flex-col gap-2.5 text-sm text-grayish-500'>
-            <p>Terms of service</p>
-            <p>All Rights Reserved © 2025 Luft Stay .</p>
+            <p>{t('footer.termsOfService')}</p>
+            <p>{t('footer.allRightsReserved')}</p>
           </div>
         </SheetFooter>
       </SheetContent>

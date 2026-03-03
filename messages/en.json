@@ -74,7 +74,8 @@
       "reservations": "My Reservations",
       "wishlist": "Wishlist"
     },
-    "logout": "Logout"
+    "logout": "Logout",
+    "currency": "Currency"
   },
   "auth": {
     "banner": {
