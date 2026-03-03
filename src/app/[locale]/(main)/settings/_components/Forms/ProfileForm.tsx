@@ -5,6 +5,7 @@ import React, { useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 import { z } from 'zod';
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -22,7 +23,6 @@ import { GetUserProfileRes, ProfileFormData } from '@/types/settings';
 
 import { getProfileData, updateUserProfile } from '@/api/settings';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { toast } from 'sonner';
 
 export default function ProfileForm({
   accessToken,
