@@ -39,6 +39,7 @@ export default function ProfileForm({
       lastName: '',
       email: '',
       file: null,
+      password: '********',
     },
     reValidateMode: 'onChange',
     mode: 'onChange',
