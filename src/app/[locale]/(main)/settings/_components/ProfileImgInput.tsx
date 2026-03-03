@@ -44,7 +44,9 @@ export default function ProfileImgInput({
       )}
       <FileUploaderButton
         fieldName='file'
-        onFileSelect={(file) => setValue('file', file)}
+        onFileSelect={(file) =>
+          setValue('file', file, { shouldDirty: true, shouldValidate: true })
+        }
         className='mx-auto -mt-2.5'
         buttonText={image ? 'Edit' : 'Add'}
         buttonIcon={

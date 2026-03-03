@@ -5,7 +5,10 @@ import { getAllData, postData } from '@/utils/api';
 export const getProfileData = (accessToken?: string) =>
   getAllData('api/auth/view-profile', undefined, accessToken);
 
-export const updateUserProfile = (data: ProfileFormData) => {
+export const updateUserProfile = (
+  data: ProfileFormData,
+  accessToken: string | undefined,
+) => {
   const formData = new FormData();
 
   (Object.keys(data) as (keyof ProfileFormData)[]).forEach((key) => {
@@ -16,8 +19,12 @@ export const updateUserProfile = (data: ProfileFormData) => {
     }
   });
 
-  postData('api/auth/view-profile', {
-    body: formData,
-    method: 'PUT',
-  });
+  return postData(
+    'api/auth/UpdateUserProfile',
+    {
+      body: formData,
+      method: 'PUT',
+    },
+    accessToken,
+  );
 };

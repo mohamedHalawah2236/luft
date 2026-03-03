@@ -47,7 +47,9 @@
       "otp": {
         "required": "OTP is required",
         "invalidLength": "OTP must be complete"
-      }
+      },
+      "required": "Required Field",
+      "lettersOnly": "Name must contain letters only"
     },
     "buttons": {
       "continue": "Continue",
@@ -62,7 +64,8 @@
     },
     "toaster": {
       "otpSent": "OTP is sent to your email",
-      "failedToSendOtp": "Failed to send OTP please try again"
+      "failedToSendOtp": "Failed to send OTP please try again",
+      "dataUpdatedSuccess": "Data updated successfully"
     },
     "loading": "Loading...",
     "navLinks": {

@@ -10,6 +10,5 @@ export type GetUserProfileRes = ApiResponse<{
 export type ProfileFormData = {
   firstName: string;
   lastName: string;
-  email: string;
-  file?: File;
+  file: File | null;
 };

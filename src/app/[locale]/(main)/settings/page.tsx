@@ -6,7 +6,7 @@ import { getTranslations } from 'next-intl/server';
 
 import { CircleChevronLeftIcon, CircleChevronRightIcon } from 'lucide-react';
 
-import ProfileForm from './_components/ProfileForm';
+import ProfileForm from './_components/Forms/ProfileForm';
 
 import { authOptions } from '@/lib/auth';
 

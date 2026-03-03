@@ -7,19 +7,22 @@ import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import CustomInput from '@/components/shared/form/CustomInput';
-import CustomPasswordInput from '@/components/shared/form/CustomPasswordInput';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 
-import ProfileImgInput from './ProfileImgInput';
+import EditableField from '../EditableField';
+import ProfileImgInput from '../ProfileImgInput';
 
-import { GetUserProfileRes } from '@/types/settings';
+import { profileFormQueryKey, profileFormSchema } from './schemas';
+
+import { GetUserProfileRes, ProfileFormData } from '@/types/settings';
 
 import { getProfileData, updateUserProfile } from '@/api/settings';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { toast } from 'sonner';
 
 export default function ProfileForm({
   accessToken,
@@ -27,46 +30,60 @@ export default function ProfileForm({
   accessToken: string | undefined;
 }) {
   const tCommon = useTranslations('common');
+  const tRoot = useTranslations('');
 
-  const formSchema = z.object({
-    firstName: z.string().min(1, 'required'),
-    lastName: z.string().min(1, 'required'),
-    email: z.string(),
-    file: z.instanceof(File).nullable(),
-  });
-
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<ReturnType<typeof profileFormSchema>>>({
+    resolver: zodResolver(profileFormSchema(tRoot)),
     defaultValues: {
       firstName: '',
       lastName: '',
       email: '',
       file: null,
     },
+    reValidateMode: 'onChange',
+    mode: 'onChange',
   });
 
-  const { isFetching, isFetched, data } = useQuery<GetUserProfileRes>({
-    queryKey: ['settings'],
-    queryFn: () => getProfileData(accessToken),
-  });
+  const { isFetching, isFetched, data, isRefetching, isLoading } =
+    useQuery<GetUserProfileRes>({
+      queryKey: [profileFormQueryKey],
+      queryFn: () => getProfileData(accessToken),
+    });
 
   const userData = data?.result;
 
-  useEffect(() => {
-    if (isFetched)
-      form.reset({
-        firstName: userData?.firstName,
-        lastName: userData?.lastName,
-        email: userData?.email,
-      });
-  }, [form, isFetched, userData]);
+  const queryClient = useQueryClient();
 
-  const { mutateAsync } = useMutation({
-    mutationFn: updateUserProfile,
-    onMutate: () => {},
-    onSuccess: (data) => {},
-    onError: (error: Error) => {},
+  const { mutateAsync, isPending } = useMutation<
+    undefined,
+    undefined,
+    ProfileFormData,
+    undefined
+  >({
+    mutationFn: (values: ProfileFormData) =>
+      updateUserProfile(values, accessToken),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [profileFormQueryKey] });
+      toast.success(tCommon('toaster.dataUpdatedSuccess'));
+      form.reset(userData);
+    },
+    onError: (error: Error) => {
+      console.log(error);
+    },
   });
+
+  useEffect(() => {
+    if (isLoading) return;
+    form.reset({
+      firstName: userData?.firstName,
+      lastName: userData?.lastName,
+      email: userData?.email,
+      file: null,
+    });
+  }, [form, isFetched, userData, isRefetching, isPending]);
+
+  const isFormValid = form.formState.isValid;
+  const isFormDirty = form.formState.isDirty;
 
   return (
     <Form {...form}>
@@ -87,7 +104,7 @@ export default function ProfileForm({
           <div className='flex w-full flex-wrap gap-6'>
             <CustomInput
               formItemClassName='flex-1 max-sm:min-w-[22.4rem]'
-              disabled={isFetching}
+              disabled={isPending || isFetching}
               required
               fieldName='firstName'
               label={tCommon('labels.firstName')}
@@ -99,7 +116,7 @@ export default function ProfileForm({
             />
             <CustomInput
               formItemClassName='flex-1 max-sm:min-w-[22.4rem]'
-              disabled={isFetching}
+              disabled={isPending || isFetching}
               required
               fieldName='lastName'
               label={tCommon('labels.lastName')}
@@ -111,36 +128,35 @@ export default function ProfileForm({
             />
           </div>
         </div>
-        <CustomInput
-          required
+        <EditableField
+          editForm={<></>}
           fieldName='email'
           label={tCommon('labels.email')}
-          type='email'
           placeholder={
             isFetching ? tCommon('loading') : tCommon('placeholders.email')
           }
-          disabled
         />
-        <CustomInput
-          required
+        <EditableField
+          editForm={<></>}
           fieldName='phone'
           label={tCommon('labels.phone')}
           placeholder={
             isFetching ? tCommon('loading') : tCommon('placeholders.phone')
           }
-          disabled
         />
-        <CustomPasswordInput
-          required
+        <EditableField
+          editForm={<></>}
           fieldName='password'
           label={tCommon('labels.password')}
           placeholder={
             isFetching ? tCommon('loading') : tCommon('placeholders.password')
           }
-          disabled
         />
 
-        <Button className='mt-4 w-[11.5rem] self-end max-sm:w-full md:mt-8'>
+        <Button
+          disabled={isPending || !isFormValid || !isFormDirty}
+          className='mt-4 w-[11.5rem] self-end max-sm:w-full md:mt-8'
+        >
           {tCommon('buttons.save')}
         </Button>
       </form>
