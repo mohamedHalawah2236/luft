@@ -76,7 +76,7 @@ export default function ChangePasswordForm() {
       confirmPassword: '',
     },
     reValidateMode: 'onChange',
-    mode: 'onChange',
+    mode: 'onTouched',
   });
 
   const session = useSession();
