@@ -25,6 +25,7 @@ import { getProfileData, updateUserProfile } from '@/api/settings';
 import { zodResolver } from '@hookform/resolvers/zod';
 import ChangeEmailForm from './ChangeEmail/ChangeEmailForm';
 import ChangePasswordForm from './ChangePasswordForm';
+import ChangePhoneForm from './ChangePhone/ChangePhoneForm';
 
 type ProfileFormProps = {
   accessToken: string | undefined;
@@ -127,7 +128,7 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
           </div>
         </div>
         <EditableField
-          formTitle='Change Email'
+          formTitle={tRoot('settings.titles.changeEmail')}
           editForm={<ChangeEmailForm />}
           fieldName='email'
           label={tCommon('labels.email')}
@@ -136,8 +137,8 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
           }
         />
         <EditableField
-          formTitle='Change phone number'
-          editForm={<></>}
+          formTitle={tRoot('settings.titles.changePhone')}
+          editForm={<ChangePhoneForm />}
           fieldName='phone'
           label={tCommon('labels.phone')}
           placeholder={
@@ -145,7 +146,7 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
           }
         />
         <EditableField
-          formTitle='Change Password'
+          formTitle={tRoot('settings.titles.changePassword')}
           editForm={<ChangePasswordForm />}
           fieldName='password'
           label={tCommon('labels.password')}

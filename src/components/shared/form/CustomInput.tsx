@@ -29,6 +29,7 @@ type CustomInputProps = {
   isNumberAsAString?: boolean;
   required?: boolean;
   showAllErrors?: boolean;
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 };
 
 function CustomInput({
@@ -42,6 +43,7 @@ function CustomInput({
   isNumberAsAString = false,
   required,
   showAllErrors,
+  onKeyDown,
 }: CustomInputProps) {
   const { formState, control, watch } = useFormContext();
   const { isSubmitting, errors } = formState;
@@ -107,6 +109,7 @@ function CustomInput({
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                 handleInputChange(event, field)
               }
+              onKeyDown={onKeyDown}
             />
           </FormControl>
           <FormMessage

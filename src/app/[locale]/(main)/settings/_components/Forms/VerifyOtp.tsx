@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import { useTranslations } from 'next-intl';
 
@@ -8,20 +8,22 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
 
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import CustomOtpInput from '@/components/shared/form/CustomOtpInput';
 import { Form } from '@/components/ui/form';
 
-import {
-  VerifyOtpPreregisterFormData,
-  VerifyOtpPreregisterResponse,
-} from '@/types/auth';
+import { VerifyOtpPreregisterResponse } from '@/types/auth';
 
-import { resendOtpPreregister, verifyOtpPreregister } from '@/api/auth';
+import { resendOtpPreregister } from '@/api/auth';
+import { changeUserIdentifier } from '@/api/settings';
 import ResendOTP from '@/app/[locale]/(auth)/_components/ResendOTP';
+import { EditableFieldContext } from '@/contexts/EditableFieldContext';
+import { ChangeUserIdentifierData, IDENTIFIER_TYPE } from '@/types/settings';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useSession } from 'next-auth/react';
 import FieldFormLayout from './FieldFormLayout';
+import { profileFormQueryKey } from './schemas';
 
 type VerifyOTPFormProps = {
   identifier: string;
@@ -46,35 +48,32 @@ export default function VerifyOTPForm({ identifier }: VerifyOTPFormProps) {
         (otp) => otp.length === +numOfDigits,
         tCommon('validations.otp.invalidLength'),
       ),
-    identifier: z
-      .string({ required_error: tCommon('validations.firstName.required') })
-      .min(1, { message: tCommon('validations.firstName.required') }),
-    type: z.number(),
-    purpose: z.number(),
-    registrationKey: z.string().min(1, 'required'),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       otp: '',
-      identifier,
-      type: 1,
-      purpose: 1,
     },
   });
 
-  const { mutateAsync } = useMutation<
-    VerifyOtpPreregisterResponse,
-    Error,
-    VerifyOtpPreregisterFormData
-  >({
-    mutationFn: verifyOtpPreregister,
+  const session = useSession();
+  const accessToken = session.data?.accessToken;
+  const { setIsOpen } = useContext(EditableFieldContext);
+  const queryCLient = useQueryClient();
+
+  const { mutateAsync } = useMutation({
+    mutationFn: async (values: ChangeUserIdentifierData) =>
+      changeUserIdentifier(values, accessToken),
     onMutate: () => {
       setServerError(undefined);
     },
 
-    onSuccess: () => {},
+    onSuccess: () => {
+      setIsOpen(false);
+      queryCLient.invalidateQueries({ queryKey: [profileFormQueryKey] });
+      toast.success(tCommon('toaster.dataUpdatedSuccess'));
+    },
     onError: (error: Error) => setServerError(error.message),
   });
 
@@ -91,8 +90,12 @@ export default function VerifyOTPForm({ identifier }: VerifyOTPFormProps) {
     onError: () => toast.error(tCommon('toaster.failedToSendOtp')),
   });
 
-  const onFormSubmit = form.handleSubmit(async (values) => {
-    await mutateAsync(values);
+  const onFormSubmit = form.handleSubmit(async ({ otp }) => {
+    await mutateAsync({
+      newIdentifier: identifier,
+      type: IDENTIFIER_TYPE.Email,
+      otpCode: otp,
+    });
   });
 
   const onResendOtp = () => {
@@ -101,33 +104,32 @@ export default function VerifyOTPForm({ identifier }: VerifyOTPFormProps) {
 
   return (
     <Form {...form}>
-      <form onSubmit={onFormSubmit}>
-        <FieldFormLayout
-          title={tSettings('titles.newEmailOtpSent')}
-          description={tSettings('descriptions.otpSent', {
-            numOfDigits,
-            identifier,
-          })}
-          submitBtnLabel={tCommon('buttons.change')}
-          serverError={serverError}
-          className='gap-8'
-        >
-          <div className='flex flex-col items-center gap-4'>
-            <CustomOtpInput
-              numOfDigits={+numOfDigits}
-              fieldName='otp'
-            />
-            <ResendOTP
-              {...{
-                isResendDisabled,
-                setIsResendDisabled,
-                onResend: onResendOtp,
-                isResending: isResendingOtp,
-              }}
-            />
-          </div>
-        </FieldFormLayout>
-      </form>
+      <FieldFormLayout
+        title={tSettings('titles.newPhoneOtpSent')}
+        description={tSettings('descriptions.otpSent', {
+          numOfDigits,
+          identifier,
+        })}
+        submitBtnLabel={tCommon('buttons.change')}
+        serverError={serverError}
+        className='gap-8'
+        onSubmit={onFormSubmit}
+      >
+        <div className='flex flex-col items-center gap-4'>
+          <CustomOtpInput
+            numOfDigits={+numOfDigits}
+            fieldName='otp'
+          />
+          <ResendOTP
+            {...{
+              isResendDisabled,
+              setIsResendDisabled,
+              onResend: onResendOtp,
+              isResending: isResendingOtp,
+            }}
+          />
+        </div>
+      </FieldFormLayout>
     </Form>
   );
 }

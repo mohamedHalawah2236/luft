@@ -1,6 +1,8 @@
 import { sendOtp } from '@/api/settings';
 import CustomInput from '@/components/shared/form/CustomInput';
 import { Form } from '@/components/ui/form';
+import { EGYPTIAN_PHONE } from '@/constants/regex';
+import { handleOnlyNumbersKeyDown } from '@/lib/utils';
 import { SetState } from '@/types';
 import { IDENTIFIER_TYPE, OTP_PURPOSE, SendOtpData } from '@/types/settings';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -23,16 +25,16 @@ export default function RequestOtpForm({
   const tCommon = useTranslations('common');
 
   const formSchema = z.object({
-    email: z
-      .string({ required_error: tCommon('validations.email.required') })
-      .min(1, { message: tCommon('validations.email.required') })
-      .email({ message: tCommon('validations.email.invalid') }),
+    phone: z
+      .string({ required_error: tCommon('validations.required') })
+      .min(1, { message: tCommon('validations.required') })
+      .regex(EGYPTIAN_PHONE, tCommon('validations.phone.invalid')),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: '',
+      phone: '',
     },
     reValidateMode: 'onChange',
     mode: 'onTouched',
@@ -41,25 +43,25 @@ export default function RequestOtpForm({
   const session = useSession();
   const accessToken = session.data?.accessToken;
 
-  const { mutateAsync } = useMutation({
+  const { mutateAsync, isSuccess } = useMutation({
     mutationFn: async (values: SendOtpData) => sendOtp(values, accessToken),
     onMutate: () => {
       setServerError(undefined);
     },
     onSuccess: () => {
       setIsOtpSent(true);
-      setIdentifier(form.getValues('email'));
+      setIdentifier(form.getValues('phone'));
     },
     onError: (error: Error) => {
       setServerError(error.message);
     },
   });
 
-  const onFormSubmit = form.handleSubmit(async ({ email }) => {
+  const onFormSubmit = form.handleSubmit(async ({ phone }) => {
     await mutateAsync({
-      identifier: email,
-      type: IDENTIFIER_TYPE.Email,
-      otpPurpose: OTP_PURPOSE.UpdateEmail,
+      identifier: phone,
+      type: IDENTIFIER_TYPE.Phone,
+      otpPurpose: OTP_PURPOSE.UpdatePhone,
     });
   });
 
@@ -72,10 +74,10 @@ export default function RequestOtpForm({
       >
         <CustomInput
           required
-          fieldName='email'
-          label={tCommon('labels.newEmail')}
-          type='email'
-          placeholder={tCommon('placeholders.email')}
+          fieldName='phone'
+          label={tCommon('labels.newPhone')}
+          placeholder={'EX. 010XXXXXXXX'}
+          onKeyDown={handleOnlyNumbersKeyDown}
         />
       </FieldFormLayout>
     </Form>

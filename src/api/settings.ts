@@ -1,4 +1,8 @@
-import { ProfileFormData } from '@/types/settings';
+import {
+  ChangeUserIdentifierData,
+  ProfileFormData,
+  SendOtpData,
+} from '@/types/settings';
 
 import { getAllData, postData } from '@/utils/api';
 
@@ -29,36 +33,32 @@ export const updateUserProfile = (
   );
 };
 
-export const sendOtp = (accessToken: string | undefined) => {
+export const sendOtp = (data: SendOtpData, accessToken: string | undefined) => {
   return postData(
     'api/auth/send-otp',
     {
-      body: JSON.stringify({
-        identifier: 'string',
-        // Change type and otpPurpose based on phone or email
-        otpPurpose: 1,
-        type: 1,
-      }),
+      body: JSON.stringify(data),
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
     },
     accessToken,
   );
 };
 
-export const changeUserEmailOrPone = (
-  otp: string,
+export const changeUserIdentifier = (
+  data: ChangeUserIdentifierData,
   accessToken: string | undefined,
 ) => {
   return postData(
     'api/auth/update-email-or-phone',
     {
-      body: JSON.stringify({
-        newIdentifier: 'string',
-        // Change type and otpPurpose based on phone or email
-        type: 1,
-        otpCode: otp,
-      }),
+      body: JSON.stringify(data),
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
     },
     accessToken,
   );

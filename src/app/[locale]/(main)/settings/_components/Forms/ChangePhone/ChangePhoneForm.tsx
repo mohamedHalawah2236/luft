@@ -5,7 +5,7 @@ import { useState } from 'react';
 import VerifyOTPForm from '../VerifyOtp';
 import RequestOtpForm from './RequestOtpForm';
 
-export default function ChangeEmailForm() {
+export default function ChangePhoneForm() {
   const [isOtpSent, setIsOtpSent] = useState(false);
   const [identifier, setIdentifier] = useState('');
 

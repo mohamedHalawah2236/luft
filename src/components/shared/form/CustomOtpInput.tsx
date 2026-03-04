@@ -13,7 +13,7 @@ import {
   InputOTPSlot,
 } from '@/components/ui/input-otp';
 
-import { cn } from '@/lib/utils';
+import { cn, handleOnlyNumbersKeyDown } from '@/lib/utils';
 
 type CustomOtpInputProps = {
   fieldName: string;
@@ -49,6 +49,7 @@ export default function CustomOtpInput({
               maxLength={numOfDigits}
               disabled={isSubmitting || disabled}
               className='!w-full'
+              onKeyDown={handleOnlyNumbersKeyDown}
               {...field}
             >
               <InputOTPGroup

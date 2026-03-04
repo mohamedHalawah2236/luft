@@ -2,7 +2,9 @@
   "common": {
     "labels": {
       "email": "Email",
+      "newEmail": "New Email",
       "phone": "Phone Number",
+      "newPhone": "New Phone",
       "password": "Password",
       "currentPassword": "Current Password",
       "newPassword": "New Password",
@@ -48,6 +50,9 @@
       "otp": {
         "required": "OTP is required",
         "invalidLength": "OTP must be complete"
+      },
+      "phone": {
+        "invalid": "Invalid phone number"
       },
       "required": "Required Field",
       "lettersOnly": "Name must contain letters only"
@@ -148,7 +153,8 @@
       "changeEmail": "Change Email",
       "changePhone": "Change phone number",
       "changePassword": "Change Password",
-      "newEmailOtpSent": "Verify your new email addresse"
+      "newEmailOtpSent": "Verify your new email addresse",
+      "newPhoneOtpSent": "Verify your new phone number"
     },
     "descriptions": {
       "otpSent": "A {numOfDigits}-digit verification code was sent to {identifier}"
