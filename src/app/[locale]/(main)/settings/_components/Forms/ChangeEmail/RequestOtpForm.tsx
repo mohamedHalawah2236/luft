@@ -1,16 +1,23 @@
-import { sendOtp } from '@/api/settings';
-import CustomInput from '@/components/shared/form/CustomInput';
-import { Form } from '@/components/ui/form';
-import { SetState } from '@/types';
-import { IDENTIFIER_TYPE, OTP_PURPOSE, SendOtpData } from '@/types/settings';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation } from '@tanstack/react-query';
+import { useState } from 'react';
+
 import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+
 import { useForm } from 'react-hook-form';
 import z from 'zod';
+
+import { useMutation } from '@tanstack/react-query';
+
+import CustomInput from '@/components/shared/form/CustomInput';
+import { Form } from '@/components/ui/form';
+
 import FieldFormLayout from '../FieldFormLayout';
+
+import { SetState } from '@/types';
+import { IDENTIFIER_TYPE, OTP_PURPOSE, SendOtpData } from '@/types/settings';
+
+import { sendOtp } from '@/api/settings';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 export default function RequestOtpForm({
   setIdentifier,

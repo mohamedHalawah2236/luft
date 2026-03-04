@@ -1,5 +1,6 @@
-import { SetState } from '@/types';
 import { createContext } from 'react';
+
+import { SetState } from '@/types';
 
 export type EditableContextArgs = {
   isOpen: boolean;

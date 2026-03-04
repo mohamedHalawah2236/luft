@@ -2,6 +2,7 @@
 
 import { useContext, useState } from 'react';
 
+import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 
 import { useForm } from 'react-hook-form';
@@ -12,14 +13,16 @@ import { useMutation } from '@tanstack/react-query';
 import CustomPasswordInput from '@/components/shared/form/CustomPasswordInput';
 import { Form } from '@/components/ui/form';
 
+import FieldFormLayout from './FieldFormLayout';
+
+import { EditableFieldContext } from '@/contexts/EditableFieldContext';
+
+import { ChangePasswordFormData } from '@/types/settings';
+
 import { PASSWORD_REGEX } from '@/constants';
 
 import { changeUserPassword } from '@/api/settings';
-import { EditableFieldContext } from '@/contexts/EditableFieldContext';
-import { ChangePasswordFormData } from '@/types/settings';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useSession } from 'next-auth/react';
-import FieldFormLayout from './FieldFormLayout';
 
 export default function ChangePasswordForm() {
   const [serverError, setServerError] = useState<string | undefined>();

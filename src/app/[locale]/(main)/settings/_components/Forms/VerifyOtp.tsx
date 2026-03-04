@@ -2,6 +2,7 @@
 
 import { useContext, useState } from 'react';
 
+import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 
 import { useForm } from 'react-hook-form';
@@ -13,17 +14,18 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import CustomOtpInput from '@/components/shared/form/CustomOtpInput';
 import { Form } from '@/components/ui/form';
 
+import FieldFormLayout from './FieldFormLayout';
+import { profileFormQueryKey } from './schemas';
+
+import { EditableFieldContext } from '@/contexts/EditableFieldContext';
+
 import { VerifyOtpPreregisterResponse } from '@/types/auth';
+import { ChangeUserIdentifierData, IDENTIFIER_TYPE } from '@/types/settings';
 
 import { resendOtpPreregister } from '@/api/auth';
 import { changeUserIdentifier } from '@/api/settings';
 import ResendOTP from '@/app/[locale]/(auth)/_components/ResendOTP';
-import { EditableFieldContext } from '@/contexts/EditableFieldContext';
-import { ChangeUserIdentifierData, IDENTIFIER_TYPE } from '@/types/settings';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useSession } from 'next-auth/react';
-import FieldFormLayout from './FieldFormLayout';
-import { profileFormQueryKey } from './schemas';
 
 type VerifyOTPFormProps = {
   identifier: string;
