@@ -12,3 +12,8 @@ export type ProfileFormData = {
   lastName: string;
   file: File | null;
 };
+
+export type ChangePasswordFormData = {
+  currentPassword: string;
+  newPassword: string;
+};

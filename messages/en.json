@@ -4,6 +4,7 @@
       "email": "Email",
       "phone": "Phone Number",
       "password": "Password",
+      "currentPassword": "Current Password",
       "newPassword": "New Password",
       "confirmPassword": "Confirm New password",
       "firstName": "First name",

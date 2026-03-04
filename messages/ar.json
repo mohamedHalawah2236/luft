@@ -3,6 +3,7 @@
     "labels": {
       "email": "البريد الإلكتروني",
       "password": "كلمة المرور",
+      "currentPassword": "كلمة المرور الحالية",
       "newPassword": "كلمة المرور الجديدة",
       "confirmPassword": "تأكيد كلمة المرور الجديدة",
       "firstName": "الاسم الأول",

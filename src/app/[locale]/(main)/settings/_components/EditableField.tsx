@@ -6,6 +6,7 @@ import { EditIcon } from 'lucide-react';
 import CustomInput from '@/components/shared/form/CustomInput';
 import CustomInputWithIcon from '@/components/shared/form/CustomInputWithIcon';
 import { Modal } from '@/components/shared/Modal';
+import EditableFieldProvider from '@/contexts/EditableFieldProvider';
 
 type EditableFieldProps = ComponentProps<typeof CustomInput> & {
   editForm: ReactNode;
@@ -17,20 +18,20 @@ export default function EditableField({
   formTitle,
   ...restProps
 }: EditableFieldProps) {
-  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   return (
-    <>
+    <EditableFieldProvider value={{ isOpen, setIsOpen }}>
       <Modal
-        isOpen={isFormOpen}
-        toggle={setIsFormOpen}
-        onClose={() => setIsFormOpen(false)}
-        className='!rounded-3xl bg-white px-6 py-4 lg:w-8/12 [&>button>svg]:text-grayish-900 [&>button]:top-8'
+        isOpen={isOpen}
+        toggle={setIsOpen}
+        onClose={() => setIsOpen(false)}
+        className='!rounded-3xl bg-white px-3 py-4 md:px-6 md:py-4 lg:w-8/12 xl:max-w-2xl [&>button>svg]:text-grayish-900 [&>button]:top-8 [&>button]:max-md:top-4'
         header={
-          <h4 className='py-2 text-[2rem] font-medium leading-10 text-grayish-900'>
+          <h4 className='text-2xl font-medium text-grayish-900 md:py-2 xl:text-[2rem] xl:leading-10'>
             {formTitle}
           </h4>
         }
-        headerClassName='pb-6 border-b border-grayish-50 ltr:text-start rtl:text-end'
+        headerClassName='xl:pb-6 pb-3 border-b border-grayish-50 ltr:text-start rtl:text-end'
       >
         {editForm}
       </Modal>
@@ -41,7 +42,7 @@ export default function EditableField({
           <button
             type='button'
             className=''
-            onClick={() => setIsFormOpen(true)}
+            onClick={() => setIsOpen(true)}
           >
             <EditIcon className='size-5 text-neutral-900' />
           </button>
@@ -49,6 +50,6 @@ export default function EditableField({
         iconAlign={'inline-end'}
         disabled
       />
-    </>
+    </EditableFieldProvider>
   );
 }

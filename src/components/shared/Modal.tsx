@@ -68,9 +68,11 @@ export const Modal = ({
         >
           {children}
         </div>
-        <DialogFooter className={cn('', footerClassName)}>
-          {footer}
-        </DialogFooter>
+        {footer && (
+          <DialogFooter className={cn('', footerClassName)}>
+            {footer}
+          </DialogFooter>
+        )}
       </DialogContent>
     </Dialog>
   );

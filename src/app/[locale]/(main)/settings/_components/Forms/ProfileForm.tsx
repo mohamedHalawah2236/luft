@@ -24,6 +24,7 @@ import { GetUserProfileRes, ProfileFormData } from '@/types/settings';
 import { getProfileData, updateUserProfile } from '@/api/settings';
 import { zodResolver } from '@hookform/resolvers/zod';
 import ChangeEmailForm from './ChangeEmail/ChangeEmailForm';
+import ChangePasswordForm from './ChangePasswordForm';
 
 type ProfileFormProps = {
   accessToken: string | undefined;
@@ -145,7 +146,7 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
         />
         <EditableField
           formTitle='Change Password'
-          editForm={<></>}
+          editForm={<ChangePasswordForm />}
           fieldName='password'
           label={tCommon('labels.password')}
           placeholder={
@@ -154,7 +155,7 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
         />
 
         <Button
-          disabled={isPending || !isFormValid || !isFormDirty}
+          disabled={!isFormValid || !isFormDirty || isPending}
           className='mt-4 w-[11.5rem] self-end max-sm:w-full md:mt-8'
         >
           {tCommon('buttons.save')}

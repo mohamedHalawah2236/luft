@@ -63,3 +63,20 @@ export const changeUserEmailOrPone = (
     accessToken,
   );
 };
+
+export const changeUserPassword = (
+  data: { currentPassword: string; newPassword: string },
+  accessToken: string | undefined,
+) => {
+  return postData(
+    'api/auth/change-password',
+    {
+      body: JSON.stringify(data),
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    },
+    accessToken,
+  );
+};

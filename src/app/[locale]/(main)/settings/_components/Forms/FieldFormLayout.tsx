@@ -11,6 +11,7 @@ type FieldFormLayoutProps = {
   title?: string;
   description?: string;
   className?: string;
+  onSubmit: () => void;
 };
 
 export default function FieldFormLayout({
@@ -20,9 +21,10 @@ export default function FieldFormLayout({
   title,
   description,
   className,
+  onSubmit,
 }: FieldFormLayoutProps) {
   const form = useFormContext();
-  const { isSubmitting } = form.formState;
+  const { isSubmitting, isDirty, isValid } = form.formState;
 
   return (
     <div className={cn('flex flex-col gap-6', className)}>
@@ -40,9 +42,10 @@ export default function FieldFormLayout({
 
         <Button
           variant={'default'}
-          className='h-12 py-3.5'
-          type='submit'
-          disabled={isSubmitting}
+          className='py-3.5 md:h-12'
+          type='button'
+          disabled={!isValid || !isDirty || isSubmitting}
+          onClick={onSubmit}
         >
           {submitBtnLabel}
         </Button>
