@@ -104,10 +104,6 @@ export default function ChangePasswordForm() {
 
   return (
     <Form {...form}>
-      {/* <form
-        noValidate
-        onSubmit={onFormSubmit}
-      > */}
       <FieldFormLayout
         submitBtnLabel={tCommon('buttons.change')}
         serverError={serverError}
@@ -132,7 +128,6 @@ export default function ChangePasswordForm() {
           placeholder={tCommon('placeholders.confirmPassword')}
         />
       </FieldFormLayout>
-      {/* </form> */}
     </Form>
   );
 }
