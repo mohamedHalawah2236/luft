@@ -31,7 +31,6 @@ export default function CustomOtpInput({
   const { formState, control, watch } = useFormContext();
   const { isSubmitting, errors } = formState;
   const hasError = errors[fieldName];
-  const otpValue = watch(fieldName) as string;
 
   return (
     <FormField

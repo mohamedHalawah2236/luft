@@ -19,10 +19,8 @@ import { profileFormQueryKey } from './schemas';
 
 import { EditableFieldContext } from '@/contexts/EditableFieldContext';
 
-import { VerifyOtpPreregisterResponse } from '@/types/auth';
 import { ChangeUserIdentifierData, IDENTIFIER_TYPE } from '@/types/settings';
 
-import { resendOtpPreregister } from '@/api/auth';
 import { changeUserIdentifier } from '@/api/settings';
 import ResendOTP from '@/app/[locale]/(auth)/_components/ResendOTP';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -79,12 +77,8 @@ export default function VerifyOTPForm({ identifier }: VerifyOTPFormProps) {
     onError: (error: Error) => setServerError(error.message),
   });
 
-  const { mutate: ResendOTPMutate, isPending: isResendingOtp } = useMutation<
-    VerifyOtpPreregisterResponse,
-    Error,
-    string
-  >({
-    mutationFn: resendOtpPreregister,
+  const { mutate: ResendOTPMutate, isPending: isResendingOtp } = useMutation({
+    mutationFn: async () => {},
     onSuccess: () => {
       setIsResendDisabled(true);
       toast.success(tCommon('toaster.otpSent'));
@@ -101,7 +95,7 @@ export default function VerifyOTPForm({ identifier }: VerifyOTPFormProps) {
   });
 
   const onResendOtp = () => {
-    if (identifier) ResendOTPMutate(identifier);
+    ResendOTPMutate();
   };
 
   return (
