@@ -1,6 +1,6 @@
 'use client';
 
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 import { useTranslations } from 'next-intl';
 
@@ -96,7 +96,7 @@ export default function VerifySignupOTPForm({
     mutationFn: resendOtpPreregister,
     onSuccess: () => {
       setIsResendDisabled(true);
-      toast.success(tCommon('toaster.otpSent'));
+      toast.success(tCommon('toaster.emailOtpSent'));
     },
     onError: () => toast.error(tCommon('toaster.failedToSendOtp')),
   });

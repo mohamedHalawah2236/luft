@@ -19,17 +19,28 @@ import { profileFormQueryKey } from './schemas';
 
 import { EditableFieldContext } from '@/contexts/EditableFieldContext';
 
-import { ChangeUserIdentifierData, IDENTIFIER_TYPE } from '@/types/settings';
+import {
+  ChangeUserIdentifierData,
+  IDENTIFIER_TYPE,
+  OTP_PURPOSE,
+} from '@/types/settings';
 
-import { changeUserIdentifier } from '@/api/settings';
+import { changeUserIdentifier, resendOtp } from '@/api/settings';
 import ResendOTP from '@/app/[locale]/(auth)/_components/ResendOTP';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 type VerifyOTPFormProps = {
   identifier: string;
+  identifierType: IDENTIFIER_TYPE;
+  otpPurpose: OTP_PURPOSE;
 };
 
-export default function VerifyOTPForm({ identifier }: VerifyOTPFormProps) {
+export default function VerifyOTPForm({
+  identifier,
+  identifierType,
+  otpPurpose,
+}: VerifyOTPFormProps) {
+  const isPhoneIdentifier = identifierType === IDENTIFIER_TYPE.Phone;
   const [serverError, setServerError] = useState<string | undefined>();
 
   const tCommon = useTranslations('common');
@@ -78,10 +89,22 @@ export default function VerifyOTPForm({ identifier }: VerifyOTPFormProps) {
   });
 
   const { mutate: ResendOTPMutate, isPending: isResendingOtp } = useMutation({
-    mutationFn: async () => {},
+    mutationFn: async () =>
+      resendOtp(
+        {
+          identifier,
+          type: identifierType,
+          otpPurpose,
+        },
+        accessToken,
+      ),
     onSuccess: () => {
       setIsResendDisabled(true);
-      toast.success(tCommon('toaster.otpSent'));
+      toast.success(
+        tCommon(
+          isPhoneIdentifier ? 'toaster.phoneOtpSent' : 'toaster.emailOtpSent',
+        ),
+      );
     },
     onError: () => toast.error(tCommon('toaster.failedToSendOtp')),
   });

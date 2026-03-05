@@ -70,7 +70,8 @@
       "change": "Change"
     },
     "toaster": {
-      "otpSent": "OTP is sent to your email",
+      "emailOtpSent": "OTP is sent to your email",
+      "phoneOtpSent": "OTP is sent to your phone number",
       "failedToSendOtp": "Failed to send OTP please try again",
       "dataUpdatedSuccess": "Data updated successfully"
     },

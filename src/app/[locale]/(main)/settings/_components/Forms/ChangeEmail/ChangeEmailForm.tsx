@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import VerifyOTPForm from '../VerifyOtp';
 
+import { IDENTIFIER_TYPE, OTP_PURPOSE } from '@/types/settings';
 import RequestOtpForm from './RequestOtpForm';
 
 export default function ChangeEmailForm() {
@@ -18,5 +19,11 @@ export default function ChangeEmailForm() {
       />
     );
 
-  return <VerifyOTPForm identifier={identifier} />;
+  return (
+    <VerifyOTPForm
+      identifier={identifier}
+      identifierType={IDENTIFIER_TYPE.Email}
+      otpPurpose={OTP_PURPOSE.UpdateEmail}
+    />
+  );
 }

@@ -47,6 +47,23 @@ export const sendOtp = (data: SendOtpData, accessToken: string | undefined) => {
   );
 };
 
+export const resendOtp = (
+  data: SendOtpData,
+  accessToken: string | undefined,
+) => {
+  return postData(
+    'api/auth/send-otp',
+    {
+      body: JSON.stringify({ ...data, isResend: true }),
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    },
+    accessToken,
+  );
+};
+
 export const changeUserIdentifier = (
   data: ChangeUserIdentifierData,
   accessToken: string | undefined,

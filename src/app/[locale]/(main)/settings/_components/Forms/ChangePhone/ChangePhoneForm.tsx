@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import VerifyOTPForm from '../VerifyOtp';
 
+import { IDENTIFIER_TYPE, OTP_PURPOSE } from '@/types/settings';
 import RequestOtpForm from './RequestOtpForm';
 
 export default function ChangePhoneForm() {
@@ -18,5 +19,11 @@ export default function ChangePhoneForm() {
       />
     );
 
-  return <VerifyOTPForm identifier={identifier} />;
+  return (
+    <VerifyOTPForm
+      identifier={identifier}
+      identifierType={IDENTIFIER_TYPE.Phone}
+      otpPurpose={OTP_PURPOSE.UpdatePhone}
+    />
+  );
 }
