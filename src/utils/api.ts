@@ -1,8 +1,9 @@
 import { signOut } from 'next-auth/react';
 
+import { ErrorApiResponse } from '@/types';
+
 import { i18n } from '@/i18n/i18n.config';
 import { getCurrLocale } from '@/lib/utils';
-import { ErrorApiResponse } from '@/types';
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
