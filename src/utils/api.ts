@@ -109,7 +109,7 @@ export async function postData(
     });
   }
 
-  const data: ErrorApiResponse = await res.json();
+  const data = await res.json();
   if (data?.isError) {
     throw new Error(data?.message, {
       cause: data.statusCode,
