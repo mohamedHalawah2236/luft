@@ -161,6 +161,9 @@
       "otpSent": "A {numOfDigits}-digit verification code was sent to {identifier}"
     }
   },
+  "toaster": {
+    "otpAlreadySent": "Otp already sent, please enter the code sent to you below"
+  },
   "bookFreeConsultation": "Book Free Consultation",
   "messageUs": "Message Us"
 }

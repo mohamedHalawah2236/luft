@@ -10,6 +10,7 @@ export const profileFormSchema = (tRoot: TFunction) =>
     firstName: nameSchema(tRoot),
     lastName: nameSchema(tRoot),
     email: z.string(),
+    phoneNumber: z.string(),
     password: z.string(),
     file: z.instanceof(File).nullable(),
   });

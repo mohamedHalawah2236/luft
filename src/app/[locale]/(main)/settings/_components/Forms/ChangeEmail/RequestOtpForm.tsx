@@ -18,6 +18,7 @@ import { IDENTIFIER_TYPE, OTP_PURPOSE, SendOtpData } from '@/types/settings';
 
 import { sendOtp } from '@/api/settings';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { toast } from 'sonner';
 
 export default function RequestOtpForm({
   setIdentifier,
@@ -28,6 +29,7 @@ export default function RequestOtpForm({
 }) {
   const [serverError, setServerError] = useState<string | undefined>();
   const tCommon = useTranslations('common');
+  const tToaster = useTranslations('toaster');
 
   const formSchema = z.object({
     email: z
@@ -58,6 +60,16 @@ export default function RequestOtpForm({
       setIdentifier(form.getValues('email'));
     },
     onError: (error: Error) => {
+      const status = error.cause as number;
+      if (status === 429) {
+        setIsOtpSent(true);
+        setIdentifier(form.getValues('email'));
+        toast.info(tToaster('otpAlreadySent'), {
+          position: 'top-left',
+          closeButton: false,
+        });
+        return;
+      }
       setServerError(error.message);
     },
   });

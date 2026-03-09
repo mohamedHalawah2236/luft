@@ -4,6 +4,7 @@ export type GetUserProfileRes = ApiResponse<{
   firstName: string;
   lastName: string;
   email: string;
+  phoneNumber: string;
   profilePicture: string;
 }>;
 

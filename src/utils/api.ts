@@ -2,6 +2,7 @@ import { signOut } from 'next-auth/react';
 
 import { i18n } from '@/i18n/i18n.config';
 import { getCurrLocale } from '@/lib/utils';
+import { ErrorApiResponse } from '@/types';
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -100,12 +101,18 @@ export async function postData(
       throw new Error('401 Unauthorized');
     }
 
-    throw new Error(`HTTP error! Status: ${res.status}`);
+    const data: ErrorApiResponse = await res.json();
+
+    throw new Error(`HTTP error! Status: ${res.status}`, {
+      cause: data.statusCode,
+    });
   }
 
-  const data = await res.json();
+  const data: ErrorApiResponse = await res.json();
   if (data?.isError) {
-    throw new Error(data?.message);
+    throw new Error(data?.message, {
+      cause: data.statusCode,
+    });
   }
 
   return data;

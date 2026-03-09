@@ -18,6 +18,13 @@ export type ApiResponse<T> = {
   result: T;
 };
 
+export type ErrorApiResponse = {
+  statusCode: number;
+  timestamp: string;
+  isError: true;
+  message: string;
+};
+
 export type SetState<T> = Dispatch<SetStateAction<T>>;
 
 export type Direction = 'ltr' | 'rtl';

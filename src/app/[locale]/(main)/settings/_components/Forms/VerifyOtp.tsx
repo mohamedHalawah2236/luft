@@ -112,7 +112,7 @@ export default function VerifyOTPForm({
   const onFormSubmit = form.handleSubmit(async ({ otp }) => {
     await mutateAsync({
       newIdentifier: identifier,
-      type: IDENTIFIER_TYPE.Email,
+      type: identifierType,
       otpCode: otp,
     });
   });

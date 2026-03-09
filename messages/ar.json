@@ -164,6 +164,9 @@
       "otpSent": "تم إرسال رمز تحقق مكوّن من {numOfDigits} أرقام إلى {identifier}"
     }
   },
+  "toaster": {
+    "otpAlreadySent": "تم إرسال رمزالتحقق بالفعل، الرجاء ادخال الرمز المرسل إليك"
+  },
   "bookFreeConsultation": "احجز استشارة مجانية",
   "messageUs": "راسلنا"
 }

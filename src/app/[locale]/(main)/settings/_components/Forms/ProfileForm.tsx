@@ -18,8 +18,8 @@ import EditableField from '../EditableField';
 import ProfileImgInput from '../ProfileImgInput';
 
 import ChangeEmailForm from './ChangeEmail/ChangeEmailForm';
-import ChangePhoneForm from './ChangePhone/ChangePhoneForm';
 import ChangePasswordForm from './ChangePasswordForm';
+import ChangePhoneForm from './ChangePhone/ChangePhoneForm';
 import { profileFormQueryKey, profileFormSchema } from './schemas';
 
 import { GetUserProfileRes, ProfileFormData } from '@/types/settings';
@@ -41,6 +41,7 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
       firstName: '',
       lastName: '',
       email: '',
+      phoneNumber: '',
       file: null,
       password: '********',
     },
@@ -77,6 +78,7 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
       firstName: userData?.firstName,
       lastName: userData?.lastName,
       email: userData?.email,
+      phoneNumber: userData?.phoneNumber,
       file: null,
     });
   }, [form, isFetched, userData, isLoading]);
@@ -139,7 +141,7 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
         <EditableField
           formTitle={tRoot('settings.titles.changePhone')}
           editForm={<ChangePhoneForm />}
-          fieldName='phone'
+          fieldName='phoneNumber'
           label={tCommon('labels.phone')}
           placeholder={
             isFetching ? tCommon('loading') : tCommon('placeholders.phone')

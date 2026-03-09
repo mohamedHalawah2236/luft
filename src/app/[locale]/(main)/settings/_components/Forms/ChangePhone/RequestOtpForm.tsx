@@ -21,6 +21,7 @@ import { EGYPTIAN_PHONE } from '@/constants/regex';
 import { sendOtp } from '@/api/settings';
 import { handleOnlyNumbersKeyDown } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { toast } from 'sonner';
 
 export default function RequestOtpForm({
   setIdentifier,
@@ -31,6 +32,7 @@ export default function RequestOtpForm({
 }) {
   const [serverError, setServerError] = useState<string | undefined>();
   const tCommon = useTranslations('common');
+  const tToaster = useTranslations('toaster');
 
   const formSchema = z.object({
     phone: z
@@ -61,6 +63,17 @@ export default function RequestOtpForm({
       setIdentifier(form.getValues('phone'));
     },
     onError: (error: Error) => {
+      const status = error.cause as number;
+      if (status === 429) {
+        setIsOtpSent(true);
+        setIdentifier(form.getValues('phone'));
+        toast.info(tToaster('otpAlreadySent'), {
+          position: 'top-left',
+          closeButton: false,
+        });
+        return;
+      }
+
       setServerError(error.message);
     },
   });
