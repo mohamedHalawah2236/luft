@@ -53,7 +53,7 @@ export default function RequestOtpForm({
   const session = useSession();
   const accessToken = session.data?.accessToken;
 
-  const { mutateAsync, isSuccess } = useMutation({
+  const { mutateAsync } = useMutation({
     mutationFn: async (values: SendOtpData) => sendOtp(values, accessToken),
     onMutate: () => {
       setServerError(undefined);

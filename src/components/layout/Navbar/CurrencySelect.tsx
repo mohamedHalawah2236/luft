@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { useTranslations } from 'next-intl';
 
@@ -7,7 +7,7 @@ import DollarIcon from '@/components/icons/DollarIcon';
 import Select from '@/components/shared/Select';
 
 export default function CurrencySelect() {
-  const [value, setValue] = useState('');
+  const [value] = useState('');
   const t = useTranslations('common');
 
   return (

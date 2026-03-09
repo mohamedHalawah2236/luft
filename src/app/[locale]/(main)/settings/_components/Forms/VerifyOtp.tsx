@@ -44,7 +44,6 @@ export default function VerifyOTPForm({
   const [serverError, setServerError] = useState<string | undefined>();
 
   const tCommon = useTranslations('common');
-  const t = useTranslations('auth.verifyOTP');
   const tSettings = useTranslations('settings');
 
   const [isResendDisabled, setIsResendDisabled] = useState(true);

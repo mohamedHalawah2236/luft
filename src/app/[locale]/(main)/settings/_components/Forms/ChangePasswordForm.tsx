@@ -85,7 +85,7 @@ export default function ChangePasswordForm() {
   const session = useSession();
   const { setIsOpen } = useContext(EditableFieldContext);
 
-  const { mutateAsync, isSuccess } = useMutation({
+  const { mutateAsync } = useMutation({
     mutationFn: async (values: ChangePasswordFormData) =>
       changeUserPassword(values, session.data?.accessToken),
     onMutate: () => {

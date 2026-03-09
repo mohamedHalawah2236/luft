@@ -28,7 +28,7 @@ export default function CustomOtpInput({
   label,
   disabled,
 }: CustomOtpInputProps) {
-  const { formState, control, watch } = useFormContext();
+  const { formState, control } = useFormContext();
   const { isSubmitting, errors } = formState;
   const hasError = errors[fieldName];
 
