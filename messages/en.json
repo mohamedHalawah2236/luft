@@ -55,7 +55,8 @@
         "invalid": "Invalid phone number"
       },
       "required": "Required Field",
-      "lettersOnly": "Name must contain letters only"
+      "lettersOnly": "Name must contain letters only",
+      "invalidInput": "Invalid Input"
     },
     "buttons": {
       "continue": "Continue",
