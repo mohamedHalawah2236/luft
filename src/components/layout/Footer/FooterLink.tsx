@@ -1,11 +1,10 @@
 'use client';
-import React from 'react';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 
 import { NavLinkProps } from '@/types/components';
 
+import { usePathname } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
 
 export default function FooterLink({ title, href }: NavLinkProps) {
