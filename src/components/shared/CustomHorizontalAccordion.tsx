@@ -1,10 +1,14 @@
 'use client';
+import * as React from 'react';
+
+import { useLocale } from 'next-intl';
+
+import { Minus, Plus } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+
 import { cn } from '@/lib/utils';
-import { Minus, Plus } from 'lucide-react';
-import { useLocale } from 'next-intl';
-import * as React from 'react';
 
 export type HorizontalAccordionItem = {
   id: string;

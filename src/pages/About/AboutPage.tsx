@@ -1,5 +1,6 @@
 import AboutSection from '@/components/sections/AboutSection';
 import OurValuesSection from '@/components/sections/OurValuesSection/OurValuesSection';
+
 import BannerSection from '../../components/sections/BannerSection';
 
 export default function AboutPage() {

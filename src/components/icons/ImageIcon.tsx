@@ -1,5 +1,6 @@
-import { cn } from '@/lib/utils';
 import { IconProps } from '@/types';
+
+import { cn } from '@/lib/utils';
 
 export default function ImageIcon({ className }: IconProps) {
   return (

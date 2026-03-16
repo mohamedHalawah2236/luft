@@ -1,6 +1,6 @@
+import Link from 'next/link';
 import { DefaultSession, getServerSession } from 'next-auth';
 import { getTranslations } from 'next-intl/server';
-import Link from 'next/link';
 
 import { Heart, Menu } from 'lucide-react';
 
