@@ -1,22 +1,27 @@
-import React from 'react';
-
-import Link from 'next/link';
 import { DefaultSession, getServerSession } from 'next-auth';
+import Link from 'next/link';
 
 import Logo from '@/components/icons/Logo';
 
-import MobileNavSheet from './Mobile/MobileNavSheet';
 import LoginNavBtn from './LoginNavBtn';
-import NavLinks from './NavLinks';
+import MobileNavSheet from './Mobile/MobileNavSheet';
 import UserDropdown from './UserDropdown';
 
 import { isLoggedIn } from '@/utils';
 
 import { Locale } from '@/i18n/i18n.config';
 import { authOptions } from '@/lib/auth';
-import QueryClientProvider from '@/providers/QueryClientProvider';
+import { Page } from '@/types/layout';
+import LanguageSwitcher from './LanguageSwitcher';
+import NavLink from './NavLinks/NavLink';
 
-export default async function Navbar({ locale }: { locale: Locale }) {
+export default async function Navbar({
+  locale,
+  navLinks,
+}: {
+  locale: Locale;
+  navLinks: Page[];
+}) {
   const isAuth = await isLoggedIn();
   const session = (await getServerSession(authOptions)) as DefaultSession & {
     accessToken: string;
@@ -37,17 +42,26 @@ export default async function Navbar({ locale }: { locale: Locale }) {
           <Logo className='h-8 w-20' />
         </Link>
         <div className='max-sm:hidden'>
-          <NavLinks />
+          <div className='flex items-center gap-6'>
+            {navLinks.map(({ title, id }) => (
+              <NavLink
+                key={title}
+                {...{ title, href: `/${id}` }}
+              />
+            ))}
+          </div>
         </div>
       </div>
 
-      <QueryClientProvider>
+      <div className='flex items-center gap-5'>
+        <LanguageSwitcher />
+
         {isAuth ? (
           <UserDropdown {...{ userName, token, dir }} />
         ) : (
           <LoginNavBtn />
         )}
-      </QueryClientProvider>
+      </div>
     </div>
   );
 }

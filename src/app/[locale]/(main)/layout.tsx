@@ -4,16 +4,21 @@ import Footer from '@/components/layout/Footer';
 import Navbar from '@/components/layout/Navbar';
 import RatedByGuests from '@/components/shared/RatedByGuests';
 
+import { getLayoutData } from '@/api/page';
 import { Locale } from '@/i18n/i18n.config';
+import { LayoutDataResponse } from '@/types/layout';
 
 export default async function AppLayout({
   children,
   params,
 }: {
   children: ReactNode;
-  params: Promise<{ locale: string }>;
+  params: Promise<{ locale: Locale }>;
 }) {
   const { locale } = await params;
+  const {
+    result: { pages },
+  }: LayoutDataResponse = await getLayoutData(locale);
 
   return (
     <div className='flex size-full flex-col overflow-auto'>
@@ -23,7 +28,10 @@ export default async function AppLayout({
           color='var(--ps-neutral-900)'
         />
       </div>
-      <Navbar locale={locale as Locale} />
+      <Navbar
+        navLinks={pages}
+        locale={locale as Locale}
+      />
       <main className='flex w-full flex-1 items-center justify-center'>
         {children}
       </main>
