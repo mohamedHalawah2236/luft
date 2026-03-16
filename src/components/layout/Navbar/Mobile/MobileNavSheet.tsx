@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import { DefaultSession, getServerSession } from 'next-auth';
 import { getTranslations } from 'next-intl/server';
+import Link from 'next/link';
 
 import { Heart, Menu } from 'lucide-react';
 
@@ -62,7 +62,7 @@ async function MobileNavSheet() {
             <UserLink
               label={t('common.navLinks.settings')}
               icon={<GearIcon className='!size-6 fill-grayish-500' />}
-              href='/settings'
+              href='/account/settings'
             />
 
             <UserLink

@@ -1,8 +1,8 @@
 'use client';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
-import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 
 import { ChevronDown, Heart, Settings } from 'lucide-react';
 
@@ -41,7 +41,7 @@ export default function UserDropdown({
     {
       label: t('navLinks.settings'),
       disabled: false,
-      onClick: () => router.push('/settings'),
+      onClick: () => router.push('/account/settings'),
       icon: <Settings className='!size-5' />,
     },
     {
