@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 import Footer from '@/components/layout/Footer';
 import Navbar from '@/components/layout/Navbar';
@@ -24,7 +24,7 @@ export default async function AppLayout({
         />
       </div>
       <Navbar locale={locale as Locale} />
-      <main className='container flex flex-1 items-center justify-center'>
+      <main className='flex w-full flex-1 items-center justify-center'>
         {children}
       </main>
       <Footer />

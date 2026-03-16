@@ -1,0 +1,44 @@
+import ImageIcon from '@/components/icons/ImageIcon';
+import { cn } from '@/lib/utils';
+
+export type BannerSectionProps = {
+  title: string;
+  description: string;
+  mediaUrl: string;
+  className?: string;
+};
+
+export default function BannerSection({
+  title,
+  description,
+  mediaUrl,
+  className,
+}: BannerSectionProps) {
+  if (!mediaUrl)
+    return (
+      <div className='flex size-full flex-col items-center justify-center gap-6 bg-neutral-50'>
+        <ImageIcon />
+        <div className='flex size-fit flex-col items-center gap-2'>
+          <h6 className='text-neutral-400'>{title}</h6>
+          <p className='text-5xl font-medium text-neutral-900'>{description}</p>
+        </div>
+      </div>
+    );
+
+  return (
+    <div
+      className={cn(
+        'flex size-full items-center justify-center bg-cover bg-center',
+        className,
+      )}
+      style={{ backgroundImage: `url(${mediaUrl})` }}
+    >
+      <div className='flex size-fit flex-col items-center gap-2 text-center font-medium text-white'>
+        <h6 className='text-lg sm:text-xl md:text-2xl'>{title}</h6>
+        <p className='text-5xl leading-[3.625rem] sm:text-6xl sm:leading-[3.75rem] md:text-7xl md:leading-[5.25rem]'>
+          {description}
+        </p>
+      </div>
+    </div>
+  );
+}
