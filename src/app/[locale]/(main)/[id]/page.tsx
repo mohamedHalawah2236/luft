@@ -1,7 +1,9 @@
-import { getPageSections } from '@/api/page';
 import AboutPage from '@/components/pages/About/AboutPage';
-import { Locale } from '@/i18n/i18n.config';
+
 import { PageApiResponse, PageTypeEnum } from '@/types/page';
+
+import { getPageSections } from '@/api/page';
+import { Locale } from '@/i18n/i18n.config';
 
 export default async function Page({
   params,

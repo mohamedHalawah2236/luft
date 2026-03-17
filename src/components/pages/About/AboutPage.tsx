@@ -1,8 +1,9 @@
 import AboutSection from '@/components/sections/AboutSection';
 import OurValuesSection from '@/components/sections/OurValuesSection/OurValuesSection';
 
-import { AboutPageSections } from '@/types/page';
 import BannerSection from '../../sections/BannerSection';
+
+import { AboutPageSections } from '@/types/page';
 
 export default function AboutPage({
   aboutUs,
