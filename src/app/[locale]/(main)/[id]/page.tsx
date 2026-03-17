@@ -11,31 +11,12 @@ export default async function Page({
   params: Promise<{ id: string; locale: string }>;
 }) {
   const { id, locale } = await params;
-  const res: PageApiResponse = await getPageSections({
+  const {
+    result: { pageType, sections },
+  }: PageApiResponse = await getPageSections({
     locale: locale as Locale,
     pageId: id,
   });
-
-  const {
-    pageType,
-    aboutUs,
-    banner,
-    ourValues,
-    mediaContentSection,
-    howItWorks,
-    perfectStaySection,
-  } = res.result;
-
-  console.log(res);
-
-  const sections = {
-    aboutUs,
-    banner,
-    ourValues,
-    mediaContentSection,
-    howItWorks,
-    perfectStaySection,
-  };
 
   switch (pageType) {
     case PageTypeEnum.AboutUs:
