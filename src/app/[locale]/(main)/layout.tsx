@@ -4,16 +4,17 @@ import Footer from '@/components/layout/Footer';
 import Navbar from '@/components/layout/Navbar';
 import RatedByGuests from '@/components/shared/RatedByGuests';
 
+import { LayoutDataResponse } from '@/types/layout';
+
 import { getLayoutData } from '@/api/page';
 import { Locale } from '@/i18n/i18n.config';
-import { LayoutDataResponse } from '@/types/layout';
 
 export default async function AppLayout({
   children,
   params,
 }: {
   children: ReactNode;
-  params: Promise<{ locale: Locale }>;
+  params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
   const {
@@ -21,7 +22,7 @@ export default async function AppLayout({
       pages,
       contactInfo: { socials, items },
     },
-  }: LayoutDataResponse = await getLayoutData(locale);
+  }: LayoutDataResponse = await getLayoutData(locale as Locale);
 
   return (
     <div className='flex size-full flex-col overflow-auto'>
@@ -34,6 +35,7 @@ export default async function AppLayout({
       <Navbar
         navLinks={pages}
         locale={locale as Locale}
+        socialLinks={socials}
       />
       <main className='flex w-full flex-1 items-center justify-center'>
         {children}

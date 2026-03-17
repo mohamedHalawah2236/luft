@@ -1,18 +1,17 @@
 'use client';
 
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
 
 import { NavLinkProps } from '@/types/components';
 
-import { usePathname } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
 
-export default function NavLink({ title, href }: NavLinkProps) {
-  const pathname = usePathname();
-  const pathnameWithoutLocale = pathname.split('/').slice(2).join('/');
-  const currPathname = `/${pathnameWithoutLocale}`;
+export default function NavLink({ title, href, id }: NavLinkProps) {
+  const params = useParams();
 
-  const isActive = currPathname === href;
+  const currentId = params?.id as string;
+  const isActive = currentId === id;
 
   return (
     <Link

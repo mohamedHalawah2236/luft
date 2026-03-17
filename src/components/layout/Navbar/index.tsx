@@ -1,26 +1,29 @@
-import { DefaultSession, getServerSession } from 'next-auth';
 import Link from 'next/link';
+import { DefaultSession, getServerSession } from 'next-auth';
 
 import Logo from '@/components/icons/Logo';
 
-import LoginNavBtn from './LoginNavBtn';
 import MobileNavSheet from './Mobile/MobileNavSheet';
+import NavLink from './NavLinks/NavLink';
+import LanguageSwitcher from './LanguageSwitcher';
+import LoginNavBtn from './LoginNavBtn';
 import UserDropdown from './UserDropdown';
+
+import { Page, SocialMediaLink } from '@/types/layout';
 
 import { isLoggedIn } from '@/utils';
 
 import { Locale } from '@/i18n/i18n.config';
 import { authOptions } from '@/lib/auth';
-import { Page } from '@/types/layout';
-import LanguageSwitcher from './LanguageSwitcher';
-import NavLink from './NavLinks/NavLink';
 
 export default async function Navbar({
   locale,
   navLinks,
+  socialLinks,
 }: {
   locale: Locale;
   navLinks: Page[];
+  socialLinks: SocialMediaLink[];
 }) {
   const isAuth = await isLoggedIn();
   const session = (await getServerSession(authOptions)) as DefaultSession & {
@@ -36,7 +39,10 @@ export default async function Navbar({
     <div className='flex items-center justify-between border-y border-grayish-50 bg-white px-6 py-3.5 lg:px-[4.5rem]'>
       <div className='flex items-center gap-8 max-sm:gap-6'>
         <div className='h-fit sm:hidden'>
-          <MobileNavSheet />
+          <MobileNavSheet
+            socialLinks={socialLinks}
+            navLinks={navLinks}
+          />
         </div>
         <Link href='/'>
           <Logo className='h-8 w-20' />
@@ -46,7 +52,7 @@ export default async function Navbar({
             {navLinks.map(({ title, id }) => (
               <NavLink
                 key={title}
-                {...{ title, href: `/${id}` }}
+                {...{ title, href: `/${id}`, id }}
               />
             ))}
           </div>

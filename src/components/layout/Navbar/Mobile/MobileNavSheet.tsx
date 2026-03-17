@@ -21,14 +21,18 @@ import CurrencySelect from '../CurrencySelect';
 import LogoutBtn from './LogoutBtn';
 import UserLink from './UserSetting';
 
-import { socialLinks } from '@/constants/links';
-import { getNavLinks } from '@/constants/nav';
+import { Page, SocialMediaLink } from '@/types/layout';
 
 import { authOptions } from '@/lib/auth';
 
-async function MobileNavSheet() {
+async function MobileNavSheet({
+  socialLinks,
+  navLinks,
+}: {
+  socialLinks: SocialMediaLink[];
+  navLinks: Page[];
+}) {
   const t = await getTranslations('');
-  const navLinks = getNavLinks(t);
   const session = (await getServerSession(authOptions)) as DefaultSession & {
     accessToken: string;
   };
@@ -43,13 +47,13 @@ async function MobileNavSheet() {
       <SheetContent className='flex w-10/12 flex-col justify-between overflow-auto bg-white p-0 [&>button]:end-4 [&>button]:right-auto [&>button]:w-fit'>
         <div className='flex flex-col gap-4 px-4 pt-4'>
           <div className='flex flex-col gap-4'>
-            {navLinks.map(({ title, href }) => (
+            {navLinks.map(({ title, id }) => (
               <SheetClose
                 asChild
-                key={title + 'mobileSidebar'}
+                key={id}
               >
                 <Link
-                  href={href}
+                  href={`/${id}`}
                   className='text-grayish-900'
                 >
                   {title}
@@ -88,10 +92,10 @@ async function MobileNavSheet() {
             color='var(--ps-neutral-500)'
           />
           <div className='mt-6 flex items-center gap-5'>
-            {socialLinks.map(({ icon, link }, i) => (
+            {socialLinks.map(({ iconUrl, url, id }) => (
               <SocialMediaItem
-                key={link + i}
-                {...{ icon, link }}
+                key={id}
+                {...{ iconUrl, url }}
               />
             ))}
           </div>
