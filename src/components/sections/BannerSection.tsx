@@ -29,7 +29,7 @@ export default function BannerSection({
   return (
     <div
       className={cn(
-        'flex size-full items-center justify-center bg-cover bg-center',
+        'flex size-full h-[21.25rem] items-center justify-center bg-cover bg-center sm:h-[25rem]',
         className,
       )}
       style={{ backgroundImage: `url(${mediaUrl})` }}
