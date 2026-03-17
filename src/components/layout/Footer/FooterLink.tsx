@@ -4,15 +4,14 @@ import Link from 'next/link';
 
 import { NavLinkProps } from '@/types/components';
 
-import { usePathname } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
+import { useParams } from 'next/navigation';
 
-export default function FooterLink({ title, href }: NavLinkProps) {
-  const pathname = usePathname();
-  const pathnameWithoutLocale = pathname.split('/').slice(2).join('/');
-  const currPathname = `/${pathnameWithoutLocale}`;
+export default function FooterLink({ id, title, href }: NavLinkProps) {
+  const params = useParams();
 
-  const isActive = currPathname === href;
+  const currentId = params?.id as string;
+  const isActive = currentId === id;
 
   return (
     <Link

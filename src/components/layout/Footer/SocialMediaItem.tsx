@@ -1,17 +1,22 @@
-import React, { ReactNode } from 'react';
-
 type SocialMediaItemProps = {
-  icon: ReactNode;
-  link: string;
+  iconUrl: string;
+  url: string;
 };
 
-export default function SocialMediaItem({ icon, link }: SocialMediaItemProps) {
+export default function SocialMediaItem({
+  iconUrl,
+  url,
+}: SocialMediaItemProps) {
   return (
     <a
-      href={link}
+      href={url}
       className='flex size-8 items-center justify-center rounded-full bg-white'
     >
-      {icon}
+      <img
+        src={iconUrl}
+        alt='icon'
+        className='max-h-5 max-w-5'
+      />
     </a>
   );
 }

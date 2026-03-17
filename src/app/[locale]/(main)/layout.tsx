@@ -17,7 +17,10 @@ export default async function AppLayout({
 }) {
   const { locale } = await params;
   const {
-    result: { pages },
+    result: {
+      pages,
+      contactInfo: { socials, items },
+    },
   }: LayoutDataResponse = await getLayoutData(locale);
 
   return (
@@ -35,7 +38,11 @@ export default async function AppLayout({
       <main className='flex w-full flex-1 items-center justify-center'>
         {children}
       </main>
-      <Footer />
+      <Footer
+        socialMediaItems={socials}
+        navLinks={pages}
+        contactItems={items}
+      />
     </div>
   );
 }

@@ -12,18 +12,18 @@ export type Page = {
 };
 
 export type ContactInfo = {
-  items: ContactItem[];
-  socials: Social[];
+  items: ContactItemProps[];
+  socials: SocialMediaLink[];
 };
 
-export type ContactItem = {
+export type ContactItemProps = {
   id: string;
   iconUrl: string;
   title: string;
   description: string;
 };
 
-export type Social = {
+export type SocialMediaLink = {
   id: string;
   name: string;
   url: string;

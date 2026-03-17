@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { cn } from '@/lib/utils';
 
 type ContactItemProps = {
@@ -16,7 +14,7 @@ export default function ContactItem({
   return (
     <div className={cn('flex flex-col gap-2', className)}>
       <h5 className='text-sm leading-6'>{label}</h5>
-      <p className='text-lg'>{value}</p>
+      <p className='sm:text-lg'>{value}</p>
     </div>
   );
 }

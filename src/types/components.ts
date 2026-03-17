@@ -40,6 +40,7 @@ export type DropdownProps = {
 };
 
 export type NavLinkProps = {
+  id: string;
   title: string;
   href: string;
 };

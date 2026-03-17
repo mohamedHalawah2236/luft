@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { getTranslations } from 'next-intl/server';
 
 import Logo from '@/components/icons/Logo';
@@ -9,13 +7,20 @@ import ContactItem from './ContactItem';
 import FooterLink from './FooterLink';
 import SocialMediaItem from './SocialMediaItem';
 
-import { socialLinks } from '@/constants/links';
-import { getNavLinks } from '@/constants/nav';
+import { ContactItemProps, Page, SocialMediaLink } from '@/types/layout';
 
-export default async function Footer() {
+type FooterProps = {
+  navLinks: Page[];
+  socialMediaItems: SocialMediaLink[];
+  contactItems: ContactItemProps[];
+};
+
+export default async function Footer({
+  navLinks,
+  socialMediaItems,
+  contactItems,
+}: FooterProps) {
   const t = await getTranslations();
-
-  const navLinks = getNavLinks(t);
 
   return (
     <div className='flex flex-col gap-6 bg-grayish-900 px-6 py-10 text-grayish-100 md:gap-16 lg:py-11 xl:gap-[7.5rem] xl:px-[4.5rem]'>
@@ -23,7 +28,7 @@ export default async function Footer() {
         {/* First Column */}
         <div className='flex flex-col gap-6'>
           <Logo className='h-[3.75rem] w-[8.75rem] fill-white' />
-          <p className='text-lg text-grayish-100 md:max-w-[21rem]'>
+          <p className='text-grayish-100 sm:text-lg md:max-w-[21rem]'>
             {t('footer.tagline')}
           </p>
           <div className='flex flex-col gap-6 max-sm:hidden'>
@@ -32,10 +37,10 @@ export default async function Footer() {
               color='var(--ps-neutral-100)'
             />
             <div className='flex items-center gap-5'>
-              {socialLinks.map(({ icon, link }, i) => (
+              {socialMediaItems.map(({ iconUrl, id, url }, i) => (
                 <SocialMediaItem
-                  key={link + i}
-                  {...{ icon, link }}
+                  key={id}
+                  {...{ iconUrl, url }}
                 />
               ))}
             </div>
@@ -46,10 +51,10 @@ export default async function Footer() {
         <div className='flex flex-col gap-2'>
           <span className='text-sm leading-6'>{t('common.labels.menu')}</span>
           <div className='flex flex-col gap-4'>
-            {navLinks.map(({ title, href }) => (
+            {navLinks.map(({ title, id }) => (
               <FooterLink
-                key={title}
-                {...{ title, href }}
+                key={`footerLink-${id}`}
+                {...{ id, title, href: `/${id}` }}
               />
             ))}
           </div>
@@ -57,26 +62,25 @@ export default async function Footer() {
 
         {/* Third Column */}
         <div className='flex flex-col gap-4 max-sm:mt-6'>
-          <ContactItem
-            label={t('common.labels.contact')}
-            value='+02 123 432 9955'
-          />
-          <ContactItem
-            label={t('common.labels.email')}
-            value='luftstay@email.com'
-          />
+          {contactItems.map(({ description, id, title }) => (
+            <ContactItem
+              key={id}
+              label={title}
+              value={description}
+            />
+          ))}
         </div>
 
         <div className='mt-6 flex flex-col gap-6 sm:hidden'>
           <RatedByGuests
-            textClassName='text-lg'
+            textClassName='sm:text-lg'
             color='var(--ps-neutral-100)'
           />
           <div className='flex items-center gap-5'>
-            {socialLinks.map(({ icon, link }, i) => (
+            {socialMediaItems.map(({ iconUrl, id, url }, i) => (
               <SocialMediaItem
-                key={link + i}
-                {...{ icon, link }}
+                key={id}
+                {...{ iconUrl, url }}
               />
             ))}
           </div>
