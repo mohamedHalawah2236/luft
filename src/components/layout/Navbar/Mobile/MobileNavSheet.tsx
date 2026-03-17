@@ -1,6 +1,6 @@
+import Link from 'next/link';
 import { DefaultSession, getServerSession } from 'next-auth';
 import { getTranslations } from 'next-intl/server';
-import Link from 'next/link';
 
 import { Heart, Menu } from 'lucide-react';
 
@@ -17,6 +17,7 @@ import {
 
 import SocialMediaItem from '../../Footer/SocialMediaItem';
 import CurrencySelect from '../CurrencySelect';
+import LanguageSwitcher from '../LanguageSwitcher';
 
 import LogoutBtn from './LogoutBtn';
 import UserLink from './UserSetting';
@@ -24,7 +25,6 @@ import UserLink from './UserSetting';
 import { Page, SocialMediaLink } from '@/types/layout';
 
 import { authOptions } from '@/lib/auth';
-import LanguageSwitcher from '../LanguageSwitcher';
 
 async function MobileNavSheet({
   socialLinks,

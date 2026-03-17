@@ -1,12 +1,12 @@
-import { DefaultSession, getServerSession } from 'next-auth';
 import Link from 'next/link';
+import { DefaultSession, getServerSession } from 'next-auth';
 
 import Logo from '@/components/icons/Logo';
 
-import LanguageSwitcher from './LanguageSwitcher';
-import LoginNavBtn from './LoginNavBtn';
 import MobileNavSheet from './Mobile/MobileNavSheet';
 import NavLink from './NavLinks/NavLink';
+import LanguageSwitcher from './LanguageSwitcher';
+import LoginNavBtn from './LoginNavBtn';
 import UserDropdown from './UserDropdown';
 
 import { Page, SocialMediaLink } from '@/types/layout';
