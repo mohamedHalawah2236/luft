@@ -13,8 +13,18 @@ export default function ContactItem({
 }: ContactItemProps) {
   return (
     <div className={cn('flex flex-col gap-2', className)}>
-      <h5 className='text-sm leading-6'>{label}</h5>
-      <p className='sm:text-lg'>{value}</p>
+      <h5
+        title={label}
+        className='line-clamp-1 text-sm leading-6'
+      >
+        {label}
+      </h5>
+      <p
+        title={value}
+        className='line-clamp-1 sm:text-lg'
+      >
+        {value}
+      </p>
     </div>
   );
 }

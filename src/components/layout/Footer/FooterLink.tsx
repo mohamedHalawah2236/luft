@@ -1,11 +1,11 @@
 'use client';
 
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
 
 import { NavLinkProps } from '@/types/components';
 
 import { cn } from '@/lib/utils';
-import { useParams } from 'next/navigation';
 
 export default function FooterLink({ id, title, href }: NavLinkProps) {
   const params = useParams();
@@ -16,7 +16,8 @@ export default function FooterLink({ id, title, href }: NavLinkProps) {
   return (
     <Link
       href={href}
-      className={cn('text-grayish-100 sm:text-lg', {
+      title={title}
+      className={cn('line-clamp-1 text-grayish-100 sm:text-lg', {
         'font-medium text-grayish-30': isActive,
       })}
     >
