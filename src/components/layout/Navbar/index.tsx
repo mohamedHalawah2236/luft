@@ -1,12 +1,12 @@
-import Link from 'next/link';
 import { DefaultSession, getServerSession } from 'next-auth';
+import Link from 'next/link';
 
 import Logo from '@/components/icons/Logo';
 
-import MobileNavSheet from './Mobile/MobileNavSheet';
-import NavLink from './NavLinks/NavLink';
 import LanguageSwitcher from './LanguageSwitcher';
 import LoginNavBtn from './LoginNavBtn';
+import MobileNavSheet from './Mobile/MobileNavSheet';
+import NavLink from './NavLinks/NavLink';
 import UserDropdown from './UserDropdown';
 
 import { Page, SocialMediaLink } from '@/types/layout';
@@ -60,7 +60,9 @@ export default async function Navbar({
       </div>
 
       <div className='flex items-center gap-5'>
-        <LanguageSwitcher />
+        <div className='max-sm:hidden'>
+          <LanguageSwitcher />
+        </div>
 
         {isAuth ? (
           <UserDropdown {...{ userName, token, dir }} />

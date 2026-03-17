@@ -18,7 +18,7 @@ export default function LanguageSwitcher() {
   return (
     <button
       type='button'
-      className='text-neutral-900 underline'
+      className='w-fit text-neutral-900 underline'
       onClick={switchLanguage}
     >
       {nextLocale === 'en' ? 'En' : 'عربي'}

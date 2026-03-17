@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import { DefaultSession, getServerSession } from 'next-auth';
 import { getTranslations } from 'next-intl/server';
+import Link from 'next/link';
 
 import { Heart, Menu } from 'lucide-react';
 
@@ -24,6 +24,7 @@ import UserLink from './UserSetting';
 import { Page, SocialMediaLink } from '@/types/layout';
 
 import { authOptions } from '@/lib/auth';
+import LanguageSwitcher from '../LanguageSwitcher';
 
 async function MobileNavSheet({
   socialLinks,
@@ -84,6 +85,7 @@ async function MobileNavSheet({
           </div>
           <hr className='text-grayish-100' />
           <CurrencySelect />
+          <LanguageSwitcher />
           <LogoutBtn token={token} />
         </div>
         <SheetFooter className='flex flex-col bg-grayish-50 px-4 py-4'>
