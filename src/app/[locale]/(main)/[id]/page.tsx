@@ -1,4 +1,4 @@
-import AboutPage from '@/pages/About/AboutPage';
+import AboutPage from '@/components/About/AboutPage';
 
 export default async function Page({
   params,
