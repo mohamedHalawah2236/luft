@@ -234,7 +234,7 @@ body {
 }
 
 .container {
-  @apply px-4 sm:px-[1.75rem] lg:px-[4.5rem];
+  @apply px-4 sm:px-[1.75rem] lg:px-[4.5rem] xl:mx-auto xl:w-[81rem] xl:px-0;
 }
 
 /* For Webkit (Chrome, Safari) */
