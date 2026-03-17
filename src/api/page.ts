@@ -8,3 +8,16 @@ export const getLayoutData = (locale: Locale) =>
       language: locale,
     },
   });
+
+export const getPageSections = ({
+  locale,
+  pageId,
+}: {
+  locale: Locale;
+  pageId: string;
+}) =>
+  getAllData(`api/CMS/get-all-cms?PageId=${pageId}`, {
+    headers: {
+      language: locale,
+    },
+  });
