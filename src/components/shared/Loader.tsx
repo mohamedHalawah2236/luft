@@ -1,4 +1,5 @@
 import { useTranslations } from 'next-intl';
+
 import Spinner from './Spinner';
 
 export default function Loader() {
