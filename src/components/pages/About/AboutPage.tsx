@@ -1,5 +1,6 @@
 import AboutSection from '@/components/sections/AboutSection';
 import OurValuesSection from '@/components/sections/OurValuesSection/OurValuesSection';
+import PerfectStaySection from '@/components/sections/PerfectStaySection';
 
 import BannerSection from '../../sections/BannerSection';
 
@@ -22,6 +23,9 @@ export default function AboutPage({
         <div className='my-[8.75rem]'>
           <OurValuesSection {...ourValues} />
         </div>
+      </div>
+      <div className='bg-grayish-50 py-10'>
+        <PerfectStaySection {...perfectStaySection} />
       </div>
     </div>
   );
