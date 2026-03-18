@@ -166,14 +166,14 @@ const CustomHorizontalAccordion = ({
                 <div className='flex-1 space-y-2'>
                   <div className='flex items-center gap-2'>
                     {item.icon && (
-                      <div className='shrink-0 text-neutral-600'>
+                      <div className='shrink-0 text-grayish-600'>
                         {item.icon}
                       </div>
                     )}
                     <div
                       dir={isEnglish ? 'rtl' : 'ltr'}
                       className={cn(
-                        'break-words text-[32px] font-medium leading-tight text-neutral-900',
+                        'break-words text-[32px] font-medium leading-tight text-grayish-900',
                       )}
                     >
                       {displayNumber}
@@ -184,7 +184,7 @@ const CustomHorizontalAccordion = ({
                   </div>
                   <div
                     className={cn(
-                      'break-words font-medium leading-tight text-neutral-900',
+                      'break-words font-medium leading-tight text-grayish-900',
                       isOpen ? 'text-[32px]' : 'text-2xl',
                     )}
                   >
@@ -205,7 +205,7 @@ const CustomHorizontalAccordion = ({
                   {/* Description always visible but faded when closed */}
                   <div
                     className={cn(
-                      'text-lg text-neutral-400 transition-opacity',
+                      'text-lg text-grayish-400 transition-opacity',
                       !isOpen && 'h-0 overflow-hidden opacity-0', // Hide when closed
                     )}
                   >
@@ -244,7 +244,7 @@ const CustomHorizontalAccordion = ({
                   }}
                   className={cn(
                     'h-10 w-10 rounded-full shadow-none transition-transform hover:scale-110 hover:shadow',
-                    'bg-transparent text-neutral-900 hover:border-none hover:bg-transparent focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+                    'bg-transparent text-grayish-900 hover:border-none hover:bg-transparent focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
 
                     'sm:h-12 sm:w-12',
                   )}

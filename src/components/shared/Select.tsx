@@ -1,11 +1,11 @@
 import { ReactNode } from 'react';
 
 import {
-  Select as SelectUI,
   SelectContent,
   SelectGroup,
   SelectItem,
   SelectTrigger,
+  Select as SelectUI,
   SelectValue,
 } from '@/components/ui/select';
 
@@ -39,7 +39,7 @@ export default function Select({
       {label && (
         <div className='ms-2.5 flex items-center gap-1.5'>
           {labelIcon}
-          <span className='text-neutral-900'>{label}</span>
+          <span className='text-grayish-900'>{label}</span>
         </div>
       )}
       <SelectUI

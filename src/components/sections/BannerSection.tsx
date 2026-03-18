@@ -20,8 +20,8 @@ export default function BannerSection({
       <div className='flex size-full flex-col items-center justify-center gap-6 bg-neutral-50'>
         <ImageIcon />
         <div className='flex size-fit flex-col items-center gap-2'>
-          <h6 className='text-neutral-400'>{title}</h6>
-          <p className='text-5xl font-medium text-neutral-900'>{description}</p>
+          <h6 className='text-grayish-400'>{title}</h6>
+          <p className='text-5xl font-medium text-grayish-900'>{description}</p>
         </div>
       </div>
     );

@@ -45,7 +45,7 @@ export default function EditableField({
             className=''
             onClick={() => setIsOpen(true)}
           >
-            <EditIcon className='size-5 text-neutral-900' />
+            <EditIcon className='size-5 text-grayish-900' />
           </button>
         }
         iconAlign={'inline-end'}

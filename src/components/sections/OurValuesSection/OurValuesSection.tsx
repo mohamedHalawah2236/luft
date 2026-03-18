@@ -21,7 +21,7 @@ const OurValuesSection = ({ title, items }: OurValuesSectionProps) => {
 
   return (
     <div>
-      <h2 className='mb-12 text-center text-5xl font-medium text-neutral-900'>
+      <h2 className='mb-12 text-center text-5xl font-medium text-grayish-900'>
         {SectionTitle}
       </h2>
       <Accordion

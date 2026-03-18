@@ -1,9 +1,8 @@
 'use client';
-import React from 'react';
 
-import Image from 'next/image';
 import { signOut } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 
 import { useMutation } from '@tanstack/react-query';
 
@@ -52,7 +51,7 @@ export default function ConfirmLogoutModal({
         />
         <div className='flex flex-col items-center gap-2 text-center'>
           <h4 className='text-xl font-medium'>{tLogout('title')}</h4>
-          <p className='text-neutral-400'>{tLogout('logBack')}</p>
+          <p className='text-grayish-400'>{tLogout('logBack')}</p>
         </div>
       </div>
     </ConfirmModal>

@@ -9,7 +9,7 @@ export default function MediaItem({
     <div className='flrx flex-col gap-1'>
       <h4
         title={title}
-        className='line-clamp-1 text-lg font-medium text-neutral-900 md:text-xl xl:text-2xl'
+        className='line-clamp-1 text-lg font-medium text-grayish-900 md:text-xl xl:text-2xl'
       >
         {number && (
           <span className='text-[1.75rem] leading-9 md:text-[2rem] md:leading-10 xl:text-5xl xl:leading-[3.625rem]'>
@@ -21,7 +21,7 @@ export default function MediaItem({
       </h4>
       <p
         title={description}
-        className='line-clamp-2 text-neutral-400 md:text-lg'
+        className='line-clamp-2 text-grayish-400 md:text-lg'
       >
         {description}
       </p>
