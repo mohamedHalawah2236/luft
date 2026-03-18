@@ -59,8 +59,7 @@ const OurValuesSection = ({ title, items }: OurValuesSectionProps) => {
       <div className='max-md:hidden'>
         <CustomHorizontalAccordion
           items={items}
-          fixedHeight='h-[411px]'
-          itemClassName='p-10'
+          itemClassName='p-10 h-[411px]'
         />
       </div>
     </div>

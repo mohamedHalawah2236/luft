@@ -106,25 +106,10 @@ const CustomHorizontalAccordion = ({
 
   if (!items.length) return null;
 
-  // Determine height class
-  const getHeightClass = () => {
-    if (heightClassName) return heightClassName;
-    if (fixedHeight) {
-      // If fixedHeight is a string, use it, otherwise use default fixed height
-      return typeof fixedHeight === 'string'
-        ? fixedHeight
-        : 'h-[400px] md:h-[450px] lg:h-[500px]'; // Fixed height for all cards
-    }
-    return 'min-h-[300px] md:min-h-[360px] lg:min-h-[400px]'; // Original responsive min-height
-  };
-
-  const containerHeightClass = getHeightClass();
-
   return (
     <div
       className={cn(
-        'flex w-full flex-col justify-center gap-4 md:flex-row',
-        containerHeightClass,
+        'flex w-full flex-col flex-wrap justify-center gap-4 md:flex-row',
         className,
       )}
     >
@@ -148,18 +133,18 @@ const CustomHorizontalAccordion = ({
               }
             }}
             className={cn(
-              'relative flex h-full w-[241px] flex-col justify-between overflow-hidden rounded-xl p-6 text-left',
+              'relative flex h-full w-[241px] min-w-[241px] flex-col justify-between overflow-hidden rounded-xl p-6 text-left',
               `${isEnglish ? 'text-left' : 'text-right'}`,
               'transition-all duration-500 ease-in-out motion-reduce:transition-none',
               '!bg-[#ECECEC] ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
               variantStyles[variant],
-              isOpen ? cn(expandedWidth) : cn(collapsedWidth),
+              isOpen ? cn(expandedWidth, '') : cn(collapsedWidth),
               item.disabled && 'cursor-not-allowed opacity-60',
               itemClassName,
               item.className,
             )}
           >
-            <div className='flex h-full min-w-0 flex-col'>
+            <div className='flex min-w-full flex-1 flex-col overflow-auto overflow-x-hidden'>
               {/* Added flex column and h-full */}
               {/* Header with icon and number */}
               <div className='flex items-start justify-between gap-2'>
@@ -196,7 +181,7 @@ const CustomHorizontalAccordion = ({
               {(item.description || item.content) && (
                 <div
                   className={cn(
-                    'transition-all duration-300 ease-out motion-reduce:transition-none',
+                    'flex-1 overflow-y-auto overflow-x-hidden transition-all duration-300 ease-out motion-reduce:transition-none',
                     isOpen
                       ? 'mt-4 flex-1 opacity-100' // Added flex-1 to take available space
                       : 'mt-0 opacity-0',
