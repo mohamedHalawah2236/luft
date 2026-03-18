@@ -60,6 +60,7 @@ const OurValuesSection = ({ title, items }: OurValuesSectionProps) => {
         <CustomHorizontalAccordion
           items={items}
           fixedHeight='h-[411px]'
+          itemClassName='p-10'
         />
       </div>
     </div>

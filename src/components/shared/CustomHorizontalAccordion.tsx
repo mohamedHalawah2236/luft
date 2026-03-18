@@ -78,8 +78,8 @@ const CustomHorizontalAccordion = ({
   className,
   itemClassName,
   heightClassName,
-  expandedWidth = 'flex-[4_1_0%]',
-  collapsedWidth = 'flex-[1_1_0%]',
+  expandedWidth = 'flex-1',
+  collapsedWidth = '',
   showToggleButton = true,
   variant = 'default',
   fixedHeight = true,
@@ -148,22 +148,18 @@ const CustomHorizontalAccordion = ({
               }
             }}
             className={cn(
-              'relative flex h-full flex-col justify-between overflow-hidden rounded-xl p-6 text-left',
+              'relative flex h-full w-[241px] flex-col justify-between overflow-hidden rounded-xl p-6 text-left',
               `${isEnglish ? 'text-left' : 'text-right'}`,
               'transition-all duration-500 ease-in-out motion-reduce:transition-none',
               '!bg-[#ECECEC] ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
               variantStyles[variant],
-              isOpen
-                ? cn(expandedWidth, 'md:max-w-none')
-                : cn(collapsedWidth, 'md:max-w-[200px] lg:max-w-[240px]'),
-              'w-full md:w-auto',
+              isOpen ? cn(expandedWidth) : cn(collapsedWidth),
               item.disabled && 'cursor-not-allowed opacity-60',
               itemClassName,
               item.className,
             )}
           >
             <div className='flex h-full min-w-0 flex-col'>
-              {' '}
               {/* Added flex column and h-full */}
               {/* Header with icon and number */}
               <div className='flex items-start justify-between gap-2'>
@@ -247,7 +243,7 @@ const CustomHorizontalAccordion = ({
                     toggle(item.id, item.disabled);
                   }}
                   className={cn(
-                    'h-10 w-10 rounded-full transition-transform hover:scale-110',
+                    'h-10 w-10 rounded-full shadow-none transition-transform hover:scale-110 hover:shadow',
                     'bg-transparent text-neutral-900 hover:border-none hover:bg-transparent focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
 
                     'sm:h-12 sm:w-12',
