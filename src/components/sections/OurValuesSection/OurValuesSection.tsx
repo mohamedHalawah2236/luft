@@ -1,4 +1,7 @@
+import AccordionElement from '@/components/shared/AccordionItem';
 import CustomHorizontalAccordion from '@/components/shared/CustomHorizontalAccordion';
+import { Accordion } from '@/components/ui/accordion';
+import { Minus, Plus } from 'lucide-react';
 
 type OurValuesData = {
   id: string;
@@ -20,10 +23,44 @@ const OurValuesSection = ({ title, items }: OurValuesSectionProps) => {
       <h2 className='mb-12 text-center text-5xl font-medium text-neutral-900'>
         {SectionTitle}
       </h2>
-      <CustomHorizontalAccordion
-        items={items}
-        fixedHeight='h-[411px]'
-      />
+      <Accordion
+        type='single'
+        collapsible
+        defaultValue='shipping'
+        className='flex flex-col gap-4 md:hidden'
+      >
+        {items.map(({ id, title, description }, i) => (
+          <AccordionElement
+            key={id}
+            value={id}
+            className='flex flex-col gap-4 rounded-3xl border-b-0 bg-grayish-50 transition-all hover:no-underline data-[state=closed]:p-8 data-[state=open]:px-10 data-[state=open]:py-6'
+            trigger={
+              <>
+                <span className='text-lg font-medium text-grayish-900 md:text-xl'>
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <span
+                  title={title}
+                  className='line-clamp-1 text-lg font-medium text-grayish-900 md:text-xl'
+                >
+                  {title}
+                </span>
+              </>
+            }
+            closeIcon={<Plus className='size-8 shrink-0 text-grayish-900' />}
+            openIcon={<Minus className='size-8 shrink-0 text-grayish-900' />}
+          >
+            <p className='text-grayish-400 md:text-lg'>{description}</p>
+          </AccordionElement>
+        ))}
+      </Accordion>
+
+      <div className='max-md:hidden'>
+        <CustomHorizontalAccordion
+          items={items}
+          fixedHeight='h-[411px]'
+        />
+      </div>
     </div>
   );
 };

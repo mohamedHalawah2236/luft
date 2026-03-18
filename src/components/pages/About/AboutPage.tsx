@@ -20,7 +20,7 @@ export default function AboutPage({
       <div className='container pb-10 pt-20'>
         <AboutSection {...aboutUs} />
 
-        <div className='my-[8.75rem]'>
+        <div className='my-16 md:my-[7.5rem] xl:my-[8.75rem]'>
           <OurValuesSection {...ourValues} />
         </div>
       </div>
