@@ -4,6 +4,7 @@ import PerfectStaySection from '@/components/sections/PerfectStaySection';
 
 import BannerSection from '../../sections/BannerSection';
 
+import MediaContentSection from '@/components/sections/MediaContentSection';
 import { AboutPageSections } from '@/types/page';
 
 export default function AboutPage({
@@ -22,6 +23,9 @@ export default function AboutPage({
 
         <div className='my-16 md:my-[7.5rem] xl:my-[8.75rem]'>
           <OurValuesSection {...ourValues} />
+        </div>
+        <div className='my-16 md:my-[7.5rem] xl:my-[8.75rem]'>
+          <MediaContentSection {...mediaContentSection} />
         </div>
       </div>
       <div className='bg-grayish-50 py-10'>
