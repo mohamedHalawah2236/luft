@@ -1,5 +1,6 @@
-import { MediaContentSection as MediaContentSectionType } from '@/types/page';
 import MediaItem from './MediaItem';
+
+import { MediaContentSection as MediaContentSectionType } from '@/types/page';
 
 export default function MediaContentSection({
   mediaUrl,

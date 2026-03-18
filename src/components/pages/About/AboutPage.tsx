@@ -1,10 +1,10 @@
 import AboutSection from '@/components/sections/AboutSection';
+import MediaContentSection from '@/components/sections/MediaContentSection';
 import OurValuesSection from '@/components/sections/OurValuesSection/OurValuesSection';
 import PerfectStaySection from '@/components/sections/PerfectStaySection';
 
 import BannerSection from '../../sections/BannerSection';
 
-import MediaContentSection from '@/components/sections/MediaContentSection';
 import { AboutPageSections } from '@/types/page';
 
 export default function AboutPage({
