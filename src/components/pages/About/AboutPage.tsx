@@ -1,4 +1,5 @@
 import AboutSection from '@/components/sections/AboutSection';
+import HowItWorksSection from '@/components/sections/HowItWorksSection';
 import MediaContentSection from '@/components/sections/MediaContentSection';
 import OurValuesSection from '@/components/sections/OurValuesSection/OurValuesSection';
 import PerfectStaySection from '@/components/sections/PerfectStaySection';
@@ -26,6 +27,9 @@ export default function AboutPage({
         </div>
         <div className='my-16 md:my-[7.5rem] xl:my-[8.75rem]'>
           <MediaContentSection {...mediaContentSection} />
+        </div>
+        <div className='my-16 md:my-[7.5rem] xl:my-[8.75rem]'>
+          <HowItWorksSection {...howItWorks} />
         </div>
       </div>
       <div className='bg-grayish-50 py-10'>
