@@ -1,7 +1,8 @@
+import { Minus, Plus } from 'lucide-react';
+
 import AccordionElement from '@/components/shared/AccordionItem';
 import CustomHorizontalAccordion from '@/components/shared/CustomHorizontalAccordion';
 import { Accordion } from '@/components/ui/accordion';
-import { Minus, Plus } from 'lucide-react';
 
 type OurValuesData = {
   id: string;
