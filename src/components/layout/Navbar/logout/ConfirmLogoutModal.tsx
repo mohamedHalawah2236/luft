@@ -1,8 +1,8 @@
 'use client';
 
+import Image from 'next/image';
 import { signOut } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
-import Image from 'next/image';
 
 import { useMutation } from '@tanstack/react-query';
 

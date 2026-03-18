@@ -1,11 +1,11 @@
 import { ReactNode } from 'react';
 
 import {
+  Select as SelectUI,
   SelectContent,
   SelectGroup,
   SelectItem,
   SelectTrigger,
-  Select as SelectUI,
   SelectValue,
 } from '@/components/ui/select';
 
