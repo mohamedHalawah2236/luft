@@ -169,5 +169,23 @@
     "otpAlreadySent": "تم إرسال رمزالتحقق بالفعل، الرجاء ادخال الرمز المرسل إليك"
   },
   "bookFreeConsultation": "احجز استشارة مجانية",
-  "messageUs": "راسلنا"
+  "messageUs": "راسلنا",
+  "sections": {
+    "testimonials": {
+      "title": "ماذا يقول ضيوفنا",
+      "subtitle": "محبوبون لراحتنا، نظافتنا، واهتمامنا الشخصي بخدمات الكونسيرج",
+      "ratedBy": "تم التقييم من قبل أكثر من {count} ضيف على airbnb",
+      "daysAgo": "منذ {days} أيام",
+      "stayedDays": "أقام لمدة {days} أيام",
+      "seeMore": "عرض المزيد",
+      "ratedOn": "تم التقييم على",
+      "dummyReviewLocation": "الزمالك - قمة العالم",
+      "dummyReviewText": "استمتعنا بإقامتنا. كانت الشقة مريحة ومجهزة تجهيزًا جيدًا وهادئة. حي رائع وموقع مركزي..."
+    },
+    "perfectStay": {
+      "buttons": {
+        "searchProperties": "بحث عن عقارات"
+      }
+    }
+  }
 }

@@ -1,7 +1,12 @@
 import AboutPage from '@/components/pages/About/AboutPage';
-import ContactUsPage from '@/components/pages/ContactUsPage';
+import ContactUsPage from '@/components/pages/ContactUs/ContactUsPage';
 
-import { AboutPageSections, ContactUsPageSections,PageApiResponse, PageTypeEnum } from '@/types/page';
+import {
+  AboutPageSections,
+  ContactUsPageSections,
+  PageApiResponse,
+  PageTypeEnum,
+} from '@/types/page';
 
 import { getPageSections } from '@/api/page';
 import { Locale } from '@/i18n/i18n.config';

@@ -1,4 +1,4 @@
-import BannerSection from '../sections/BannerSection';
+import BannerSection from '@/components/sections/BannerSection';
 
 import { ContactUsPageSections } from '@/types/page';
 

@@ -166,5 +166,23 @@
     "otpAlreadySent": "Otp already sent, please enter the code sent to you below"
   },
   "bookFreeConsultation": "Book Free Consultation",
-  "messageUs": "Message Us"
+  "messageUs": "Message Us",
+  "sections": {
+    "testimonials": {
+      "title": "What Our Guests Say",
+      "subtitle": "Loved for comfort, cleanliness, and our personalized concierge care",
+      "ratedBy": "rated by {count}+ Guests on airbnb",
+      "daysAgo": "{days} days ago",
+      "stayedDays": "Stayed {days} days",
+      "seeMore": "See more",
+      "ratedOn": "Rated on",
+      "dummyReviewLocation": "El Zamalek - Top of the world",
+      "dummyReviewText": "We enjoyed our stay. The apartment was comfortable, well appointed, and peaceful. Great neighborhood and centrally located. T..."
+    },
+    "perfectStay": {
+      "buttons": {
+        "searchProperties": "Search Properties"
+      }
+    }
+  }
 }

@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 import { Star } from 'lucide-react';
 
@@ -16,49 +17,6 @@ interface Review {
   stayedDays: number;
   text: string;
 }
-
-const reviews: Review[] = [
-  {
-    id: '1',
-    guestName: 'Mikasa Aramin',
-    location: 'El Zamalek - Top of the world',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Mikasa1',
-    rating: 4,
-    daysAgo: 5,
-    stayedDays: 6,
-    text: 'We enjoyed our stay. The apartment was comfortable, well appointed, and peaceful. Great neighborhood and centrally located. T...',
-  },
-  {
-    id: '2',
-    guestName: 'Mikasa Aramin',
-    location: 'El Zamalek - Top of the world',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Mikasa2',
-    rating: 4,
-    daysAgo: 5,
-    stayedDays: 6,
-    text: 'We enjoyed our stay. The apartment was comfortable, well appointed, and peaceful. Great neighborhood and centrally located. T...',
-  },
-  {
-    id: '3',
-    guestName: 'Mikasa Aramin',
-    location: 'El Zamalek - Top of the world',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Mikasa3',
-    rating: 4,
-    daysAgo: 5,
-    stayedDays: 6,
-    text: 'We enjoyed our stay. The apartment was comfortable, well appointed, and peaceful. Great neighborhood and centrally located. T...',
-  },
-  {
-    id: '4',
-    guestName: 'Mikasa Aramin',
-    location: 'El Zamalek - Top of the world',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Mikasa4',
-    rating: 4,
-    daysAgo: 5,
-    stayedDays: 6,
-    text: 'We enjoyed our stay. The apartment was comfortable, well appointed, and peaceful. Great neighborhood and centrally located. T...',
-  },
-];
 
 function StarRating({
   rating,
@@ -87,17 +45,60 @@ function StarRating({
 }
 
 export default function TestimonialsSection() {
+  const t = useTranslations('sections.testimonials');
+
+  const reviews: Review[] = [
+    {
+      id: '1',
+      guestName: 'Mikasa Aramin',
+      location: t('dummyReviewLocation'),
+      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Mikasa1',
+      rating: 4,
+      daysAgo: 5,
+      stayedDays: 6,
+      text: t('dummyReviewText'),
+    },
+    {
+      id: '2',
+      guestName: 'Mikasa Aramin',
+      location: t('dummyReviewLocation'),
+      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Mikasa2',
+      rating: 4,
+      daysAgo: 5,
+      stayedDays: 6,
+      text: t('dummyReviewText'),
+    },
+    {
+      id: '3',
+      guestName: 'Mikasa Aramin',
+      location: t('dummyReviewLocation'),
+      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Mikasa3',
+      rating: 4,
+      daysAgo: 5,
+      stayedDays: 6,
+      text: t('dummyReviewText'),
+    },
+    {
+      id: '4',
+      guestName: 'Mikasa Aramin',
+      location: t('dummyReviewLocation'),
+      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Mikasa4',
+      rating: 4,
+      daysAgo: 5,
+      stayedDays: 6,
+      text: t('dummyReviewText'),
+    },
+  ];
+
   return (
     <section className='w-full'>
       {/* Header Section */}
       <div className='mb-8 flex flex-col items-start justify-between gap-2 md:mb-12 md:flex-row md:items-end md:gap-6 lg:mb-16'>
         <div className='flex-1'>
           <h2 className='mb-2 text-[1.75rem] font-medium leading-9 text-grayish-900 md:text-[2rem] lg:text-5xl lg:leading-[3.625rem]'>
-            What Our Guests Say
+            {t('title')}
           </h2>
-          <p className='text-grayish-400 lg:text-lg'>
-            Loved for comfort, cleanliness, and our personalized concierge care
-          </p>
+          <p className='text-grayish-400 lg:text-lg'>{t('subtitle')}</p>
         </div>
 
         {/* Rating Badge */}
@@ -113,7 +114,7 @@ export default function TestimonialsSection() {
               size='md'
             />
             <span className='text-grayish-400'>
-              rated by 1,000+ Guests on airbnb
+              {t('ratedBy', { count: '1,000' })}
             </span>
           </div>
         </div>
@@ -150,10 +151,10 @@ export default function TestimonialsSection() {
                 size='sm'
               />
               <span className=''>•</span>
-              <span className=''>{review.daysAgo} days ago</span>
+              <span className=''>{t('daysAgo', { days: review.daysAgo })}</span>
               <span className='text-grayish-400'>•</span>
               <span className='text-grayish-400'>
-                Stayed {review.stayedDays} days
+                {t('stayedDays', { days: review.stayedDays })}
               </span>
             </div>
 
@@ -161,11 +162,13 @@ export default function TestimonialsSection() {
             <p className='mb-1 line-clamp-3 text-grayish-400'>{review.text}</p>
 
             {/* See More Link */}
-            <span className='mb-4 text-grayish-900 underline'>See more</span>
+            <span className='mb-4 text-grayish-900 underline'>
+              {t('seeMore')}
+            </span>
 
             {/* Airbnb Attribution */}
             <div className='flex items-center gap-2 pt-3'>
-              <span className='text-grayish-900'>Rated on</span>
+              <span className='text-grayish-900'>{t('ratedOn')}</span>
               <AirbnbIcon />
             </div>
           </div>
