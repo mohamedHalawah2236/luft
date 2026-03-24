@@ -1,5 +1,6 @@
-import { ContactUsPageSections } from '@/types/page';
 import BannerSection from '../sections/BannerSection';
+
+import { ContactUsPageSections } from '@/types/page';
 
 export default function ContactUsPage({
   banner,
