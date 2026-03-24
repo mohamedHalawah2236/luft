@@ -77,12 +77,10 @@ const CustomHorizontalAccordion = ({
   collapsible = true,
   className,
   itemClassName,
-  heightClassName,
   expandedWidth = 'flex-1',
   collapsedWidth = '',
   showToggleButton = true,
   variant = 'default',
-  fixedHeight = true,
 }: CustomHorizontalAccordionProps) => {
   const fallbackDefault = defaultValue ?? items[0]?.id ?? '';
   const [openValue, setOpenValue] = useControllableValue<string>({

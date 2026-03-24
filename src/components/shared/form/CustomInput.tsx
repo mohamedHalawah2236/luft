@@ -45,7 +45,7 @@ function CustomInput({
   showAllErrors,
   onKeyDown,
 }: CustomInputProps) {
-  const { formState, control, watch } = useFormContext();
+  const { formState, control } = useFormContext();
   const { isSubmitting, errors } = formState;
   const hasError = errors[fieldName];
 

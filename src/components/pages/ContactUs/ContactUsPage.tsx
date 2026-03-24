@@ -4,10 +4,7 @@ import SendMessageSection from './sections/SendMessageSection';
 
 import { ContactUsPageSections } from '@/types/page';
 
-export default function ContactUsPage({
-  banner,
-  contactInformationSection,
-}: ContactUsPageSections) {
+export default function ContactUsPage({ banner }: ContactUsPageSections) {
   return (
     <div className='flex w-full flex-col'>
       <BannerSection {...banner} />

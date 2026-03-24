@@ -37,7 +37,7 @@ export default async function Footer({
               color='var(--ps-neutral-100)'
             />
             <div className='flex items-center gap-5'>
-              {socialMediaItems.map(({ iconUrl, id, url }, i) => (
+              {socialMediaItems.map(({ iconUrl, id, url }) => (
                 <SocialMediaItem
                   key={id}
                   {...{ iconUrl, url }}
@@ -77,7 +77,7 @@ export default async function Footer({
             color='var(--ps-neutral-100)'
           />
           <div className='flex items-center gap-5'>
-            {socialMediaItems.map(({ iconUrl, id, url }, i) => (
+            {socialMediaItems.map(({ iconUrl, id, url }) => (
               <SocialMediaItem
                 key={id}
                 {...{ iconUrl, url }}

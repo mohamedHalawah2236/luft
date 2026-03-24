@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl';
 
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 import { z } from 'zod';
 
 import { useMutation } from '@tanstack/react-query';
@@ -16,7 +17,6 @@ import { EGYPTIAN_PHONE, NAME_REGEX } from '@/constants/regex';
 
 import { sendMessage } from '@/api/page';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { toast } from 'sonner';
 
 export default function SendMessageSection() {
   const tCommon = useTranslations('common');
@@ -58,7 +58,6 @@ export default function SendMessageSection() {
 
   const { mutateAsync, isPending } = useMutation({
     mutationFn: sendMessage,
-    onMutate: () => {},
     onSuccess: () => {
       toast.success(tSendMessage('toast.success'));
       form.reset();
