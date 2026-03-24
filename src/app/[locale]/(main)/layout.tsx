@@ -37,7 +37,7 @@ export default async function AppLayout({
         locale={locale as Locale}
         socialLinks={socials}
       />
-      <main className='flex w-full flex-1 items-center justify-center'>
+      <main className='flex w-full flex-1 items-center justify-center bg-white'>
         {children}
       </main>
       <Footer

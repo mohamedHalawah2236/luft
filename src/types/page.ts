@@ -101,16 +101,9 @@ export type AboutPageSections = {
   perfectStaySection: PerfectStaySection;
 };
 
-export type ContactInformationSection = BaseSection & {
-  title: string;
-  description: string;
-  mediaUrl: string;
-  mediaExtension: string;
-};
-
 export type ContactUsPageSections = {
   banner: BannerSection;
-  contactInformationSection: ContactInformationSection;
+  contactInformationSection: ContactUsSectionRes;
 };
 
 export type SendMessageFormData = {
@@ -119,4 +112,31 @@ export type SendMessageFormData = {
   emailAddress: string;
   phoneNumber: string;
   message: string;
+};
+
+export type ContactUsData = {
+  id: string;
+  iconUrl: string;
+  title: string;
+  mediaExtension: string;
+  description: string;
+};
+export type socialsItemData = {
+  id: string;
+  iconUrl: string;
+  title: string;
+  socials: {
+    id: string;
+    iconUrl: string;
+    url: string;
+    name: string;
+  }[];
+};
+
+export type ContactUsSectionRes = BaseSection & {
+  title: string;
+  secondaryHeading: string;
+  description: string;
+  items: ContactUsData[];
+  socialsItem: socialsItemData;
 };

@@ -100,7 +100,7 @@ export default function SendMessageSection() {
                 placeholder={tCommon('placeholders.lastName')}
               />
               <CustomInput
-                formItemClassName='max-lg:col-span-2'
+                formItemClassName='max-xl:col-span-2'
                 disabled={isPending}
                 required
                 fieldName='emailAddress'
@@ -109,7 +109,7 @@ export default function SendMessageSection() {
                 placeholder={tCommon('placeholders.email')}
               />
               <CustomInput
-                formItemClassName='max-lg:col-span-2'
+                formItemClassName='max-xl:col-span-2'
                 disabled={isPending}
                 required
                 fieldName='phoneNumber'
