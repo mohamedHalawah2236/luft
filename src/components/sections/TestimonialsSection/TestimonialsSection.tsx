@@ -4,6 +4,8 @@ import Image from 'next/image';
 
 import { Star } from 'lucide-react';
 
+import AirbnbIcon from '@/components/icons/AirbnbIcon';
+
 interface Review {
   id: string;
   guestName: string;
@@ -67,16 +69,16 @@ function StarRating({
 }) {
   const sizeClass = size === 'sm' ? 'w-4 h-4' : 'w-6 h-6';
   return (
-    <div className='flex gap-1'>
+    <div className='flex gap-2'>
       {[...Array(5)].map((_, i) => (
         <Star
           key={i}
-          className={`${sizeClass} ${
+          className={`${sizeClass} stroke-black ${
             i < Math.floor(rating)
-              ? 'fill-black text-black'
+              ? 'fill-grayish-900 text-grayish-900'
               : i < rating
-                ? 'fill-black text-black'
-                : 'fill-gray-300 text-gray-300'
+                ? 'fill-grayish-900 text-grayish-900'
+                : 'text-transpafill-transparent fill-transparent'
           }`}
         />
       ))}
@@ -84,31 +86,33 @@ function StarRating({
   );
 }
 
-export default function Testimonials() {
+export default function TestimonialsSection() {
   return (
-    <section className='w-full bg-white px-6 py-16 md:px-12 lg:px-16'>
+    <section className='w-full'>
       {/* Header Section */}
-      <div className='mb-12 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end'>
-        <div>
-          <h2 className='mb-4 text-4xl font-bold md:text-5xl'>
+      <div className='mb-8 flex flex-col items-start justify-between gap-2 md:mb-12 md:flex-row md:items-end md:gap-6 lg:mb-16'>
+        <div className='flex-1'>
+          <h2 className='mb-2 text-[1.75rem] font-medium leading-9 text-grayish-900 md:text-[2rem] lg:text-5xl lg:leading-[3.625rem]'>
             What Our Guests Say
           </h2>
-          <p className='text-lg text-gray-600'>
+          <p className='text-grayish-400 lg:text-lg'>
             Loved for comfort, cleanliness, and our personalized concierge care
           </p>
         </div>
 
         {/* Rating Badge */}
-        <div className='flex flex-col items-center gap-3 md:items-end'>
+        <div className='flex flex-col items-center gap-1 max-sm:items-start md:items-end'>
           <div className='flex items-baseline gap-2'>
-            <span className='text-6xl font-bold'>4.8</span>
+            <span className='text-5xl font-medium leading-[3.625rem] md:text-6xl md:leading-[4.5rem] lg:text-7xl lg:leading-[5.375rem]'>
+              4.8
+            </span>
           </div>
-          <div className='flex items-center gap-3'>
+          <div className='flex items-center gap-4 max-sm:flex-col max-sm:items-start'>
             <StarRating
               rating={4.5}
               size='md'
             />
-            <span className='text-sm text-gray-600'>
+            <span className='text-grayish-400'>
               rated by 1,000+ Guests on airbnb
             </span>
           </div>
@@ -116,14 +120,14 @@ export default function Testimonials() {
       </div>
 
       {/* Reviews Carousel */}
-      <div className='scrollbar-hide flex gap-6 overflow-x-auto pb-4'>
+      <div className='flex gap-12 overflow-x-auto pb-4'>
         {reviews.map((review) => (
           <div
             key={review.id}
-            className='w-full flex-shrink-0 rounded-lg border border-gray-200 bg-white p-6 md:w-96'
+            className='min-w-[20.464rem]'
           >
             {/* Guest Info */}
-            <div className='mb-4 flex items-center gap-3'>
+            <div className='mb-4 flex gap-2'>
               <div className='h-12 w-12 flex-shrink-0 overflow-hidden rounded-full bg-gray-100'>
                 <Image
                   src={review.avatar}
@@ -134,77 +138,38 @@ export default function Testimonials() {
                 />
               </div>
               <div className='flex-1'>
-                <h3 className='font-semibold text-gray-900'>
-                  {review.guestName}
-                </h3>
-                <p className='text-sm text-gray-600'>{review.location}</p>
+                <h3 className='text-lg text-grayish-900'>{review.guestName}</h3>
+                <p className='text-grayish-400'>{review.location}</p>
               </div>
             </div>
 
             {/* Rating and Metadata */}
-            <div className='mb-3 flex items-center gap-2'>
+            <div className='mb-4 flex items-center gap-2 text-grayish-900'>
               <StarRating
                 rating={review.rating}
                 size='sm'
               />
-              <span className='text-sm text-gray-600'>•</span>
-              <span className='text-sm text-gray-600'>
-                {review.daysAgo} days ago
-              </span>
-              <span className='text-sm text-gray-600'>•</span>
-              <span className='text-sm text-gray-600'>
+              <span className=''>•</span>
+              <span className=''>{review.daysAgo} days ago</span>
+              <span className='text-grayish-400'>•</span>
+              <span className='text-grayish-400'>
                 Stayed {review.stayedDays} days
               </span>
             </div>
 
             {/* Review Text */}
-            <p className='mb-3 text-sm leading-relaxed text-gray-700'>
-              {review.text}
-            </p>
+            <p className='mb-1 line-clamp-3 text-grayish-400'>{review.text}</p>
 
             {/* See More Link */}
-            <a
-              href='#'
-              className='inline-text-sm mb-4 font-semibold text-gray-900 underline'
-            >
-              See more
-            </a>
+            <span className='mb-4 text-grayish-900 underline'>See more</span>
 
             {/* Airbnb Attribution */}
-            <div className='flex items-center gap-2 border-t border-gray-200 pt-3'>
-              <span className='text-xs text-gray-600'>Rated on</span>
-              <svg
-                width='60'
-                height='20'
-                viewBox='0 0 60 20'
-                fill='none'
-                xmlns='http://www.w3.org/2000/svg'
-                className='h-5'
-              >
-                <path
-                  d='M10 0C5.6 0 2 3.6 2 8c0 6 8 12 8 12s8-6 8-12c0-4.4-3.6-8-8-8z'
-                  fill='currentColor'
-                  className='text-red-500'
-                />
-                <text
-                  x='15'
-                  y='14'
-                  fontSize='10'
-                  fontWeight='bold'
-                  fill='currentColor'
-                >
-                  airbnb
-                </text>
-              </svg>
+            <div className='flex items-center gap-2 pt-3'>
+              <span className='text-grayish-900'>Rated on</span>
+              <AirbnbIcon />
             </div>
           </div>
         ))}
-      </div>
-
-      {/* Pagination Dots */}
-      <div className='mt-8 flex justify-center gap-2'>
-        <div className='h-2 w-6 rounded-full bg-gray-900'></div>
-        <div className='h-2 w-12 rounded-full bg-gray-300'></div>
       </div>
     </section>
   );
