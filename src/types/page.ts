@@ -24,14 +24,7 @@ export enum PageTypeEnum {
 export type PageApiResponse = ApiResponse<{
   pageTitle: string;
   pageType: PageTypeEnum;
-  sections: {
-    aboutUs: AboutUsSection;
-    banner: BannerSection;
-    ourValues: OurValuesSection;
-    mediaContentSection: MediaContentSection;
-    howItWorks: HowItWorksSection;
-    perfectStaySection: PerfectStaySection;
-  };
+  sections: ContactUsPageSections | AboutPageSections;
 }>;
 
 type BaseSection = {
@@ -106,4 +99,16 @@ export type AboutPageSections = {
   mediaContentSection: MediaContentSection;
   howItWorks: HowItWorksSection;
   perfectStaySection: PerfectStaySection;
+};
+
+export type ContactInformationSection = BaseSection & {
+  title: string;
+  description: string;
+  mediaUrl: string;
+  mediaExtension: string;
+};
+
+export type ContactUsPageSections = {
+  banner: BannerSection;
+  contactInformationSection: ContactInformationSection;
 };

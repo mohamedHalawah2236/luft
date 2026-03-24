@@ -1,8 +1,9 @@
 import AboutPage from '@/components/pages/About/AboutPage';
 
-import { PageApiResponse, PageTypeEnum } from '@/types/page';
+import { PageApiResponse, PageTypeEnum, AboutPageSections, ContactUsPageSections } from '@/types/page';
 
 import { getPageSections } from '@/api/page';
+import ContactUsPage from '@/components/pages/ContactUsPage';
 import { Locale } from '@/i18n/i18n.config';
 
 export default async function Page({
@@ -20,7 +21,9 @@ export default async function Page({
 
   switch (pageType) {
     case PageTypeEnum.AboutUs:
-      return <AboutPage {...sections} />;
+      return <AboutPage {...(sections as AboutPageSections)} />;
+    case PageTypeEnum.ContactUs:
+      return <ContactUsPage {...(sections as ContactUsPageSections)} />;
     default:
       return <></>;
   }
