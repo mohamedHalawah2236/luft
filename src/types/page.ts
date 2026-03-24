@@ -112,3 +112,11 @@ export type ContactUsPageSections = {
   banner: BannerSection;
   contactInformationSection: ContactInformationSection;
 };
+
+export type SendMessageFormData = {
+  firstName: string;
+  lastName: string;
+  emailAddress: string;
+  phoneNumber: string;
+  message: string;
+};

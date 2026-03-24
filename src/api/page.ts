@@ -1,4 +1,6 @@
-import { getAllData } from '@/utils/api';
+import { SendMessageFormData } from '@/types/page';
+
+import { getAllData, postData } from '@/utils/api';
 
 import { Locale } from '@/i18n/i18n.config';
 
@@ -19,5 +21,14 @@ export const getPageSections = ({
   getAllData(`api/CMS/get-all-cms?PageId=${pageId}`, {
     headers: {
       language: locale,
+    },
+  });
+
+export const sendMessage = (data: SendMessageFormData) =>
+  postData('api/ContactUs/sendContactUsMessage', {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json',
     },
   });

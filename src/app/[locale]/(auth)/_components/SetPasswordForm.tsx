@@ -1,6 +1,6 @@
 'use client';
 
-import React, { ComponentProps, useState } from 'react';
+import { ComponentProps, useState } from 'react';
 
 import { useTranslations } from 'next-intl';
 
@@ -14,7 +14,7 @@ import { Form } from '@/components/ui/form';
 
 import AuthFormLayout from './AuthFormLayout';
 
-import { PASSWORD_REGEX } from '@/constants';
+import { PASSWORD_REGEX } from '@/constants/regex';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 

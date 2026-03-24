@@ -1,6 +1,6 @@
 'use client';
 
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 import { useTranslations } from 'next-intl';
 
@@ -20,7 +20,7 @@ import {
   UserSignupData,
 } from '@/types/auth';
 
-import { NAME_REGEX } from '@/constants';
+import { NAME_REGEX } from '@/constants/regex';
 
 import { sendOtpPreregister } from '@/api/auth';
 import { zodResolver } from '@hookform/resolvers/zod';

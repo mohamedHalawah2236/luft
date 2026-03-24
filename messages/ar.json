@@ -13,7 +13,8 @@
       "lastName": "الاسم الأخير",
       "otp": "رمز التحقق",
       "contact": "تواصل معنا",
-      "menu": "القائمة"
+      "menu": "القائمة",
+      "message": "الرسالة"
     },
     "placeholders": {
       "email": "أدخل عنوان بريدك الإلكتروني",
@@ -185,6 +186,19 @@
     "perfectStay": {
       "buttons": {
         "searchProperties": "بحث عن عقارات"
+      }
+    },
+    "sendMessage": {
+      "title": "راسلنا",
+      "buttons": {
+        "send": "إرسال"
+      },
+      "validations": {
+        "min": "يجب أن تكون الرسالة 10 أحرف على الأقل"
+      },
+      "toast": {
+        "success": "تم إرسال الرسالة بنجاح",
+        "error": "فشل إرسال الرسالة"
       }
     }
   }

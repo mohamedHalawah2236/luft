@@ -12,7 +12,8 @@
       "firstName": "First name",
       "lastName": "Last name",
       "contact": "Contact Us",
-      "menu": "Menu"
+      "menu": "Menu",
+      "message": "Message"
     },
     "placeholders": {
       "email": "Enter your email Address",
@@ -182,6 +183,19 @@
     "perfectStay": {
       "buttons": {
         "searchProperties": "Search Properties"
+      }
+    },
+    "sendMessage": {
+      "title": "Send us a message",
+      "buttons": {
+        "send": "Send"
+      },
+      "validations": {
+        "min": "Message must be at least 10 characters"
+      },
+      "toast": {
+        "success": "Message sent successfully",
+        "error": "Failed to send message"
       }
     }
   }

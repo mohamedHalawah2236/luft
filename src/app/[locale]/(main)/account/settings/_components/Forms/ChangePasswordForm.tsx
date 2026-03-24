@@ -19,7 +19,7 @@ import { EditableFieldContext } from '@/contexts/EditableFieldContext';
 
 import { ChangePasswordFormData } from '@/types/settings';
 
-import { PASSWORD_REGEX } from '@/constants';
+import { PASSWORD_REGEX } from '@/constants/regex';
 
 import { changeUserPassword } from '@/api/settings';
 import { zodResolver } from '@hookform/resolvers/zod';
