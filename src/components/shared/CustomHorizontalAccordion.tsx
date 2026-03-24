@@ -109,7 +109,7 @@ const CustomHorizontalAccordion = ({
   return (
     <div
       className={cn(
-        'flex w-full flex-col flex-wrap justify-center gap-4 md:flex-row',
+        'flex max-w-full flex-col gap-4 overflow-auto pb-1 md:flex-row',
         className,
       )}
     >
@@ -138,7 +138,9 @@ const CustomHorizontalAccordion = ({
               'transition-all duration-500 ease-in-out motion-reduce:transition-none',
               '!bg-[#ECECEC] ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
               variantStyles[variant],
-              isOpen ? cn(expandedWidth, '') : cn(collapsedWidth),
+              isOpen
+                ? cn(expandedWidth, 'min-w-[600px] flex-1')
+                : cn(collapsedWidth),
               item.disabled && 'cursor-not-allowed opacity-60',
               itemClassName,
               item.className,
