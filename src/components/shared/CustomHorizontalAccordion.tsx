@@ -109,7 +109,7 @@ const CustomHorizontalAccordion = ({
   return (
     <div
       className={cn(
-        'flex max-w-full flex-col gap-4 overflow-auto pb-1 md:flex-row',
+        'mx-auto flex w-fit max-w-full flex-col gap-4 overflow-auto pb-1 md:flex-row',
         className,
       )}
     >
