@@ -1,8 +1,6 @@
-import React from 'react';
-
-import Link from 'next/link';
 import { getServerSession } from 'next-auth';
 import { getTranslations } from 'next-intl/server';
+import Link from 'next/link';
 
 import { CircleChevronLeftIcon, CircleChevronRightIcon } from 'lucide-react';
 
@@ -22,9 +20,9 @@ export default async function SettingsPage({
   const accessToken = session?.accessToken;
 
   return (
-    <div className='flex w-full gap-8 max-md:flex-col max-md:gap-6 max-md:py-20 max-sm:pb-40 max-sm:pt-6 md:py-14'>
+    <div className='container flex w-full gap-8 max-lg:flex-col max-md:gap-6 md:mb-44 md:mt-20 xl:mb-48 xl:ms-[4.5rem] xl:mt-28 xl:w-[60.375rem]'>
       {/* Section Title */}
-      <div className='flex gap-4 max-md:items-center md:flex-col'>
+      <div className='flex gap-4 max-lg:items-center lg:flex-col xl:-mt-16'>
         <Link
           href='/'
           className='w-fit max-sm:hidden'
@@ -36,18 +34,20 @@ export default async function SettingsPage({
           )}
         </Link>
         <div className='flex flex-col gap-2'>
-          <h6 className='text-2xl font-medium text-grayish-900 sm:text-[1.75rem] md:max-w-36 md:text-[2rem]'>
+          <h6 className='text-2xl font-medium text-grayish-900 sm:text-[1.75rem] lg:max-w-36 lg:text-[2rem]'>
             {t('title')}
           </h6>
-          <p className='text-lg text-grayish-400 md:hidden'>
+          <p className='text-lg text-grayish-400 lg:hidden'>
             {t('description')}
           </p>
         </div>
       </div>
 
+      {/* Continute MD work */}
+
       {/* Form */}
       <div className='flex flex-1 flex-col gap-12'>
-        <p className='text-lg text-grayish-400 max-md:hidden'>
+        <p className='text-lg text-grayish-400 max-lg:hidden'>
           {t('description')}
         </p>
 
