@@ -91,7 +91,8 @@
       "wishlist": "قائمة المفضلة"
     },
     "logout": "تسجيل الخروج",
-    "currency": "العملة"
+    "currency": "العملة",
+    "mediaNotSupported": "الوسائط غير مدعومة"
   },
   "auth": {
     "banner": {
@@ -199,6 +200,53 @@
       "toast": {
         "success": "تم إرسال الرسالة بنجاح",
         "error": "فشل إرسال الرسالة"
+      }
+    },
+    "homeSearch": {
+      "tabs": {
+        "stays": "إقامات",
+        "services": "خدمات"
+      },
+      "fields": {
+        "city": {
+          "label": "المدينة",
+          "placeholder": "اختر الوجهة"
+        },
+        "date": {
+          "label": "التاريخ",
+          "placeholder": "اختر التاريخ"
+        },
+        "guests": {
+          "label": "الضيوف",
+          "placeholder": "اختر عدد الضيوف"
+        }
+      },
+      "buttons": {
+        "search": "بحث"
+      },
+      "cities": {
+        "placeholder": "اختر الوجهة",
+        "newYork": "نيويورك",
+        "losAngeles": "لوس أنجلوس",
+        "chicago": "شيكاغو",
+        "miami": "ميامي",
+        "sanFrancisco": "سان فرانسيسكو"
+      },
+      "dates": {
+        "placeholder": "اختر التاريخ",
+        "today": "اليوم",
+        "tomorrow": "غداً",
+        "thisWeek": "هذا الأسبوع",
+        "nextWeek": "الأسبوع القادم",
+        "thisMonth": "هذا الشهر"
+      },
+      "guestCounts": {
+        "placeholder": "اختر عدد الضيوف",
+        "one": "ضيف واحد",
+        "two": "ضيفان",
+        "three": "3 ضيوف",
+        "four": "4 ضيوف",
+        "fivePlus": "+5 ضيوف"
       }
     }
   }

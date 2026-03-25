@@ -137,7 +137,7 @@ const CustomHorizontalAccordion = ({
               '!bg-[#ECECEC] ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
               variantStyles[variant],
               isOpen
-                ? cn(expandedWidth, 'min-w-[600px] flex-1')
+                ? cn(expandedWidth, 'min-w-[32.751rem] flex-1')
                 : cn(collapsedWidth),
               item.disabled && 'cursor-not-allowed opacity-60',
               itemClassName,

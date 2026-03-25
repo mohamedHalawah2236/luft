@@ -88,7 +88,8 @@
       "wishlist": "Wishlist"
     },
     "logout": "Logout",
-    "currency": "Currency"
+    "currency": "Currency",
+    "mediaNotSupported": "Media not supported"
   },
   "auth": {
     "banner": {
@@ -196,6 +197,53 @@
       "toast": {
         "success": "Message sent successfully",
         "error": "Failed to send message"
+      }
+    },
+    "homeSearch": {
+      "tabs": {
+        "stays": "Stays",
+        "services": "Services"
+      },
+      "fields": {
+        "city": {
+          "label": "City",
+          "placeholder": "Select destination"
+        },
+        "date": {
+          "label": "Date",
+          "placeholder": "Select date"
+        },
+        "guests": {
+          "label": "Guests",
+          "placeholder": "Select guests number"
+        }
+      },
+      "buttons": {
+        "search": "Search"
+      },
+      "cities": {
+        "placeholder": "Select destination",
+        "newYork": "New York",
+        "losAngeles": "Los Angeles",
+        "chicago": "Chicago",
+        "miami": "Miami",
+        "sanFrancisco": "San Francisco"
+      },
+      "dates": {
+        "placeholder": "Select date",
+        "today": "Today",
+        "tomorrow": "Tomorrow",
+        "thisWeek": "This Week",
+        "nextWeek": "Next Week",
+        "thisMonth": "This Month"
+      },
+      "guestCounts": {
+        "placeholder": "Select guests number",
+        "one": "1 Guest",
+        "two": "2 Guests",
+        "three": "3 Guests",
+        "four": "4 Guests",
+        "fivePlus": "5+ Guests"
       }
     }
   }

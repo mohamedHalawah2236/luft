@@ -1,9 +1,11 @@
 import AboutPage from '@/components/pages/About/AboutPage';
 import ContactUsPage from '@/components/pages/ContactUs/ContactUsPage';
+import HomePage from '@/components/pages/Home/HomePage';
 
 import {
   AboutPageSections,
   ContactUsPageSections,
+  HomePageSections,
   PageApiResponse,
   PageTypeEnum,
 } from '@/types/page';
@@ -24,11 +26,15 @@ export default async function Page({
     pageId: id,
   });
 
+  console.log(sections);
+
   switch (pageType) {
     case PageTypeEnum.AboutUs:
       return <AboutPage {...(sections as AboutPageSections)} />;
     case PageTypeEnum.ContactUs:
       return <ContactUsPage {...(sections as ContactUsPageSections)} />;
+    case PageTypeEnum.Home:
+      return <HomePage {...(sections as HomePageSections)} />;
     default:
       return <></>;
   }
