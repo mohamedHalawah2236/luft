@@ -24,7 +24,7 @@ export enum PageTypeEnum {
 export type PageApiResponse = ApiResponse<{
   pageTitle: string;
   pageType: PageTypeEnum;
-  sections: ContactUsPageSections | AboutPageSections;
+  sections: ContactUsPageSections | AboutPageSections | HomePageSections;
 }>;
 
 type BaseSection = {
@@ -106,6 +106,10 @@ export type ContactUsPageSections = {
   contactInformationSection: ContactUsSectionRes;
 };
 
+export type HomePageSections = {
+  hero: HeroSectionRes;
+};
+
 export type SendMessageFormData = {
   firstName: string;
   lastName: string;
@@ -139,4 +143,11 @@ export type ContactUsSectionRes = BaseSection & {
   description: string;
   items: ContactUsData[];
   socialsItem: socialsItemData;
+};
+
+export type HeroSectionRes = BaseSection & {
+  title: string;
+  description: string;
+  mediaUrl: string;
+  mediaExtension: string;
 };
