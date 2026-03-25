@@ -108,6 +108,7 @@ export type ContactUsPageSections = {
 
 export type HomePageSections = {
   hero: HeroSectionRes;
+  concierge: ConciergeSectionRes;
 };
 
 export type SendMessageFormData = {
@@ -150,4 +151,17 @@ export type HeroSectionRes = BaseSection & {
   description: string;
   mediaUrl: string;
   mediaExtension: string;
+};
+
+export type ConciergeSectionRes = BaseSection & {
+  title: string;
+  description: string;
+  items: ConciergeItemRes[];
+};
+
+export type ConciergeItemRes = {
+  id: string;
+  iconUrl: string;
+  title: string;
+  description: string;
 };

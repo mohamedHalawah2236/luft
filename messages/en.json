@@ -69,7 +69,8 @@
       "cancel": "Cancel",
       "save": "Save",
       "refetch": "Refetch",
-      "change": "Change"
+      "change": "Change",
+      "exploreMore": "Explore More"
     },
     "toaster": {
       "emailOtpSent": "OTP is sent to your email",
