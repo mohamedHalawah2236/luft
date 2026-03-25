@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import { getServerSession } from 'next-auth';
 import { getTranslations } from 'next-intl/server';
+import Link from 'next/link';
 
 import { CircleChevronLeftIcon, CircleChevronRightIcon } from 'lucide-react';
 
@@ -37,7 +37,7 @@ export default async function SettingsPage({
           <h6 className='text-2xl font-medium text-grayish-900 sm:text-[1.75rem] lg:max-w-36 lg:text-[2rem]'>
             {t('title')}
           </h6>
-          <p className='text-lg text-grayish-400 lg:hidden'>
+          <p className='text-grayish-400 md:text-lg lg:hidden'>
             {t('description')}
           </p>
         </div>
