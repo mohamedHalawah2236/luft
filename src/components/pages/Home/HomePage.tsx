@@ -2,9 +2,14 @@ import ConciergeSectionPreview from '@/components/sections/ConciergeSection/Conc
 
 import HeroSectionPreview from './sections/Hero/HeroSection';
 
+import PromiseSectionPreview from '@/components/sections/PromiseSection/PromiseSection';
 import { HomePageSections } from '@/types/page';
 
-export default function HomePage({ hero, concierge }: HomePageSections) {
+export default function HomePage({
+  hero,
+  concierge,
+  promise,
+}: HomePageSections) {
   return (
     <div className='w-full bg-grayish-30'>
       <div className='container flex w-full flex-col'>
@@ -16,6 +21,9 @@ export default function HomePage({ hero, concierge }: HomePageSections) {
         <div className='container'>
           <ConciergeSectionPreview {...concierge} />
         </div>
+      </div>
+      <div className='container my-20 md:my-[7.5rem] xl:my-[8.75rem]'>
+        <PromiseSectionPreview {...promise} />
       </div>
     </div>
   );
