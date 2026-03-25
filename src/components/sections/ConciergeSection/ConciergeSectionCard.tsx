@@ -1,0 +1,40 @@
+type FeatureSectionCardProps = {
+  title: string;
+  description: string;
+  iconUrl: string;
+};
+
+export default function ConciergeSectionCard({
+  title,
+  description,
+  iconUrl,
+}: FeatureSectionCardProps) {
+  return (
+    <div className='flex min-w-[17.24rem] flex-col gap-4 rounded-2xl bg-white p-4 xl:gap-6'>
+      <div className='flex size-6 items-center justify-center md:size-12'>
+        {iconUrl && (
+          <img
+            src={iconUrl}
+            alt='title'
+            className='size-[1.36rem] md:size-8'
+          />
+        )}
+      </div>
+      {/* Texts */}
+      <div className='flex flex-col gap-1'>
+        <h4
+          title={title}
+          className='line-clamp-1 font-medium text-grayish-900 md:text-lg'
+        >
+          {title}
+        </h4>
+        <p
+          className='line-clamp-4 text-base leading-5 text-grayish-400'
+          title={description}
+        >
+          {description}
+        </p>
+      </div>
+    </div>
+  );
+}

@@ -72,7 +72,8 @@
       "cancel": "إلغاء",
       "save": "حفظ",
       "refetch": "تحديث",
-      "change": "تغيير"
+      "change": "تغيير",
+      "exploreMore": "استكشف المزيد"
     },
     "toaster": {
       "emailOtpSent": "تم إرسال رمز التحقق إلى بريدك الإلكتروني",
