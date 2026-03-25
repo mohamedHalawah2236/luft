@@ -65,7 +65,7 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [profileFormQueryKey] });
       toast.success(tCommon('toaster.dataUpdatedSuccess'));
-      form.reset(userData);
+      form.reset({ ...userData, file: null });
     },
     onError: (error: Error) => {
       console.log(error);
