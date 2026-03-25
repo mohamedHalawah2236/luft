@@ -1,6 +1,6 @@
+import Link from 'next/link';
 import { getServerSession } from 'next-auth';
 import { getTranslations } from 'next-intl/server';
-import Link from 'next/link';
 
 import { CircleChevronLeftIcon, CircleChevronRightIcon } from 'lucide-react';
 
