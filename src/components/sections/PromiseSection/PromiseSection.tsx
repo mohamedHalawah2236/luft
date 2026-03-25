@@ -1,8 +1,10 @@
 import MediaPreview from '@/components/pages/Home/sections/MediaPreview';
+
 import BulletCard from './BulletCard';
 
-import { cn } from '@/lib/utils';
 import { MediaPositionEnum, PromiseSectionRes } from '@/types/page';
+
+import { cn } from '@/lib/utils';
 
 export default function PromiseSectionPreview({
   title,

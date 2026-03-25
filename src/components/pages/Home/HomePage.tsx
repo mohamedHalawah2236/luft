@@ -1,8 +1,8 @@
 import ConciergeSectionPreview from '@/components/sections/ConciergeSection/ConciergeSection';
+import PromiseSectionPreview from '@/components/sections/PromiseSection/PromiseSection';
 
 import HeroSectionPreview from './sections/Hero/HeroSection';
 
-import PromiseSectionPreview from '@/components/sections/PromiseSection/PromiseSection';
 import { HomePageSections } from '@/types/page';
 
 export default function HomePage({
