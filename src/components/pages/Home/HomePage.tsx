@@ -1,5 +1,6 @@
 import ConciergeSectionPreview from '@/components/sections/ConciergeSection/ConciergeSection';
 import PromiseSectionPreview from '@/components/sections/PromiseSection/PromiseSection';
+import TestimonialsSection from '@/components/sections/TestimonialsSection/TestimonialsSection';
 
 import HeroSectionPreview from './sections/Hero/HeroSection';
 
@@ -24,6 +25,9 @@ export default function HomePage({
       </div>
       <div className='container my-20 md:my-[7.5rem] xl:my-[8.75rem]'>
         <PromiseSectionPreview {...promise} />
+      </div>
+      <div className='container my-20 bg-grayish-50 md:my-[7.5rem] xl:my-[8.75rem]'>
+        <TestimonialsSection />
       </div>
     </div>
   );
