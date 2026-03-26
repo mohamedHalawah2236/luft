@@ -6,12 +6,17 @@ import { useParams } from 'next/navigation';
 import { NavLinkProps } from '@/types/components';
 
 import { cn } from '@/lib/utils';
+import { PageTypeEnum } from '@/types/page';
 
-export default function FooterLink({ id, title, href }: NavLinkProps) {
+export default function FooterLink({ id, title, pageType }: NavLinkProps) {
   const params = useParams();
 
   const currentId = params?.id as string;
-  const isActive = currentId === id;
+  const isActive = currentId
+    ? currentId === id
+    : pageType === PageTypeEnum.Home;
+
+  const href = pageType === PageTypeEnum.Home ? '/' : `/${id}`;
 
   return (
     <Link

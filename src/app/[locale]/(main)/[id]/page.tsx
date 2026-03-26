@@ -26,8 +26,6 @@ export default async function Page({
     pageId: id,
   });
 
-  console.log(sections);
-
   switch (pageType) {
     case PageTypeEnum.AboutUs:
       return <AboutPage {...(sections as AboutPageSections)} />;
