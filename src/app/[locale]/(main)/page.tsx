@@ -1,10 +1,14 @@
-import { getLayoutData, getPageSections } from '@/api/page';
+import { ReactNode } from 'react';
+
+import { notFound } from 'next/navigation';
+
 import HomePage from '@/components/pages/Home/HomePage';
-import { Locale } from '@/i18n/i18n.config';
+
 import { LayoutDataResponse } from '@/types/layout';
 import { HomePageSections, PageApiResponse, PageTypeEnum } from '@/types/page';
-import { notFound } from 'next/navigation';
-import { ReactNode } from 'react';
+
+import { getLayoutData, getPageSections } from '@/api/page';
+import { Locale } from '@/i18n/i18n.config';
 
 const Home = async ({
   params,

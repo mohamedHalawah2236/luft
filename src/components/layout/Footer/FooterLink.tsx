@@ -4,9 +4,9 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 
 import { NavLinkProps } from '@/types/components';
+import { PageTypeEnum } from '@/types/page';
 
 import { cn } from '@/lib/utils';
-import { PageTypeEnum } from '@/types/page';
 
 export default function FooterLink({ id, title, pageType }: NavLinkProps) {
   const params = useParams();

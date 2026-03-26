@@ -1,9 +1,9 @@
 import type { ReactNode } from 'react';
 
+import { PageTypeEnum } from './page';
 import { SetState } from '.';
 
 import { Dir } from '@/i18n/i18n.config';
-import { PageTypeEnum } from './page';
 
 export type ModalProps = {
   isOpen?: boolean;
