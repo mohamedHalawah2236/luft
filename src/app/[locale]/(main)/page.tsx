@@ -1,5 +1,3 @@
-import { ReactNode } from 'react';
-
 import { notFound } from 'next/navigation';
 
 import HomePage from '@/components/pages/Home/HomePage';
@@ -10,12 +8,7 @@ import { HomePageSections, PageApiResponse, PageTypeEnum } from '@/types/page';
 import { getLayoutData, getPageSections } from '@/api/page';
 import { Locale } from '@/i18n/i18n.config';
 
-const Home = async ({
-  params,
-}: {
-  children: ReactNode;
-  params: Promise<{ locale: string }>;
-}) => {
+const Home = async ({ params }: { params: Promise<{ locale: string }> }) => {
   const { locale } = await params;
   const {
     result: { pages },
