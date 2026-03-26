@@ -18,7 +18,7 @@ export default function AboutPage({
   perfectStaySection,
 }: AboutPageSections) {
   return (
-    <div className='flex w-full flex-col'>
+    <div className='flex w-full flex-col bg-grayish-30'>
       <BannerSection {...banner} />
       <div className='container pb-10 pt-20'>
         <AboutSection {...aboutUs} />
