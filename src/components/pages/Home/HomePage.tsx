@@ -26,8 +26,10 @@ export default function HomePage({
       <div className='container my-20 md:my-[7.5rem] xl:my-[8.75rem]'>
         <PromiseSectionPreview {...promise} />
       </div>
-      <div className='container my-20 bg-grayish-50 md:my-[7.5rem] xl:my-[8.75rem]'>
-        <TestimonialsSection />
+      <div className='my-20 bg-grayish-50 py-8 md:my-[7.5rem] md:py-11 xl:my-[8.75rem] xl:py-10'>
+        <div className='container'>
+          <TestimonialsSection />
+        </div>
       </div>
     </div>
   );

@@ -10,14 +10,14 @@ export default function HeroSectionPreview({
   mediaExtension,
 }: HeroSectionRes) {
   return (
-    <div className='flex h-full flex-col items-center gap-4 xl:flex-row xl:gap-6'>
-      <div className='order-2 flex flex-col gap-6 md:gap-8 xl:order-1 xl:gap-12'>
+    <div className='flex h-full flex-col items-center gap-4 lg:flex-row lg:gap-6'>
+      <div className='order-2 flex flex-col gap-6 md:gap-8 lg:order-1 lg:gap-12'>
         <div className='flex flex-1 flex-col'>
           {/* Texts */}
           <div className='flex flex-col gap-4'>
             <h3
               title={title}
-              className='line-clamp-2 text-[2rem] font-medium leading-[2.5rem] text-grayish-900 md:text-5xl md:leading-[3.5rem] xl:text-6xl xl:leading-[4.52rem]'
+              className='line-clamp-2 text-[2rem] font-medium leading-[2.5rem] text-grayish-900 md:text-5xl md:leading-[3.5rem] lg:text-6xl lg:leading-[4.52rem]'
             >
               {title}
             </h3>
@@ -38,7 +38,7 @@ export default function HeroSectionPreview({
       <MediaHero
         src={mediaUrl}
         extension={mediaExtension}
-        className='h-[14rem] w-full rounded-[2.5rem] md:h-[27.875rem] xl:order-2 xl:w-[39.625rem] xl:min-w-[39.625rem]'
+        className='h-[14rem] w-full rounded-[2.5rem] md:h-[27.875rem] lg:order-2 lg:w-[39.625rem] lg:min-w-[39.625rem]'
       />
     </div>
   );
