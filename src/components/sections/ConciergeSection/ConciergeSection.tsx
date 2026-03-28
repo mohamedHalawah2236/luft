@@ -6,11 +6,18 @@ import ConciergeSectionCard from './ConciergeSectionCard';
 
 import { ConciergeSectionRes } from '@/types/page';
 
+type ConciergeSectionProps = ConciergeSectionRes & {
+  ctaUrl?: string;
+  ctaLabel?: string;
+};
+
 export default async function ConciergeSectionPreview({
   title,
   description,
   items,
-}: ConciergeSectionRes) {
+  ctaLabel,
+  ctaUrl,
+}: ConciergeSectionProps) {
   const t = await getTranslations('common.buttons');
   return (
     <div className='max-size-full flex flex-col items-center justify-center gap-6 md:gap-8 xl:gap-12'>
@@ -42,7 +49,11 @@ export default async function ConciergeSectionPreview({
         ))}
       </div>
 
-      <Button className='h-10 w-[11.25rem] md:h-12'>{t('exploreMore')}</Button>
+      {ctaUrl && (
+        <Button className='h-10 w-[11.25rem] md:h-12'>
+          {ctaLabel || t('exploreMore')}
+        </Button>
+      )}
     </div>
   );
 }

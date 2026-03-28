@@ -24,7 +24,11 @@ export enum PageTypeEnum {
 export type PageApiResponse = ApiResponse<{
   pageTitle: string;
   pageType: PageTypeEnum;
-  sections: ContactUsPageSections | AboutPageSections | HomePageSections;
+  sections:
+    | ContactUsPageSections
+    | AboutPageSections
+    | HomePageSections
+    | ForOwnersPageSections;
 }>;
 
 type BaseSection = {
@@ -108,6 +112,11 @@ export type ContactUsPageSections = {
 
 export type HomePageSections = {
   hero: HeroSectionRes;
+  concierge: ConciergeSectionRes;
+  promise: PromiseSectionRes;
+};
+
+export type ForOwnersPageSections = {
   concierge: ConciergeSectionRes;
   promise: PromiseSectionRes;
 };

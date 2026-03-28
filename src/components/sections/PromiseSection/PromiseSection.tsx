@@ -39,7 +39,7 @@ export default function PromiseSectionPreview({
         )}
 
         {/* Bullets */}
-        <div className='flex flex-col gap-12 max-lg:order-2'>
+        <div className='flex flex-1 flex-col gap-12 max-lg:order-2'>
           {items?.map((bullet, i) => (
             <BulletCard
               data={bullet}

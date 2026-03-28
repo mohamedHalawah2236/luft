@@ -20,7 +20,10 @@ export default function HomePage({
       </div>
       <div className='my-20 bg-grayish-50 py-6 md:my-[7.5rem] md:py-12 xl:my-[8.75rem] xl:py-20'>
         <div className='container'>
-          <ConciergeSectionPreview {...concierge} />
+          <ConciergeSectionPreview
+            {...concierge}
+            ctaUrl='/'
+          />
         </div>
       </div>
       <div className='container my-20 md:my-[7.5rem] xl:my-[8.75rem]'>

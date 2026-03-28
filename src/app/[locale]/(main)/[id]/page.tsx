@@ -1,10 +1,12 @@
 import AboutPage from '@/components/pages/About/AboutPage';
 import ContactUsPage from '@/components/pages/ContactUs/ContactUsPage';
+import ForOwnersPage from '@/components/pages/ForOwners/ForOwnersPage';
 import HomePage from '@/components/pages/Home/HomePage';
 
 import {
   AboutPageSections,
   ContactUsPageSections,
+  ForOwnersPageSections,
   HomePageSections,
   PageApiResponse,
   PageTypeEnum,
@@ -33,6 +35,8 @@ export default async function Page({
       return <ContactUsPage {...(sections as ContactUsPageSections)} />;
     case PageTypeEnum.Home:
       return <HomePage {...(sections as HomePageSections)} />;
+    case PageTypeEnum.ForOwners:
+      return <ForOwnersPage {...(sections as ForOwnersPageSections)} />;
     default:
       return <></>;
   }
