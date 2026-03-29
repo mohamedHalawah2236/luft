@@ -253,6 +253,9 @@
         "four": "4 Guests",
         "fivePlus": "5+ Guests"
       }
+    },
+    "partners": {
+      "luftPartner": "Luftstay Partner"
     }
   }
 }

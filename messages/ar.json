@@ -256,6 +256,9 @@
         "four": "4 ضيوف",
         "fivePlus": "+5 ضيوف"
       }
+    },
+    "partners": {
+      "luftPartner": "شريك لوفت"
     }
   }
 }

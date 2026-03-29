@@ -122,6 +122,7 @@ export type ForOwnersPageSections = {
   promise: PromiseSectionRes;
   cards: CardsSectionRes;
   faQs: FaqsSectionRes;
+  partnersSection: PartnersSectionRes;
 };
 
 export type SendMessageFormData = {
@@ -223,4 +224,21 @@ export type FaqsSectionRes = BaseSection & {
   title: string;
   description: string;
   items: FaqItemRes[];
+};
+
+export type ReviewItem = {
+  id: string;
+  iconUrl: string;
+  title: string;
+  description: string;
+  mediaExtension: string;
+  reviewText: string;
+};
+
+export type PartnersSectionRes = BaseSection & {
+  title: string;
+  description: string;
+  mediaUrl: string;
+  mediaExtension: string;
+  items: ReviewItem[];
 };

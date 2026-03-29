@@ -1,6 +1,7 @@
 import CardsSection from '@/components/sections/CardsSection';
 import ConciergeSectionPreview from '@/components/sections/ConciergeSection/ConciergeSection';
 import FaqsSection from '@/components/sections/FaqsSection';
+import PartnersSection from '@/components/sections/PartnersSection';
 import PromiseSectionPreview from '@/components/sections/PromiseSection/PromiseSection';
 
 import HeroSection from './Sections/Hero';
@@ -13,6 +14,7 @@ export default function ForOwnersPage({
   hero,
   cards,
   faQs,
+  partnersSection,
 }: ForOwnersPageSections) {
   return (
     <div className='w-full bg-white'>
@@ -32,6 +34,9 @@ export default function ForOwnersPage({
       </div>
       <div className='container my-20 md:my-[7.5rem] xl:my-[8.75rem]'>
         <FaqsSection {...faQs} />
+      </div>
+      <div className='container mb-[12.125rem] mt-20 md:mt-[7.5rem] lg:mb-[1.75rem] xl:mt-[8.75rem]'>
+        <PartnersSection {...partnersSection} />
       </div>
     </div>
   );
