@@ -120,6 +120,7 @@ export type ForOwnersPageSections = {
   hero: HeroSectionRes;
   concierge: ConciergeSectionRes;
   promise: PromiseSectionRes;
+  cards: CardsSectionRes;
 };
 
 export type SendMessageFormData = {
@@ -196,4 +197,17 @@ export type BulletRes = {
   iconUrl: string;
   title: string;
   description: string;
+};
+
+export type CardItem = {
+  id: string;
+  iconUrl: string;
+  mediaExtension: string;
+  title: string;
+};
+
+export type CardsSectionRes = BaseSection & {
+  title: string;
+  description: string;
+  items: CardItem[];
 };
