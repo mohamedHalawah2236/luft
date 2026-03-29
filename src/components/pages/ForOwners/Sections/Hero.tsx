@@ -31,7 +31,7 @@ export default function HeroSection({
 
         <Button
           type='button'
-          className='h-14 w-[19.125rem] rounded-full px-4 py-2'
+          className='h-14 w-[19.125rem] max-w-full rounded-full px-4 py-2'
         >
           {t('startPartnership')}
         </Button>
