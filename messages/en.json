@@ -170,6 +170,13 @@
   },
   "bookFreeConsultation": "Book Free Consultation",
   "messageUs": "Message Us",
+  "pages": {
+    "forOwners": {
+      "buttons": {
+        "startPartnership": "Start your partnership"
+      }
+    }
+  },
   "sections": {
     "testimonials": {
       "title": "What Our Guests Say",

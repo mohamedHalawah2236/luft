@@ -117,6 +117,7 @@ export type HomePageSections = {
 };
 
 export type ForOwnersPageSections = {
+  hero: HeroSectionRes;
   concierge: ConciergeSectionRes;
   promise: PromiseSectionRes;
 };
