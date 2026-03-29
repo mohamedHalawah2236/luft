@@ -1,5 +1,6 @@
-import { CardsSectionRes } from '@/types/page';
 import CardItem from './CardItem';
+
+import { CardsSectionRes } from '@/types/page';
 
 export default function CardsSection({
   title,

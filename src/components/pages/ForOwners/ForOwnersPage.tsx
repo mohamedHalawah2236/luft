@@ -1,9 +1,9 @@
+import CardsSection from '@/components/sections/CardsSection';
 import ConciergeSectionPreview from '@/components/sections/ConciergeSection/ConciergeSection';
 import PromiseSectionPreview from '@/components/sections/PromiseSection/PromiseSection';
 
 import HeroSection from './Sections/Hero';
 
-import CardsSection from '@/components/sections/CardsSection';
 import { ForOwnersPageSections } from '@/types/page';
 
 export default function ForOwnersPage({
