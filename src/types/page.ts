@@ -121,6 +121,7 @@ export type ForOwnersPageSections = {
   concierge: ConciergeSectionRes;
   promise: PromiseSectionRes;
   cards: CardsSectionRes;
+  faQs: FaqsSectionRes;
 };
 
 export type SendMessageFormData = {
@@ -210,4 +211,16 @@ export type CardsSectionRes = BaseSection & {
   title: string;
   description: string;
   items: CardItem[];
+};
+
+export type FaqItemRes = {
+  id: string;
+  title: string;
+  description: string;
+};
+
+export type FaqsSectionRes = BaseSection & {
+  title: string;
+  description: string;
+  items: FaqItemRes[];
 };
