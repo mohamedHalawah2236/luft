@@ -5,6 +5,7 @@ import Logo from '@/components/icons/Logo';
 
 import MobileNavSheet from './Mobile/MobileNavSheet';
 import NavLink from './NavLinks/NavLink';
+import CurrencySelect from './CurrencySelect';
 import LanguageSwitcher from './LanguageSwitcher';
 import LoginNavBtn from './LoginNavBtn';
 import UserDropdown from './UserDropdown';
@@ -37,8 +38,8 @@ export default async function Navbar({
 
   return (
     <div className='flex items-center justify-between border-y border-grayish-50 bg-white px-6 py-3.5 lg:px-[4.5rem]'>
-      <div className='flex items-center gap-8 max-sm:gap-6'>
-        <div className='h-fit sm:hidden'>
+      <div className='flex items-center gap-8 max-md:gap-6'>
+        <div className='h-fit md:hidden'>
           <MobileNavSheet
             socialLinks={socialLinks}
             navLinks={navLinks}
@@ -47,7 +48,7 @@ export default async function Navbar({
         <Link href='/'>
           <Logo className='h-8 w-20' />
         </Link>
-        <div className='max-sm:hidden'>
+        <div className='max-md:hidden'>
           <div className='flex items-center gap-6'>
             {navLinks.map(({ title, id, pageType }) => (
               <NavLink
@@ -59,9 +60,11 @@ export default async function Navbar({
         </div>
       </div>
 
-      <div className='flex items-center gap-5'>
-        <div className='max-sm:hidden'>
+      <div className='flex h-full items-center gap-2'>
+        <div className='flex h-full items-center gap-2 px-3 max-md:hidden'>
           <LanguageSwitcher />
+          <span className='h-6 w-px bg-grayish-200' />
+          <CurrencySelect />
         </div>
 
         {isAuth ? (

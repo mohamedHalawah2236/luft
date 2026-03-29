@@ -65,12 +65,12 @@ export default function UserDropdown({
 
   return (
     <>
-      <span className='flex size-10 items-center justify-center rounded-full bg-grayish-900 p-2 text-xl font-medium text-grayish-50 sm:hidden'>
+      <span className='flex size-10 items-center justify-center rounded-full bg-grayish-900 p-2 text-xl font-medium text-grayish-50 md:hidden'>
         {firstNameLetter?.toUpperCase()}
         {lastNameLetter?.toUpperCase()}
       </span>
 
-      <div className='max-sm:hidden'>
+      <div className='max-md:hidden'>
         <Dropdown
           dir={dir}
           isOpen={isDropdownOpen}

@@ -84,7 +84,7 @@ async function MobileNavSheet({
             />
           </div>
           <hr className='text-grayish-100' />
-          <CurrencySelect />
+          <CurrencySelect variant='mobile' />
           <LanguageSwitcher />
           <LogoutBtn token={token} />
         </div>
