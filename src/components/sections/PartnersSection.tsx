@@ -2,6 +2,13 @@ import { useTranslations } from 'next-intl';
 
 import ImageIcon from '@/components/icons/ImageIcon';
 
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel';
 import { PartnersSectionRes } from '@/types/page';
 
 export default function PartnersSection({
@@ -29,41 +36,47 @@ export default function PartnersSection({
         </p>
       </div>
 
-      {/* Reviews Carousel */}
-      <div className='flex gap-12 overflow-x-auto pb-4'>
-        {items.map((review) => (
-          <div
-            key={review.id}
-            className='min-w-[20.464rem] max-w-[20.464rem]'
-          >
-            {/* Guest Info */}
-            <div className='mb-4 flex gap-2'>
-              <div className='size-12 flex-shrink-0 overflow-hidden rounded-full bg-grayish-50'>
-                {review.iconUrl ? (
-                  <img
-                    src={review.iconUrl}
-                    alt={review.title}
-                    className='size-full object-cover'
-                  />
-                ) : (
-                  <div className='flex size-full items-center justify-center'>
-                    <ImageIcon className='size-5' />
-                  </div>
-                )}
-              </div>
-              <div className='flex flex-1 flex-col gap-1'>
-                <h3 className='font-medium text-grayish-900 md:text-lg'>
-                  {review.title}
-                </h3>
-                <p className='text-grayish-400'>{t('luftPartner')}</p>
-              </div>
-            </div>
+      <Carousel className='flex w-full items-center gap-1 pb-4 [&>.overflow-hidden]:flex-1'>
+        <CarouselPrevious className='static translate-x-0 translate-y-0' />
 
-            {/* Review Text */}
-            <p className='line-clamp-3 text-grayish-400'>{review.reviewText}</p>
-          </div>
-        ))}
-      </div>
+        <CarouselContent className='-ms-12 flex-1'>
+          {items.map((review, index) => (
+            <CarouselItem
+              key={index}
+              className='min-w-[20.464rem] max-w-[20.464rem] ps-12'
+            >
+              {/* Guest Info */}
+              <div className='mb-4 flex gap-2'>
+                <div className='size-12 flex-shrink-0 overflow-hidden rounded-full bg-grayish-50'>
+                  {review.iconUrl ? (
+                    <img
+                      src={review.iconUrl}
+                      alt={review.title}
+                      className='size-full object-cover'
+                    />
+                  ) : (
+                    <div className='flex size-full items-center justify-center'>
+                      <ImageIcon className='size-5' />
+                    </div>
+                  )}
+                </div>
+                <div className='flex flex-1 flex-col gap-1'>
+                  <h3 className='font-medium text-grayish-900 md:text-lg'>
+                    {review.title}
+                  </h3>
+                  <p className='text-grayish-400'>{t('luftPartner')}</p>
+                </div>
+              </div>
+
+              {/* Review Text */}
+              <p className='line-clamp-3 text-grayish-400'>
+                {review.reviewText}
+              </p>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselNext className='static translate-x-0 translate-y-0' />
+      </Carousel>
     </section>
   );
 }

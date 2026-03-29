@@ -2,6 +2,14 @@ import CardItem from './CardItem';
 
 import { CardsSectionRes } from '@/types/page';
 
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel';
+
 export default function CardsSection({
   title,
   description,
@@ -25,15 +33,24 @@ export default function CardsSection({
         </p>
       </div>
 
-      {/* Work Items */}
-      <div className='custom-scrollbar flex max-w-full gap-6 overflow-auto pb-12'>
-        {items.map((item) => (
-          <CardItem
-            key={'card' + item.id}
-            {...item}
-          />
-        ))}
-      </div>
+      <Carousel className='flex w-full items-center gap-1 pb-12 [&>.overflow-hidden]:flex-1'>
+        <CarouselPrevious className='static translate-x-0 translate-y-0' />
+
+        <CarouselContent className='-ms-4 flex-1 lg:-ms-6'>
+          {items.map((item, index) => (
+            <CarouselItem
+              key={index}
+              className='ps-4 lg:ps-6'
+            >
+              <CardItem
+                key={'card' + item.id}
+                {...item}
+              />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselNext className='static translate-x-0 translate-y-0' />
+      </Carousel>
     </div>
   );
 }
