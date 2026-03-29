@@ -1,8 +1,9 @@
 import ConciergeSectionPreview from '@/components/sections/ConciergeSection/ConciergeSection';
 import PromiseSectionPreview from '@/components/sections/PromiseSection/PromiseSection';
 
-import { ForOwnersPageSections } from '@/types/page';
 import HeroSection from './Sections/Hero';
+
+import { ForOwnersPageSections } from '@/types/page';
 
 export default function ForOwnersPage({
   concierge,
