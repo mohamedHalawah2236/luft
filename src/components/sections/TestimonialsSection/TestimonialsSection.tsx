@@ -125,7 +125,7 @@ export default function TestimonialsSection() {
         {reviews.map((review) => (
           <div
             key={review.id}
-            className='min-w-[20.464rem]'
+            className='min-w-[20.464rem] max-w-[20.464rem]'
           >
             {/* Guest Info */}
             <div className='mb-4 flex gap-2'>

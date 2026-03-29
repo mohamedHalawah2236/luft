@@ -13,7 +13,7 @@ export default function FaqsSection({
   items,
 }: FaqsSectionRes) {
   return (
-    <div className='mx-auto flex w-full max-w-[71.875rem] flex-col gap-0 md:gap-2 lg:gap-6'>
+    <div className='mx-auto flex w-full flex-col gap-0 md:gap-2 lg:gap-6'>
       <div className='flex flex-col gap-2'>
         <h3 className='text-[1.75rem] font-medium leading-9 text-grayish-900 md:text-[2rem] md:leading-10 lg:text-5xl lg:leading-[3.625rem]'>
           {title}
