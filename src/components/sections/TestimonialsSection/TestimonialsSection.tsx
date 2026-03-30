@@ -1,12 +1,11 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 import { Star } from 'lucide-react';
 
 import AirbnbIcon from '@/components/icons/AirbnbIcon';
-
 import {
   Carousel,
   CarouselContent,

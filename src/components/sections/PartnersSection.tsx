@@ -1,7 +1,6 @@
 import { useTranslations } from 'next-intl';
 
 import ImageIcon from '@/components/icons/ImageIcon';
-
 import {
   Carousel,
   CarouselContent,
@@ -9,6 +8,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
+
 import { PartnersSectionRes } from '@/types/page';
 
 export default function PartnersSection({

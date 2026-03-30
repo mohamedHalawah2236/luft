@@ -1,7 +1,3 @@
-import CardItem from './CardItem';
-
-import { CardsSectionRes } from '@/types/page';
-
 import {
   Carousel,
   CarouselContent,
@@ -9,6 +5,10 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
+
+import CardItem from './CardItem';
+
+import { CardsSectionRes } from '@/types/page';
 
 export default function CardsSection({
   title,
