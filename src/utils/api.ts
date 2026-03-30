@@ -41,6 +41,7 @@ export async function getAllData(
   const res = await fetch(`${apiUrl}/${endpoint}`, {
     ...options,
     headers: {
+      'Content-Type': 'application/json',
       ...(options.headers || {}),
       ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
     },
@@ -88,6 +89,7 @@ export async function postData(
   const res = await fetch(`${apiUrl}/${endpoint}`, {
     ...options,
     headers: {
+      'Content-Type': 'application/json',
       ...(options.headers || {}),
       ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
     },
