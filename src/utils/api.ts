@@ -49,6 +49,16 @@ export async function getAllData(
     },
   });
 
+  if (!res.ok) {
+    if (res.status === 401) {
+      signOut({
+        redirect: true,
+        callbackUrl: '/login',
+      });
+      throw new Error('401 Unauthorized');
+    }
+  }
+
   const data = await res.json();
 
   if (data?.isError) {
@@ -99,6 +109,16 @@ export async function postData(
       ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
     },
   });
+
+  if (!res.ok) {
+    if (res.status === 401) {
+      signOut({
+        redirect: true,
+        callbackUrl: '/login',
+      });
+      throw new Error('401 Unauthorized');
+    }
+  }
 
   const data = await res.json();
   if (data?.isError) {
