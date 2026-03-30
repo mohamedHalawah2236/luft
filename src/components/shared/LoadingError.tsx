@@ -18,13 +18,13 @@ export default function LoadingError({
   onRefetch,
   isRefetching,
 }: LoadingErrorProps) {
-  const t = useTranslations('common.buttons');
+  const t = useTranslations('common');
 
   return (
     <div className='my-5 flex flex-col items-center gap-2'>
       <div className='flex items-center justify-center gap-3 text-center text-xl font-medium text-error-400'>
         <AlertCircle className='stroke-error-400' />
-        <div>{errorMsg || 'Failed to load Data'}</div>
+        <div>{errorMsg || t('failedToLoadData')}</div>
       </div>
       {onRefetch && (
         <Button
@@ -32,7 +32,7 @@ export default function LoadingError({
           disabled={isRefetching}
           onClick={onRefetch}
         >
-          {t('refetch')}
+          {t('buttons.refetch')}
         </Button>
       )}
     </div>

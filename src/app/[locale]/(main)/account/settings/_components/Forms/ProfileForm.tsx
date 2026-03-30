@@ -11,6 +11,7 @@ import { z } from 'zod';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import CustomInput from '@/components/shared/form/CustomInput';
+import LoadingError from '@/components/shared/LoadingError';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 
@@ -49,7 +50,7 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
     mode: 'onChange',
   });
 
-  const { isFetching, isFetched, data, isLoading } =
+  const { isFetching, isFetched, data, isLoading, isError } =
     useQuery<GetUserProfileRes>({
       queryKey: [profileFormQueryKey],
       queryFn: () => getProfileData(accessToken),
@@ -86,6 +87,8 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
   const isFormValid = form.formState.isValid;
   const isFormDirty = form.formState.isDirty;
 
+  if (isError) return <LoadingError />;
+
   return (
     <Form {...form}>
       <form
@@ -97,7 +100,7 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
       >
         <div className='flex flex-col gap-6 sm:gap-8 md:gap-12'>
           <ProfileImgInput
-            isLoading={isFetching}
+            isLoading={isFetching || isPending}
             image={userData?.profilePicture}
             className='w-fit max-sm:mx-auto'
           />

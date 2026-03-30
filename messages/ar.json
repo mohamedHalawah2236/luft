@@ -82,6 +82,7 @@
       "dataUpdatedSuccess": "تم تحديث البيانات بنجاح"
     },
     "loading": "جاري التحميل ...",
+    "failedToLoadData": "فشل تحميل البيانات",
     "navLinks": {
       "home": "الرئيسية",
       "owners": "للملاك",

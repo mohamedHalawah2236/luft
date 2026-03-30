@@ -49,6 +49,12 @@ export async function getAllData(
     },
   });
 
+  const data = await res.json();
+
+  if (data?.isError) {
+    throw new Error(data?.message);
+  }
+
   if (!res.ok) {
     if (res.status === 401) {
       signOut({
@@ -61,12 +67,6 @@ export async function getAllData(
     throw new Error(
       `Failed to retrieve data from ${endpoint}, status code: ${res.status}`,
     );
-  }
-
-  const data = await res.json();
-
-  if (data?.isError) {
-    throw new Error(data?.message);
   }
 
   return data;
@@ -100,6 +100,13 @@ export async function postData(
     },
   });
 
+  const data = await res.json();
+  if (data?.isError) {
+    throw new Error(data?.message, {
+      cause: data.statusCode,
+    });
+  }
+
   if (!res.ok) {
     if (res.status === 401) {
       signOut({
@@ -112,13 +119,6 @@ export async function postData(
     const data: ErrorApiResponse = await res.json();
 
     throw new Error(`HTTP error! Status: ${res.status}`, {
-      cause: data.statusCode,
-    });
-  }
-
-  const data = await res.json();
-  if (data?.isError) {
-    throw new Error(data?.message, {
       cause: data.statusCode,
     });
   }

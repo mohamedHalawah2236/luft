@@ -79,6 +79,7 @@
       "dataUpdatedSuccess": "Data updated successfully"
     },
     "loading": "Loading...",
+    "failedToLoadData": "Failed to load data",
     "navLinks": {
       "home": "Home",
       "owners": "For Owners",

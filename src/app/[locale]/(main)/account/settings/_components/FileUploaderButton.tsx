@@ -13,6 +13,7 @@ interface FileUploaderButtonProps {
   buttonIcon?: ReactNode;
   className?: string;
   fieldName: string;
+  disabled?: boolean;
 }
 
 export default function FileUploaderButton({
@@ -22,6 +23,7 @@ export default function FileUploaderButton({
   buttonIcon = <Plus className='size-5 text-grayish-900' />,
   className = '',
   fieldName,
+  disabled,
 }: FileUploaderButtonProps) {
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -43,6 +45,7 @@ export default function FileUploaderButton({
         <button
           type='button'
           onClick={handleClick}
+          disabled={disabled}
           className={cn(
             'relative z-50 flex h-8 w-[5.5rem] items-center justify-center gap-1 rounded-full bg-white text-grayish-900 shadow-sm shadow-grayish-50',
             className,

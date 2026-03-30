@@ -1,5 +1,4 @@
 'use client';
-import React from 'react';
 
 import { EditIcon, Plus } from 'lucide-react';
 import { useFormContext } from 'react-hook-form';
@@ -44,6 +43,7 @@ export default function ProfileImgInput({
       )}
       <FileUploaderButton
         fieldName='file'
+        disabled={isLoading}
         onFileSelect={(file) =>
           setValue('file', file, { shouldDirty: true, shouldValidate: true })
         }
