@@ -1,7 +1,8 @@
 'use client';
 
-import { EditIcon, Plus } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+
+import { EditIcon, Plus } from 'lucide-react';
 import { useFormContext } from 'react-hook-form';
 
 import UserImg from '@/components/shared/UserImg';
