@@ -55,9 +55,7 @@ export default function CurrencySelect({
   const onCurrencyChange = (value: string) => {
     setValue(value);
     localStorage.setItem('currency', value);
-    window.dispatchEvent(
-      new CustomEvent('currency-change', { detail: value }),
-    );
+    window.dispatchEvent(new CustomEvent('currency-change', { detail: value }));
   };
 
   if (variant === 'mobile') {
@@ -79,11 +77,7 @@ export default function CurrencySelect({
         ...option,
         onClick: () => onCurrencyChange(option.value),
       }))}
-      trigger={
-        <button>
-          <span className='text-grayish-900 underline'>{value}</span>
-        </button>
-      }
+      trigger={<span className='text-grayish-900 underline'>{value}</span>}
       className='border-transparent bg-grayish-30 drop-shadow'
     />
   );

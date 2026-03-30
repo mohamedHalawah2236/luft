@@ -1,9 +1,8 @@
 import { signOut } from 'next-auth/react';
 
-import { ErrorApiResponse } from '@/types';
+import { getLanguage } from './language';
 
-import { i18n } from '@/i18n/i18n.config';
-import { getCurrLocale } from '@/lib/utils';
+import { ErrorApiResponse } from '@/types';
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -38,9 +37,12 @@ export async function getAllData(
   options: RequestInit = {},
   accessToken?: string,
 ) {
+  const language = await getLanguage();
+
   const res = await fetch(`${apiUrl}/${endpoint}`, {
     ...options,
     headers: {
+      language,
       'Content-Type': 'application/json',
       ...(options.headers || {}),
       ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
@@ -86,9 +88,12 @@ export async function postData(
   options: RequestInit = {},
   accessToken?: string,
 ) {
+  const language = await getLanguage();
+
   const res = await fetch(`${apiUrl}/${endpoint}`, {
     ...options,
     headers: {
+      language,
       'Content-Type': 'application/json',
       ...(options.headers || {}),
       ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
@@ -116,31 +121,6 @@ export async function postData(
     throw new Error(data?.message, {
       cause: data.statusCode,
     });
-  }
-
-  return data;
-}
-
-export async function nextApiFetch(
-  endpoint: string,
-  options: RequestInit = {},
-) {
-  const res = await fetch(endpoint, {
-    ...options,
-    headers: {
-      'Content-Type': 'application/json',
-      Language: getCurrLocale() ?? i18n.defaultLocale,
-      ...options.headers,
-    },
-  });
-
-  if (!res.ok) {
-    throw new Error(`HTTP error! Status: ${res.status}`);
-  }
-
-  const data = await res.json();
-  if (data?.isError) {
-    throw new Error(data?.message);
   }
 
   return data;
