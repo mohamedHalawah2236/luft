@@ -88,7 +88,7 @@ export default function RequestOtpForm({
   return (
     <Form {...form}>
       <FieldFormLayout
-        submitBtnLabel={tCommon('buttons.continue')}
+        submitBtnLabel={tCommon('buttons.next')}
         serverError={serverError}
         onSubmit={onFormSubmit}
       >

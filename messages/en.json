@@ -71,7 +71,10 @@
       "save": "Save",
       "refetch": "Refetch",
       "change": "Change",
-      "exploreMore": "Explore More"
+      "exploreMore": "Explore More",
+      "next": "Next",
+      "edit": "Edit",
+      "add": "Add"
     },
     "toaster": {
       "emailOtpSent": "OTP is sent to your email",
@@ -160,7 +163,7 @@
       "changeEmail": "Change Email",
       "changePhone": "Change phone number",
       "changePassword": "Change Password",
-      "newEmailOtpSent": "Verify your new email addresse",
+      "newEmailOtpSent": "Verify your new email address",
       "newPhoneOtpSent": "Verify your new phone number"
     },
     "descriptions": {

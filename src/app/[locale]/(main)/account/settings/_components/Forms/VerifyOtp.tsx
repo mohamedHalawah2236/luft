@@ -123,7 +123,7 @@ export default function VerifyOTPForm({
   return (
     <Form {...form}>
       <FieldFormLayout
-        title={tSettings('titles.newPhoneOtpSent')}
+        title={tSettings('titles.newEmailOtpSent')}
         description={tSettings('descriptions.otpSent', {
           numOfDigits,
           identifier,

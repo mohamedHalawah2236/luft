@@ -1,6 +1,7 @@
 'use client';
 
 import { EditIcon, Plus } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { useFormContext } from 'react-hook-form';
 
 import UserImg from '@/components/shared/UserImg';
@@ -23,6 +24,7 @@ export default function ProfileImgInput({
   isLoading,
   className,
 }: ProfileImgInputProps) {
+  const t = useTranslations('common.buttons');
   const { watch, setValue } = useFormContext<ProfileFormData>();
 
   const file = watch('file');
@@ -48,7 +50,7 @@ export default function ProfileImgInput({
           setValue('file', file, { shouldDirty: true, shouldValidate: true })
         }
         className='mx-auto -mt-2.5'
-        buttonText={image ? 'Edit' : 'Add'}
+        buttonText={image ? t('edit') : t('add')}
         buttonIcon={
           image ? (
             <EditIcon className='size-5 text-grayish-900' />

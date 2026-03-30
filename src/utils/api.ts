@@ -104,7 +104,6 @@ export async function postData(
     ...options,
     headers: {
       language,
-      'Content-Type': 'application/json',
       ...(options.headers || {}),
       ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
     },
