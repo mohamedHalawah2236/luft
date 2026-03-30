@@ -24,7 +24,11 @@ export enum PageTypeEnum {
 export type PageApiResponse = ApiResponse<{
   pageTitle: string;
   pageType: PageTypeEnum;
-  sections: ContactUsPageSections | AboutPageSections | HomePageSections;
+  sections:
+    | ContactUsPageSections
+    | AboutPageSections
+    | HomePageSections
+    | ForOwnersPageSections;
 }>;
 
 type BaseSection = {
@@ -112,6 +116,15 @@ export type HomePageSections = {
   promise: PromiseSectionRes;
 };
 
+export type ForOwnersPageSections = {
+  hero: HeroSectionRes;
+  concierge: ConciergeSectionRes;
+  promise: PromiseSectionRes;
+  cards: CardsSectionRes;
+  faQs: FaqsSectionRes;
+  partnersSection: PartnersSectionRes;
+};
+
 export type SendMessageFormData = {
   firstName: string;
   lastName: string;
@@ -186,4 +199,46 @@ export type BulletRes = {
   iconUrl: string;
   title: string;
   description: string;
+};
+
+export type CardItem = {
+  id: string;
+  iconUrl: string;
+  mediaExtension: string;
+  title: string;
+};
+
+export type CardsSectionRes = BaseSection & {
+  title: string;
+  description: string;
+  items: CardItem[];
+};
+
+export type FaqItemRes = {
+  id: string;
+  title: string;
+  description: string;
+};
+
+export type FaqsSectionRes = BaseSection & {
+  title: string;
+  description: string;
+  items: FaqItemRes[];
+};
+
+export type ReviewItem = {
+  id: string;
+  iconUrl: string;
+  title: string;
+  description: string;
+  mediaExtension: string;
+  reviewText: string;
+};
+
+export type PartnersSectionRes = BaseSection & {
+  title: string;
+  description: string;
+  mediaUrl: string;
+  mediaExtension: string;
+  items: ReviewItem[];
 };

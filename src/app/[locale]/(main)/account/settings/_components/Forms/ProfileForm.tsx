@@ -104,7 +104,7 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
 
           <div className='flex w-full flex-wrap gap-6'>
             <CustomInput
-              formItemClassName='flex-1 max-sm:min-w-[22.4rem]'
+              formItemClassName='flex-1 max-sm:min-w-full'
               disabled={isPending || isFetching}
               required
               fieldName='firstName'
@@ -116,7 +116,7 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
               }
             />
             <CustomInput
-              formItemClassName='flex-1 max-sm:min-w-[22.4rem]'
+              formItemClassName='flex-1 max-sm:min-w-full'
               disabled={isPending || isFetching}
               required
               fieldName='lastName'

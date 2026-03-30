@@ -1,11 +1,19 @@
 'use client';
 
-import Image from 'next/image';
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 
 import { Star } from 'lucide-react';
 
 import AirbnbIcon from '@/components/icons/AirbnbIcon';
+
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel';
 
 interface Review {
   id: string;
@@ -121,59 +129,70 @@ export default function TestimonialsSection() {
       </div>
 
       {/* Reviews Carousel */}
-      <div className='flex gap-12 overflow-x-auto pb-4'>
-        {reviews.map((review) => (
-          <div
-            key={review.id}
-            className='min-w-[20.464rem]'
-          >
-            {/* Guest Info */}
-            <div className='mb-4 flex gap-2'>
-              <div className='h-12 w-12 flex-shrink-0 overflow-hidden rounded-full bg-gray-100'>
-                <Image
-                  src={review.avatar}
-                  alt={review.guestName}
-                  width={48}
-                  height={48}
-                  className='h-full w-full object-cover'
+      <Carousel className='flex w-full items-center gap-1 pb-4 [&>.overflow-hidden]:flex-1'>
+        <CarouselPrevious className='static translate-x-0 translate-y-0' />
+
+        <CarouselContent className='-ms-12 flex-1'>
+          {reviews.map((review) => (
+            <CarouselItem
+              key={review.id}
+              className='min-w-[20.464rem] max-w-[20.464rem] ps-12'
+            >
+              {/* Guest Info */}
+              <div className='mb-4 flex gap-2'>
+                <div className='h-12 w-12 flex-shrink-0 overflow-hidden rounded-full bg-gray-100'>
+                  <Image
+                    src={review.avatar}
+                    alt={review.guestName}
+                    width={48}
+                    height={48}
+                    className='h-full w-full object-cover'
+                  />
+                </div>
+                <div className='flex-1'>
+                  <h3 className='text-lg text-grayish-900'>
+                    {review.guestName}
+                  </h3>
+                  <p className='text-grayish-400'>{review.location}</p>
+                </div>
+              </div>
+
+              {/* Rating and Metadata */}
+              <div className='mb-4 flex items-center gap-2 text-grayish-900'>
+                <StarRating
+                  rating={review.rating}
+                  size='sm'
                 />
+                <span className=''>•</span>
+                <span className=''>
+                  {t('daysAgo', { days: review.daysAgo })}
+                </span>
+                <span className='text-grayish-400'>•</span>
+                <span className='text-grayish-400'>
+                  {t('stayedDays', { days: review.stayedDays })}
+                </span>
               </div>
-              <div className='flex-1'>
-                <h3 className='text-lg text-grayish-900'>{review.guestName}</h3>
-                <p className='text-grayish-400'>{review.location}</p>
-              </div>
-            </div>
 
-            {/* Rating and Metadata */}
-            <div className='mb-4 flex items-center gap-2 text-grayish-900'>
-              <StarRating
-                rating={review.rating}
-                size='sm'
-              />
-              <span className=''>•</span>
-              <span className=''>{t('daysAgo', { days: review.daysAgo })}</span>
-              <span className='text-grayish-400'>•</span>
-              <span className='text-grayish-400'>
-                {t('stayedDays', { days: review.stayedDays })}
+              {/* Review Text */}
+              <p className='mb-1 line-clamp-3 text-grayish-400'>
+                {review.text}
+              </p>
+
+              {/* See More Link */}
+              <span className='mb-4 text-grayish-900 underline'>
+                {t('seeMore')}
               </span>
-            </div>
 
-            {/* Review Text */}
-            <p className='mb-1 line-clamp-3 text-grayish-400'>{review.text}</p>
-
-            {/* See More Link */}
-            <span className='mb-4 text-grayish-900 underline'>
-              {t('seeMore')}
-            </span>
-
-            {/* Airbnb Attribution */}
-            <div className='flex items-center gap-2 pt-3'>
-              <span className='text-grayish-900'>{t('ratedOn')}</span>
-              <AirbnbIcon />
-            </div>
-          </div>
-        ))}
-      </div>
+              {/* Airbnb Attribution */}
+              <div className='flex items-center gap-2 pt-3'>
+                <span className='text-grayish-900'>{t('ratedOn')}</span>
+                <AirbnbIcon />
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselNext className='static translate-x-0 translate-y-0' />
+      </Carousel>
     </section>
   );
 }

@@ -173,6 +173,13 @@
   },
   "bookFreeConsultation": "احجز استشارة مجانية",
   "messageUs": "راسلنا",
+  "pages": {
+    "forOwners": {
+      "buttons": {
+        "startPartnership": "ابدأ شراكتك"
+      }
+    }
+  },
   "sections": {
     "testimonials": {
       "title": "ماذا يقول ضيوفنا",
@@ -249,6 +256,9 @@
         "four": "4 ضيوف",
         "fivePlus": "+5 ضيوف"
       }
+    },
+    "partners": {
+      "luftPartner": "شريك لوفت"
     }
   }
 }

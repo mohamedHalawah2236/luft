@@ -26,20 +26,20 @@ export default function PromiseSectionPreview({
         </p>
       </div>
 
-      <div className='flex items-center justify-between gap-4 max-xl:flex-col lg:gap-6'>
+      <div className='flex justify-between gap-4 max-lg:flex-col lg:items-center lg:gap-6'>
         {/* media */}
         {mediaPosition === MediaPositionEnum.START && (
           <MediaPreview
             url={mediaUrl}
             extension={mediaExtension}
             className={cn(
-              'h-[37.5rem] w-full max-sm:h-[14rem] xl:w-[46.75rem]',
+              'h-[37.5rem] w-full max-sm:h-[14rem] lg:w-[46.75rem]',
             )}
           />
         )}
 
         {/* Bullets */}
-        <div className='flex flex-col gap-12 max-xl:order-2'>
+        <div className='flex flex-1 flex-col gap-12 max-lg:order-2'>
           {items?.map((bullet, i) => (
             <BulletCard
               data={bullet}
@@ -54,7 +54,7 @@ export default function PromiseSectionPreview({
             url={mediaUrl}
             extension={mediaExtension}
             className={cn(
-              'h-[37.5rem] w-full max-xl:order-1 max-sm:h-[14rem] xl:w-[46.75rem]',
+              'h-[37.5rem] w-full max-lg:order-1 max-sm:h-[14rem] lg:w-[46.75rem]',
             )}
           />
         )}

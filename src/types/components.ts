@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 
+import { PageTypeEnum } from './page';
 import { SetState } from '.';
 
 import { Dir } from '@/i18n/i18n.config';
@@ -42,7 +43,7 @@ export type DropdownProps = {
 export type NavLinkProps = {
   id: string;
   title: string;
-  href: string;
+  pageType: PageTypeEnum;
 };
 
 export type SelectOption = {

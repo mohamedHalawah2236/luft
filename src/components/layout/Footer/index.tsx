@@ -51,10 +51,10 @@ export default async function Footer({
         <div className='flex flex-col gap-2'>
           <span className='text-sm leading-6'>{t('common.labels.menu')}</span>
           <div className='flex flex-col gap-4'>
-            {navLinks.map(({ title, id }) => (
+            {navLinks.map(({ title, id, pageType }) => (
               <FooterLink
                 key={`footerLink-${id}`}
-                {...{ id, title, href: `/${id}` }}
+                {...{ id, title, href: `/${id}`, pageType }}
               />
             ))}
           </div>
