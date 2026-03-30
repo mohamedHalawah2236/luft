@@ -28,6 +28,9 @@ export const updateUserProfile = (
     {
       body: formData,
       method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
     },
     accessToken,
   );

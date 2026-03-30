@@ -13,12 +13,18 @@ export const sendOtpPreregister = async (userData: SignupFormData) =>
   postData('api/auth/register/send-otp-preregister', {
     method: 'POST',
     body: JSON.stringify(userData),
+    headers: {
+      'Content-Type': 'application/json',
+    },
   });
 
 export const resendOtpPreregister = async (userData: SignupFormData) =>
   postData('api/auth/register/resend-otp-preregister', {
     method: 'POST',
     body: JSON.stringify(userData),
+    headers: {
+      'Content-Type': 'application/json',
+    },
   });
 
 export const verifyOtpPreregister = async (
@@ -27,6 +33,9 @@ export const verifyOtpPreregister = async (
   postData('api/auth/register/validate-preregister', {
     method: 'POST',
     body: JSON.stringify(virificationData),
+    headers: {
+      'Content-Type': 'application/json',
+    },
   });
 
 export const setRegisteredUserPassword = async (
@@ -48,6 +57,9 @@ export const sendOtpForgetPassword = async (email: string) =>
       type: 1,
       otpPurpose: 1,
     }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
   });
 
 export const validateForgetPasswordOtp = async ({
@@ -62,12 +74,18 @@ export const validateForgetPasswordOtp = async ({
       type: 1,
       otpPurpose: 1,
     }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
   });
 
 export const resetPassword = async (resetPasswordData: ResetPasswordFormData) =>
   postData('api/auth/reset-password', {
     method: 'POST',
     body: JSON.stringify(resetPasswordData),
+    headers: {
+      'Content-Type': 'application/json',
+    },
   });
 
 export const login = async (credentials: LoginFormData) =>
@@ -87,5 +105,6 @@ export const logout = async (token: string) =>
     method: 'PATCH',
     headers: {
       Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
     },
   });
