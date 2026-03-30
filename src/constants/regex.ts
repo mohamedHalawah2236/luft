@@ -8,6 +8,7 @@ export const NAME_REGEX = /^[A-Za-z\u0600-\u06FF\s]+$/;
 
 export const PASSWORD_REGEX = {
   uppercase: /[A-Z]/,
+  lowercase: /[a-z]/,
   number: /\d/,
   special: /[^A-Za-z0-9]/,
 } as const;

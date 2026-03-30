@@ -33,6 +33,7 @@
         "required": "Password is required",
         "length": "Password must be 8 to 20 characters",
         "uppercase": "Password must include one uppercase letter",
+        "lowercase": "Password must include one lowercase letter",
         "number": "Password must include one number",
         "specialCharacter": "Password must include one special character"
       },

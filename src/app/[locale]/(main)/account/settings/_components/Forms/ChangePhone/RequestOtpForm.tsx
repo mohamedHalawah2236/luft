@@ -36,7 +36,10 @@ export default function RequestOtpForm({
 
   const formSchema = z.object({
     phone: z
-      .string({ required_error: tCommon('validations.required') })
+      .string({
+        required_error: tCommon('validations.required'),
+        message: tCommon('validations.required'),
+      })
       .min(1, { message: tCommon('validations.required') })
       .regex(EGYPTIAN_PHONE, tCommon('validations.phone.invalid')),
   });

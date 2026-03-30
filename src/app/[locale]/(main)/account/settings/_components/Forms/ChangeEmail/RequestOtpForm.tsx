@@ -33,7 +33,10 @@ export default function RequestOtpForm({
 
   const formSchema = z.object({
     email: z
-      .string({ required_error: tCommon('validations.email.required') })
+      .string({
+        required_error: tCommon('validations.email.required'),
+        message: tCommon('validations.email.required'),
+      })
       .min(1, { message: tCommon('validations.email.required') })
       .email({ message: tCommon('validations.email.invalid') }),
   });

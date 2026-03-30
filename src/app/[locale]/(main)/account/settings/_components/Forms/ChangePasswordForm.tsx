@@ -6,6 +6,7 @@ import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 import { z } from 'zod';
 
 import { useMutation } from '@tanstack/react-query';
@@ -31,40 +32,61 @@ export default function ChangePasswordForm() {
 
   const formSchema = z
     .object({
-      currentPassword: z.string().min(1, tCommon('validations.required')),
+      currentPassword: z
+        .string({
+          message: tCommon('validations.required'),
+          required_error: tCommon('validations.required'),
+        })
+        .min(1, tCommon('validations.required')),
 
-      password: z.string().superRefine((password, ctx) => {
-        if (password.length < 8 || password.length > 20) {
-          ctx.addIssue({
-            code: 'custom',
-            message: tCommon('validations.password.length'),
-          });
-        }
+      password: z
+        .string({
+          message: tCommon('validations.required'),
+          required_error: tCommon('validations.required'),
+        })
+        .min(1, tCommon('validations.required'))
+        .superRefine((password, ctx) => {
+          if (password.length < 8 || password.length > 20) {
+            ctx.addIssue({
+              code: 'custom',
+              message: tCommon('validations.password.length'),
+            });
+          }
 
-        if (!PASSWORD_REGEX.number.test(password)) {
-          ctx.addIssue({
-            code: 'custom',
-            message: tCommon('validations.password.number'),
-          });
-        }
+          if (!PASSWORD_REGEX.number.test(password)) {
+            ctx.addIssue({
+              code: 'custom',
+              message: tCommon('validations.password.number'),
+            });
+          }
 
-        if (!PASSWORD_REGEX.special.test(password)) {
-          ctx.addIssue({
-            code: 'custom',
-            message: tCommon('validations.password.specialCharacter'),
-          });
-        }
+          if (!PASSWORD_REGEX.special.test(password)) {
+            ctx.addIssue({
+              code: 'custom',
+              message: tCommon('validations.password.specialCharacter'),
+            });
+          }
 
-        if (!PASSWORD_REGEX.uppercase.test(password)) {
-          ctx.addIssue({
-            code: 'custom',
-            message: tCommon('validations.password.uppercase'),
-          });
-        }
-      }),
+          if (!PASSWORD_REGEX.uppercase.test(password)) {
+            ctx.addIssue({
+              code: 'custom',
+              message: tCommon('validations.password.uppercase'),
+            });
+          }
+
+          if (!PASSWORD_REGEX.lowercase.test(password)) {
+            ctx.addIssue({
+              code: 'custom',
+              message: tCommon('validations.password.lowercase'),
+            });
+          }
+        }),
 
       confirmPassword: z
-        .string()
+        .string({
+          message: tCommon('validations.required'),
+          required_error: tCommon('validations.required'),
+        })
         .min(1, tCommon('validations.confirmPassword.required')),
     })
     .refine((data) => data.password === data.confirmPassword, {
@@ -94,6 +116,7 @@ export default function ChangePasswordForm() {
 
     onSuccess: () => {
       setIsOpen(false);
+      toast.success(tCommon('toaster.dataUpdatedSuccess'));
     },
     onError: (error: Error) => setServerError(error.message),
   });
