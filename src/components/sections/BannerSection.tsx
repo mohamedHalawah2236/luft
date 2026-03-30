@@ -17,9 +17,9 @@ export default function BannerSection({
 }: BannerSectionProps) {
   if (!mediaUrl)
     return (
-      <div className='flex size-full flex-col items-center justify-center gap-6 bg-grayish-50'>
+      <div className='flex size-full flex-col items-center justify-center gap-6 overflow-hidden bg-grayish-50'>
         <ImageIcon />
-        <div className='flex size-fit flex-col items-center gap-2'>
+        <div className='flex size-fit flex-col items-center gap-2 px-2'>
           <h6 className='text-grayish-400'>{title}</h6>
           <p className='text-5xl font-medium text-grayish-900'>{description}</p>
         </div>
@@ -29,12 +29,12 @@ export default function BannerSection({
   return (
     <div
       className={cn(
-        'flex size-full h-[21.25rem] items-center justify-center bg-cover bg-center sm:h-[25rem]',
+        'flex size-full h-[21.25rem] items-center justify-center overflow-hidden bg-cover bg-center sm:h-[25rem]',
         className,
       )}
       style={{ backgroundImage: `url(${mediaUrl})` }}
     >
-      <div className='flex size-fit flex-col items-center gap-2 text-center font-medium text-white'>
+      <div className='flex size-fit flex-col items-center gap-2 px-2 text-center font-medium text-white'>
         <h6 className='text-lg sm:text-xl md:text-2xl'>{title}</h6>
         <p className='text-5xl leading-[3.625rem] sm:text-6xl sm:leading-[3.75rem] md:text-7xl md:leading-[5.25rem]'>
           {description}
