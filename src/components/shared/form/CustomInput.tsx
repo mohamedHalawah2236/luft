@@ -30,6 +30,7 @@ type CustomInputProps = {
   required?: boolean;
   showAllErrors?: boolean;
   onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  autoFocus?: boolean;
 };
 
 function CustomInput({
@@ -44,6 +45,7 @@ function CustomInput({
   required,
   showAllErrors,
   onKeyDown,
+  autoFocus = false,
 }: CustomInputProps) {
   const { formState, control } = useFormContext();
   const { isSubmitting, errors } = formState;
@@ -109,6 +111,7 @@ function CustomInput({
                 handleInputChange(event, field)
               }
               onKeyDown={onKeyDown}
+              autoFocus={autoFocus}
             />
           </FormControl>
           <FormMessage
