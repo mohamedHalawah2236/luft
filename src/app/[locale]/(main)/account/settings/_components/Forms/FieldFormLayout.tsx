@@ -36,7 +36,7 @@ export default function FieldFormLayout({
           <h6 className='text-2xl font-medium text-grayish-900'>{title}</h6>
         )}
         {description && (
-          <p className='text-xl text-grayish-500'>{description}</p>
+          <p className='text-xl text-grayish-400'>{description}</p>
         )}
       </div>
       <div className='relative flex flex-col gap-4'>{children}</div>
