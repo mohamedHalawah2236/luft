@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { IconProps } from '@/types';
 
 import { cn } from '@/lib/utils';
@@ -12,7 +10,7 @@ export default function GearIcon({ className }: IconProps) {
       viewBox='0 0 19 20'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
-      className={cn('fill-neutral-500', className)}
+      className={cn('fill-grayish-500', className)}
     >
       <path
         fill-rule='evenodd'

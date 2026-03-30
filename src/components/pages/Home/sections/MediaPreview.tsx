@@ -34,7 +34,7 @@ export default function MediaPreview({
       className={cn(
         'h-[19.8rem] w-[33.25rem] overflow-hidden rounded-2xl',
         {
-          'flex items-center justify-center bg-neutral-50':
+          'flex items-center justify-center bg-grayish-50':
             !url || mediaHasError || isNotSupportedMedia,
         },
         className,

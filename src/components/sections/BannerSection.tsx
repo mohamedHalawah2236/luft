@@ -17,7 +17,7 @@ export default function BannerSection({
 }: BannerSectionProps) {
   if (!mediaUrl)
     return (
-      <div className='flex size-full flex-col items-center justify-center gap-6 bg-neutral-50'>
+      <div className='flex size-full flex-col items-center justify-center gap-6 bg-grayish-50'>
         <ImageIcon />
         <div className='flex size-fit flex-col items-center gap-2'>
           <h6 className='text-grayish-400'>{title}</h6>

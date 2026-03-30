@@ -63,10 +63,10 @@ function useControllableValue<T>({
 }
 
 const variantStyles = {
-  default: 'bg-neutral-100',
-  bordered: 'border-2 border-neutral-200 bg-white',
-  elevated: 'bg-white shadow-lg shadow-neutral-200/50',
-  minimal: 'bg-transparent border border-neutral-200',
+  default: 'bg-grayish-100',
+  bordered: 'border-2 border-grayish-200 bg-white',
+  elevated: 'bg-white shadow-lg shadow-grayish-200/50',
+  minimal: 'bg-transparent border border-grayish-200',
 };
 
 const CustomHorizontalAccordion = ({
