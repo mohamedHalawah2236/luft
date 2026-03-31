@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { useTranslations } from 'next-intl';
 
@@ -38,6 +38,13 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
   const tRoot = useTranslations('');
 
   const [serverError, setServerError] = useState<string | null>(null);
+  const errorRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (serverError && errorRef.current) {
+      errorRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, [serverError]);
 
   const form = useForm<z.infer<ReturnType<typeof profileFormSchema>>>({
     resolver: zodResolver(profileFormSchema(tRoot)),
@@ -164,7 +171,11 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
           }
         />
 
-        {serverError && <FormServerError>{serverError}</FormServerError>}
+        {serverError && (
+          <div ref={errorRef}>
+            <FormServerError>{serverError}</FormServerError>
+          </div>
+        )}
 
         <Button
           disabled={!isFormValid || !isFormDirty || isPending}
