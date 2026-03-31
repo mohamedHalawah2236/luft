@@ -3,6 +3,11 @@ import z from 'zod';
 import { nameSchema } from '@/types/sharedSchemas';
 
 import { TFunction } from '@/constants';
+import {
+  ALLOWED_ICON_TYPES,
+  MAX_IMAGE_SIZE,
+  MAX_IMAGE_SIZE_MB,
+} from '@/constants/media';
 
 export const profileFormQueryKey = 'user-profile';
 export const profileFormSchema = (tRoot: TFunction) =>
@@ -16,5 +21,28 @@ export const profileFormSchema = (tRoot: TFunction) =>
     email: z.string().email(),
     phoneNumber: z.string(),
     password: z.string(),
-    file: z.instanceof(File).nullable(),
+    file: z
+      .instanceof(File)
+      .nullable()
+      .superRefine((file, ctx) => {
+        const isAllowedType = ALLOWED_ICON_TYPES.includes(file?.type ?? '');
+
+        if (!isAllowedType) {
+          return ctx.addIssue({
+            code: 'custom',
+            message: tRoot('common.validations.media.notAllowedType'),
+          });
+        }
+
+        const isBigFile = file?.size ?? 0 > MAX_IMAGE_SIZE;
+
+        if (isBigFile) {
+          return ctx.addIssue({
+            code: 'custom',
+            message: tRoot('common.validations.media.fileSizeMax', {
+              size: MAX_IMAGE_SIZE_MB,
+            }),
+          });
+        }
+      }),
   });

@@ -6,6 +6,7 @@ import { EditIcon, Plus } from 'lucide-react';
 import { useFormContext } from 'react-hook-form';
 
 import UserImg from '@/components/shared/UserImg';
+import { FormField, FormMessage } from '@/components/ui/form';
 import { Skeleton } from '@/components/ui/skeleton';
 
 import FileUploaderButton from './FileUploaderButton';
@@ -33,33 +34,46 @@ export default function ProfileImgInput({
   const previewImage = uploadedImgUrl || image;
 
   return (
-    <div className={cn('relative', className)}>
-      {isLoading ? (
-        <Skeleton className='size-[7.5rem] rounded-full' />
-      ) : previewImage ? (
-        <img
-          src={previewImage}
-          className='size-[7.5rem] rounded-full border border-grayish-50 object-cover'
-        />
-      ) : (
-        <UserImg className='flex size-[7.5rem] text-6xl' />
-      )}
-      <FileUploaderButton
-        fieldName='file'
-        disabled={isLoading}
-        onFileSelect={(file) =>
-          setValue('file', file, { shouldDirty: true, shouldValidate: true })
-        }
-        className='mx-auto -mt-2.5'
-        buttonText={image ? t('edit') : t('add')}
-        buttonIcon={
-          image ? (
-            <EditIcon className='size-5 text-grayish-900' />
-          ) : (
-            <Plus className='size-5 text-grayish-900' />
-          )
-        }
-      />
-    </div>
+    <FormField
+      name='file'
+      render={(field) => {
+        return (
+          <div className='flex flex-col gap-2'>
+            <div className={cn('relative', className)}>
+              {isLoading ? (
+                <Skeleton className='size-[7.5rem] rounded-full' />
+              ) : previewImage ? (
+                <img
+                  src={previewImage}
+                  className='size-[7.5rem] rounded-full border border-grayish-50 object-cover'
+                />
+              ) : (
+                <UserImg className='flex size-[7.5rem] text-6xl' />
+              )}
+              <FileUploaderButton
+                fieldName='file'
+                disabled={isLoading}
+                onFileSelect={(file) =>
+                  setValue('file', file, {
+                    shouldDirty: true,
+                    shouldValidate: true,
+                  })
+                }
+                className='mx-auto -mt-2.5'
+                buttonText={image ? t('edit') : t('add')}
+                buttonIcon={
+                  image ? (
+                    <EditIcon className='size-5 text-grayish-900' />
+                  ) : (
+                    <Plus className='size-5 text-grayish-900' />
+                  )
+                }
+              />
+            </div>
+            <FormMessage className='ms-4 text-error-500' />
+          </div>
+        );
+      }}
+    ></FormField>
   );
 }

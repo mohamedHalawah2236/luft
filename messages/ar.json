@@ -65,7 +65,11 @@
 
       "required": "الحقل مطلوب",
       "lettersOnly": "يجب أن يحتوي الاسم على أحرف فقط",
-      "invalidInput": "القيمة المدخلة غير صحيحة"
+      "invalidInput": "القيمة المدخلة غير صحيحة",
+      "media": {
+        "notAllowedType": "نوع الملف غير مسموح",
+        "fileSizeMax": "يجب أن يكون حجم الملف أقل من أو يساوي {size} ميجابايت"
+      }
     },
     "buttons": {
       "continue": "متابعة",

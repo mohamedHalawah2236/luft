@@ -62,7 +62,11 @@
       },
       "required": "Required Field",
       "lettersOnly": "Name must contain letters only",
-      "invalidInput": "Invalid Input"
+      "invalidInput": "Invalid Input",
+      "media": {
+        "notAllowedType": "Not allowed type",
+        "fileSizeMax": "File size must be less than or equal {size}MB"
+      }
     },
     "buttons": {
       "continue": "Continue",
