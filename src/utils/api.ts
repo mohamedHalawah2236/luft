@@ -1,8 +1,7 @@
 import { signOut } from 'next-auth/react';
 
+import { concatErrors } from './errors';
 import { getLanguage } from './language';
-
-import { ErrorApiResponse } from '@/types';
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -57,26 +56,16 @@ export async function getAllData(
       });
       throw new Error('401 Unauthorized');
     }
+
+    throw new Error(
+      `Failed to retrieve data from ${endpoint}, status code: ${res.status}`,
+    );
   }
 
   const data = await res.json();
 
   if (data?.isError) {
     throw new Error(data?.message);
-  }
-
-  if (!res.ok) {
-    if (res.status === 401) {
-      signOut({
-        redirect: true,
-        callbackUrl: '/login',
-      });
-      throw new Error('401 Unauthorized');
-    }
-
-    throw new Error(
-      `Failed to retrieve data from ${endpoint}, status code: ${res.status}`,
-    );
   }
 
   return data;
@@ -117,27 +106,17 @@ export async function postData(
       });
       throw new Error('401 Unauthorized');
     }
+
+    const data = await res.json();
+    if (data.errors) {
+      throw new Error(concatErrors(data));
+    }
+    throw new Error(data.message);
   }
 
   const data = await res.json();
   if (data?.isError) {
     throw new Error(data?.message, {
-      cause: data.statusCode,
-    });
-  }
-
-  if (!res.ok) {
-    if (res.status === 401) {
-      signOut({
-        redirect: true,
-        callbackUrl: '/login',
-      });
-      throw new Error('401 Unauthorized');
-    }
-
-    const data: ErrorApiResponse = await res.json();
-
-    throw new Error(`HTTP error! Status: ${res.status}`, {
       cause: data.statusCode,
     });
   }

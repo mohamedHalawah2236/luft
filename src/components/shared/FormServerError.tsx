@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 import { useFormContext } from 'react-hook-form';
 
@@ -22,7 +22,7 @@ export default function FormServerError({
   return (
     <p
       className={cn(
-        'border-s-4 border-error-500 bg-error-50 p-2 font-semibold text-error-500 max-md:text-sm',
+        'whitespace-pre-line border-s-4 border-error-500 bg-error-50 p-2 font-semibold text-error-500 max-md:text-sm',
         className,
       )}
     >

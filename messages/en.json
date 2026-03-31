@@ -43,11 +43,15 @@
       },
       "firstName": {
         "required": "First name is required",
-        "invalid": "First name must contain letters only"
+        "invalid": "First name must contain letters only",
+        "min": "First name must be at least {min} characters",
+        "max": "First name must be at most {max} characters"
       },
       "lastName": {
         "required": "Last name is required",
-        "invalid": "Last name must contain letters only"
+        "invalid": "Last name must contain letters only",
+        "min": "Last name must be at least {min} characters",
+        "max": "Last name must be at most {max} characters"
       },
       "otp": {
         "required": "OTP is required",
