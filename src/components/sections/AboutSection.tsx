@@ -11,7 +11,7 @@ export default function AboutSection({
 }: AboutSectionProps) {
   return (
     <div className='flex h-full items-center gap-8 max-md:flex-col lg:gap-12'>
-      <div className='flex w-[24rem] flex-col gap-2 max-lg:flex-1 max-md:order-2 max-md:w-auto lg:w-[42.313rem]'>
+      <div className='flex w-[24rem] flex-1 flex-col gap-2 max-lg:flex-1 max-md:order-2 max-md:w-auto lg:w-[42.313rem]'>
         {/* Texts */}
         <h3
           title={title}
@@ -30,7 +30,7 @@ export default function AboutSection({
       <img
         src={mediaUrl}
         alt={title}
-        className='h-[13.3rem] rounded-3xl max-lg:w-[23rem] max-sm:order-1 max-sm:w-full lg:h-[25.563rem] lg:max-w-[35.69rem]'
+        className='h-[13.3rem] rounded-3xl max-lg:w-[23rem] max-sm:order-1 max-sm:w-full lg:h-[25.563rem] lg:w-[35.69rem]'
       />
     </div>
   );
