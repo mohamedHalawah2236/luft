@@ -28,7 +28,7 @@ const OurValuesSection = ({ title, items }: OurValuesSectionProps) => {
         type='single'
         collapsible
         defaultValue='shipping'
-        className='flex flex-col gap-4 md:hidden'
+        className='flex flex-col gap-4 xl:hidden'
       >
         {items.map(({ id, title, description }, i) => (
           <AccordionElement
@@ -56,7 +56,7 @@ const OurValuesSection = ({ title, items }: OurValuesSectionProps) => {
         ))}
       </Accordion>
 
-      <div className='max-md:hidden'>
+      <div className='max-xl:hidden'>
         <CustomHorizontalAccordion
           items={items}
           itemClassName='p-10 h-[411px]'
