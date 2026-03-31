@@ -2,6 +2,8 @@
 
 import * as React from 'react';
 
+import { useLocale } from 'next-intl';
+
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from 'embla-carousel-react';
@@ -36,6 +38,7 @@ const CarouselContext = React.createContext<CarouselContextProps | null>(null);
 
 function useCarousel() {
   const context = React.useContext(CarouselContext);
+  const dir = useLocale() === 'ar' ? 'rtl' : 'ltr';
 
   if (!context) {
     throw new Error('useCarousel must be used within a <Carousel />');
@@ -64,6 +67,7 @@ const Carousel = React.forwardRef<
       {
         ...opts,
         axis: orientation === 'horizontal' ? 'x' : 'y',
+        direction: useLocale() === 'ar' ? 'rtl' : 'ltr',
       },
       plugins,
     );
@@ -221,7 +225,7 @@ const CarouselPrevious = React.forwardRef<
       onClick={scrollPrev}
       {...props}
     >
-      <ArrowLeft className='h-4 w-4' />
+      <ArrowLeft className='h-4 w-4 rtl:rotate-180' />
       <span className='sr-only'>Previous slide</span>
     </Button>
   );
@@ -250,7 +254,7 @@ const CarouselNext = React.forwardRef<
       onClick={scrollNext}
       {...props}
     >
-      <ArrowRight className='h-4 w-4' />
+      <ArrowRight className='h-4 w-4 rtl:rotate-180' />
       <span className='sr-only'>Next slide</span>
     </Button>
   );
