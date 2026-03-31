@@ -39,6 +39,7 @@ export async function getAllData(
   const language = await getLanguage();
 
   const res = await fetch(`${apiUrl}/${endpoint}`, {
+    cache: 'no-store',
     ...options,
     headers: {
       language,
