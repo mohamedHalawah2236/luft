@@ -10,13 +10,26 @@ export default withAuth(
     const pathname = request.nextUrl.pathname;
     const targetRoute = pathname.split('/').slice(2).join('/');
     const isAuth = await getToken({ req: request });
+
     const authRoutes = ['login', 'signup', 'forget-password'];
     const isAuthRoute = authRoutes.some((route) =>
       targetRoute.startsWith(route),
     );
 
-    if (isAuth && isAuthRoute)
+    const protectedRoutes = ['account/settings'];
+    const isProtectedRoute = protectedRoutes.some((route) =>
+      targetRoute.startsWith(route),
+    );
+
+    if (isAuth && isAuthRoute) {
       return NextResponse.redirect(new URL('/', request.url));
+    }
+
+    if (!isAuth && isProtectedRoute) {
+      const locale = pathname.split('/')[1] || 'en';
+      return NextResponse.redirect(new URL(`/${locale}/login`, request.url));
+    }
+
     return createMiddleware(routing)(request);
   },
   {

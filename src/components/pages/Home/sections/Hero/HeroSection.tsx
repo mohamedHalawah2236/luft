@@ -17,7 +17,7 @@ export default function HeroSectionPreview({
           <div className='flex flex-col gap-4'>
             <h3
               title={title}
-              className='line-clamp-2 text-[2rem] font-medium leading-[2.5rem] text-grayish-900 md:text-5xl md:leading-[3.5rem] lg:text-6xl lg:leading-[4.52rem]'
+              className='line-clamp-3 text-[2rem] font-medium leading-[2.5rem] text-grayish-900 md:text-5xl md:leading-[3.5rem] lg:text-6xl lg:leading-[4.52rem]'
             >
               {title}
             </h3>

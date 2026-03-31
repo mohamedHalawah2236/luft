@@ -25,6 +25,11 @@ export type ErrorApiResponse = {
   message: string;
 };
 
+export type ValidationErrorApiResponse = {
+  errors: Record<string, string[]>;
+  status: number;
+};
+
 export type SetState<T> = Dispatch<SetStateAction<T>>;
 
 export type Direction = 'ltr' | 'rtl';

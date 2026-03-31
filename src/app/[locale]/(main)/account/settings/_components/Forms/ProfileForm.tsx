@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { useTranslations } from 'next-intl';
 
@@ -11,6 +11,7 @@ import { z } from 'zod';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import CustomInput from '@/components/shared/form/CustomInput';
+import FormServerError from '@/components/shared/FormServerError';
 import LoadingError from '@/components/shared/LoadingError';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
@@ -35,6 +36,15 @@ type ProfileFormProps = {
 export default function ProfileForm({ accessToken }: ProfileFormProps) {
   const tCommon = useTranslations('common');
   const tRoot = useTranslations('');
+
+  const [serverError, setServerError] = useState<string | null>(null);
+  const errorRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (serverError && errorRef.current) {
+      errorRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, [serverError]);
 
   const form = useForm<z.infer<ReturnType<typeof profileFormSchema>>>({
     resolver: zodResolver(profileFormSchema(tRoot)),
@@ -70,6 +80,7 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
     },
     onError: (error: Error) => {
       console.log(error);
+      setServerError(error.message);
     },
   });
 
@@ -159,6 +170,12 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
             isFetching ? tCommon('loading') : tCommon('placeholders.password')
           }
         />
+
+        {serverError && (
+          <div ref={errorRef}>
+            <FormServerError>{serverError}</FormServerError>
+          </div>
+        )}
 
         <Button
           disabled={!isFormValid || !isFormDirty || isPending}
