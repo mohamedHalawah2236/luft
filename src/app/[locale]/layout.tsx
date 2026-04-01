@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { getServerSession } from 'next-auth';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
-import { notFound } from 'next/navigation';
 
 import ConnectionListener from '@/components/ConnectionListener';
 import Providers from '@/components/layout/Providers';
