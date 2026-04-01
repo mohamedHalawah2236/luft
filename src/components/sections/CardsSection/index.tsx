@@ -34,7 +34,7 @@ export default function CardsSection({
       </div>
 
       <Carousel className='flex w-full items-center gap-1 pb-12 [&>.overflow-hidden]:flex-1'>
-        <CarouselPrevious className='static translate-x-0 translate-y-0' />
+        <CarouselPrevious className='static translate-x-0 translate-y-0 border-0 border-transparent hover:bg-grayish-30' />
 
         <CarouselContent className='-ms-4 flex-1 lg:-ms-6'>
           {items.map((item, index) => (
@@ -49,7 +49,7 @@ export default function CardsSection({
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselNext className='static translate-x-0 translate-y-0' />
+        <CarouselNext className='static translate-x-0 translate-y-0 border-0 border-transparent hover:bg-grayish-30' />
       </Carousel>
     </div>
   );
