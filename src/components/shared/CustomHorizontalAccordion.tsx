@@ -169,7 +169,7 @@ const CustomHorizontalAccordion = ({
                   </div>
                   <div
                     className={cn(
-                      'break-words font-medium leading-tight text-grayish-900',
+                      'line-clamp-2 break-words font-medium leading-tight text-grayish-900',
                       isOpen ? 'text-[32px]' : 'text-2xl',
                     )}
                   >
