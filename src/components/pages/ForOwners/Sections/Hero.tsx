@@ -3,11 +3,13 @@ import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 
 import { HeroSectionRes } from '@/types/page';
+import MediaHero from '../../Home/sections/Hero/CustomVideoPlay';
 
 export default function HeroSection({
   title,
   description,
   mediaUrl,
+  mediaExtension,
 }: HeroSectionRes) {
   const t = useTranslations('pages.forOwners.buttons');
   return (
@@ -36,12 +38,12 @@ export default function HeroSection({
           {t('startPartnership')}
         </Button>
       </div>
-
       {/* media */}
-      <img
+      <MediaHero
         src={mediaUrl}
+        extension={mediaExtension}
         className='h-[14rem] w-full rounded-[2.5rem] md:h-[27.875rem] lg:order-2 lg:w-[39.625rem] lg:min-w-[39.625rem]'
-      />
+      />{' '}
     </div>
   );
 }
