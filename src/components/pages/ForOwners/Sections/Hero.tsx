@@ -2,8 +2,9 @@ import { useTranslations } from 'next-intl';
 
 import { Button } from '@/components/ui/button';
 
-import { HeroSectionRes } from '@/types/page';
 import MediaHero from '../../Home/sections/Hero/CustomVideoPlay';
+
+import { HeroSectionRes } from '@/types/page';
 
 export default function HeroSection({
   title,
