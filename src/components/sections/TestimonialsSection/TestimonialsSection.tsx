@@ -1,7 +1,7 @@
 'use client';
 
-import Image from 'next/image';
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 
 import { Star } from 'lucide-react';
 
@@ -173,14 +173,12 @@ export default function TestimonialsSection() {
               </div>
 
               {/* Review Text */}
-              <p className='mb-1 line-clamp-3 text-grayish-400'>
+              <p
+                title={review.text}
+                className='mb-1 line-clamp-3 text-grayish-400'
+              >
                 {review.text}
               </p>
-
-              {/* See More Link */}
-              <span className='mb-4 text-grayish-900 underline'>
-                {t('seeMore')}
-              </span>
 
               {/* Airbnb Attribution */}
               <div className='flex items-center gap-2 pt-3'>
