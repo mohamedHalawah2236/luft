@@ -34,9 +34,17 @@ export default function BannerSection({
       )}
       style={{ backgroundImage: `url(${mediaUrl})` }}
     >
-      <div className='flex size-fit flex-col items-center gap-2 px-2 text-center font-medium text-white'>
-        <h6 className='text-lg sm:text-xl md:text-2xl'>{title}</h6>
-        <p className='text-5xl leading-[3.625rem] sm:text-6xl sm:leading-[3.75rem] md:text-7xl md:leading-[5.25rem]'>
+      <div className='flex max-h-full flex-col items-center gap-2 overflow-hidden p-4 px-2 text-center font-medium text-white'>
+        <h6
+          title={title}
+          className='text-lg sm:text-xl md:text-2xl'
+        >
+          {title}
+        </h6>
+        <p
+          title={description}
+          className='overflow-hidden text-5xl leading-[3.625rem] sm:text-6xl sm:leading-[3.75rem] md:text-7xl md:leading-[5.25rem]'
+        >
           {description}
         </p>
       </div>
