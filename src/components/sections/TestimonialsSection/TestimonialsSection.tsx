@@ -129,7 +129,7 @@ export default function TestimonialsSection() {
 
       {/* Reviews Carousel */}
       <Carousel className='flex w-full items-center gap-1 pb-4 [&>.overflow-hidden]:flex-1'>
-        <CarouselPrevious className='static translate-x-0 translate-y-0' />
+        <CarouselPrevious className='static translate-x-0 translate-y-0 border-0 border-transparent hover:bg-grayish-30' />
 
         <CarouselContent className='-ms-12 flex-1'>
           {reviews.map((review) => (
@@ -188,7 +188,7 @@ export default function TestimonialsSection() {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselNext className='static translate-x-0 translate-y-0' />
+        <CarouselNext className='static translate-x-0 translate-y-0 border-0 border-transparent hover:bg-grayish-30' />
       </Carousel>
     </section>
   );
