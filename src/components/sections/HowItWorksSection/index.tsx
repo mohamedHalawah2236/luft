@@ -13,13 +13,13 @@ export default function HowItWorksSection({
       <div className='flex flex-col gap-2'>
         <h3
           title={title}
-          className='text-[1.75rem] font-medium leading-9 text-grayish-900 md:text-[2rem] md:leading-10 xl:text-5xl xl:leading-[3.5rem]'
+          className='line-clamp-3 text-[1.75rem] font-medium leading-9 text-grayish-900 md:text-[2rem] md:leading-10 xl:text-5xl xl:leading-[3.5rem]'
         >
           {title}
         </h3>
         <p
           title={description}
-          className='text-grayish-400 md:text-lg'
+          className='line-clamp-[7] whitespace-pre-wrap text-grayish-400 md:text-lg'
         >
           {description}
         </p>

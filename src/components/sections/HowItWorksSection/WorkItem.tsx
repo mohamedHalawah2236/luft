@@ -22,7 +22,7 @@ export default function WorkItem({
         </h6>
         <p
           title={description}
-          className='line-clamp-5 text-grayish-400'
+          className='line-clamp-5 whitespace-pre-wrap text-grayish-400'
         >
           {description}
         </p>

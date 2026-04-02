@@ -25,12 +25,12 @@ export default async function ConciergeSectionPreview({
       <div className='flex flex-col items-center gap-2 text-center'>
         <h4
           title={title}
-          className='line-clamp-2 text-[1.75rem] font-medium leading-9 text-grayish-900 md:text-[2rem] md:leading-[2.625rem] xl:text-5xl xl:leading-[3.6rem]'
+          className='line-clamp-3 text-[1.75rem] font-medium leading-9 text-grayish-900 md:text-[2rem] md:leading-[2.625rem] xl:text-5xl xl:leading-[3.6rem]'
         >
           {title}
         </h4>
         <p
-          className='line-clamp-4 text-grayish-400 md:text-lg'
+          className='line-clamp-7 whitespace-pre-wrap text-grayish-400 md:text-lg'
           title={description}
         >
           {description}

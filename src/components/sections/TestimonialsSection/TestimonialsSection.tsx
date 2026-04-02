@@ -149,10 +149,12 @@ export default function TestimonialsSection() {
                   />
                 </div>
                 <div className='flex-1'>
-                  <h3 className='text-lg text-grayish-900'>
+                  <h3 className='line-clamp-1 text-lg text-grayish-900'>
                     {review.guestName}
                   </h3>
-                  <p className='text-grayish-400'>{review.location}</p>
+                  <p className='line-clamp-1 whitespace-pre-wrap text-grayish-400'>
+                    {review.location}
+                  </p>
                 </div>
               </div>
 
@@ -175,7 +177,7 @@ export default function TestimonialsSection() {
               {/* Review Text */}
               <p
                 title={review.text}
-                className='mb-1 line-clamp-3 text-grayish-400'
+                className='mb-1 line-clamp-3 whitespace-pre-wrap text-grayish-400'
               >
                 {review.text}
               </p>

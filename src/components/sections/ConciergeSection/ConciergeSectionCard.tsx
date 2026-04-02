@@ -29,7 +29,7 @@ export default function ConciergeSectionCard({
           {title}
         </h4>
         <p
-          className='line-clamp-4 text-base leading-5 text-grayish-400'
+          className='line-clamp-4 whitespace-pre-wrap text-base leading-5 text-grayish-400'
           title={description}
         >
           {description}
