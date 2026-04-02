@@ -21,7 +21,7 @@ export default function MediaItem({
       </h4>
       <p
         title={description}
-        className='line-clamp-2 text-grayish-400 md:text-lg'
+        className='line-clamp-2 whitespace-pre-wrap text-grayish-400 md:text-lg'
       >
         {description}
       </p>

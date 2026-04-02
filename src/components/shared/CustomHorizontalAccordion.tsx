@@ -190,7 +190,7 @@ const CustomHorizontalAccordion = ({
                   {/* Description always visible but faded when closed */}
                   <div
                     className={cn(
-                      'text-lg text-grayish-400 transition-opacity',
+                      'line-clamp-[7] whitespace-pre-wrap text-lg text-grayish-400 transition-opacity',
                       !isOpen && 'h-0 overflow-hidden opacity-0', // Hide when closed
                     )}
                   >

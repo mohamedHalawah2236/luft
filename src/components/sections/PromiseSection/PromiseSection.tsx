@@ -21,7 +21,7 @@ export default function PromiseSectionPreview({
         <h3 className='line-clamp-2 text-[1.75rem] font-medium leading-9 text-grayish-900 md:text-[2rem] md:leading-[2.625rem] lg:text-5xl lg:leading-[3.625rem]'>
           {title}
         </h3>
-        <p className='line-clamp-4 text-grayish-400 md:text-lg'>
+        <p className='line-clamp-4 whitespace-pre-wrap text-grayish-400 md:text-lg'>
           {description}
         </p>
       </div>

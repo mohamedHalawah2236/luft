@@ -21,7 +21,7 @@ export default function AboutSection({
         </h3>
         <p
           title={description}
-          className='line-clamp-[12] text-grayish-400 md:text-lg'
+          className='line-clamp-[12] whitespace-pre-wrap text-grayish-400 md:text-lg'
         >
           {description}
         </p>

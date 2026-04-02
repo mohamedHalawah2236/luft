@@ -24,13 +24,13 @@ export default function PartnersSection({
       <div className='flex flex-col gap-2'>
         <h3
           title={title}
-          className='text-[1.75rem] font-medium leading-9 text-grayish-900 md:text-[2rem] md:leading-10 lg:text-5xl lg:leading-[3.5rem]'
+          className='line-clamp-3 text-[1.75rem] font-medium leading-9 text-grayish-900 md:text-[2rem] md:leading-10 lg:text-5xl lg:leading-[3.5rem]'
         >
           {title}
         </h3>
         <p
           title={description}
-          className='text-grayish-400 md:text-lg'
+          className='line-clamp-[7] whitespace-pre-wrap text-grayish-400 md:text-lg'
         >
           {description}
         </p>
@@ -61,7 +61,7 @@ export default function PartnersSection({
                   )}
                 </div>
                 <div className='flex flex-1 flex-col gap-1'>
-                  <h3 className='font-medium text-grayish-900 md:text-lg'>
+                  <h3 className='line-clamp-1 font-medium text-grayish-900 md:text-lg'>
                     {review.title}
                   </h3>
                   <p className='text-grayish-400'>{t('luftPartner')}</p>
@@ -69,7 +69,7 @@ export default function PartnersSection({
               </div>
 
               {/* Review Text */}
-              <p className='line-clamp-3 text-grayish-400'>
+              <p className='line-clamp-3 whitespace-pre-wrap text-grayish-400'>
                 {review.reviewText}
               </p>
             </CarouselItem>

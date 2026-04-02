@@ -24,7 +24,7 @@ export default function BulletCard({ data }: { data: BulletRes }) {
           {title}
         </h6>
         <p
-          className='line-clamp-2 text-grayish-400 md:text-lg'
+          className='line-clamp-2 whitespace-pre-wrap text-grayish-400 md:text-lg'
           title={description}
         >
           {description}

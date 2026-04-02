@@ -17,7 +17,7 @@ export default function CardItemPreview({
       {/* Texts */}
       <h6
         title={title}
-        className='line-clamp-1 font-medium text-grayish-900 md:text-lg lg:text-xl'
+        className='line-clamp-1 whitespace-pre-wrap font-medium text-grayish-900 md:text-lg lg:text-xl'
       >
         {title}
       </h6>

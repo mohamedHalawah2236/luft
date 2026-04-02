@@ -21,7 +21,7 @@ const OurValuesSection = ({ title, items }: OurValuesSectionProps) => {
 
   return (
     <div>
-      <h2 className='mb-12 text-center text-5xl font-medium text-grayish-900'>
+      <h2 className='mb-12 line-clamp-3 text-center text-5xl font-medium text-grayish-900'>
         {SectionTitle}
       </h2>
       <Accordion
@@ -51,7 +51,9 @@ const OurValuesSection = ({ title, items }: OurValuesSectionProps) => {
             closeIcon={<Plus className='size-8 shrink-0 text-grayish-900' />}
             openIcon={<Minus className='size-8 shrink-0 text-grayish-900' />}
           >
-            <p className='text-grayish-400 md:text-lg'>{description}</p>
+            <p className='line-clamp-[7] whitespace-pre-wrap text-grayish-400 md:text-lg'>
+              {description}
+            </p>
           </AccordionElement>
         ))}
       </Accordion>
