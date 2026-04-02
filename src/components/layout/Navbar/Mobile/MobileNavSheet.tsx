@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { DefaultSession, getServerSession } from 'next-auth';
 import { getTranslations } from 'next-intl/server';
 
@@ -24,6 +23,7 @@ import UserLink from './UserSetting';
 
 import { Page, SocialMediaLink } from '@/types/layout';
 
+import { Link } from '@/i18n/routing';
 import { authOptions } from '@/lib/auth';
 
 async function MobileNavSheet({

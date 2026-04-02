@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { DefaultSession, getServerSession } from 'next-auth';
 
 import Logo from '@/components/icons/Logo';
@@ -15,6 +14,7 @@ import { Page, SocialMediaLink } from '@/types/layout';
 import { isLoggedIn } from '@/utils';
 
 import { Locale } from '@/i18n/i18n.config';
+import { Link } from '@/i18n/routing';
 import { authOptions } from '@/lib/auth';
 
 export default async function Navbar({
