@@ -1,12 +1,11 @@
 'use client';
 
-import Link from 'next/link';
 import { useParams } from 'next/navigation';
 
 import { NavLinkProps } from '@/types/components';
 import { PageTypeEnum } from '@/types/page';
 
-import { usePathname } from '@/i18n/routing';
+import { Link, usePathname } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
 
 export default function NavLink({ title, id, pageType }: NavLinkProps) {

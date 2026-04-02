@@ -1,5 +1,6 @@
-import Link from 'next/link';
 import { DefaultSession, getServerSession } from 'next-auth';
+
+import { Link } from '@/i18n/routing';
 
 import Logo from '@/components/icons/Logo';
 
