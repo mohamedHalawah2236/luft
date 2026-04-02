@@ -1,9 +1,9 @@
 'use client';
 import React, { ReactNode } from 'react';
 
-import { Link } from '@/i18n/routing';
-
 import { SheetClose } from '@/components/ui/sheet';
+
+import { Link } from '@/i18n/routing';
 
 type UserLinkProps = {
   label: string;

@@ -1,8 +1,6 @@
 import { DefaultSession, getServerSession } from 'next-auth';
 import { getTranslations } from 'next-intl/server';
 
-import { Link } from '@/i18n/routing';
-
 import { Heart, Menu } from 'lucide-react';
 
 import GearIcon from '@/components/icons/GearIcon';
@@ -25,6 +23,7 @@ import UserLink from './UserSetting';
 
 import { Page, SocialMediaLink } from '@/types/layout';
 
+import { Link } from '@/i18n/routing';
 import { authOptions } from '@/lib/auth';
 
 async function MobileNavSheet({
