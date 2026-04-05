@@ -23,7 +23,7 @@ export default async function Footer({
   const t = await getTranslations();
 
   return (
-    <div className='flex flex-col gap-6 overflow-hidden bg-grayish-900 px-6 py-10 text-grayish-100 md:gap-16 lg:py-11 xl:gap-[7.5rem] xl:px-[4.5rem]'>
+    <div className='flex min-h-fit flex-col gap-6 overflow-x-hidden bg-grayish-900 px-6 py-10 text-grayish-100 md:gap-16 lg:py-11 xl:gap-[7.5rem] xl:px-[4.5rem]'>
       <div className='flex flex-wrap justify-between gap-4 max-sm:flex-col max-sm:gap-6'>
         {/* First Column */}
         <div className='flex flex-col gap-6'>
