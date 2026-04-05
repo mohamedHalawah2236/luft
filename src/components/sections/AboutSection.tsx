@@ -11,7 +11,7 @@ export default function AboutSection({
 }: AboutSectionProps) {
   return (
     <div className='flex h-full items-center gap-8 max-md:flex-col lg:gap-12'>
-      <div className='flex w-[24rem] flex-1 flex-col gap-2 max-lg:flex-1 max-md:order-2 max-md:w-auto lg:w-[42.313rem]'>
+      <div className='flex w-[24rem] max-w-full flex-1 flex-col gap-2 overflow-hidden max-lg:flex-1 max-md:order-2 max-md:w-auto lg:w-[42.313rem]'>
         {/* Texts */}
         <h3
           title={title}

@@ -12,7 +12,7 @@ export default function ContactItem({
   className,
 }: ContactItemProps) {
   return (
-    <div className={cn('flex flex-col gap-2', className)}>
+    <div className={cn('flex flex-col gap-2 overflow-hidden', className)}>
       <h5
         title={label}
         className='line-clamp-1 text-sm leading-6'

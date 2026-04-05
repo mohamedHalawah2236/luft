@@ -20,7 +20,7 @@ const OurValuesSection = ({ title, items }: OurValuesSectionProps) => {
   const SectionTitle = title;
 
   return (
-    <div>
+    <div className='overflow-x-hidden'>
       <h2 className='mb-12 line-clamp-3 text-center text-5xl font-medium text-grayish-900'>
         {SectionTitle}
       </h2>
@@ -28,13 +28,13 @@ const OurValuesSection = ({ title, items }: OurValuesSectionProps) => {
         type='single'
         collapsible
         defaultValue='shipping'
-        className='flex flex-col gap-4 xl:hidden'
+        className='flex w-full max-w-full flex-col gap-4 xl:hidden'
       >
         {items.map(({ id, title, description }, i) => (
           <AccordionElement
             key={id}
             value={id}
-            className='flex flex-col gap-4 rounded-3xl border-b-0 bg-grayish-50 transition-all hover:no-underline data-[state=closed]:p-8 data-[state=open]:px-10 data-[state=open]:py-6'
+            className='flex w-full max-w-full flex-col gap-4 overflow-auto rounded-3xl border-b-0 bg-grayish-50 transition-all hover:no-underline data-[state=closed]:p-8 data-[state=open]:px-10 data-[state=open]:py-6'
             trigger={
               <>
                 <span className='text-lg font-medium text-grayish-900 md:text-xl'>
@@ -42,7 +42,7 @@ const OurValuesSection = ({ title, items }: OurValuesSectionProps) => {
                 </span>
                 <span
                   title={title}
-                  className='line-clamp-1 text-lg font-medium text-grayish-900 md:text-xl'
+                  className='line-clamp-1 overflow-hidden text-lg font-medium text-grayish-900 md:text-xl'
                 >
                   {title}
                 </span>
@@ -50,6 +50,7 @@ const OurValuesSection = ({ title, items }: OurValuesSectionProps) => {
             }
             closeIcon={<Plus className='size-8 shrink-0 text-grayish-900' />}
             openIcon={<Minus className='size-8 shrink-0 text-grayish-900' />}
+            triggerClassName='max-w-full'
           >
             <p className='line-clamp-[7] whitespace-pre-wrap text-grayish-400 md:text-lg'>
               {description}

@@ -29,12 +29,12 @@ export default function BannerSection({
   return (
     <div
       className={cn(
-        'flex size-full h-[21.25rem] items-center justify-center overflow-hidden bg-cover bg-center sm:h-[25rem]',
+        'flex size-full h-[21.25rem] items-center justify-center overflow-hidden bg-cover bg-center p-4 sm:h-[25rem]',
         className,
       )}
       style={{ backgroundImage: `url(${mediaUrl})` }}
     >
-      <div className='flex max-h-full flex-col items-center gap-2 overflow-hidden p-4 px-2 text-center font-medium text-white'>
+      <div className='flex max-h-full flex-col items-center gap-2 overflow-hidden text-center font-medium text-white'>
         <h6
           title={title}
           className='line-clamp-1 text-lg sm:text-xl md:text-2xl'

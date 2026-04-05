@@ -10,7 +10,7 @@ export default function HowItWorksSection({
   return (
     <div className='flex flex-col items-center gap-12 text-center'>
       {/* Texts */}
-      <div className='flex flex-col gap-2'>
+      <div className='flex max-w-full flex-col gap-2 overflow-hidden'>
         <h3
           title={title}
           className='line-clamp-3 text-[1.75rem] font-medium leading-9 text-grayish-900 md:text-[2rem] md:leading-10 xl:text-5xl xl:leading-[3.5rem]'

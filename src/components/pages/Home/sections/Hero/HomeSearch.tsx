@@ -42,7 +42,7 @@ export function HomeSearch() {
   ];
 
   return (
-    <div className='mx-auto w-full space-y-6 px-4 max-sm:px-0 md:px-0'>
+    <div className='mx-auto w-full space-y-6'>
       {/* Tabs */}
       <div className='flex items-center gap-2'>
         <button className='flex h-10 items-center gap-2 rounded-full border border-grayish-50 bg-white px-5 text-sm font-medium text-grayish-900'>

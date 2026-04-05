@@ -60,7 +60,7 @@ export default function PartnersSection({
                     </div>
                   )}
                 </div>
-                <div className='flex flex-1 flex-col gap-1'>
+                <div className='flex flex-1 flex-col gap-1 overflow-hidden'>
                   <h3 className='line-clamp-1 font-medium text-grayish-900 md:text-lg'>
                     {review.title}
                   </h3>

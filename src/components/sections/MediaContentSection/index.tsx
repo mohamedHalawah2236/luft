@@ -14,7 +14,7 @@ export default function MediaContentSection({
         className='h-[15.69rem] w-full rounded-3xl md:h-[19.375rem] md:w-[23.563rem] xl:h-[25.563rem] xl:max-w-[39rem] xl:flex-1'
       />
       {/* items */}
-      <div className='flex flex-1 flex-col gap-12'>
+      <div className='flex max-w-full flex-1 flex-col gap-12 overflow-hidden'>
         {items?.map((item) => {
           return (
             <MediaItem
