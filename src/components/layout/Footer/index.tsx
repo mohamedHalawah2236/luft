@@ -47,7 +47,7 @@ export default async function Footer({
           </div>
         </div>
 
-        <div className='flex gap-4 max-xl:max-w-[311px] max-xl:flex-1 max-md:flex-col xl:w-[40rem] xl:gap-10'>
+        <div className='flex gap-4 max-xl:max-w-[311px] max-xl:flex-1 max-md:flex-col max-sm:max-w-full xl:w-[40rem] xl:gap-10'>
           {/* Second Column */}
           <div className='flex flex-col gap-2 xl:flex-1'>
             <span className='text-sm leading-6'>{t('common.labels.menu')}</span>
