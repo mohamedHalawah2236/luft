@@ -6,7 +6,7 @@ export default function BulletCard({ data }: { data: BulletRes }) {
   const description = data?.description;
 
   return (
-    <div className='flex gap-2 xl:flex-col'>
+    <div className='flex max-w-full gap-2 overflow-hidden xl:flex-col'>
       {iconUrl && (
         <img
           src={iconUrl}
@@ -16,7 +16,7 @@ export default function BulletCard({ data }: { data: BulletRes }) {
       )}
 
       {/* Texts */}
-      <div className='flex flex-col gap-1'>
+      <div className='flex flex-col gap-1 overflow-hidden'>
         <h6
           className='line-clamp-1 text-lg font-medium text-grayish-900 md:text-xl xl:text-2xl'
           title={title}

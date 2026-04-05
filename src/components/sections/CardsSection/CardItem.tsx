@@ -8,7 +8,7 @@ export default function CardItemPreview({
   return (
     <button
       type='button'
-      className='group flex min-w-[19.125rem] flex-col gap-4 max-sm:min-w-[15.625rem]'
+      className='group flex min-w-[19.125rem] max-w-[19.125rem] flex-col gap-4 overflow-hidden max-sm:min-w-[15.625rem] max-sm:max-w-[15.625rem]'
     >
       <img
         src={iconUrl}
@@ -17,7 +17,7 @@ export default function CardItemPreview({
       {/* Texts */}
       <h6
         title={title}
-        className='line-clamp-1 whitespace-pre-wrap font-medium text-grayish-900 md:text-lg lg:text-xl'
+        className='line-clamp-1 max-w-full whitespace-pre-wrap font-medium text-grayish-900 md:text-lg lg:text-xl'
       >
         {title}
       </h6>

@@ -6,7 +6,7 @@ export default function MediaItem({
   number,
 }: MediaContentItem) {
   return (
-    <div className='flrx flex-col gap-1'>
+    <div className='flrx flex-col gap-1 overflow-hidden'>
       <h4
         title={title}
         className='line-clamp-1 text-lg font-medium text-grayish-900 md:text-xl xl:text-2xl'

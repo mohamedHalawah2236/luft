@@ -22,7 +22,7 @@ export default async function ConciergeSectionPreview({
   return (
     <div className='max-size-full flex flex-col items-center justify-center gap-6 md:gap-8 xl:gap-12'>
       {/* Texts */}
-      <div className='flex flex-col items-center gap-2 text-center'>
+      <div className='flex max-w-full flex-col items-center gap-2 overflow-hidden text-center'>
         <h4
           title={title}
           className='line-clamp-3 text-[1.75rem] font-medium leading-9 text-grayish-900 md:text-[2rem] md:leading-[2.625rem] xl:text-5xl xl:leading-[3.6rem]'
@@ -38,7 +38,7 @@ export default async function ConciergeSectionPreview({
       </div>
 
       {/* Features Cards */}
-      <div className='grid w-full grid-cols-[repeat(auto-fit,minmax(17.24rem,1fr))] gap-6'>
+      <div className='grid w-full grid-cols-[repeat(auto-fit,minmax(17.24rem,1fr))] gap-6 max-sm:grid-cols-1'>
         {items.map((feature, i) => (
           <ConciergeSectionCard
             key={`conciergeItem-${i}`}

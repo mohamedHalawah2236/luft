@@ -8,14 +8,14 @@ const ContactInfoSection = ({
   socialsItem,
 }: ContactUsSectionRes) => {
   return (
-    <div className='flex h-fit w-full flex-col rounded-3xl bg-grayish-30 p-8 pb-[3.25rem] md:pb-12 lg:pb-9'>
-      <div className='mb-12'>
+    <div className='flex h-fit w-full flex-col overflow-hidden rounded-3xl bg-grayish-30 p-8 pb-[3.25rem] md:pb-12 lg:pb-9'>
+      <div className='mb-12 max-w-full overflow-hidden'>
         <h2 className='mb-2 text-xl font-medium leading-9 text-grayish-900 md:text-[1.5rem] lg:text-[1.75rem]'>
           {title}
         </h2>
         <p className='text-base text-grayish-400'>{description}</p>
       </div>
-      <div className='flex flex-col gap-8'>
+      <div className='flex max-w-full flex-col gap-8 overflow-hidden'>
         <h3 className='text-lg font-medium leading-8 text-grayish-900 md:text-xl lg:text-[1.5rem]'>
           {secondaryHeading}
         </h3>

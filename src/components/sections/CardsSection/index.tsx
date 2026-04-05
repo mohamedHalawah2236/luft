@@ -16,9 +16,9 @@ export default function CardsSection({
   items,
 }: CardsSectionRes) {
   return (
-    <div className='flex w-full flex-col gap-12 text-center'>
+    <div className='flex w-full flex-col gap-12 overflow-hidden text-center'>
       {/* Texts */}
-      <div className='flex flex-col gap-2 text-center'>
+      <div className='flex max-w-full flex-col gap-2 text-center'>
         <h3
           title={title}
           className='line-clamp-3 text-[1.75rem] font-medium leading-9 text-grayish-900 md:text-[2rem] md:leading-10 lg:text-5xl lg:leading-[3.5rem]'
