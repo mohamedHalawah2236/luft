@@ -9,6 +9,8 @@ export default function HeroSectionPreview({
   mediaUrl,
   mediaExtension,
 }: HeroSectionRes) {
+  if (!title && !mediaUrl) return null;
+
   return (
     <div className='flex h-full flex-col items-center gap-4 xl:flex-row xl:gap-6'>
       <div className='order-2 flex max-w-full flex-col gap-6 overflow-hidden md:gap-8 xl:order-1 xl:gap-12'>

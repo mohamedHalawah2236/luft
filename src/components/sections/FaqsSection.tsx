@@ -12,6 +12,8 @@ export default function FaqsSection({
   description,
   items,
 }: FaqsSectionRes) {
+  if (!title && (!items || items.length === 0)) return null;
+
   return (
     <div className='mx-auto flex w-full flex-col gap-0 md:gap-2 lg:gap-6'>
       <div className='flex max-w-full flex-col gap-2 overflow-hidden'>

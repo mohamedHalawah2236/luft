@@ -6,6 +6,8 @@ export default function MediaContentSection({
   mediaUrl,
   items,
 }: MediaContentSectionType) {
+  if (!mediaUrl && (!items || items.length === 0)) return null;
+
   return (
     <div className='flex h-full flex-col items-center gap-6 md:flex-row md:gap-8 xl:gap-12'>
       {/* media */}

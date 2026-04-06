@@ -15,6 +15,8 @@ export default function BannerSection({
   mediaUrl,
   className,
 }: BannerSectionProps) {
+  if (!title && !mediaUrl) return null;
+
   if (!mediaUrl)
     return (
       <div className='flex size-full flex-col items-center justify-center gap-6 overflow-hidden bg-grayish-50'>

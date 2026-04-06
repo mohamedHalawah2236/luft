@@ -17,6 +17,8 @@ type OurValuesSectionProps = {
 };
 
 const OurValuesSection = ({ title, items }: OurValuesSectionProps) => {
+  if (!title && (!items || items.length === 0)) return null;
+
   const SectionTitle = title;
 
   return (

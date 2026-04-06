@@ -18,6 +18,8 @@ export default async function ConciergeSectionPreview({
   ctaLabel,
   ctaUrl,
 }: ConciergeSectionProps) {
+  if (!title && (!items || items.length === 0)) return null;
+
   const t = await getTranslations('common.buttons');
   return (
     <div className='max-size-full flex flex-col items-center justify-center gap-6 md:gap-8 xl:gap-12'>

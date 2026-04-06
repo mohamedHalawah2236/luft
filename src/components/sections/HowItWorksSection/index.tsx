@@ -7,6 +7,8 @@ export default function HowItWorksSection({
   description,
   items,
 }: HowItWorksSectionType) {
+  if (!title && (!items || items.length === 0)) return null;
+
   return (
     <div className='flex flex-col items-center gap-12 text-center'>
       {/* Texts */}

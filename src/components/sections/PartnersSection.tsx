@@ -16,6 +16,8 @@ export default function PartnersSection({
   description,
   items,
 }: PartnersSectionRes) {
+  if (!title && (!items || items.length === 0)) return null;
+
   const t = useTranslations('sections.partners');
 
   return (

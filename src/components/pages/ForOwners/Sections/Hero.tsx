@@ -12,6 +12,8 @@ export default function HeroSection({
   mediaUrl,
   mediaExtension,
 }: HeroSectionRes) {
+  if (!title && !mediaUrl) return null;
+
   const t = useTranslations('pages.forOwners.buttons');
   return (
     <div className='flex h-full flex-col gap-4 overflow-hidden lg:flex-row lg:items-center lg:gap-6'>

@@ -15,6 +15,8 @@ export default function CardsSection({
   description,
   items,
 }: CardsSectionRes) {
+  if (!title && (!items || items.length === 0)) return null;
+
   return (
     <div className='flex w-full flex-col gap-12 overflow-hidden text-center'>
       {/* Texts */}

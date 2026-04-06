@@ -11,6 +11,8 @@ export default function PerfectStaySection({
   title,
   description,
 }: PerfectStaySectionProps) {
+  if (!title && !description) return null;
+
   const t = useTranslations('sections.perfectStay');
   return (
     <div className='flex flex-col items-center justify-center gap-2 overflow-hidden px-4 text-center'>

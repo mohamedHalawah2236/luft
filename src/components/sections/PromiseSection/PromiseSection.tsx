@@ -14,6 +14,8 @@ export default function PromiseSectionPreview({
   mediaExtension,
   mediaPosition,
 }: PromiseSectionRes) {
+  if (!title && (!items || items.length === 0)) return null;
+
   return (
     <div className='flex flex-col gap-6 md:gap-8 xl:gap-12'>
       {/* Texts */}
