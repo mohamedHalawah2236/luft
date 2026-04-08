@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 
+import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 
 import { useForm } from 'react-hook-form';
@@ -20,15 +21,14 @@ import EditableField from '../EditableField';
 import ProfileImgInput from '../ProfileImgInput';
 
 import ChangeEmailForm from './ChangeEmail/ChangeEmailForm';
-import ChangePasswordForm from './ChangePasswordForm';
 import ChangePhoneForm from './ChangePhone/ChangePhoneForm';
+import ChangePasswordForm from './ChangePasswordForm';
 import { profileFormQueryKey, profileFormSchema } from './schemas';
 
 import { GetUserProfileRes, ProfileFormData } from '@/types/settings';
 
 import { getProfileData, updateUserProfile } from '@/api/settings';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useSession } from 'next-auth/react';
 
 type ProfileFormProps = {
   accessToken: string | undefined;

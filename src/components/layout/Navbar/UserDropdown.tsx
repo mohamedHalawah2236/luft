@@ -1,23 +1,23 @@
 'use client';
 import { useState } from 'react';
 
-import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
+import { DefaultSession } from 'next-auth';
+import { useSession } from 'next-auth/react';
+import { useTranslations } from 'next-intl';
 
 import { ChevronDown, Heart, Settings } from 'lucide-react';
 
 import KeyIcon from '@/components/icons/KeyIcon';
 import Dropdown from '@/components/shared/Dropdown';
+import UserImg from '@/components/shared/UserImg';
 
 import ConfirmLogoutModal from './logout/ConfirmLogoutModal';
 
 import { DropDownItem } from '@/types/components';
 
-import UserImg from '@/components/shared/UserImg';
 import { Dir } from '@/i18n/i18n.config';
 import { cn } from '@/lib/utils';
-import { DefaultSession } from 'next-auth';
-import { useSession } from 'next-auth/react';
 
 type UserDropdownProps = {
   dir?: Dir;

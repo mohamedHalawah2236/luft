@@ -1,7 +1,9 @@
-import { cn } from '@/lib/utils';
-import { getTextLocale } from '@/utils/language';
 import { DefaultSession } from 'next-auth';
 import { useSession } from 'next-auth/react';
+
+import { getTextLocale } from '@/utils/language';
+
+import { cn } from '@/lib/utils';
 
 type UserImgProps = {
   image?: string;
