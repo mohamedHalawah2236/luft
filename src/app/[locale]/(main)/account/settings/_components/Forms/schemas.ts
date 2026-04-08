@@ -18,15 +18,13 @@ export const profileFormSchema = (tRoot: TFunction) =>
     lastName: nameSchema(tRoot)
       .min(2, tRoot('common.validations.lastName.min', { min: 2 }))
       .max(50, tRoot('common.validations.lastName.max', { max: 50 })),
-    email: z.string().email(),
-    phoneNumber: z.string(),
-    password: z.string(),
+    email: z.string().email().nullable().optional(),
+    phoneNumber: z.string().nullable().optional(),
+    password: z.string().nullable().optional(),
     file: z
       .instanceof(File)
-      .nullable()
       .superRefine((file, ctx) => {
         const isAllowedType = ALLOWED_ICON_TYPES.includes(file?.type ?? '');
-
         if (!isAllowedType) {
           return ctx.addIssue({
             code: 'custom',
@@ -45,5 +43,6 @@ export const profileFormSchema = (tRoot: TFunction) =>
             }),
           });
         }
-      }),
+      })
+      .nullable(),
   });

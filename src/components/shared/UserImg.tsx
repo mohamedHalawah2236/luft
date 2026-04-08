@@ -1,9 +1,7 @@
-import React from 'react';
-
+import { cn } from '@/lib/utils';
+import { getTextLocale } from '@/utils/language';
 import { DefaultSession } from 'next-auth';
 import { useSession } from 'next-auth/react';
-
-import { cn } from '@/lib/utils';
 
 type UserImgProps = {
   image?: string;
@@ -22,17 +20,20 @@ export default function UserImg({ className }: UserImgProps) {
   const firstNameLetter = firstName?.[0];
   const lastNameLetter = lastName?.[0];
 
+  const textLocale = getTextLocale(userName);
+  const isArabicName = textLocale === 'ar';
+
   return (
     <div
+      dir='ltr'
       className={cn(
-        'flex size-10 items-center justify-center rounded-full bg-grayish-900 p-2 text-xl font-medium text-grayish-50',
+        'flex size-10 items-center justify-center gap-px rounded-full bg-grayish-900 p-2 text-xl font-medium text-grayish-50',
         className,
       )}
     >
-      <span className='size-fit'>
-        {firstNameLetter?.toUpperCase()}
-        {lastNameLetter?.toUpperCase()}
-      </span>
+      {firstNameLetter?.toUpperCase()}
+      {isArabicName && <>&nbsp;</>}
+      {lastNameLetter?.toUpperCase()}
     </div>
   );
 }

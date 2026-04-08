@@ -20,14 +20,15 @@ import EditableField from '../EditableField';
 import ProfileImgInput from '../ProfileImgInput';
 
 import ChangeEmailForm from './ChangeEmail/ChangeEmailForm';
-import ChangePhoneForm from './ChangePhone/ChangePhoneForm';
 import ChangePasswordForm from './ChangePasswordForm';
+import ChangePhoneForm from './ChangePhone/ChangePhoneForm';
 import { profileFormQueryKey, profileFormSchema } from './schemas';
 
 import { GetUserProfileRes, ProfileFormData } from '@/types/settings';
 
 import { getProfileData, updateUserProfile } from '@/api/settings';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useSession } from 'next-auth/react';
 
 type ProfileFormProps = {
   accessToken: string | undefined;
@@ -69,6 +70,7 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
   const userData = data?.result;
 
   const queryClient = useQueryClient();
+  const { update } = useSession();
 
   const { mutateAsync, isPending } = useMutation({
     mutationFn: (values: ProfileFormData) =>
@@ -77,6 +79,11 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
       queryClient.invalidateQueries({ queryKey: [profileFormQueryKey] });
       toast.success(tCommon('toaster.dataUpdatedSuccess'));
       form.reset({ ...variables, file: null });
+      update({
+        user: {
+          name: `${variables.firstName} ${variables.lastName}`,
+        },
+      });
     },
     onError: (error: Error) => {
       console.log(error);
@@ -91,6 +98,7 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
       lastName: userData?.lastName,
       email: userData?.email,
       phoneNumber: userData?.phoneNumber,
+      password: '********',
       file: null,
     });
   }, [form, isFetched, userData, isLoading]);
