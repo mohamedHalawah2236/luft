@@ -34,7 +34,8 @@ export const profileFormSchema = (tRoot: TFunction) =>
           });
         }
 
-        const isBigFile = file?.size ?? 0 > MAX_IMAGE_SIZE;
+        const fileSize = file?.size ?? 0;
+        const isBigFile = fileSize > MAX_IMAGE_SIZE;
 
         if (isBigFile) {
           return ctx.addIssue({
