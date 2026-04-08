@@ -57,7 +57,7 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
       password: '********',
     },
     reValidateMode: 'onChange',
-    mode: 'onChange',
+    mode: 'onTouched',
   });
 
   const { isFetching, isFetched, data, isLoading, isError } =
