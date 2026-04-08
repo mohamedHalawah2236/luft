@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 
+import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 
 import { useForm } from 'react-hook-form';
@@ -69,6 +70,7 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
   const userData = data?.result;
 
   const queryClient = useQueryClient();
+  const { update } = useSession();
 
   const { mutateAsync, isPending } = useMutation({
     mutationFn: (values: ProfileFormData) =>
@@ -77,6 +79,11 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
       queryClient.invalidateQueries({ queryKey: [profileFormQueryKey] });
       toast.success(tCommon('toaster.dataUpdatedSuccess'));
       form.reset({ ...variables, file: null });
+      update({
+        user: {
+          name: `${variables.firstName} ${variables.lastName}`,
+        },
+      });
     },
     onError: (error: Error) => {
       console.log(error);
@@ -91,6 +98,7 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
       lastName: userData?.lastName,
       email: userData?.email,
       phoneNumber: userData?.phoneNumber,
+      password: '********',
       file: null,
     });
   }, [form, isFetched, userData, isLoading]);

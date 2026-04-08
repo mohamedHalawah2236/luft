@@ -2,12 +2,15 @@
 import { useState } from 'react';
 
 import { useRouter } from 'next/navigation';
+import { DefaultSession } from 'next-auth';
+import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 
 import { ChevronDown, Heart, Settings } from 'lucide-react';
 
 import KeyIcon from '@/components/icons/KeyIcon';
 import Dropdown from '@/components/shared/Dropdown';
+import UserImg from '@/components/shared/UserImg';
 
 import ConfirmLogoutModal from './logout/ConfirmLogoutModal';
 
@@ -17,22 +20,16 @@ import { Dir } from '@/i18n/i18n.config';
 import { cn } from '@/lib/utils';
 
 type UserDropdownProps = {
-  userName: string;
-  token: string;
   dir?: Dir;
 };
 
-export default function UserDropdown({
-  userName,
-  token,
-  dir,
-}: UserDropdownProps) {
+export default function UserDropdown({ dir }: UserDropdownProps) {
   const router = useRouter();
   const t = useTranslations('common');
-  const firstName = userName?.split(' ')[0];
-  const lastName = userName?.split(' ')[1];
-  const firstNameLetter = firstName?.[0];
-  const lastNameLetter = lastName?.[0];
+  const session = useSession().data as DefaultSession & {
+    accessToken: string;
+  };
+  const token = session?.accessToken ?? '';
 
   const [isDropdownOpen, setisDropdownOpen] = useState(false);
   const [isConfirmLogoutOpen, setIsConfirmLogoutOpen] = useState(false);
@@ -65,10 +62,7 @@ export default function UserDropdown({
 
   return (
     <>
-      <span className='flex size-10 items-center justify-center rounded-full bg-grayish-900 p-2 text-xl font-medium text-grayish-50 md:hidden'>
-        {firstNameLetter?.toUpperCase()}
-        {lastNameLetter?.toUpperCase()}
-      </span>
+      <UserImg className='md:hidden' />
 
       <div className='max-md:hidden'>
         <Dropdown
@@ -81,10 +75,7 @@ export default function UserDropdown({
           align='center'
           trigger={
             <div className='flex items-center gap-2'>
-              <span className='flex size-10 items-center justify-center rounded-full bg-grayish-900 p-2 text-xl font-medium text-grayish-50'>
-                {firstNameLetter?.toUpperCase()}
-                {lastNameLetter?.toUpperCase()}
-              </span>
+              <UserImg />
               <ChevronDown
                 className={cn('size-6 stroke-grayish-400 transition-all', {
                   'rotate-180': isDropdownOpen,
