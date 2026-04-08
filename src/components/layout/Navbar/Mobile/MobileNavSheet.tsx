@@ -19,6 +19,7 @@ import CurrencySelect from '../CurrencySelect';
 import LanguageSwitcher from '../LanguageSwitcher';
 
 import LogoutBtn from './LogoutBtn';
+import MobileNavLink from './MobileNavLink';
 import UserLink from './UserSetting';
 
 import { Page, SocialMediaLink } from '@/types/layout';
@@ -46,20 +47,14 @@ async function MobileNavSheet({
         <Menu className='size-6' />
       </SheetTrigger>
       <SheetContent className='flex w-10/12 flex-col justify-between overflow-auto bg-white p-0 [&>button]:end-4 [&>button]:right-auto [&>button]:w-fit'>
-        <div className='flex flex-col gap-4 px-4 pt-4'>
+        <div className='flex flex-1 flex-col gap-4 px-4 pt-4'>
           <div className='flex flex-col gap-4'>
             {navLinks.map(({ title, id }) => (
-              <SheetClose
-                asChild
+              <MobileNavLink
                 key={id}
-              >
-                <Link
-                  href={`/${id}`}
-                  className='text-grayish-900'
-                >
-                  {title}
-                </Link>
-              </SheetClose>
+                title={title}
+                id={id}
+              />
             ))}
           </div>
           <hr className='text-grayish-100' />
