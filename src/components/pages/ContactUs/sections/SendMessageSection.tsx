@@ -13,10 +13,11 @@ import CustomTextarea from '@/components/shared/form/CustomTextarea';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 
+import { nameSchema } from '@/types/sharedSchemas';
+
 import { EGYPTIAN_PHONE, NOT_SPACES_ONLY } from '@/constants/regex';
 
 import { sendMessage } from '@/api/page';
-import { nameSchema } from '@/types/sharedSchemas';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 export default function SendMessageSection() {
