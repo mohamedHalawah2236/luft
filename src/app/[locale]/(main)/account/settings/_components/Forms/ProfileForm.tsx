@@ -75,13 +75,14 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
   const { mutateAsync, isPending } = useMutation({
     mutationFn: (values: ProfileFormData) =>
       updateUserProfile(values, accessToken),
-    onSuccess: (_, variables) => {
+    onSuccess: (data, variables) => {
       queryClient.invalidateQueries({ queryKey: [profileFormQueryKey] });
       toast.success(tCommon('toaster.dataUpdatedSuccess'));
       form.reset({ ...variables, file: null });
       update({
         user: {
           name: `${variables.firstName} ${variables.lastName}`,
+          image: data.result,
         },
       });
     },

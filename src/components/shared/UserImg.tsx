@@ -6,7 +6,6 @@ import { getTextLocale } from '@/utils/language';
 import { cn } from '@/lib/utils';
 
 type UserImgProps = {
-  image?: string;
   className?: string;
 };
 
@@ -16,6 +15,7 @@ export default function UserImg({ className }: UserImgProps) {
   };
 
   const userName = session?.user?.name ?? '';
+  const profilePicture = session?.user?.image ?? '';
 
   const firstName = userName?.split(' ')[0];
   const lastName = userName?.split(' ')[1];
@@ -29,13 +29,26 @@ export default function UserImg({ className }: UserImgProps) {
     <div
       dir='ltr'
       className={cn(
-        'flex size-10 items-center justify-center gap-px rounded-full bg-grayish-900 p-2 text-xl font-medium text-grayish-50',
+        'flex size-10 items-center justify-center gap-px overflow-hidden rounded-full border border-grayish-50 text-xl font-medium',
+        {
+          'bg-grayish-900 p-2 text-grayish-50': !profilePicture,
+        },
         className,
       )}
     >
-      {firstNameLetter?.toUpperCase()}
-      {isArabicName && <>&nbsp;</>}
-      {lastNameLetter?.toUpperCase()}
+      {profilePicture ? (
+        <img
+          src={profilePicture}
+          alt='Profile'
+          className='size-full object-cover'
+        />
+      ) : (
+        <>
+          {firstNameLetter?.toUpperCase()}
+          {isArabicName && <>&nbsp;</>}
+          {lastNameLetter?.toUpperCase()}
+        </>
+      )}
     </div>
   );
 }
