@@ -10,8 +10,8 @@ export default function HeroSectionPreview({
   mediaExtension,
 }: HeroSectionRes) {
   return (
-    <div className='flex h-full flex-col items-center gap-4 xl:flex-row xl:gap-6'>
-      <div className='order-2 flex max-w-full flex-col gap-6 overflow-hidden md:gap-8 xl:order-1 xl:gap-12'>
+    <div className='flex h-full flex-col items-center gap-4 xl:flex-row xl:justify-between xl:gap-6'>
+      <div className='order-2 flex w-full max-w-full flex-col gap-6 overflow-hidden md:gap-8 xl:order-1 xl:gap-12'>
         {/* Texts */}
         <div className='flex max-w-full flex-1 flex-col gap-4 overflow-hidden'>
           <h3

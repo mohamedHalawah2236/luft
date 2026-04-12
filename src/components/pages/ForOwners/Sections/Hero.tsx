@@ -14,7 +14,7 @@ export default function HeroSection({
 }: HeroSectionRes) {
   const t = useTranslations('pages.forOwners.buttons');
   return (
-    <div className='flex h-full flex-col gap-4 overflow-hidden lg:flex-row lg:items-center lg:gap-6'>
+    <div className='flex h-full flex-col gap-4 overflow-hidden lg:flex-row lg:items-center lg:justify-between lg:gap-6'>
       <div className='order-2 flex flex-1 flex-col gap-6 overflow-hidden md:gap-8 lg:order-1 lg:gap-12'>
         {/* Texts */}
         <div className='flex max-w-full flex-col gap-4 overflow-hidden'>
