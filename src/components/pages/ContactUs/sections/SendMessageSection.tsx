@@ -13,24 +13,24 @@ import CustomTextarea from '@/components/shared/form/CustomTextarea';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 
-import { EGYPTIAN_PHONE, NAME_REGEX } from '@/constants/regex';
+import { EGYPTIAN_PHONE, NOT_SPACES_ONLY } from '@/constants/regex';
 
 import { sendMessage } from '@/api/page';
+import { nameSchema } from '@/types/sharedSchemas';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 export default function SendMessageSection() {
   const tCommon = useTranslations('common');
+  const tRoot = useTranslations();
   const tSendMessage = useTranslations('sections.sendMessage');
 
   const formSchema = z.object({
-    firstName: z
-      .string({ required_error: tCommon('validations.required') })
-      .min(1, { message: tCommon('validations.required') })
-      .regex(NAME_REGEX, tCommon('validations.firstName.invalid')),
-    lastName: z
-      .string({ required_error: tCommon('validations.required') })
-      .min(1, { message: tCommon('validations.required') })
-      .regex(NAME_REGEX, tCommon('validations.lastName.invalid')),
+    firstName: nameSchema(tRoot)
+      .min(2, tCommon('validations.firstName.min', { min: 2 }))
+      .max(50, tCommon('validations.firstName.max', { max: 50 })),
+    lastName: nameSchema(tRoot)
+      .min(2, tCommon('validations.lastName.min', { min: 2 }))
+      .max(50, tCommon('validations.lastName.max', { max: 50 })),
 
     emailAddress: z
       .string({ required_error: tCommon('validations.required') })
@@ -38,10 +38,14 @@ export default function SendMessageSection() {
       .email({ message: tCommon('validations.email.invalid') }),
     phoneNumber: z
       .string({ required_error: tCommon('validations.required') })
+      .regex(NOT_SPACES_ONLY, tCommon('validations.required'))
       .min(1, { message: tCommon('validations.required') })
       .regex(EGYPTIAN_PHONE, { message: tCommon('validations.phone.invalid') }),
+
     message: z
       .string({ required_error: tCommon('validations.required') })
+      .min(1, { message: tCommon('validations.required') })
+      .regex(NOT_SPACES_ONLY, tCommon('validations.required'))
       .min(10, { message: tSendMessage('validations.min') }),
   });
 
