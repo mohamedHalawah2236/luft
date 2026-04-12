@@ -42,10 +42,15 @@ export default function CreateAccountForm({
     firstName: z
       .string({ required_error: tCommon('validations.firstName.required') })
       .min(1, { message: tCommon('validations.firstName.required') })
+      .min(2, tCommon('validations.firstName.min', { min: 2 }))
+      .max(50, tCommon('validations.firstName.max', { max: 50 }))
       .regex(NAME_REGEX, tCommon('validations.firstName.invalid')),
+
     lastName: z
       .string({ required_error: tCommon('validations.lastName.required') })
       .min(1, { message: tCommon('validations.lastName.required') })
+      .min(2, tCommon('validations.lastName.min', { min: 2 }))
+      .max(50, tCommon('validations.lastName.max', { max: 50 }))
       .regex(NAME_REGEX, tCommon('validations.lastName.invalid')),
     email: z
       .string({ required_error: tCommon('validations.email.required') })

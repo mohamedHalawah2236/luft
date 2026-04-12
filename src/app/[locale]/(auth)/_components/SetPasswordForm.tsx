@@ -70,6 +70,13 @@ export default function SetPasswordForm({
             message: tCommon('validations.password.uppercase'),
           });
         }
+
+        if (!PASSWORD_REGEX.lowercase.test(password)) {
+          ctx.addIssue({
+            code: 'custom',
+            message: tCommon('validations.password.lowercase'),
+          });
+        }
       }),
       confirm_password: z
         .string()
