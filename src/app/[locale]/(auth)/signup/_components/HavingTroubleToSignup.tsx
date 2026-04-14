@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { useTranslations } from 'next-intl';
 
 import { Button } from '@/components/ui/button';
@@ -13,7 +11,7 @@ export default function HavingTroubleToSignup({
   const t = useTranslations('auth.signup');
 
   return (
-    <div className='mx-auto flex w-fit items-center gap-2'>
+    <div className='mx-auto flex w-fit flex-wrap items-center gap-2'>
       <p>{t('havingTrouble')}</p>
       <Button
         variant={'link'}
