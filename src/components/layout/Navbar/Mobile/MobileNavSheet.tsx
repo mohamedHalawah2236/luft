@@ -10,7 +10,6 @@ import KeyIcon from '@/components/icons/KeyIcon';
 import RatedByGuests from '@/components/shared/RatedByGuests';
 import {
   Sheet,
-  SheetClose,
   SheetContent,
   SheetFooter,
   SheetTrigger,
@@ -25,8 +24,6 @@ import MobileNavLink from './MobileNavLink';
 import UserLink from './UserSetting';
 
 import { Page, SocialMediaLink } from '@/types/layout';
-
-import { Link } from '@/i18n/routing';
 
 function MobileNavSheet({
   socialLinks,
@@ -44,13 +41,8 @@ function MobileNavSheet({
       <SheetTrigger>
         <Menu className='size-6' />
       </SheetTrigger>
-<<<<<<< HEAD
-      <SheetContent className='flex w-10/12 flex-col justify-between overflow-auto bg-white p-0 [&>button]:end-4 [&>button]:right-auto [&>button]:w-fit'>
-        <div className='flex flex-1 flex-col gap-4 px-4 pt-4'>
-=======
       <SheetContent className='flex w-10/12 flex-col justify-between overflow-auto bg-white p-0 sm:max-w-full [&>button]:end-4 [&>button]:right-auto [&>button]:w-fit'>
         <div className='flex flex-col gap-4 px-4 pt-4'>
->>>>>>> 110ef631297c5dd38887a178a2a5adf0a4e723d8
           <div className='flex flex-col gap-4'>
             {navLinks.map(({ title, id }) => (
               <MobileNavLink
