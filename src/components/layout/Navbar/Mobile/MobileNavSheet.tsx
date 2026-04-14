@@ -1,5 +1,7 @@
-import { DefaultSession, getServerSession } from 'next-auth';
-import { getTranslations } from 'next-intl/server';
+'use client';
+
+import { useSession } from 'next-auth/react';
+import { useTranslations } from 'next-intl';
 
 import { Heart, Menu } from 'lucide-react';
 
@@ -25,29 +27,30 @@ import UserLink from './UserSetting';
 import { Page, SocialMediaLink } from '@/types/layout';
 
 import { Link } from '@/i18n/routing';
-import { authOptions } from '@/lib/auth';
 
-async function MobileNavSheet({
+function MobileNavSheet({
   socialLinks,
   navLinks,
 }: {
   socialLinks: SocialMediaLink[];
   navLinks: Page[];
 }) {
-  const t = await getTranslations('');
-  const session = (await getServerSession(authOptions)) as DefaultSession & {
-    accessToken: string;
-  };
-
-  const token = session?.accessToken ?? '';
+  const t = useTranslations();
+  const session = useSession();
+  const token = session?.data?.accessToken ?? '';
 
   return (
     <Sheet>
       <SheetTrigger>
         <Menu className='size-6' />
       </SheetTrigger>
+<<<<<<< HEAD
       <SheetContent className='flex w-10/12 flex-col justify-between overflow-auto bg-white p-0 [&>button]:end-4 [&>button]:right-auto [&>button]:w-fit'>
         <div className='flex flex-1 flex-col gap-4 px-4 pt-4'>
+=======
+      <SheetContent className='flex w-10/12 flex-col justify-between overflow-auto bg-white p-0 sm:max-w-full [&>button]:end-4 [&>button]:right-auto [&>button]:w-fit'>
+        <div className='flex flex-col gap-4 px-4 pt-4'>
+>>>>>>> 110ef631297c5dd38887a178a2a5adf0a4e723d8
           <div className='flex flex-col gap-4'>
             {navLinks.map(({ title, id }) => (
               <MobileNavLink
@@ -81,9 +84,9 @@ async function MobileNavSheet({
           <hr className='text-grayish-100' />
           <CurrencySelect variant='mobile' />
           <LanguageSwitcher />
-          <LogoutBtn token={token} />
+          {token && <LogoutBtn token={token} />}
         </div>
-        <SheetFooter className='flex flex-col bg-grayish-50 px-4 py-4'>
+        <SheetFooter className='flex !flex-col bg-grayish-50 px-4 py-4'>
           <RatedByGuests
             textClassName='text-sm'
             color='var(--ps-neutral-500)'

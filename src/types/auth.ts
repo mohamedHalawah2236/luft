@@ -44,6 +44,7 @@ export type AuthUserApiResponse = {
   refreshToken: string;
   accessTokenExpiresAt: string;
   refreshTokenExpiresAt: string;
+  profilePicture: string;
   roles: string[];
   isVerified: boolean;
   hasPin: boolean;

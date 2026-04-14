@@ -14,6 +14,8 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel';
 
+import { cn } from '@/lib/utils';
+
 interface Review {
   id: string;
   guestName: string;
@@ -28,25 +30,39 @@ interface Review {
 function StarRating({
   rating,
   size = 'sm',
+  className,
 }: {
   rating: number;
   size?: 'sm' | 'md';
+  className?: string;
 }) {
   const sizeClass = size === 'sm' ? 'w-4 h-4' : 'w-6 h-6';
   return (
-    <div className='flex gap-2'>
-      {[...Array(5)].map((_, i) => (
-        <Star
-          key={i}
-          className={`${sizeClass} stroke-black ${
-            i < Math.floor(rating)
-              ? 'fill-grayish-900 text-grayish-900'
-              : i < rating
-                ? 'fill-grayish-900 text-grayish-900'
-                : 'text-transpafill-transparent fill-transparent'
-          }`}
-        />
-      ))}
+    <div className={cn('flex gap-2', className)}>
+      {[...Array(5)].map((_, i) => {
+        const fillPercentage = Math.max(0, Math.min(100, (rating - i) * 100));
+
+        return (
+          <div
+            key={i}
+            className={`relative ${sizeClass}`}
+          >
+            <Star
+              className={`${sizeClass} fill-transparent stroke-grayish-900 text-transparent`}
+            />
+            {fillPercentage > 0 && (
+              <div
+                className='absolute start-0 top-0 h-full overflow-hidden'
+                style={{ width: `${fillPercentage}%` }}
+              >
+                <Star
+                  className={`${sizeClass} max-w-none fill-grayish-900 stroke-grayish-900 text-grayish-900`}
+                />
+              </div>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }
@@ -67,32 +83,132 @@ export default function TestimonialsSection() {
     },
     {
       id: '2',
-      guestName: 'Mikasa Aramin',
+      guestName: 'Eren Yeager',
       location: t('dummyReviewLocation'),
-      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Mikasa2',
-      rating: 4,
-      daysAgo: 5,
-      stayedDays: 6,
+      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Eren',
+      rating: 5,
+      daysAgo: 12,
+      stayedDays: 4,
       text: t('dummyReviewText'),
     },
     {
       id: '3',
-      guestName: 'Mikasa Aramin',
+      guestName: 'Armin Arlert',
       location: t('dummyReviewLocation'),
-      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Mikasa3',
-      rating: 4,
-      daysAgo: 5,
-      stayedDays: 6,
+      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Armin',
+      rating: 5,
+      daysAgo: 8,
+      stayedDays: 7,
       text: t('dummyReviewText'),
     },
     {
       id: '4',
-      guestName: 'Mikasa Aramin',
+      guestName: 'Levi Ackerman',
       location: t('dummyReviewLocation'),
-      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Mikasa4',
+      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Levi',
+      rating: 5,
+      daysAgo: 2,
+      stayedDays: 14,
+      text: t('dummyReviewText'),
+    },
+    {
+      id: '5',
+      guestName: 'Hange Zoe',
+      location: t('dummyReviewLocation'),
+      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Hange',
       rating: 4,
-      daysAgo: 5,
+      daysAgo: 20,
+      stayedDays: 3,
+      text: t('dummyReviewText'),
+    },
+    {
+      id: '6',
+      guestName: 'Erwin Smith',
+      location: t('dummyReviewLocation'),
+      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Erwin',
+      rating: 5,
+      daysAgo: 45,
+      stayedDays: 5,
+      text: t('dummyReviewText'),
+    },
+    {
+      id: '7',
+      guestName: 'Jean Kirstein',
+      location: t('dummyReviewLocation'),
+      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Jean',
+      rating: 4,
+      daysAgo: 15,
+      stayedDays: 2,
+      text: t('dummyReviewText'),
+    },
+    {
+      id: '8',
+      guestName: 'Sasha Blouse',
+      location: t('dummyReviewLocation'),
+      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sasha',
+      rating: 5,
+      daysAgo: 6,
+      stayedDays: 8,
+      text: t('dummyReviewText'),
+    },
+    {
+      id: '9',
+      guestName: 'Connie Springer',
+      location: t('dummyReviewLocation'),
+      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Connie',
+      rating: 4,
+      daysAgo: 30,
+      stayedDays: 4,
+      text: t('dummyReviewText'),
+    },
+    {
+      id: '10',
+      guestName: 'Historia Reiss',
+      location: t('dummyReviewLocation'),
+      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Historia',
+      rating: 5,
+      daysAgo: 50,
+      stayedDays: 10,
+      text: t('dummyReviewText'),
+    },
+    {
+      id: '11',
+      guestName: 'Ymir',
+      location: t('dummyReviewLocation'),
+      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Ymir',
+      rating: 4,
+      daysAgo: 55,
       stayedDays: 6,
+      text: t('dummyReviewText'),
+    },
+    {
+      id: '12',
+      guestName: 'Reiner Braun',
+      location: t('dummyReviewLocation'),
+      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Reiner',
+      rating: 3,
+      daysAgo: 100,
+      stayedDays: 2,
+      text: t('dummyReviewText'),
+    },
+    {
+      id: '13',
+      guestName: 'Zeke Yeager',
+      location: t('dummyReviewLocation'),
+      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Zeke',
+      rating: 4,
+      daysAgo: 120,
+      stayedDays: 5,
+      text: t('dummyReviewText'),
+    },
+    {
+      id: '14',
+      guestName: 'Annie Leonhart',
+      location: t('dummyReviewLocation'),
+      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Annie',
+      rating: 5,
+      daysAgo: 150,
+      stayedDays: 7,
       text: t('dummyReviewText'),
     },
   ];
@@ -135,7 +251,7 @@ export default function TestimonialsSection() {
           {reviews.map((review) => (
             <CarouselItem
               key={review.id}
-              className='min-w-[20.464rem] max-w-[20.464rem] ps-12'
+              className='ms-12 flex min-w-[20.465rem] max-w-[20.465rem] flex-col ps-0'
             >
               {/* Guest Info */}
               <div className='mb-4 flex gap-2'>
@@ -163,12 +279,13 @@ export default function TestimonialsSection() {
                 <StarRating
                   rating={review.rating}
                   size='sm'
+                  className='gap-1.5'
                 />
-                <span className=''>•</span>
+                <span className='w-1 text-xs text-grayish-400'>•</span>
                 <span className=''>
                   {t('daysAgo', { days: review.daysAgo })}
                 </span>
-                <span className='text-grayish-400'>•</span>
+                <span className='w-1 text-xs text-grayish-400'>•</span>
                 <span className='text-grayish-400'>
                   {t('stayedDays', { days: review.stayedDays })}
                 </span>
@@ -177,7 +294,7 @@ export default function TestimonialsSection() {
               {/* Review Text */}
               <p
                 title={review.text}
-                className='mb-1 line-clamp-3 whitespace-pre-wrap text-grayish-400'
+                className='mb-1 line-clamp-3 flex-1 whitespace-pre-wrap text-grayish-400'
               >
                 {review.text}
               </p>

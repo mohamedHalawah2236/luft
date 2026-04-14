@@ -22,7 +22,7 @@ export default function FooterLink({ id, title, pageType }: NavLinkProps) {
     <Link
       href={href}
       title={title}
-      className={cn('line-clamp-1 text-grayish-100 sm:text-lg', {
+      className={cn('line-clamp-1 w-fit text-grayish-100 sm:text-lg', {
         'font-medium text-grayish-30': isActive,
       })}
     >

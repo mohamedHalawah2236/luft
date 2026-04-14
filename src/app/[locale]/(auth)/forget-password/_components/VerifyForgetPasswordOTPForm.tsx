@@ -38,7 +38,7 @@ export default function VerifyForgetPasswordOTPForm({
   const [serverError, setServerError] = useState<string | undefined>();
 
   const tCommon = useTranslations('common');
-  const t = useTranslations('auth.verifyOTP');
+  const t = useTranslations('');
 
   const [isResendDisabled, setIsResendDisabled] = useState(true);
 
@@ -47,6 +47,7 @@ export default function VerifyForgetPasswordOTPForm({
   const formSchema = z.object({
     otp: z
       .string({ required_error: tCommon('validations.otp.required') })
+      .min(1, tCommon('validations.otp.required'))
       .min(+numOfDigits, { message: tCommon('validations.otp.invalidLength') }),
   });
 
@@ -101,9 +102,12 @@ export default function VerifyForgetPasswordOTPForm({
     <Form {...form}>
       <form onSubmit={onFormSubmit}>
         <AuthFormLayout
-          title={t('title')}
-          description={t('description', { numOfDigits, userEmail })}
-          submitBtnLabel={tCommon('buttons.continue')}
+          title={t('auth.verifyOTP.title')}
+          description={t('auth.verifyOTP.description', {
+            numOfDigits,
+            userEmail,
+          })}
+          submitBtnLabel={t('auth.forgetPassword.verifyOTP')}
           serverError={serverError}
         >
           <div className='flex flex-col items-center gap-4'>
