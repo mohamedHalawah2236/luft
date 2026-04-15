@@ -251,7 +251,7 @@ export default function TestimonialsSection() {
           {reviews.map((review) => (
             <CarouselItem
               key={review.id}
-              className='ms-12 flex min-w-[20.465rem] max-w-[20.465rem] flex-col ps-0'
+              className='ms-12 flex min-w-fit flex-col ps-0'
             >
               {/* Guest Info */}
               <div className='mb-4 flex gap-2'>
@@ -294,7 +294,7 @@ export default function TestimonialsSection() {
               {/* Review Text */}
               <p
                 title={review.text}
-                className='mb-1 line-clamp-3 flex-1 whitespace-pre-wrap text-grayish-400'
+                className='mb-1 line-clamp-3 min-w-[20.465rem] max-w-[20.465rem] flex-1 whitespace-pre-wrap text-grayish-400'
               >
                 {review.text}
               </p>
