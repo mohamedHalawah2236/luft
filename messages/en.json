@@ -213,7 +213,8 @@
         "send": "Send"
       },
       "validations": {
-        "min": "Message must be at least 10 characters"
+        "min": "Message must be at least 10 characters",
+        "max": "Message must be at most {max} characters"
       },
       "toast": {
         "success": "Message sent successfully",
