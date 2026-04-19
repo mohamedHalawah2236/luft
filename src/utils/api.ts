@@ -1,5 +1,7 @@
-import { i18n } from '@/i18n/i18n.config';
-import { getCurrLocale } from '@/lib/utils';
+import { signOut } from 'next-auth/react';
+
+import { concatErrors } from './errors';
+import { getLanguage } from './language';
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -29,10 +31,33 @@ export function deleteSearchParams(paramName: string, paramValue: string) {
   return `?${searchParams.toString()}`;
 }
 
-export async function getAllData(endpoint: string, options: any = {}) {
-  const res = await fetch(`${apiUrl}/${endpoint}`, options);
+export async function getAllData(
+  endpoint: string,
+  options: RequestInit = {},
+  accessToken?: string,
+) {
+  const language = await getLanguage();
+
+  const res = await fetch(`${apiUrl}/${endpoint}`, {
+    cache: 'no-store',
+    ...options,
+    headers: {
+      language,
+      'Content-Type': 'application/json',
+      ...(options.headers || {}),
+      ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+    },
+  });
 
   if (!res.ok) {
+    if (res.status === 401) {
+      signOut({
+        redirect: true,
+        callbackUrl: '/login',
+      });
+      throw new Error('401 Unauthorized');
+    }
+
     throw new Error(
       `Failed to retrieve data from ${endpoint}, status code: ${res.status}`,
     );
@@ -58,48 +83,55 @@ export async function getAllDataParallel(
   return res;
 }
 
-export async function postData(endpoint: string, options: RequestInit = {}) {
+export async function postData(
+  endpoint: string,
+  options: RequestInit = {},
+  accessToken?: string,
+) {
+  const language = await getLanguage();
+
   const res = await fetch(`${apiUrl}/${endpoint}`, {
     ...options,
     headers: {
-      'Content-Type': 'application/json',
-      Language: getCurrLocale() ?? i18n.defaultLocale,
-      ...options.headers,
+      language,
+      ...(options.headers || {}),
+      ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
     },
   });
 
   if (!res.ok) {
-    throw new Error(`HTTP error! Status: ${res.status}`);
+    if (res.status === 401) {
+      signOut({
+        redirect: true,
+        callbackUrl: '/login',
+      });
+      throw new Error('401 Unauthorized', {
+        cause: res.status,
+      });
+    }
+
+    const data = await res.json();
+    if (data.errors) {
+      throw new Error(concatErrors(data), {
+        cause: data.statusCode,
+      });
+    }
+    throw new Error(data.message, {
+      cause: data.statusCode,
+    });
   }
 
   const data = await res.json();
   if (data?.isError) {
-    throw new Error(data?.message);
-  }
-
-  return data;
-}
-
-export async function nextApiFetch(
-  endpoint: string,
-  options: RequestInit = {},
-) {
-  const res = await fetch(endpoint, {
-    ...options,
-    headers: {
-      'Content-Type': 'application/json',
-      Language: getCurrLocale() ?? i18n.defaultLocale,
-      ...options.headers,
-    },
-  });
-
-  if (!res.ok) {
-    throw new Error(`HTTP error! Status: ${res.status}`);
-  }
-
-  const data = await res.json();
-  if (data?.isError) {
-    throw new Error(data?.message);
+    if (data.statusCode === 401) {
+      signOut({
+        redirect: true,
+        callbackUrl: '/login',
+      });
+    }
+    throw new Error(data?.message, {
+      cause: data.statusCode,
+    });
   }
 
   return data;

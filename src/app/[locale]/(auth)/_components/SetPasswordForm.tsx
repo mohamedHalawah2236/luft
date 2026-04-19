@@ -1,6 +1,6 @@
 'use client';
 
-import React, { ComponentProps, useState } from 'react';
+import { ComponentProps, useState } from 'react';
 
 import { useTranslations } from 'next-intl';
 
@@ -14,7 +14,7 @@ import { Form } from '@/components/ui/form';
 
 import AuthFormLayout from './AuthFormLayout';
 
-import { PASSWORD_REGEX } from '@/constants';
+import { PASSWORD_REGEX } from '@/constants/regex';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -25,7 +25,7 @@ type SetPasswordFormProps = Omit<
   onSubmit: (values: {
     password: string;
     confirm_password: string;
-  }) => Promise<any>;
+  }) => Promise<unknown>;
   onSubmissionSuccess?: (data: unknown) => void;
 };
 
@@ -68,6 +68,13 @@ export default function SetPasswordForm({
           ctx.addIssue({
             code: 'custom',
             message: tCommon('validations.password.uppercase'),
+          });
+        }
+
+        if (!PASSWORD_REGEX.lowercase.test(password)) {
+          ctx.addIssue({
+            code: 'custom',
+            message: tCommon('validations.password.lowercase'),
           });
         }
       }),

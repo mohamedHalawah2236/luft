@@ -4,14 +4,15 @@ import { IconProps } from '@/types';
 
 import { cn } from '@/lib/utils';
 
-export default function StarIcon({ className }: IconProps) {
+export default function StarIcon({ className, fill }: IconProps) {
   return (
     <svg
       width='24'
       height='24'
       viewBox='0 0 24 24'
       xmlns='http://www.w3.org/2000/svg'
-      className={cn('fill-black', className)}
+      className={cn('', className)}
+      fill={fill}
     >
       <path
         fillRule='evenodd'

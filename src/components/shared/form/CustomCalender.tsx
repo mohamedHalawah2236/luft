@@ -48,7 +48,7 @@ const CustomCalender = ({
                 <Button
                   variant='outline'
                   className={cn(
-                    'h-[53px] rounded-2xl border-input bg-white px-4 py-4 text-left font-normal hover:bg-neutral-100 hover:text-foreground',
+                    'h-[53px] rounded-2xl border-input bg-white px-4 py-4 text-left font-normal hover:bg-grayish-100 hover:text-foreground',
                     field.value ? 'text-foreground' : 'text-muted-foreground',
                   )}
                   disabled={isSubmitting}

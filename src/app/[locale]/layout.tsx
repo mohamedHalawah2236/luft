@@ -1,14 +1,17 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { getServerSession } from 'next-auth';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 
 import ConnectionListener from '@/components/ConnectionListener';
+import Providers from '@/components/layout/Providers';
 import { Toaster } from '@/components/ui/sonner';
 
 import { switzer } from '@/fonts/fonts';
 import { Locale } from '@/i18n/i18n.config';
 import { routing } from '@/i18n/routing';
+import { authOptions } from '@/lib/auth';
 import { siteConfig } from '@/www/config/site';
 
 export const metadata: Metadata = {
@@ -83,28 +86,27 @@ export default async function LocaleLayout({
   // side is the easiest way to get started
   const messages = await getMessages();
 
+  const session = await getServerSession(authOptions);
+
   return (
     <html
       lang={locale}
       dir={locale === 'en' ? 'ltr' : 'rtl'}
     >
       <body
-        className={`${switzer.variable} font-switzer mx-auto h-dvh w-dvw max-w-[1920px] overflow-hidden bg-grayish-30 antialiased`}
-        style={{
-          fontFamily: switzer.style.fontFamily,
-        }}
+        className={`${switzer.variable} mx-auto size-full h-dvh w-dvw overflow-hidden bg-grayish-30 font-switzer antialiased`}
       >
         <NextIntlClientProvider messages={messages}>
-          <ConnectionListener />
-          {/* <Navbar /> */}
-          {children}
-          {/* <Footer /> */}
-          <Toaster
-            position={locale === 'en' ? 'bottom-left' : 'bottom-right'}
-            closeButton
-            richColors
-            theme='light'
-          />
+          <Providers session={session!}>
+            <ConnectionListener />
+            {children}
+            <Toaster
+              position={locale === 'en' ? 'top-right' : 'top-left'}
+              closeButton
+              richColors
+              theme='light'
+            />
+          </Providers>
         </NextIntlClientProvider>
       </body>
     </html>

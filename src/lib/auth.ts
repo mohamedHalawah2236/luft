@@ -21,13 +21,20 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         if (!credentials) return null;
 
-        const { userId, fullName, email, accessToken, refreshToken } =
-          credentials as AuthUserApiResponse;
+        const {
+          userId,
+          fullName,
+          email,
+          accessToken,
+          refreshToken,
+          profilePicture,
+        } = credentials as AuthUserApiResponse;
 
         return {
           id: userId,
           email: email,
           name: fullName,
+          image: profilePicture,
           accessToken,
           refreshToken,
         };
@@ -36,11 +43,21 @@ export const authOptions: NextAuthOptions = {
   ],
 
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger, session }) {
       if (user) {
         token.accessToken = user.accessToken;
         token.refreshToken = user.refreshToken;
         token.userId = user.id;
+      }
+
+      if (trigger === 'update') {
+        if (session?.user?.name) {
+          token.name = session.user.name;
+        }
+        if (session?.user?.image !== undefined) {
+          token.picture = session.user.image;
+          token.image = session.user.image;
+        }
       }
 
       return token;
@@ -48,6 +65,9 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.userId;
+        if (token.picture !== undefined || token.image !== undefined) {
+          session.user.image = (token.picture ?? token.image) as string;
+        }
       }
       session.accessToken = token.accessToken;
       session.refreshToken = token.refreshToken;

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { useFormContext } from 'react-hook-form';
 
 import {
@@ -15,7 +13,7 @@ import {
   InputOTPSlot,
 } from '@/components/ui/input-otp';
 
-import { cn } from '@/lib/utils';
+import { cn, handleOnlyNumbersKeyDown } from '@/lib/utils';
 
 type CustomOtpInputProps = {
   fieldName: string;
@@ -30,10 +28,9 @@ export default function CustomOtpInput({
   label,
   disabled,
 }: CustomOtpInputProps) {
-  const { formState, control, watch } = useFormContext();
+  const { formState, control } = useFormContext();
   const { isSubmitting, errors } = formState;
   const hasError = errors[fieldName];
-  const otpValue = watch(fieldName) as string;
 
   return (
     <FormField
@@ -51,6 +48,7 @@ export default function CustomOtpInput({
               maxLength={numOfDigits}
               disabled={isSubmitting || disabled}
               className='!w-full'
+              onKeyDown={handleOnlyNumbersKeyDown}
               {...field}
             >
               <InputOTPGroup
@@ -59,7 +57,7 @@ export default function CustomOtpInput({
                 className='flex items-center gap-2 px-0.5'
               >
                 {Array.from({ length: numOfDigits }).map((_, i) => {
-                  const fieldHasValue = otpValue[i];
+                  const fieldHasValue = field.value[i];
                   return (
                     <InputOTPSlot
                       key={'digit' + i}

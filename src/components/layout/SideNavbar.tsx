@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
 
@@ -9,8 +7,6 @@ import LOGO from '../../../public/svgs/logo.svg';
 import Icon from '../shared/Icon';
 import { Button } from '../ui/button';
 import { SheetContent, SheetHeader, SheetTitle } from '../ui/sheet';
-
-import LocaleSwitcher from './LocaleSwitcher';
 
 import { PAGES } from '@/constants';
 
@@ -91,7 +87,6 @@ const SideNavbar = () => {
           />
         </Link>
       </div>
-      <LocaleSwitcher className='flex pl-0' />
     </SheetContent>
   );
 };

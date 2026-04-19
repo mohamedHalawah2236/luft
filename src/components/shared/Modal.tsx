@@ -41,7 +41,7 @@ export const Modal = ({
         forceMount
         className={cn(
           'flex max-h-[95%] max-w-[90%] flex-col !overflow-hidden rounded-xl bg-grayish-50 p-0',
-          '[&>button>svg]:size-6 [&>button>svg]:text-grayish-900',
+          '[&>button>svg]:size-6 [&>button>svg]:text-grayish-900 [&>button]:!end-4 [&>button]:right-auto',
           {
             '[&>button]:hidden': !onClose,
           },
@@ -52,7 +52,7 @@ export const Modal = ({
         {header && (
           <DialogHeader
             className={cn(
-              '[&+button>svg]:max-sm:size-6',
+              'flex-row [&+button>svg]:max-sm:size-6 [&+button]:end-4',
               {
                 '[&+button]:hidden': onClose === undefined,
               },
@@ -68,9 +68,11 @@ export const Modal = ({
         >
           {children}
         </div>
-        <DialogFooter className={cn('', footerClassName)}>
-          {footer}
-        </DialogFooter>
+        {footer && (
+          <DialogFooter className={cn('', footerClassName)}>
+            {footer}
+          </DialogFooter>
+        )}
       </DialogContent>
     </Dialog>
   );

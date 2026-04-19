@@ -29,6 +29,8 @@ type CustomInputProps = {
   isNumberAsAString?: boolean;
   required?: boolean;
   showAllErrors?: boolean;
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  autoFocus?: boolean;
 };
 
 function CustomInput({
@@ -42,11 +44,12 @@ function CustomInput({
   isNumberAsAString = false,
   required,
   showAllErrors,
+  onKeyDown,
+  autoFocus = false,
 }: CustomInputProps) {
-  const { formState, control, watch } = useFormContext();
+  const { formState, control } = useFormContext();
   const { isSubmitting, errors } = formState;
   const hasError = errors[fieldName];
-  const hasValue = watch(fieldName);
 
   // Prevent wheel event on number inputs
   useEffect(() => {
@@ -97,7 +100,7 @@ function CustomInput({
               className={cn(
                 'h-12 rounded-2xl border-[1.5px] border-grayish-100 px-4 py-3 text-grayish-900 outline-none transition-all placeholder:text-grayish-400 hover:border-grayish-300 focus-visible:border-grayish-900 focus-visible:ring-0 disabled:border-grayish-100 disabled:bg-grayish-50',
                 {
-                  'border-grayish-300': hasValue,
+                  'border-grayish-300': field.value,
                   'border-error-500 text-error-500 placeholder:text-error-500 hover:border-error-400 focus-visible:border-error-500 focus-visible:text-error-500':
                     hasError,
                 },
@@ -107,6 +110,8 @@ function CustomInput({
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                 handleInputChange(event, field)
               }
+              onKeyDown={onKeyDown}
+              autoFocus={autoFocus}
             />
           </FormControl>
           <FormMessage
