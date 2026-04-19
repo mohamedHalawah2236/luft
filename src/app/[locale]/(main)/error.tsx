@@ -1,6 +1,7 @@
 'use client';
-import StatusLayout from '@/components/shared/StatusLayout';
 import { useTranslations } from 'next-intl';
+
+import StatusLayout from '@/components/shared/StatusLayout';
 
 export default function Error() {
   const t = useTranslations('emptyStates.error');

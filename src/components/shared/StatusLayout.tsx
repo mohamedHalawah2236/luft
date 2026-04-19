@@ -1,55 +1,75 @@
 'use client';
-import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 
+import { Button } from '@/components/ui/button';
+
+import { cn } from '@/lib/utils';
+
 type StatusLayoutProps = {
-    title: string;
-    paragraph: string;
-    mainImageSrc?: string;
-    className?: string;
+  title: string;
+  paragraph: string;
+  mainImageSrc?: string;
+  className?: string;
 };
 
-const StatusLayout = ({ title, paragraph, mainImageSrc, className }: StatusLayoutProps) => {
-    const params = useParams();
-    const isEnglish = params.locale === 'en';
-    return (
-        <div className={`container mx-auto py-20 ${className || ''}`}>
-            <div className='flex flex-col items-center justify-center'>
-                <img
-                    src={mainImageSrc}
-                    alt={title}
-                    className='w-auto h-auto'
-                />
+const StatusLayout = ({
+  title,
+  paragraph,
+  mainImageSrc,
+  className,
+}: StatusLayoutProps) => {
+  const params = useParams();
+  const isEnglish = params.locale === 'en';
+  return (
+    <div
+      className={cn(
+        'mx-auto mb-44 mt-12 w-full px-4 md:mb-20 md:mt-20 md:px-6 lg:mb-32 lg:mt-16 lg:px-[4.5rem] 2xl:!w-[1296px] 2xl:p-0',
+        className,
+      )}
+    >
+      <div className='flex flex-col items-center justify-center'>
+        <img
+          src={mainImageSrc}
+          alt={title}
+          className='mx-auto h-auto w-auto'
+        />
 
-                <div className='flex items-center justify-between mt-12 w-full' dir='ltr'
-                >
-                    <img
-                        src='/svg/leftArrow.svg'
-                        alt='left arrow'
-                        className='w-auto h-auto'
-                    />
+        <div
+          className='mt-12 flex w-full items-center justify-between'
+          dir='ltr'
+        >
+          <img
+            src='/svg/leftArrow.svg'
+            alt='left arrow'
+            className='h-auto w-auto max-sm:hidden'
+          />
 
-                    <div className='flex flex-col gap-2 items-center text-neutral-50 flex-1 '>
-                        <p className='text-5xl text-grayish-900 tracking-[-0.025em]'>{title}</p>
-                        <span className='text-lg text-grayish-400'>{paragraph}</span>
-                    </div>
+          <div className='flex flex-1 flex-col items-center gap-2 text-center text-neutral-50'>
+            <p className='text-[1.75rem] leading-9 tracking-[-0.025em] text-grayish-900 md:text-[2rem] md:leading-10 lg:text-5xl lg:leading-[3.75rem]'>
+              {title}
+            </p>
+            <span className='text-grayish-400 md:text-lg'>{paragraph}</span>
+          </div>
 
-                    <img
-                        src='/svg/rightArrow.svg'
-                        alt='right arrow'
-                        className='w-auto h-auto'
-                    />
-                </div>
-
-                <Button className='bg-grayish-900 text-grayish-50 hover:text-grayish-50 hover:bg-grayish-800 cursor-pointer h-[54px] mt-[48px] py-2 px-4 min-w-[200px]'>
-                    <Link href={`/`} className='w-full '>
-                        {isEnglish ? 'Back To Home' : 'الرجوع للرئيسية'}
-                    </Link>
-                </Button>
-            </div>
+          <img
+            src='/svg/rightArrow.svg'
+            alt='right arrow'
+            className='h-auto w-auto max-sm:hidden'
+          />
         </div>
-    );
+
+        <Button className='mt-[48px] h-[54px] min-w-[200px] cursor-pointer bg-grayish-900 px-4 py-2 text-grayish-50 hover:bg-grayish-800 hover:text-grayish-50'>
+          <Link
+            href={`/`}
+            className='w-full'
+          >
+            {isEnglish ? 'Back To Home' : 'الرجوع للرئيسية'}
+          </Link>
+        </Button>
+      </div>
+    </div>
+  );
 };
 
 export default StatusLayout;

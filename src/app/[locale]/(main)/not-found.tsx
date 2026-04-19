@@ -1,5 +1,6 @@
-import StatusLayout from '@/components/shared/StatusLayout';
 import { getTranslations } from 'next-intl/server';
+
+import StatusLayout from '@/components/shared/StatusLayout';
 
 const NotFound = async () => {
   const t = await getTranslations('emptyStates.notFound');
