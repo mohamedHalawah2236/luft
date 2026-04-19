@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
+import Autoplay from 'embla-carousel-autoplay';
 import { Star } from 'lucide-react';
 
 import AirbnbIcon from '@/components/icons/AirbnbIcon';
@@ -244,14 +245,23 @@ export default function TestimonialsSection() {
       </div>
 
       {/* Reviews Carousel */}
-      <Carousel className='flex w-full items-center gap-1 pb-4 [&>.overflow-hidden]:flex-1'>
-        <CarouselPrevious className='static translate-x-0 translate-y-0 border-0 border-transparent hover:bg-grayish-30' />
+      <Carousel
+        plugins={[
+          Autoplay({
+            delay: 2500,
+            stopOnInteraction: true,
+            stopOnLastSnap: true,
+          }),
+        ]}
+        className='flex w-full items-center gap-2 pb-4 [&>.overflow-hidden]:flex-1'
+      >
+        <CarouselPrevious className='static !size-fit translate-x-0 translate-y-0 border-0 border-transparent p-0 hover:bg-grayish-30 max-sm:hidden' />
 
-        <CarouselContent className='-ms-12 flex-1'>
+        <CarouselContent className='-ms-6 flex-1 md:-ms-8 lg:-ms-12'>
           {reviews.map((review) => (
             <CarouselItem
               key={review.id}
-              className='ms-12 flex min-w-fit flex-col ps-0'
+              className='ms-6 flex min-w-fit flex-col ps-0 md:ms-8 lg:ms-12'
             >
               {/* Guest Info */}
               <div className='mb-4 flex gap-2'>
@@ -307,7 +317,7 @@ export default function TestimonialsSection() {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselNext className='static translate-x-0 translate-y-0 border-0 border-transparent hover:bg-grayish-30' />
+        <CarouselNext className='static !size-fit translate-x-0 translate-y-0 border-0 border-transparent p-0 hover:bg-grayish-30 max-sm:hidden' />
       </Carousel>
     </section>
   );

@@ -1,4 +1,7 @@
+'use client';
 import { useTranslations } from 'next-intl';
+
+import Autoplay from 'embla-carousel-autoplay';
 
 import {
   Carousel,
@@ -19,22 +22,20 @@ export default function RecommendedProperties() {
         <h3 className='line-clamp-3 text-[1.75rem] font-medium leading-9 text-grayish-900 md:text-[2rem] md:leading-[2.75rem] xl:text-5xl xl:leading-[3.625rem]'>
           {t('title')}
         </h3>
-        <p className='text-grayish-400 md:text-lg'>
-          {t('subtitle')}
-        </p>
+        <p className='text-grayish-400 md:text-lg'>{t('subtitle')}</p>
       </div>
       {/* carousel */}
       <Carousel
-        // plugins={[
-        //   Autoplay({
-        //     delay: 2500,
-        //     stopOnInteraction: true,
-        //     stopOnLastSnap: true,
-        //   }),
-        // ]}
+        plugins={[
+          Autoplay({
+            delay: 2500,
+            stopOnInteraction: true,
+            stopOnLastSnap: true,
+          }),
+        ]}
         className='flex w-full items-center gap-2 [&>.overflow-hidden]:flex-1'
       >
-        <CarouselPrevious className='static !size-fit translate-x-0 translate-y-0 border-0 border-transparent !bg-transparent p-0 hover:bg-grayish-30' />
+        <CarouselPrevious className='static !size-fit translate-x-0 translate-y-0 border-0 border-transparent !bg-transparent p-0 hover:bg-grayish-30 max-sm:hidden' />
 
         <CarouselContent className='-ms-4 flex-1 lg:-ms-6'>
           {Array.from({ length: 10 }).map((_, index) => (
@@ -55,7 +56,7 @@ export default function RecommendedProperties() {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselNext className='static !size-fit translate-x-0 translate-y-0 border-0 border-transparent !bg-transparent p-0 hover:bg-grayish-30' />
+        <CarouselNext className='static !size-fit translate-x-0 translate-y-0 border-0 border-transparent !bg-transparent p-0 hover:bg-grayish-30 max-sm:hidden' />
       </Carousel>
     </div>
   );

@@ -1,4 +1,7 @@
+'use client';
 import { useTranslations } from 'next-intl';
+
+import Autoplay from 'embla-carousel-autoplay';
 
 import ImageIcon from '@/components/icons/ImageIcon';
 import {
@@ -36,14 +39,23 @@ export default function PartnersSection({
         </p>
       </div>
 
-      <Carousel className='relative flex w-full items-center gap-4 pb-4 [&>.overflow-hidden]:flex-1'>
-        <CarouselPrevious className='static translate-x-0 translate-y-0 border-0 border-transparent bg-grayish-30 hover:bg-grayish-50' />
+      <Carousel
+        plugins={[
+          Autoplay({
+            delay: 2500,
+            stopOnInteraction: true,
+            stopOnLastSnap: true,
+          }),
+        ]}
+        className='relative flex w-full items-center gap-4 pb-4 [&>.overflow-hidden]:flex-1'
+      >
+        <CarouselPrevious className='static !size-fit translate-x-0 translate-y-0 border-0 border-transparent bg-grayish-30 p-0 hover:bg-grayish-50 max-sm:hidden' />
 
-        <CarouselContent className='-ms-12 flex-1'>
+        <CarouselContent className='-ms-6 flex-1 md:-ms-8 lg:-ms-12'>
           {items.map((review, index) => (
             <CarouselItem
               key={index}
-              className='min-w-[20.464rem] max-w-[20.464rem] ps-12'
+              className='min-w-[20.464rem] max-w-[20.464rem] ps-6 md:ps-8 lg:ps-12'
             >
               {/* Guest Info */}
               <div className='mb-4 flex gap-2'>
@@ -81,7 +93,7 @@ export default function PartnersSection({
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselNext className='static translate-x-0 translate-y-0 border-0 border-transparent bg-grayish-30 hover:bg-grayish-50' />
+        <CarouselNext className='static !size-fit translate-x-0 translate-y-0 border-0 border-transparent bg-grayish-30 p-0 hover:bg-grayish-50 max-sm:hidden' />
       </Carousel>
     </section>
   );
