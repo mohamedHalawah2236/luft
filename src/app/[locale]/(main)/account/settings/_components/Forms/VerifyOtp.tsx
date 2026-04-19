@@ -9,7 +9,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
 
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 
 import CustomOtpInput from '@/components/shared/form/CustomOtpInput';
 import { Form } from '@/components/ui/form';
@@ -69,7 +69,6 @@ export default function VerifyOTPForm({
   const session = useSession();
   const accessToken = session.data?.accessToken;
   const { setIsOpen } = useContext(EditableFieldContext);
-  const queryCLient = useQueryClient();
 
   const { mutateAsync } = useMutation({
     mutationFn: async (values: ChangeUserIdentifierData) =>
