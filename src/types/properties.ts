@@ -9,6 +9,7 @@ export type PropertyApiRes = {
   rating: number;
   reviewCount: number;
   coverImageUrl: string;
+  images: string[];
 };
 
 export type RecommendedPropertiesApiRes = ApiResponse<PropertyApiRes[]>;
