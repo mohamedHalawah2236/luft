@@ -280,5 +280,11 @@
         "description": "A peaceful retreat with stunning views."
       }
     }
+  },
+  "emptyStates": {
+    "notFound": {
+      "title": "Well… this is awkward",
+      "description": "The page you’re looking for isn’t here anymore."
+    }
   }
 }
