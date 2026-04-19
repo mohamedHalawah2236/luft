@@ -105,18 +105,30 @@ export async function postData(
         redirect: true,
         callbackUrl: '/login',
       });
-      throw new Error('401 Unauthorized');
+      throw new Error('401 Unauthorized', {
+        cause: res.status,
+      });
     }
 
     const data = await res.json();
     if (data.errors) {
-      throw new Error(concatErrors(data));
+      throw new Error(concatErrors(data), {
+        cause: data.statusCode,
+      });
     }
-    throw new Error(data.message);
+    throw new Error(data.message, {
+      cause: data.statusCode,
+    });
   }
 
   const data = await res.json();
   if (data?.isError) {
+    if (data.statusCode === 401) {
+      signOut({
+        redirect: true,
+        callbackUrl: '/login',
+      });
+    }
     throw new Error(data?.message, {
       cause: data.statusCode,
     });
