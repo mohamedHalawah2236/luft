@@ -1,6 +1,9 @@
+import { Suspense } from 'react';
+
 import ConciergeSectionPreview from '@/components/sections/ConciergeSection/ConciergeSection';
 import PromiseSectionPreview from '@/components/sections/PromiseSection/PromiseSection';
 import TestimonialsSection from '@/components/sections/TestimonialsSection/TestimonialsSection';
+import Loader from '@/components/shared/Loader';
 
 import HeroSectionPreview from './sections/Hero/HeroSection';
 import RecommendedProperties from './sections/RecommendedProperties/RecommendedProperties';
@@ -17,9 +20,11 @@ export default function HomePage({
       <div className='container mb-20 mt-6 flex w-full flex-col md:mb-[7.5rem] md:mt-10 xl:my-[8.5rem]'>
         <HeroSectionPreview {...hero} />
       </div>
-      <div className='container my-20 md:my-[7.5rem] xl:my-[8.75rem]'>
-        <RecommendedProperties />
-      </div>
+      <Suspense fallback={<Loader />}>
+        <div className='container my-20 md:my-[7.5rem] xl:my-[8.75rem]'>
+          <RecommendedProperties />
+        </div>
+      </Suspense>
       <div className='my-20 bg-grayish-50 py-6 md:my-[7.5rem] md:py-12 xl:my-[8.75rem] xl:py-20'>
         <div className='container'>
           <ConciergeSectionPreview
