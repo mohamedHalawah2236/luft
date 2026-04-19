@@ -285,6 +285,10 @@
     "notFound": {
       "title": "Well… this is awkward",
       "description": "The page you’re looking for isn’t here anymore."
+    },
+    "error": {
+      "title": "We’re having trouble right now",
+      "description": "Our servers are temporarily unavailable. Please try again in a moment."
     }
   }
 }
