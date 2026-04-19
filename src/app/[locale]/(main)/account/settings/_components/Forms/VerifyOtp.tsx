@@ -2,7 +2,7 @@
 
 import { useContext, useState } from 'react';
 
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 
 import { useForm } from 'react-hook-form';
@@ -15,7 +15,6 @@ import CustomOtpInput from '@/components/shared/form/CustomOtpInput';
 import { Form } from '@/components/ui/form';
 
 import FieldFormLayout from './FieldFormLayout';
-import { profileFormQueryKey } from './schemas';
 
 import { EditableFieldContext } from '@/contexts/EditableFieldContext';
 
@@ -81,8 +80,12 @@ export default function VerifyOTPForm({
 
     onSuccess: () => {
       setIsOpen(false);
-      queryCLient.invalidateQueries({ queryKey: [profileFormQueryKey] });
       toast.success(tCommon('toaster.dataUpdatedSuccess'));
+      if (identifierType === IDENTIFIER_TYPE.Email)
+        signOut({
+          redirect: true,
+          callbackUrl: '/login',
+        });
     },
     onError: (error: Error) => setServerError(error.message),
   });
