@@ -103,6 +103,7 @@
     },
     "logout": "Logout",
     "currency": "Currency",
+    "night": "/night",
     "mediaNotSupported": "Media not supported"
   },
   "auth": {
@@ -270,6 +271,14 @@
     },
     "partners": {
       "luftPartner": "Luftstay Partner"
+    },
+    "recommendedProperties": {
+      "title": "Stays Recommended For You",
+      "subtitle": "A curated pick of our most comfortable, best-rated apartments.",
+      "card": {
+        "title": "The Serene Escape",
+        "description": "A peaceful retreat with stunning views."
+      }
     }
   }
 }
