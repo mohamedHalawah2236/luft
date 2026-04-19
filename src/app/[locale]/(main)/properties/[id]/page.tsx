@@ -24,11 +24,12 @@ export default async function PropertyPage({
   };
 
   return (
-    <div className='container my-[4.5rem] flex flex-col'>
+    <div className='flex flex-col'>
       <PropertyImages
         coverImage={property.coverImageUrl}
         images={property.images}
       />
+      <div className='container'></div>
     </div>
   );
 }
