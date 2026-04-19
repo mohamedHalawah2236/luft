@@ -64,7 +64,7 @@ export default function PropertyImages({
           href={'/'}
           className='absolute start-4 top-2 z-20 flex size-10 items-center justify-center rounded-full bg-grayish-50'
         >
-          <ChevronLeft className='text-grayish-400' />
+          <ChevronLeft className='text-grayish-400 rtl:rotate-180' />
         </Link>
         <div className='absolute bottom-2 left-1/2 z-50 mx-auto w-[66px] -translate-x-1/2 rounded-2xl bg-grayish-50 text-center text-lg leading-5 text-grayish-900'>
           {current}/{count}
