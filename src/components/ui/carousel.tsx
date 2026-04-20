@@ -38,7 +38,6 @@ const CarouselContext = React.createContext<CarouselContextProps | null>(null);
 
 function useCarousel() {
   const context = React.useContext(CarouselContext);
-  const dir = useLocale() === 'ar' ? 'rtl' : 'ltr';
 
   if (!context) {
     throw new Error('useCarousel must be used within a <Carousel />');
@@ -262,10 +261,9 @@ const CarouselNext = React.forwardRef<
 CarouselNext.displayName = 'CarouselNext';
 
 export {
-  Carousel,
-  type CarouselApi,
-  CarouselContent,
+  Carousel, type CarouselApi,
+CarouselContent,
   CarouselItem,
   CarouselNext,
-  CarouselPrevious,
-};
+  CarouselPrevious};
+
