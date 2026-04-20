@@ -8,6 +8,8 @@ import {
 import { ChevronLeft } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import AddToWishlistBtn from './AddToWishlistBtn';
+import ShareBtn from './ShareBtn';
 
 type PropertyImagesProps = {
   coverImage: string;
@@ -66,8 +68,16 @@ export default function PropertyImages({
         >
           <ChevronLeft className='text-grayish-400 rtl:rotate-180' />
         </Link>
-        <div className='absolute bottom-2 left-1/2 z-50 mx-auto w-[66px] -translate-x-1/2 rounded-2xl bg-grayish-50 text-center text-lg leading-5 text-grayish-900'>
-          {current}/{count}
+        <div className='absolute end-4 top-2 z-20 flex items-center gap-2'>
+          <div className='flex size-10 items-center justify-center rounded-full bg-grayish-50'>
+            <AddToWishlistBtn />
+          </div>
+          <div className='flex size-10 items-center justify-center rounded-full bg-grayish-50'>
+            <ShareBtn />
+          </div>
+        </div>
+        <div className='absolute bottom-2 left-1/2 z-50 mx-auto flex w-[66px] -translate-x-1/2 items-center justify-center rounded-2xl bg-grayish-50 text-center text-lg leading-5 text-grayish-900'>
+          <span>{current}</span>/<span>{count}</span>
         </div>
         <CarouselContent className='!-ml-0'>
           <CarouselItem
