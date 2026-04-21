@@ -1,8 +1,10 @@
 import { MapPin } from 'lucide-react';
+
 import AddDatesForPrices from './_components/AddDatesForPrices';
 import AddToWishlistBtn from './_components/AddToWishlistBtn';
 import AmenitiesList from './_components/AmenitiesList';
 import PropertyImages from './_components/PropertyImages';
+import ReservationForm from './_components/ReservationForm';
 import SectionTitle from './_components/SectionTitle';
 import ShareBtn from './_components/ShareBtn';
 
@@ -52,6 +54,12 @@ export default async function PropertyPage({
           {/* Booking section */}
           <AddDatesForPrices />
         </div>
+      </div>
+      <div className='max-h-fit sm:hidden'>
+        <ReservationForm
+          maxGuests={5}
+          variant='mobile'
+        />
       </div>
     </div>
   );

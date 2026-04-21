@@ -1,13 +1,17 @@
 'use client';
+import { useEffect, useState } from 'react';
+
+import Link from 'next/link';
+
+import { ChevronLeft } from 'lucide-react';
+
 import {
   Carousel,
   CarouselApi,
   CarouselContent,
   CarouselItem,
 } from '@/components/ui/carousel';
-import { ChevronLeft } from 'lucide-react';
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
+
 import AddToWishlistBtn from './AddToWishlistBtn';
 import ShareBtn from './ShareBtn';
 
