@@ -3,10 +3,11 @@ import { useState } from 'react';
 
 import { Check } from 'lucide-react';
 
+import { Amenity } from '@/types/properties';
 import SectionTitle from './SectionTitle';
 
 type AmenitiesListProps = {
-  amenities: { id: string }[];
+  amenities: Amenity[];
 };
 
 export default function AmenitiesList({ amenities }: AmenitiesListProps) {
@@ -21,21 +22,15 @@ export default function AmenitiesList({ amenities }: AmenitiesListProps) {
       {/* aminities */}
       <div className='grid w-full grid-cols-2 gap-4 md:grid-cols-3'>
         {/* Amenity Card */}
-        {Array.from({
-          length: !isExpanded
-            ? hasMoreThanMax
-              ? maxAminities
-              : amenities.length
-            : amenities.length,
-        }).map((_, index) => (
+        {amenities.map(({ amenityId, amenityName, amenityTypeName }) => (
           <div
-            key={index}
-            className='animate-fade flex w-full items-start gap-0.5 duration-300'
+            key={amenityId}
+            className='flex w-full animate-fade items-start gap-0.5 duration-300'
           >
             <Check className='mt-0.5 size-5 text-grayish-400' />
             <div className='flex flex-col gap-1'>
-              <h6 className='font-medium leading-5'>High-speed WiFi</h6>
-              <p className='text-sm text-grayish-400'>Living</p>
+              <h6 className='font-medium leading-5'>{amenityName}</h6>
+              <p className='text-sm text-grayish-400'>{amenityTypeName}</p>
             </div>
           </div>
         ))}

@@ -19,112 +19,12 @@ import ReviewCard from './ReviewCard';
 
 import { PropertyReview } from '@/types/properties';
 
-export default function ReviewsSection() {
+type ReviewsSectionProps = {
+  reviews: PropertyReview[];
+};
+export default function ReviewsSection({ reviews }: ReviewsSectionProps) {
   const t = useTranslations('sections.testimonials');
   const [isExpanded, setIsExpanded] = useState(false);
-
-  const reviews: PropertyReview[] = [
-    {
-      id: '1',
-      name: 'Mikasa Aramin',
-      city: t('dummyReviewLocation'),
-      imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Mikasa1',
-      rating: 4,
-      daysAgo: 5,
-      lengthOfStay: 6,
-      reviewText: t('dummyReviewText'),
-    },
-    {
-      id: '2',
-      name: 'Eren Yeager',
-      city: t('dummyReviewLocation'),
-      imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Eren',
-      rating: 5,
-      daysAgo: 12,
-      lengthOfStay: 4,
-      reviewText: t('dummyReviewText'),
-    },
-    {
-      id: '3',
-      name: 'Armin Arlert',
-      city: t('dummyReviewLocation'),
-      imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Armin',
-      rating: 5,
-      daysAgo: 8,
-      lengthOfStay: 7,
-      reviewText: t('dummyReviewText'),
-    },
-    {
-      id: '4',
-      name: 'Levi Ackerman',
-      city: t('dummyReviewLocation'),
-      imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Levi',
-      rating: 5,
-      daysAgo: 2,
-      lengthOfStay: 14,
-      reviewText: t('dummyReviewText'),
-    },
-    {
-      id: '5',
-      name: 'Hange Zoe',
-      city: t('dummyReviewLocation'),
-      imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Hange',
-      rating: 4,
-      daysAgo: 20,
-      lengthOfStay: 3,
-      reviewText: t('dummyReviewText'),
-    },
-    {
-      id: '6',
-      name: 'Erwin Smith',
-      city: t('dummyReviewLocation'),
-      imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Erwin',
-      rating: 5,
-      daysAgo: 45,
-      lengthOfStay: 5,
-      reviewText: t('dummyReviewText'),
-    },
-    {
-      id: '7',
-      name: 'Jean Kirstein',
-      city: t('dummyReviewLocation'),
-      imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Jean',
-      rating: 4,
-      daysAgo: 15,
-      lengthOfStay: 2,
-      reviewText: t('dummyReviewText'),
-    },
-    {
-      id: '8',
-      name: 'Sasha Blouse',
-      city: t('dummyReviewLocation'),
-      imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sasha',
-      rating: 5,
-      daysAgo: 6,
-      lengthOfStay: 8,
-      reviewText: t('dummyReviewText'),
-    },
-    {
-      id: '9',
-      name: 'Connie Springer',
-      city: t('dummyReviewLocation'),
-      imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Connie',
-      rating: 4,
-      daysAgo: 30,
-      lengthOfStay: 4,
-      reviewText: t('dummyReviewText'),
-    },
-    {
-      id: '10',
-      name: 'Historia Reiss',
-      city: t('dummyReviewLocation'),
-      imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Historia',
-      rating: 5,
-      daysAgo: 50,
-      lengthOfStay: 10,
-      reviewText: t('dummyReviewText'),
-    },
-  ];
 
   const maxCollapsedReviews = 4;
   const reviewsCount = reviews.length;
@@ -189,7 +89,7 @@ export default function ReviewsSection() {
             stopOnLastSnap: true,
           }),
         ]}
-        className='flex w-full items-center gap-2 pb-4 sm:hidden [&>.overflow-hidden]:flex-1'
+        className='flex w-full items-center gap-2 sm:hidden [&>.overflow-hidden]:flex-1'
       >
         <CarouselPrevious className='static !size-fit translate-x-0 translate-y-0 border-0 border-transparent p-0 hover:bg-grayish-30 max-sm:hidden' />
 
