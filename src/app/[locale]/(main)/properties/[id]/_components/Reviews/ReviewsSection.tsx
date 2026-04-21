@@ -1,10 +1,12 @@
 'use client';
 
+import { useState } from 'react';
+
 import { useTranslations } from 'next-intl';
 
-import StarRating from '@/components/icons/StarRating';
 import Autoplay from 'embla-carousel-autoplay';
 
+import StarRating from '@/components/icons/StarRating';
 import {
   Carousel,
   CarouselContent,
@@ -12,9 +14,10 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
-import { PropertyReview } from '@/types/properties';
-import { useState } from 'react';
+
 import ReviewCard from './ReviewCard';
+
+import { PropertyReview } from '@/types/properties';
 
 export default function ReviewsSection() {
   const t = useTranslations('sections.testimonials');

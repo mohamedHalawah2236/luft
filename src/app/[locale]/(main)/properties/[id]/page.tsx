@@ -4,6 +4,7 @@ import AddDatesForPrices from './_components/AddDatesForPrices';
 import AddToWishlistBtn from './_components/AddToWishlistBtn';
 import AmenitiesList from './_components/AmenitiesList';
 import PropertyImages from './_components/PropertyImages';
+import PropertyLocation from './_components/PropertyLocation';
 import ReservationForm from './_components/ReservationForm';
 import ReviewsSection from './_components/Reviews/ReviewsSection';
 import SectionTitle from './_components/SectionTitle';
@@ -55,8 +56,14 @@ export default async function PropertyPage({
           {/* Booking section */}
           <AddDatesForPrices />
         </div>
-        <div className='my-8 md:my-12 lg:my-[4.5rem]'>
+        <div className='my-8 md:my-12 lg:my-16'>
           <ReviewsSection />
+        </div>
+        <div className='mb-6 md:mb-8 lg:mb-12'>
+          <PropertyLocation
+            lat={30.0444}
+            lng={31.2357}
+          />
         </div>
       </div>
       <div className='max-h-fit sm:hidden'>

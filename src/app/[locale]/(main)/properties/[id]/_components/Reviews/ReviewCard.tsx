@@ -1,8 +1,10 @@
+import Image from 'next/image';
+import { useTranslations } from 'next-intl';
+
 import AirbnbIcon from '@/components/icons/AirbnbIcon';
 import StarRating from '@/components/icons/StarRating';
+
 import { PropertyReview } from '@/types/properties';
-import { useTranslations } from 'next-intl';
-import Image from 'next/image';
 
 export default function ReviewCard({ review }: { review: PropertyReview }) {
   const t = useTranslations('sections.testimonials');
@@ -48,7 +50,7 @@ export default function ReviewCard({ review }: { review: PropertyReview }) {
       {/* Review Text */}
       <p
         title={review.reviewText}
-        className='mb-1 line-clamp-3 min-w-[20.465rem] max-w-[20.465rem] flex-1 whitespace-pre-wrap text-grayish-400'
+        className='mb-1 line-clamp-3 flex-1 whitespace-pre-wrap text-grayish-400 max-sm:min-w-[20.465rem] max-sm:max-w-[20.465rem]'
       >
         {review.reviewText}
       </p>
