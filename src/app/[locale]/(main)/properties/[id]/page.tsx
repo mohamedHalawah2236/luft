@@ -5,6 +5,7 @@ import AddToWishlistBtn from './_components/AddToWishlistBtn';
 import AmenitiesList from './_components/AmenitiesList';
 import PropertyImages from './_components/PropertyImages';
 import ReservationForm from './_components/ReservationForm';
+import ReviewsSection from './_components/Reviews/ReviewsSection';
 import SectionTitle from './_components/SectionTitle';
 import ShareBtn from './_components/ShareBtn';
 
@@ -40,11 +41,11 @@ export default async function PropertyPage({
       <div className='container mt-8 md:mt-12 lg:mt-16'>
         <div className='flex justify-between gap-4'>
           {/* Text sections */}
-          <div className='flex flex-col pb-[6.1875rem] md:w-[32.44rem] xl:w-[46.625rem]'>
+          <div className='flex flex-col md:w-[32.44rem] xl:w-[46.625rem]'>
             <PropertyInfo />
-            <span className='my-8 h-px w-full bg-grayish-50' />
+            <span className='my-4 h-px w-full bg-grayish-50 md:my-6 lg:my-8' />
             <AboutProperty />
-            <span className='my-8 h-px w-full bg-grayish-50' />
+            <span className='my-4 h-px w-full bg-grayish-50 md:my-6 lg:my-8' />
             <AmenitiesList
               amenities={Array.from({ length: 20 }).map((_, index) => ({
                 id: index.toString(),
@@ -53,6 +54,9 @@ export default async function PropertyPage({
           </div>
           {/* Booking section */}
           <AddDatesForPrices />
+        </div>
+        <div className='my-8 md:my-12 lg:my-[4.5rem]'>
+          <ReviewsSection />
         </div>
       </div>
       <div className='max-h-fit sm:hidden'>
