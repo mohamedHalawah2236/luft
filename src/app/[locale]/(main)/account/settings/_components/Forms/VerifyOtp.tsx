@@ -9,12 +9,13 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
 
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import CustomOtpInput from '@/components/shared/form/CustomOtpInput';
 import { Form } from '@/components/ui/form';
 
 import FieldFormLayout from './FieldFormLayout';
+import { profileFormQueryKey } from './schemas';
 
 import { EditableFieldContext } from '@/contexts/EditableFieldContext';
 
@@ -70,6 +71,8 @@ export default function VerifyOTPForm({
   const accessToken = session.data?.accessToken;
   const { setIsOpen } = useContext(EditableFieldContext);
 
+  const queryClient = useQueryClient();
+
   const { mutateAsync } = useMutation({
     mutationFn: async (values: ChangeUserIdentifierData) =>
       changeUserIdentifier(values, accessToken),
@@ -85,6 +88,7 @@ export default function VerifyOTPForm({
           redirect: true,
           callbackUrl: '/login',
         });
+      else queryClient.invalidateQueries({ queryKey: [profileFormQueryKey] });
     },
     onError: (error: Error) => setServerError(error.message),
   });
