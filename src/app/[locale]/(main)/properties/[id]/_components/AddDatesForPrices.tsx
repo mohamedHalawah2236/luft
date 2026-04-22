@@ -1,13 +1,17 @@
+import { getTranslations } from 'next-intl/server';
+
 import ReservationForm from './ReservationForm';
 
 type AddDatesForPricesProps = {
   maxGuests: number;
   pricePerNight: number;
 };
-export default function AddDatesForPrices({
+export default async function AddDatesForPrices({
   maxGuests,
   pricePerNight,
 }: AddDatesForPricesProps) {
+  const t = await getTranslations('pages.propertyDetails.reservation');
+
   return (
     <div
       style={{ boxShadow: '0px 4px 20px 0px #1B1B1B12' }}
@@ -15,10 +19,10 @@ export default function AddDatesForPrices({
     >
       <div className='flex flex-col gap-1'>
         <h6 className='text-xl font-medium lg:text-2xl'>
-          Add dates for prices
+          {t('addDatesTitle')}
         </h6>
         <p className='leading-5 text-grayish-400'>
-          Choose your dates and guests to secure this stay.
+          {t('addDatesSubtitle')}
         </p>
       </div>
       <div className='flex flex-col gap-4'>
@@ -26,7 +30,7 @@ export default function AddDatesForPrices({
           <span className='text-[1.75rem] font-medium leading-9 text-grayish-900 lg:text-[2rem] lg:leading-10'>
             ${pricePerNight}
           </span>
-          &nbsp; for 2 nights
+          &nbsp; {t('forNights', { count: 2 })}
         </div>
         {/* Reservations form */}
         <ReservationForm maxGuests={maxGuests} />

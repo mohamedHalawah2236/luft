@@ -192,6 +192,45 @@
       "buttons": {
         "startPartnership": "ابدأ شراكتك"
       }
+    },
+    "propertyDetails": {
+      "about": {
+        "title": "عن هذا المكان",
+        "showMore": "عرض المزيد",
+        "showLess": "عرض أقل"
+      },
+      "amenities": {
+        "title": "ما يوفره هذا المكان",
+        "showAll": "عرض جميع المرافق",
+        "showLess": "عرض أقل"
+      },
+      "propertyInfo": {
+        "guests": "{count} ضيوف",
+        "bedrooms": "{count} غرف نوم",
+        "bathrooms": "{count} حمامات"
+      },
+      "location": {
+        "title": "أين ستكون"
+      },
+      "reservation": {
+        "addDatesTitle": "أضف التواريخ للأسعار",
+        "addDatesSubtitle": "اختر تواريخك وعدد ضيوفك لتأمين هذه الإقامة.",
+        "forNights": "لمدة {count} ليالٍ",
+        "checkIn": "تسجيل الوصول",
+        "checkOut": "تسجيل المغادرة",
+        "addDate": "أضف تاريخاً",
+        "guests": "الضيوف",
+        "guestsCount": "{count} ضيوف",
+        "reserve": "احجز الآن"
+      },
+      "reviews": {
+        "showAll": "عرض جميع التقييمات",
+        "showLess": "عرض أقل"
+      },
+      "actions": {
+        "share": "مشاركة",
+        "wishlist": "المفضلة"
+      }
     }
   },
   "sections": {

@@ -1,4 +1,3 @@
-import { getProperty } from '@/api/properties';
 import AboutProperty from './_components/AboutProperty';
 import AddDatesForPrices from './_components/AddDatesForPrices';
 import AmenitiesList from './_components/AmenitiesList';
@@ -8,6 +7,8 @@ import PropertyInfo from './_components/PropertyInfo';
 import PropertyLocation from './_components/PropertyLocation';
 import ReservationForm from './_components/ReservationForm';
 import ReviewsSection from './_components/Reviews/ReviewsSection';
+
+import { getProperty } from '@/api/properties';
 
 export default async function PropertyPage({
   params,

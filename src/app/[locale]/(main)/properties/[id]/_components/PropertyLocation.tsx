@@ -1,5 +1,7 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
+
 import SectionTitle from './SectionTitle';
 
 import { AdvancedMarker, APIProvider, Map } from '@vis.gl/react-google-maps';
@@ -33,11 +35,12 @@ function HomeMarkerIcon() {
 }
 
 export default function PropertyLocation({ lat, lng }: PropertyLocationProps) {
+  const t = useTranslations('pages.propertyDetails.location');
   const position = { lat, lng };
 
   return (
     <div className='flex flex-col gap-4'>
-      <SectionTitle>Where you’ll be</SectionTitle>
+      <SectionTitle>{t('title')}</SectionTitle>
       <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? ''}>
         <div className='h-fit w-full overflow-hidden rounded-3xl'>
           <Map

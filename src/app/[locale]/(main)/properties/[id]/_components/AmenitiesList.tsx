@@ -1,16 +1,20 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 
+import { useTranslations } from 'next-intl';
+
 import { Check } from 'lucide-react';
 
-import { Amenity } from '@/types/properties';
 import SectionTitle from './SectionTitle';
+
+import { Amenity } from '@/types/properties';
 
 type AmenitiesListProps = {
   amenities: Amenity[];
 };
 
 export default function AmenitiesList({ amenities }: AmenitiesListProps) {
+  const t = useTranslations('pages.propertyDetails.amenities');
   const [isExpanded, setIsExpanded] = useState(false);
   const isMobileRef = useRef<null | boolean>(null);
   const isMobile = isMobileRef.current;
@@ -24,7 +28,7 @@ export default function AmenitiesList({ amenities }: AmenitiesListProps) {
 
   return (
     <div className='flex flex-col gap-4 text-grayish-900'>
-      <SectionTitle>What this place offers</SectionTitle>
+      <SectionTitle>{t('title')}</SectionTitle>
       {/* aminities */}
       <div className='grid w-full grid-cols-2 gap-4 md:grid-cols-3'>
         {/* Amenity Card */}
@@ -47,7 +51,7 @@ export default function AmenitiesList({ amenities }: AmenitiesListProps) {
           className='mt-2 w-fit px-4 py-2.5 underline transition-all'
           onClick={() => setIsExpanded((prev) => !prev)}
         >
-          {isExpanded ? 'Show less' : 'Show all amenities'}
+          {isExpanded ? t('showLess') : t('showAll')}
         </button>
       )}
     </div>

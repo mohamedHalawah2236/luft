@@ -23,7 +23,8 @@ type ReviewsSectionProps = {
   reviews: PropertyReview[];
 };
 export default function ReviewsSection({ reviews }: ReviewsSectionProps) {
-  const t = useTranslations('sections.testimonials');
+  const t = useTranslations('pages.propertyDetails.reviews');
+  const tReviews = useTranslations('sections.testimonials');
   const [isExpanded, setIsExpanded] = useState(false);
 
   const maxCollapsedReviews = 4;
@@ -36,9 +37,9 @@ export default function ReviewsSection({ reviews }: ReviewsSectionProps) {
       <div className='mb-12 flex flex-col items-start justify-between gap-2 md:mb-12 md:flex-row md:items-end md:gap-6 lg:mb-16'>
         <div className='flex-1'>
           <h2 className='mb-2 text-[1.75rem] font-medium leading-9 text-grayish-900 md:text-[2rem] lg:text-5xl lg:leading-[3.625rem]'>
-            {t('title')}
+            {tReviews('title')}
           </h2>
-          <p className='text-grayish-400 lg:text-lg'>{t('subtitle')}</p>
+          <p className='text-grayish-400 lg:text-lg'>{tReviews('subtitle')}</p>
         </div>
 
         {/* Rating Badge */}
@@ -54,7 +55,7 @@ export default function ReviewsSection({ reviews }: ReviewsSectionProps) {
               size='md'
             />
             <span className='text-grayish-400'>
-              {t('ratedBy', { count: '1,000' })}
+              {tReviews('ratedBy', { count: '1,000' })}
             </span>
           </div>
         </div>
@@ -81,7 +82,7 @@ export default function ReviewsSection({ reviews }: ReviewsSectionProps) {
             className='mx-4 my-2.5 mt-8 w-fit text-grayish-900 underline lg:mt-12'
             onClick={() => setIsExpanded((prev) => !prev)}
           >
-            {isExpanded ? 'show less' : 'show all reviews'}
+            {isExpanded ? t('showLess') : t('showAll')}
           </button>
         )}
       </div>

@@ -1,3 +1,5 @@
+import { getTranslations } from 'next-intl/server';
+
 import { MapPin } from 'lucide-react';
 
 import AddToWishlistBtn from './AddToWishlistBtn';
@@ -14,7 +16,7 @@ type PropertyInfoProps = {
   area: string;
 };
 
-function PropertyInfo({
+async function PropertyInfo({
   title,
   subtitle,
   maximumGuests,
@@ -23,6 +25,8 @@ function PropertyInfo({
   city,
   area,
 }: PropertyInfoProps) {
+  const t = await getTranslations('pages.propertyDetails.propertyInfo');
+
   return (
     <div className='flex flex-col'>
       <div className='flex items-center justify-between'>
@@ -36,9 +40,9 @@ function PropertyInfo({
         {subtitle}
       </p>
       <div className='mt-2 flex items-center gap-1 leading-5'>
-        <span>{maximumGuests} Guests</span>.
-        <span>{numberOfRooms} Bedrooms</span>.
-        <span>{numberOfBathrooms} Bathrooms</span>
+        <span>{t('guests', { count: maximumGuests })}</span>.
+        <span>{t('bedrooms', { count: numberOfRooms })}</span>.
+        <span>{t('bathrooms', { count: numberOfBathrooms })}</span>
       </div>
       <div className='mt-2 flex items-center gap-1 text-grayish-400'>
         <MapPin className='size-5 text-grayish-400' />

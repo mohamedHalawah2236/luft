@@ -1,7 +1,10 @@
-import DriveIcon from '@/components/icons/DriveIcon';
-import { NearbyPlaceCategory } from '@/types/properties';
 import { Check } from 'lucide-react';
+
+import DriveIcon from '@/components/icons/DriveIcon';
+
 import SectionTitle from './SectionTitle';
+
+import { NearbyPlaceCategory } from '@/types/properties';
 
 export default function NearbyPlaces({
   nearbyPlaces,
