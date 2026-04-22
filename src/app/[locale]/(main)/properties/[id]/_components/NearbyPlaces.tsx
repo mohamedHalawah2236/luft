@@ -11,7 +11,10 @@ export default function NearbyPlaces({
   return (
     <div className='grid w-full grid-cols-1 gap-x-12 gap-y-8 sm:grid-cols-2 lg:grid-cols-3'>
       {nearbyPlaces.map(({ category, places }) => (
-        <div className='flex flex-col gap-6'>
+        <div
+          key={category}
+          className='flex flex-col gap-6'
+        >
           <SectionTitle>{category}</SectionTitle>
           <div className='flex flex-col gap-4'>
             {places.map(({ time, placeName }) => (

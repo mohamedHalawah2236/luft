@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { Check } from 'lucide-react';
 
@@ -12,7 +12,13 @@ type AmenitiesListProps = {
 
 export default function AmenitiesList({ amenities }: AmenitiesListProps) {
   const [isExpanded, setIsExpanded] = useState(false);
-  const isMobile = window.screen.width <= 600;
+  const isMobileRef = useRef<null | boolean>(null);
+  const isMobile = isMobileRef.current;
+
+  useEffect(() => {
+    isMobileRef.current = window.screen.width <= 600;
+  }, []);
+
   const maxAminities = isMobile ? 6 : 13;
   const hasMoreThanMax = amenities.length > maxAminities;
 
