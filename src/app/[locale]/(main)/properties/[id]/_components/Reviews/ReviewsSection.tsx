@@ -28,6 +28,7 @@ export default function ReviewsSection({ reviews }: ReviewsSectionProps) {
 
   const maxCollapsedReviews = 4;
   const reviewsCount = reviews.length;
+  const hasSeeMore = reviewsCount > maxCollapsedReviews;
 
   return (
     <section className='w-full'>
@@ -62,7 +63,11 @@ export default function ReviewsSection({ reviews }: ReviewsSectionProps) {
       <div className='flex flex-col max-sm:hidden'>
         <div className='grid grid-cols-2 gap-x-10 gap-y-12'>
           {Array.from({
-            length: isExpanded ? reviewsCount : maxCollapsedReviews,
+            length: hasSeeMore
+              ? isExpanded
+                ? reviewsCount
+                : maxCollapsedReviews
+              : reviewsCount,
           }).map((_, index) => (
             <ReviewCard
               key={reviews[index].id}
@@ -70,14 +75,15 @@ export default function ReviewsSection({ reviews }: ReviewsSectionProps) {
             />
           ))}
         </div>
-        {/* Reviews Carousel */}
-        <button
-          type='button'
-          className='mx-4 my-2.5 mt-8 w-fit text-grayish-900 underline lg:mt-12'
-          onClick={() => setIsExpanded((prev) => !prev)}
-        >
-          {isExpanded ? 'show less' : 'show all reviews'}
-        </button>
+        {hasSeeMore && (
+          <button
+            type='button'
+            className='mx-4 my-2.5 mt-8 w-fit text-grayish-900 underline lg:mt-12'
+            onClick={() => setIsExpanded((prev) => !prev)}
+          >
+            {isExpanded ? 'show less' : 'show all reviews'}
+          </button>
+        )}
       </div>
 
       {/* Reviews Carousel */}

@@ -7,6 +7,7 @@ import PropertyImages from './_components/PropertyImages';
 import PropertyInfo from './_components/PropertyInfo';
 import PropertyLocation from './_components/PropertyLocation';
 import ReservationForm from './_components/ReservationForm';
+import ReviewsSection from './_components/Reviews/ReviewsSection';
 
 export default async function PropertyPage({
   params,
@@ -76,7 +77,7 @@ export default async function PropertyPage({
         </div>
         {reviews.length > 0 && (
           <div className='my-8 md:my-12 lg:my-16'>
-            {/* <ReviewsSection reviews={reviews} /> */}
+            <ReviewsSection reviews={reviews} />
           </div>
         )}
         <div className='mb-6 md:mb-8 lg:mb-12'>

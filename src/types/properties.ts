@@ -41,8 +41,15 @@ export type PropertyCollection = {
   collectionName: string;
 };
 
-type Review = {
-  [key: string]: any;
+export type PropertyReview = {
+  id: string;
+  imageUrl: string;
+  name: string;
+  city: string;
+  reviewText: string;
+  lengthOfStay: number;
+  daysAgo: number;
+  rating: number;
 };
 
 export type PropertyDetailsApiRes = {
@@ -70,19 +77,8 @@ export type PropertyDetailsApiRes = {
   collections: PropertyCollection[];
   averageRating: number;
   reviewCount: number;
-  reviews: Review[];
+  reviews: PropertyReview[];
 };
 
 export type RecommendedPropertiesApiRes = ApiResponse<PropertyApiRes[]>;
 export type GetPropertyApiResponse = ApiResponse<PropertyDetailsApiRes>;
-
-export type PropertyReview = {
-  id: string;
-  imageUrl: string;
-  name: string;
-  city: string;
-  reviewText: string;
-  lengthOfStay: number;
-  daysAgo: number;
-  rating: number;
-};
