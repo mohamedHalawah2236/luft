@@ -55,18 +55,7 @@ export default async function PropertyPage({
               area={area}
             />
             <span className='my-4 h-px w-full bg-grayish-50 md:my-6 lg:my-8' />
-            <AboutProperty
-              description={`Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti
-            sunt eum iste, similique, quidem rem quis perspiciatis aspernatur
-            suscipit, ipsum doloribus minus fuga possimus porro assumenda magnam
-            asperiores dolorem odio.Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti
-            sunt eum iste, similique, quidem rem quis perspiciatis aspernatur
-            suscipit, ipsum doloribus minus fuga possimus porro assumenda magnam
-            asperiores dolorem odio.Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti
-            sunt eum iste, similique, quidem rem quis perspiciatis aspernatur
-            suscipit, ipsum doloribus minus fuga possimus porro assumenda magnam
-            asperiores dolorem odio.`}
-            />
+            <AboutProperty description={description} />
             <span className='my-4 h-px w-full bg-grayish-50 md:my-6 lg:my-8' />
             {amenities.length > 0 && <AmenitiesList amenities={amenities} />}
           </div>

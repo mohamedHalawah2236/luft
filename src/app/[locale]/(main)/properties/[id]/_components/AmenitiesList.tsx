@@ -38,9 +38,13 @@ export default function AmenitiesList({ amenities }: AmenitiesListProps) {
             className='flex w-full animate-fade items-start gap-0.5 duration-300'
           >
             <Check className='mt-0.5 size-5 text-grayish-400' />
-            <div className='flex flex-col gap-1'>
-              <h6 className='font-medium leading-5'>{amenityName}</h6>
-              <p className='text-sm text-grayish-400'>{amenityTypeName}</p>
+            <div className='flex flex-1 flex-col gap-1'>
+              <h6 className='line-clamp-1 font-medium leading-5'>
+                {amenityName}
+              </h6>
+              <p className='line-clamp-1 text-sm text-grayish-400'>
+                {amenityTypeName}
+              </p>
             </div>
           </div>
         ))}

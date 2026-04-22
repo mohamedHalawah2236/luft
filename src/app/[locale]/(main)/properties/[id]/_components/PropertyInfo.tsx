@@ -30,13 +30,13 @@ async function PropertyInfo({
   return (
     <div className='flex flex-col'>
       <div className='flex items-center justify-between'>
-        <SectionTitle>{title}</SectionTitle>
+        <SectionTitle className='line-clamp-2'>{title}</SectionTitle>
         <div className='flex items-center gap-4 max-md:hidden'>
           <ShareBtn />
           <AddToWishlistBtn />
         </div>
       </div>
-      <p className='mt-4 font-medium leading-5 text-grayish-900 md:text-xl xl:text-xl'>
+      <p className='mt-4 line-clamp-2 font-medium leading-5 text-grayish-900 md:text-xl xl:text-xl'>
         {subtitle}
       </p>
       <div className='mt-2 flex items-center gap-1 leading-5'>
@@ -46,7 +46,7 @@ async function PropertyInfo({
       </div>
       <div className='mt-2 flex items-center gap-1 text-grayish-400'>
         <MapPin className='size-5 text-grayish-400' />
-        <span>
+        <span className='line-clamp-1 flex-1'>
           {city}, {area}
         </span>
       </div>

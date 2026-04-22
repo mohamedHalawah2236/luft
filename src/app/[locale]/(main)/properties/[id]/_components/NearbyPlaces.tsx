@@ -18,7 +18,7 @@ export default function NearbyPlaces({
           key={category}
           className='flex flex-col gap-6'
         >
-          <SectionTitle>{category}</SectionTitle>
+          <SectionTitle className='line-clamp-1'>{category}</SectionTitle>
           <div className='flex flex-col gap-4'>
             {places.map(({ time, placeName }) => (
               <div
@@ -27,12 +27,14 @@ export default function NearbyPlaces({
               >
                 <div className='flex items-center gap-2'>
                   <Check className='size-5 text-grayish-400' />
-                  <span className='font-medium leading-5 text-grayish-900 md:text-lg lg:text-xl'>
+                  <span className='line-clamp-1 font-medium leading-5 text-grayish-900 md:text-lg lg:text-xl'>
                     {placeName}
                   </span>
                 </div>
                 <div className='flex items-center gap-1'>
-                  <span className='text-grayish-400'>{time}</span>
+                  <span className='line-clamp-1 flex-1 text-grayish-400'>
+                    {time}
+                  </span>
                   <DriveIcon className='size-6 text-grayish-400' />
                 </div>
               </div>
