@@ -146,9 +146,11 @@ export default function PropertyImages({
             <ShareBtn />
           </div>
         </div>
-        <div className='absolute bottom-2 left-1/2 z-50 mx-auto flex w-[66px] -translate-x-1/2 items-center justify-center rounded-2xl bg-grayish-50 text-center text-lg leading-5 text-grayish-900'>
-          <span>{current}</span>/<span>{count}</span>
-        </div>
+        {count > 0 && (
+          <div className='absolute bottom-2 left-1/2 z-50 mx-auto flex w-[66px] -translate-x-1/2 animate-fade items-center justify-center rounded-2xl bg-grayish-50 text-center text-lg leading-5 text-grayish-900'>
+            <span>{current}</span>/<span>{count}</span>
+          </div>
+        )}
         <CarouselContent className='!-ml-0'>
           <CarouselItem
             className='h-[270px] min-w-full pl-0'
