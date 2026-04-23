@@ -189,6 +189,49 @@
       "buttons": {
         "startPartnership": "Start your partnership"
       }
+    },
+    "propertyDetails": {
+      "about": {
+        "title": "About this Place",
+        "showMore": "Show more",
+        "showLess": "Show less"
+      },
+      "amenities": {
+        "title": "What this place offers",
+        "showAll": "Show all amenities",
+        "showLess": "Show less"
+      },
+      "propertyInfo": {
+        "guests": "{count} Guests",
+        "bedrooms": "{count} Bedrooms",
+        "bathrooms": "{count} Bathrooms"
+      },
+      "location": {
+        "title": "Where you'll be"
+      },
+      "reservation": {
+        "addDatesTitle": "Add dates for prices",
+        "addDatesSubtitle": "Choose your dates and guests to secure this stay.",
+        "forNights": "for {count} nights",
+        "checkIn": "Check-in",
+        "checkOut": "Check-out",
+        "addDate": "Add Date",
+        "guests": "Guests",
+        "guestsCount": "{count} Guests",
+        "reserve": "Reserve"
+      },
+      "reviews": {
+        "showAll": "Show all reviews",
+        "showLess": "Show less"
+      },
+      "actions": {
+        "share": "Share",
+        "wishlist": "Wishlist"
+      },
+      "images": {
+        "title": "Property Images",
+        "showAll": "Show All photos"
+      }
     }
   },
   "sections": {
