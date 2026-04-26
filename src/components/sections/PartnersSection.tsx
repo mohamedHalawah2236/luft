@@ -14,7 +14,7 @@ import {
   CarouselScrollBar,
 } from '@/components/ui/carousel';
 
-import { useCarouselScrollBar } from '@/hooks/useCarouselScrollbar';
+
 
 import { PartnersSectionRes } from '@/types/page';
 
@@ -25,7 +25,6 @@ export default function PartnersSection({
 }: PartnersSectionRes) {
   const t = useTranslations('sections.partners');
   const [api, setApi] = useState<CarouselApi>();
-  const { value, onChange, canScroll } = useCarouselScrollBar(api);
 
   return (
     <section className='flex flex-col gap-16'>
@@ -100,13 +99,10 @@ export default function PartnersSection({
             ))}
           </CarouselContent>
         </Carousel>
-        {canScroll && (
-          <CarouselScrollBar
-            id='partners'
-            value={value}
-            onChange={onChange}
-          />
-        )}
+        <CarouselScrollBar
+          id='partners'
+          api={api}
+        />
       </div>
     </section>
   );

@@ -12,7 +12,7 @@ import {
 
 import CardItem from './CardItem';
 
-import { useCarouselScrollBar } from '@/hooks/useCarouselScrollbar';
+
 
 import { CardsSectionRes } from '@/types/page';
 
@@ -22,7 +22,6 @@ export default function CardsSection({
   items,
 }: CardsSectionRes) {
   const [api, setApi] = useState<CarouselApi>();
-  const { value, onChange, canScroll } = useCarouselScrollBar(api);
 
   return (
     <div className='flex w-full flex-col gap-12 overflow-hidden text-center'>
@@ -61,13 +60,10 @@ export default function CardsSection({
             ))}
           </CarouselContent>
         </Carousel>
-        {canScroll && (
-          <CarouselScrollBar
-            id='cards'
-            value={value}
-            onChange={onChange}
-          />
-        )}
+        <CarouselScrollBar
+          id='cards'
+          api={api}
+        />
       </div>
     </div>
   );

@@ -16,7 +16,6 @@ import {
 
 import PropertyCard from './PropertyCard';
 
-import { useCarouselScrollBar } from '@/hooks/useCarouselScrollbar';
 
 import { PropertyApiRes } from '@/types/properties';
 
@@ -28,7 +27,6 @@ export default function PropertiesCarousel({
 }: PropertiesCarouselProps) {
   const t = useTranslations('sections.recommendedProperties');
   const [api, setApi] = useState<CarouselApi>();
-  const { value, onChange, canScroll } = useCarouselScrollBar(api);
 
   return (
     <>
@@ -72,13 +70,10 @@ export default function PropertiesCarousel({
           )}
         </CarouselContent>
       </Carousel>
-      {canScroll && (
-        <CarouselScrollBar
-          id='property'
-          value={value}
-          onChange={onChange}
-        />
-      )}
+      <CarouselScrollBar
+        id='property'
+        api={api}
+      />
     </>
   );
 }

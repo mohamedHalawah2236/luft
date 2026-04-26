@@ -260,26 +260,30 @@ const CarouselNext = React.forwardRef<
 });
 CarouselNext.displayName = 'CarouselNext';
 
+import { useCarouselScrollBar } from '@/hooks/useCarouselScrollbar';
+
 type CarouselScrollBarProps = {
-  value: number;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  id: string;
+  api: CarouselApi | undefined;
+  id?: string;
   className?: string;
 };
 
 const CarouselScrollBar = ({
-  value,
-  onChange,
+  api,
   id,
   className,
 }: CarouselScrollBarProps) => {
+  const { value, onChange, canScroll } = useCarouselScrollBar(api);
+
+  if (!canScroll) return null;
+
   return (
     <input
       id={id}
       type='range'
       min='0'
       max='1'
-      step='0.001'
+      step='0.0001'
       value={value}
       onChange={onChange}
       className={cn(
@@ -292,10 +296,10 @@ const CarouselScrollBar = ({
 
 export {
   Carousel,
-  type CarouselApi,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
   CarouselScrollBar,
+  type CarouselApi,
 };

@@ -17,7 +17,7 @@ import {
   CarouselScrollBar,
 } from '@/components/ui/carousel';
 
-import { useCarouselScrollBar } from '@/hooks/useCarouselScrollbar';
+
 
 interface Review {
   id: string;
@@ -33,7 +33,6 @@ interface Review {
 export default function TestimonialsSection() {
   const t = useTranslations('sections.testimonials');
   const [api, setApi] = useState<CarouselApi>();
-  const { value, onChange, canScroll } = useCarouselScrollBar(api);
 
   const reviews: Review[] = [
     {
@@ -282,14 +281,11 @@ export default function TestimonialsSection() {
             ))}
           </CarouselContent>
         </Carousel>
-        {canScroll && (
-          <CarouselScrollBar
-            id='testimonials'
-            value={value}
-            onChange={onChange}
-            className='bg-grayish-100'
-          />
-        )}
+        <CarouselScrollBar
+          id='testimonials'
+          api={api}
+          className='bg-grayish-100'
+        />
       </div>
     </section>
   );
