@@ -1,12 +1,18 @@
+'use client';
+
+import { useState } from 'react';
+
 import {
   Carousel,
+  CarouselApi,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
+  CarouselScrollBar,
 } from '@/components/ui/carousel';
 
 import CardItem from './CardItem';
+
+import { useCarouselScrollBar } from '@/hooks/useCarouselScrollbar';
 
 import { CardsSectionRes } from '@/types/page';
 
@@ -15,6 +21,9 @@ export default function CardsSection({
   description,
   items,
 }: CardsSectionRes) {
+  const [api, setApi] = useState<CarouselApi>();
+  const { value, onChange, canScroll } = useCarouselScrollBar(api);
+
   return (
     <div className='flex w-full flex-col gap-12 overflow-hidden text-center'>
       {/* Texts */}
@@ -33,24 +42,33 @@ export default function CardsSection({
         </p>
       </div>
 
-      <Carousel className='flex w-full items-center gap-1 pb-12 [&>.overflow-hidden]:flex-1'>
-        <CarouselPrevious className='static translate-x-0 translate-y-0 border-0 border-transparent hover:bg-grayish-30' />
-
-        <CarouselContent className='-ms-4 flex-1 lg:-ms-6'>
-          {items.map((item, index) => (
-            <CarouselItem
-              key={index}
-              className='ps-4 lg:ps-6'
-            >
-              <CardItem
-                key={'card' + item.id}
-                {...item}
-              />
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselNext className='static translate-x-0 translate-y-0 border-0 border-transparent hover:bg-grayish-30' />
-      </Carousel>
+      <div className='flex flex-col items-center gap-6 md:gap-8 lg:gap-12'>
+        <Carousel
+          setApi={setApi}
+          className='flex w-full items-center gap-1 pb-4 [&>.overflow-hidden]:flex-1'
+        >
+          <CarouselContent className='-ms-4 flex-1 lg:-ms-6'>
+            {items.map((item, index) => (
+              <CarouselItem
+                key={index}
+                className='ps-4 lg:ps-6'
+              >
+                <CardItem
+                  key={'card' + item.id}
+                  {...item}
+                />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
+        {canScroll && (
+          <CarouselScrollBar
+            id='cards'
+            value={value}
+            onChange={onChange}
+          />
+        )}
+      </div>
     </div>
   );
 }

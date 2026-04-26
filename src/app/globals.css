@@ -266,3 +266,14 @@ body {
   filter: brightness(1.15) contrast(1.1) saturate(1.05);
   background-color: var(--primary-30);
 }
+
+/* globals.css */
+
+input[type='range'].carousel-scroll::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  @apply h-2 w-12 cursor-grab rounded-full bg-grayish-400 active:cursor-grabbing;
+}
+
+input[type='range'].carousel-scroll::-moz-range-thumb {
+  @apply h-2 w-12 cursor-grab rounded-full bg-grayish-400 active:cursor-grabbing;
+}

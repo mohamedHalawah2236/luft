@@ -17,7 +17,6 @@ export default async function PropertyPage({
 }) {
   const { id } = await params;
   const { result: property } = await getProperty(id);
-  const coverImage = property.images.find((img) => img.isCover);
   const {
     title,
     subtitle,
