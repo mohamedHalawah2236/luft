@@ -37,10 +37,7 @@ export default async function PropertyPage({
 
   return (
     <div className='flex size-full flex-col bg-grayish-30 sm:pb-16 lg:pb-44'>
-      <PropertyImages
-        coverImage={coverImage?.url ?? ''}
-        images={property.images.map((img) => img.url)}
-      />
+      <PropertyImages images={property.images} />
       <div className='container mt-8 md:mt-12 lg:mt-16'>
         <div className='flex justify-between gap-4'>
           {/* Text sections */}

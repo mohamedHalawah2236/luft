@@ -12,7 +12,7 @@ export type PropertyApiRes = {
   images: string[];
 };
 
-type PropertyImage = {
+export type PropertyImage = {
   id: string;
   url: string;
   isCover: boolean;

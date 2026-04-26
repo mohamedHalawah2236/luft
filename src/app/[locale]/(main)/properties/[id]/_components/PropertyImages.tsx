@@ -20,15 +20,13 @@ import AddToWishlistBtn from './AddToWishlistBtn';
 import ImgDialog from './ImgDialog';
 import ShareBtn from './ShareBtn';
 
+import type { PropertyImage } from '@/types/properties';
+
 type PropertyImagesProps = {
-  coverImage: string;
-  images: string[];
+  images: PropertyImage[];
 };
 
-export default function PropertyImages({
-  coverImage,
-  images,
-}: PropertyImagesProps) {
+export default function PropertyImages({ images }: PropertyImagesProps) {
   const t = useTranslations('pages.propertyDetails.images');
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [api, setApi] = useState<CarouselApi>();
@@ -46,6 +44,9 @@ export default function PropertyImages({
   }, [api]);
 
   const hasShowPhotosBtn = true;
+
+  const coverImage = images.find((img) => img.isCover)?.url ?? '';
+  const imagesWithoutCover = images.filter((img) => !img.isCover);
 
   return (
     <>
@@ -91,18 +92,22 @@ export default function PropertyImages({
                         />
                       </CarouselItem>
 
-                      {images.map((image, index) => (
-                        <CarouselItem
-                          className='flex max-h-full min-w-full justify-center'
-                          key={image + index}
-                        >
-                          <img
-                            src={image}
-                            alt=''
-                            className='max-h-full min-h-full'
-                          />
-                        </CarouselItem>
-                      ))}
+                      {images.map(({ url, id, isCover }, index) => {
+                        if (isCover) return null;
+
+                        return (
+                          <CarouselItem
+                            className='flex max-h-full min-w-full justify-center'
+                            key={id + index}
+                          >
+                            <img
+                              src={url}
+                              alt=''
+                              className='max-h-full min-h-full'
+                            />
+                          </CarouselItem>
+                        );
+                      })}
                     </CarouselContent>
                     <CarouselNext className='static !size-fit translate-x-0 translate-y-0 border-0 border-transparent bg-transparent p-0 hover:bg-grayish-30 max-sm:hidden' />
                   </Carousel>
@@ -121,16 +126,17 @@ export default function PropertyImages({
 
           <div className='grid flex-1 grid-cols-2 grid-rows-2 gap-4'>
             {Array.from({ length: 4 }).map((_, index) => {
-              const image = images[index];
-              if (!image) return null;
+              const imageUrl = images[index]?.url;
+              const isCover = images[index]?.isCover;
+              if (!imageUrl || isCover) return null;
 
               return (
                 <ImgDialog
                   key={index}
-                  src={image}
+                  src={imageUrl}
                 >
                   <img
-                    src={image}
+                    src={imageUrl}
                     alt=''
                     className='h-full w-full rounded-2xl object-cover'
                   />
@@ -176,18 +182,21 @@ export default function PropertyImages({
             />
           </CarouselItem>
 
-          {images.map((image, index) => (
-            <CarouselItem
-              className='h-[270px] min-w-full pl-0'
-              key={image + index}
-            >
-              <img
-                src={image}
-                alt=''
-                className='size-full object-cover'
-              />
-            </CarouselItem>
-          ))}
+          {images.map(({ url, id, isCover }, index) => {
+            if (isCover) return null;
+            return (
+              <CarouselItem
+                className='h-[270px] min-w-full pl-0'
+                key={id + index}
+              >
+                <img
+                  src={url}
+                  alt=''
+                  className='size-full object-cover'
+                />
+              </CarouselItem>
+            );
+          })}
         </CarouselContent>
       </Carousel>
     </>
