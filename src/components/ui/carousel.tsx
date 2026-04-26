@@ -260,10 +260,46 @@ const CarouselNext = React.forwardRef<
 });
 CarouselNext.displayName = 'CarouselNext';
 
+import { useCarouselScrollBar } from '@/hooks/useCarouselScrollbar';
+
+type CarouselScrollBarProps = {
+  api: CarouselApi | undefined;
+  id?: string;
+  className?: string;
+};
+
+const CarouselScrollBar = ({
+  api,
+  id,
+  className,
+}: CarouselScrollBarProps) => {
+  const { value, onChange, canScroll } = useCarouselScrollBar(api);
+
+  if (!canScroll) return null;
+
+  return (
+    <input
+      id={id}
+      type='range'
+      min='0'
+      max='1'
+      step='0.0001'
+      value={value}
+      onChange={onChange}
+      className={cn(
+        'carousel-scroll mx-auto h-2 w-[16.5rem] appearance-none rounded-full bg-grayish-50',
+        className,
+      )}
+    />
+  );
+};
+
 export {
-  Carousel, type CarouselApi,
-CarouselContent,
+  Carousel,
+  type CarouselApi,
+  CarouselContent,
   CarouselItem,
   CarouselNext,
-  CarouselPrevious};
-
+  CarouselPrevious,
+  CarouselScrollBar,
+};

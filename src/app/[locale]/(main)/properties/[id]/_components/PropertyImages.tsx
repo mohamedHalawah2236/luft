@@ -17,17 +17,16 @@ import {
 } from '@/components/ui/carousel';
 
 import AddToWishlistBtn from './AddToWishlistBtn';
+import ImgDialog from './ImgDialog';
 import ShareBtn from './ShareBtn';
 
+import type { PropertyImage } from '@/types/properties';
+
 type PropertyImagesProps = {
-  coverImage: string;
-  images: string[];
+  images: PropertyImage[];
 };
 
-export default function PropertyImages({
-  coverImage,
-  images,
-}: PropertyImagesProps) {
+export default function PropertyImages({ images }: PropertyImagesProps) {
   const t = useTranslations('pages.propertyDetails.images');
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [api, setApi] = useState<CarouselApi>();
@@ -44,84 +43,104 @@ export default function PropertyImages({
     });
   }, [api]);
 
+  const hasShowPhotosBtn = true;
+
+  const coverImage = images.find((img) => img.isCover)?.url ?? '';
+  const imagesWithoutCover = images.filter((img) => !img.isCover);
+
   return (
     <>
       <div className='container relative mt-[4.5rem] max-md:hidden md:h-[23.75rem] xl:h-[36.625rem]'>
         <div className='relative flex h-full gap-4'>
-          <>
-            <button
-              onClick={() => setIsGalleryOpen(true)}
-              type='button'
-              style={{ boxShadow: '0px 4px 20px 0px #1B1B1B12' }}
-              className='absolute bottom-4 end-4 z-30 flex w-[12.5rem] items-center justify-center gap-1 rounded-full bg-white py-2.5 text-grayish-900 max-md:hidden'
-            >
-              <Grip className='size-5' />
-              <span className='leading-5'>{t('showAll')}</span>
-            </button>
-            <Modal
-              isOpen={isGalleryOpen}
-              onClose={() => setIsGalleryOpen(false)}
-              toggle={setIsGalleryOpen}
-              header={
-                <>
-                  <h4 className='p-6 text-center text-3xl font-medium'>
-                    {t('title')}
-                  </h4>
-                </>
-              }
-              className='h-[95%] gap-0 overflow-hidden max-md:hidden [&>#modal-content]:h-full'
-            >
-              <div className='h-full w-full px-8 pb-10'>
-                <Carousel className='flex h-full w-full items-center [&>.overflow-hidden]:h-full [&>.overflow-hidden]:max-h-full [&>.overflow-hidden]:flex-1'>
-                  <CarouselPrevious className='static !size-fit translate-x-0 translate-y-0 border-0 border-transparent bg-transparent p-0 hover:bg-grayish-30 max-sm:hidden' />
+          {hasShowPhotosBtn && (
+            <>
+              <button
+                onClick={() => setIsGalleryOpen(true)}
+                type='button'
+                style={{ boxShadow: '0px 4px 20px 0px #1B1B1B12' }}
+                className='absolute bottom-4 end-4 z-30 flex w-fit items-center justify-center gap-1 rounded-full bg-white px-1.5 py-2.5 text-grayish-900 max-md:hidden lg:w-[12.5rem] lg:px-0'
+              >
+                <Grip className='size-5' />
+                <span className='leading-5'>{t('showAll')}</span>
+              </button>
+              <Modal
+                isOpen={isGalleryOpen}
+                onClose={() => setIsGalleryOpen(false)}
+                toggle={setIsGalleryOpen}
+                header={
+                  <>
+                    <h4 className='p-6 text-center text-3xl font-medium'>
+                      {t('title')}
+                    </h4>
+                  </>
+                }
+                className='h-[95%] gap-0 overflow-hidden max-md:hidden [&>#modal-content]:h-full'
+              >
+                <div className='h-full w-full px-8 pb-10'>
+                  <Carousel className='flex h-full w-full items-center [&>.overflow-hidden]:h-full [&>.overflow-hidden]:max-h-full [&>.overflow-hidden]:flex-1'>
+                    <CarouselPrevious className='static !size-fit translate-x-0 translate-y-0 border-0 border-transparent bg-transparent p-0 hover:bg-grayish-30 max-sm:hidden' />
 
-                  <CarouselContent className='!m-0 h-full max-h-full'>
-                    <CarouselItem
-                      className='flex max-h-full min-w-full justify-center'
-                      key={coverImage}
-                    >
-                      <img
-                        src={coverImage}
-                        alt=''
-                        className='max-h-full min-h-full'
-                      />
-                    </CarouselItem>
-
-                    {images.map((image, index) => (
+                    <CarouselContent className='!m-0 h-full max-h-full'>
                       <CarouselItem
                         className='flex max-h-full min-w-full justify-center'
-                        key={image + index}
+                        key={coverImage}
                       >
                         <img
-                          src={image}
+                          src={coverImage}
                           alt=''
                           className='max-h-full min-h-full'
                         />
                       </CarouselItem>
-                    ))}
-                  </CarouselContent>
-                  <CarouselNext className='static !size-fit translate-x-0 translate-y-0 border-0 border-transparent bg-transparent p-0 hover:bg-grayish-30 max-sm:hidden' />
-                </Carousel>
-              </div>
-            </Modal>
-          </>
-          <img
-            src={coverImage}
-            alt=''
-            className='min-h-full rounded-2xl object-cover md:w-[24.5rem] xl:w-[39.75rem]'
-          />
+
+                      {images.map(({ url, id, isCover }, index) => {
+                        if (isCover) return null;
+
+                        return (
+                          <CarouselItem
+                            className='flex max-h-full min-w-full justify-center'
+                            key={id + index}
+                          >
+                            <img
+                              src={url}
+                              alt=''
+                              className='max-h-full min-h-full'
+                            />
+                          </CarouselItem>
+                        );
+                      })}
+                    </CarouselContent>
+                    <CarouselNext className='static !size-fit translate-x-0 translate-y-0 border-0 border-transparent bg-transparent p-0 hover:bg-grayish-30 max-sm:hidden' />
+                  </Carousel>
+                </div>
+              </Modal>
+            </>
+          )}
+
+          <ImgDialog src={coverImage}>
+            <img
+              src={coverImage}
+              alt=''
+              className='min-h-full rounded-2xl object-cover md:w-[24.5rem] xl:w-[39.75rem]'
+            />
+          </ImgDialog>
+
           <div className='grid flex-1 grid-cols-2 grid-rows-2 gap-4'>
             {Array.from({ length: 4 }).map((_, index) => {
-              const image = images[index];
-              if (!image) return null;
+              const imageUrl = images[index]?.url;
+              const isCover = images[index]?.isCover;
+              if (!imageUrl || isCover) return null;
 
               return (
-                <img
+                <ImgDialog
                   key={index}
-                  src={image}
-                  alt=''
-                  className='h-full w-full rounded-2xl object-cover'
-                />
+                  src={imageUrl}
+                >
+                  <img
+                    src={imageUrl}
+                    alt=''
+                    className='h-full w-full rounded-2xl object-cover'
+                  />
+                </ImgDialog>
               );
             })}
           </div>
@@ -163,18 +182,21 @@ export default function PropertyImages({
             />
           </CarouselItem>
 
-          {images.map((image, index) => (
-            <CarouselItem
-              className='h-[270px] min-w-full pl-0'
-              key={image + index}
-            >
-              <img
-                src={image}
-                alt=''
-                className='size-full object-cover'
-              />
-            </CarouselItem>
-          ))}
+          {images.map(({ url, id, isCover }, index) => {
+            if (isCover) return null;
+            return (
+              <CarouselItem
+                className='h-[270px] min-w-full pl-0'
+                key={id + index}
+              >
+                <img
+                  src={url}
+                  alt=''
+                  className='size-full object-cover'
+                />
+              </CarouselItem>
+            );
+          })}
         </CarouselContent>
       </Carousel>
     </>

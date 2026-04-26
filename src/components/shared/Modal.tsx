@@ -22,6 +22,7 @@ export const Modal = ({
   footer,
   headerClassName,
   footerClassName,
+  closeOnClickOutside = false,
 }: ModalProps) => {
   const handleOpenChange = (val: boolean) => {
     toggle?.(val);
@@ -47,7 +48,7 @@ export const Modal = ({
           },
           className,
         )}
-        onInteractOutside={(e) => e.preventDefault()}
+        onInteractOutside={(e) => !closeOnClickOutside && e.preventDefault()}
       >
         {header && (
           <DialogHeader

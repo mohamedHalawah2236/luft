@@ -17,6 +17,7 @@ export type ModalProps = {
   forceModal?: boolean;
   headerClassName?: string;
   footerClassName?: string;
+  closeOnClickOutside?: boolean;
 };
 
 export type DropDownItem = {

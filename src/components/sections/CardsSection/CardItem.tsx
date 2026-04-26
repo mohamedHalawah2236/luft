@@ -8,7 +8,7 @@ export default function CardItemPreview({
   return (
     <button
       type='button'
-      className='group flex min-w-[19.125rem] max-w-[19.125rem] flex-col gap-4 overflow-hidden max-sm:min-w-[15.625rem] max-sm:max-w-[15.625rem]'
+      className='group flex min-w-[19.125rem] max-w-[19.125rem] select-none flex-col gap-4 overflow-hidden max-sm:min-w-[15.625rem] max-sm:max-w-[15.625rem]'
     >
       <img
         src={iconUrl}
