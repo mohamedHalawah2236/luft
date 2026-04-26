@@ -16,7 +16,6 @@ import {
 
 import PropertyCard from './PropertyCard';
 
-
 import { PropertyApiRes } from '@/types/properties';
 
 type PropertiesCarouselProps = {

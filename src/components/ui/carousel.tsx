@@ -296,10 +296,10 @@ const CarouselScrollBar = ({
 
 export {
   Carousel,
+  type CarouselApi,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
   CarouselScrollBar,
-  type CarouselApi,
 };

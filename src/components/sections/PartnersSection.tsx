@@ -14,8 +14,6 @@ import {
   CarouselScrollBar,
 } from '@/components/ui/carousel';
 
-
-
 import { PartnersSectionRes } from '@/types/page';
 
 export default function PartnersSection({
