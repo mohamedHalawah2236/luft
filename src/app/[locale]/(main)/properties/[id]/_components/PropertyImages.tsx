@@ -44,6 +44,8 @@ export default function PropertyImages({ images }: PropertyImagesProps) {
   }, [api]);
 
   const coverImage = images.find((img) => img.isCover)?.url ?? '';
+  const otherImages = images.filter((img) => !img.isCover);
+
   const hasShowPhotosBtn = images.length > 5;
 
   return (
@@ -124,8 +126,8 @@ export default function PropertyImages({ images }: PropertyImagesProps) {
 
           <div className='grid flex-1 grid-cols-2 grid-rows-2 gap-4'>
             {Array.from({ length: 4 }).map((_, index) => {
-              const imageUrl = images[index]?.url;
-              const isCover = images[index]?.isCover;
+              const imageUrl = otherImages[index]?.url;
+              const isCover = otherImages[index]?.isCover;
               if (!imageUrl || isCover) return null;
 
               return (
