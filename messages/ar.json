@@ -107,7 +107,9 @@
     "logout": "تسجيل الخروج",
     "currency": "العملة",
     "night": "/الليلة",
-    "mediaNotSupported": "الوسائط غير مدعومة"
+    "mediaNotSupported": "الوسائط غير مدعومة",
+    "cantLoadMedia": "تعذّر تحميل الوسائط",
+    "noMediaUploaded": "لم يتم رفع أي وسائط"
   },
   "auth": {
     "banner": {

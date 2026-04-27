@@ -2,6 +2,8 @@ import { useTranslations } from 'next-intl';
 
 import { Star } from 'lucide-react';
 
+import MediaPreview from '../MediaPreview';
+
 import { Link } from '@/i18n/routing';
 
 type PropertyCardProps = {
@@ -32,9 +34,8 @@ export default function PropertyCard({
       href={`/properties/${id}`}
       className='flex w-[13rem] select-none flex-col gap-4 overflow-hidden transition-all duration-300 hover:scale-[0.97] md:w-[22.375rem] lg:w-[26rem]'
     >
-      <img
-        src={image}
-        alt={title}
+      <MediaPreview
+        url={image}
         className='h-[12.875rem] w-full rounded-3xl object-cover md:h-[25rem]'
       />
       <div className='flex w-full flex-col gap-2'>

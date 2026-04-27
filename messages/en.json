@@ -104,7 +104,9 @@
     "logout": "Logout",
     "currency": "Currency",
     "night": "/night",
-    "mediaNotSupported": "Media not supported"
+    "mediaNotSupported": "Media not supported",
+    "cantLoadMedia": "Can't load media",
+    "noMediaUploaded": "No media uploaded"
   },
   "auth": {
     "banner": {

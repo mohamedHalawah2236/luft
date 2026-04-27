@@ -31,7 +31,6 @@ export default function PromiseSectionPreview({
         {mediaPosition === MediaPositionEnum.START && (
           <MediaPreview
             url={mediaUrl}
-            extension={mediaExtension}
             className={cn(
               'h-[37.5rem] w-full max-sm:h-[14rem] xl:w-[46.75rem]',
             )}
@@ -52,7 +51,6 @@ export default function PromiseSectionPreview({
         {mediaPosition === MediaPositionEnum.END && (
           <MediaPreview
             url={mediaUrl}
-            extension={mediaExtension}
             className={cn(
               'h-[37.5rem] w-full max-xl:order-1 max-sm:h-[14rem] xl:w-[46.75rem]',
             )}
