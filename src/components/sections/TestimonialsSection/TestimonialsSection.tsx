@@ -17,8 +17,6 @@ import {
   CarouselScrollBar,
 } from '@/components/ui/carousel';
 
-
-
 interface Review {
   id: string;
   guestName: string;
@@ -224,7 +222,7 @@ export default function TestimonialsSection() {
             {reviews.map((review) => (
               <CarouselItem
                 key={review.id}
-                className='ms-6 flex min-w-fit select-none flex-col ps-0 md:ms-8 lg:ms-12'
+                className='flex min-w-fit select-none flex-col ps-6 md:ps-8 lg:ps-12'
               >
                 {/* Guest Info */}
                 <div className='mb-4 flex gap-2'>
@@ -248,18 +246,18 @@ export default function TestimonialsSection() {
                 </div>
 
                 {/* Rating and Metadata */}
-                <div className='mb-4 flex items-center gap-2 text-grayish-900'>
+                <div className='mb-4 flex min-w-fit items-center gap-2 text-grayish-900'>
                   <StarRating
                     rating={review.rating}
                     size='sm'
                     className='gap-1.5'
                   />
                   <span className='w-1 text-xs text-grayish-400'>•</span>
-                  <span className=''>
+                  <span className='whitespace-nowrap'>
                     {t('daysAgo', { days: review.daysAgo })}
                   </span>
                   <span className='w-1 text-xs text-grayish-400'>•</span>
-                  <span className='text-grayish-400'>
+                  <span className='whitespace-nowrap text-grayish-400'>
                     {t('stayedDays', { days: review.stayedDays })}
                   </span>
                 </div>

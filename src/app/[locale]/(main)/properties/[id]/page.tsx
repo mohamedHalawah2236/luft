@@ -66,7 +66,7 @@ export default async function PropertyPage({
             <ReviewsSection reviews={reviews} />
           </div>
         )}
-        <div className='mb-6 md:mb-8 lg:mb-12'>
+        <div className='mb-6 mt-8 md:mb-8 md:mt-12 lg:mb-12 lg:mt-16'>
           <PropertyLocation
             lat={latitude}
             lng={longitude}
