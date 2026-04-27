@@ -268,11 +268,7 @@ type CarouselScrollBarProps = {
   className?: string;
 };
 
-const CarouselScrollBar = ({
-  api,
-  id,
-  className,
-}: CarouselScrollBarProps) => {
+const CarouselScrollBar = ({ api, id, className }: CarouselScrollBarProps) => {
   const { value, onChange, canScroll } = useCarouselScrollBar(api);
 
   if (!canScroll) return null;
