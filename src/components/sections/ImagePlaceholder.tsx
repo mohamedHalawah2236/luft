@@ -1,12 +1,27 @@
+'use client';
+import { useTranslations } from 'next-intl';
+
 import ImageIcon from '@/components/icons/ImageIcon';
 
-export default function ImagePlaceholder({ label }: { label?: string }) {
+import { cn } from '@/lib/utils';
+
+type ImagePlaceholderProps = {
+  messageKey?: 'cantLoadMedia' | 'noMediaUploaded' | 'mediaNotSupported';
+  iconClassName?: string;
+};
+
+export default function ImagePlaceholder({
+  messageKey,
+  iconClassName,
+}: ImagePlaceholderProps) {
+  const t = useTranslations('common');
+
   return (
-    <div className='flex flex-col items-center gap-3'>
-      <ImageIcon />
-      <span className='text-xl font-medium text-grayish-400'>
-        {label || 'No media uploaded'}
-      </span>
+    <div className='flex size-full flex-col items-center justify-center gap-1.5'>
+      <ImageIcon className={cn('size-6', iconClassName)} />
+      {messageKey && (
+        <p className='text-sm font-medium text-grayish-400'>{t(messageKey)}</p>
+      )}
     </div>
   );
 }
