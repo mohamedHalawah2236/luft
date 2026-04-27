@@ -47,7 +47,7 @@ export default function MediaPreview({
   return (
     <div
       className={cn(
-        'relative h-[19.8rem] w-[33.25rem] overflow-hidden',
+        'relative h-[19.8rem] w-[33.25rem] overflow-hidden rounded-2xl',
         {
           'flex items-center justify-center bg-grayish-100':
             !url || mediaHasError || isNotSupportedMedia,

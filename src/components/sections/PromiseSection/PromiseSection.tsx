@@ -14,6 +14,8 @@ export default function PromiseSectionPreview({
   mediaExtension,
   mediaPosition,
 }: PromiseSectionRes) {
+
+  console.log(mediaUrl);
   return (
     <div className='flex flex-col gap-6 md:gap-8 xl:gap-12'>
       {/* Texts */}
@@ -31,7 +33,6 @@ export default function PromiseSectionPreview({
         {mediaPosition === MediaPositionEnum.START && (
           <MediaPreview
             url={mediaUrl}
-            extension={mediaExtension}
             className={cn(
               'h-[37.5rem] w-full max-sm:h-[14rem] xl:w-[46.75rem]',
             )}
@@ -52,7 +53,6 @@ export default function PromiseSectionPreview({
         {mediaPosition === MediaPositionEnum.END && (
           <MediaPreview
             url={mediaUrl}
-            extension={mediaExtension}
             className={cn(
               'h-[37.5rem] w-full max-xl:order-1 max-sm:h-[14rem] xl:w-[46.75rem]',
             )}
