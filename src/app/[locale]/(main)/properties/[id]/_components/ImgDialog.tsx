@@ -30,7 +30,7 @@ export default function ImgDialog({ children, src }: ImgDialogProps) {
         </DialogClose>
       </DialogPortal>
       <img
-        src={'https://placehold.co/2000x1400'}
+        src={src}
         alt=''
         className='max-h-full max-w-full'
       />
