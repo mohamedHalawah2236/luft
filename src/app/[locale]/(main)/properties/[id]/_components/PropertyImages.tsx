@@ -43,10 +43,8 @@ export default function PropertyImages({ images }: PropertyImagesProps) {
     });
   }, [api]);
 
-  const hasShowPhotosBtn = true;
-
   const coverImage = images.find((img) => img.isCover)?.url ?? '';
-  const imagesWithoutCover = images.filter((img) => !img.isCover);
+  const hasShowPhotosBtn = images.length > 5;
 
   return (
     <>
