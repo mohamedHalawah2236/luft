@@ -51,7 +51,7 @@ export default function PropertyImages({ images }: PropertyImagesProps) {
   return (
     <>
       <div className='container relative mt-[4.5rem] max-md:hidden md:h-[23.75rem] xl:h-[36.625rem]'>
-        <div className='relative flex h-full gap-4'>
+        <div className='relative flex h-full max-h-full gap-4'>
           {hasShowPhotosBtn && (
             <>
               <button
@@ -120,7 +120,7 @@ export default function PropertyImages({ images }: PropertyImagesProps) {
             <img
               src={coverImage}
               alt=''
-              className='min-h-full rounded-2xl object-cover md:w-[24.5rem] xl:w-[39.75rem]'
+              className='h-full rounded-2xl object-cover md:w-[24.5rem] xl:w-[39.75rem]'
             />
           </ImgDialog>
 
