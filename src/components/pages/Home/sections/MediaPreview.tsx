@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import ImagePlaceholder from '@/components/sections/ImagePlaceholder';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -11,17 +11,19 @@ import { cn } from '@/lib/utils';
 type MediaPreviewProps = {
   url: string | null;
   className?: string;
-  iconClassName?: string;
+  fallbackIconClassName?: string;
+  isIcon?: boolean;
 };
 
 export default function MediaPreview({
   url,
   className,
-  iconClassName,
+  fallbackIconClassName,
+  isIcon,
 }: MediaPreviewProps) {
   // Strip query strings and hash fragments before extracting the extension
   const rawExt = url
-    ? new URL(url, 'http://x').pathname.split('.').pop()
+    ? new URL(url, 'http://x').pathname.split('.').pop()?.toLowerCase()
     : undefined;
   const extension = rawExt ? `.${rawExt}` : '';
 
@@ -38,12 +40,6 @@ export default function MediaPreview({
     return false;
   });
 
-  useEffect(() => {
-    setMediaHasError(false);
-    setIsLoading(!!url && (isImageMedia || isVideoMedia));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [url]);
-
   return (
     <div
       className={cn(
@@ -57,7 +53,9 @@ export default function MediaPreview({
     >
       {url ? (
         mediaHasError ? (
-          <ImagePlaceholder messageKey='cantLoadMedia' />
+          <ImagePlaceholder
+            messageKey={!isIcon ? 'cantLoadMedia' : undefined}
+          />
         ) : isImageMedia ? (
           <>
             {isLoading && (
@@ -103,12 +101,14 @@ export default function MediaPreview({
           </>
         ) : (
           <ImagePlaceholder
-            iconClassName={iconClassName}
-            messageKey='mediaNotSupported'
+            iconClassName={fallbackIconClassName}
+            messageKey={!isIcon ? 'mediaNotSupported' : undefined}
           />
         )
       ) : (
-        <ImagePlaceholder messageKey='noMediaUploaded' />
+        <ImagePlaceholder
+          messageKey={!isIcon ? 'noMediaUploaded' : undefined}
+        />
       )}
     </div>
   );
