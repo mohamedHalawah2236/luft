@@ -32,7 +32,7 @@ export default function PropertyCard({
   return (
     <Link
       href={`/properties/${id}`}
-      className='flex w-[13rem] select-none flex-col gap-4 overflow-hidden transition-all duration-300 hover:scale-[0.97] md:w-[22.375rem] lg:w-[26rem]'
+      className='flex w-[13rem] select-none flex-col gap-4 overflow-hidden md:w-[22.375rem] lg:w-[26rem]'
     >
       <MediaPreview
         url={image}
