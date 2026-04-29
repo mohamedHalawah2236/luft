@@ -228,7 +228,9 @@
       },
       "actions": {
         "share": "Share",
-        "wishlist": "Wishlist"
+        "wishlist": "Wishlist",
+        "linkCopied": "Link copied to clipboard",
+        "shareProperty": "Share this property"
       },
       "images": {
         "title": "Property Images",
