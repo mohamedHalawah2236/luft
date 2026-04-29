@@ -231,7 +231,9 @@
       },
       "actions": {
         "share": "مشاركة",
-        "wishlist": "المفضلة"
+        "wishlist": "المفضلة",
+        "linkCopied": "تم نسخ الرابط",
+        "shareProperty": "مشاركة هذا العقار"
       },
       "images": {
         "title": "صور العقار",
