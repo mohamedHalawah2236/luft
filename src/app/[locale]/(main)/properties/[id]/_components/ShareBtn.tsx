@@ -6,22 +6,21 @@ import { toast } from 'sonner';
 
 export default function ShareBtn() {
   const t = useTranslations('pages.propertyDetails.actions');
-  console.log(window.location.href);
+  const currentUrl = window.location.href;
+
   return (
     <button
       onClick={() => {
-        const url = window.location.href;
-
         if (navigator.share) {
           navigator
             .share({
               title: t('shareProperty'),
               text: t('shareProperty'),
-              url,
+              url: currentUrl,
             })
             .catch((err) => console.log(err));
         } else {
-          navigator.clipboard.writeText(url);
+          navigator.clipboard.writeText(currentUrl);
           toast.info(t('linkCopied'));
         }
       }}
