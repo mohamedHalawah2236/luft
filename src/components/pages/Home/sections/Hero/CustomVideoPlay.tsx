@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { Pause, Play, Volume2, VolumeX } from 'lucide-react';
 
-import MediaPreview from '../MediaPreview';
+import MediaPreview from '../../../../shared/MediaPreview/MediaPreview';
 
 import { ALLOWED_IMGS_TYPES, ALLOWED_VIDS_TYPES } from '@/constants/media';
 

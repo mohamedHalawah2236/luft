@@ -2,7 +2,7 @@ import { useTranslations } from 'next-intl';
 
 import { Star } from 'lucide-react';
 
-import MediaPreview from '../MediaPreview';
+import MediaPreview from '../../../../shared/MediaPreview/MediaPreview';
 
 import { Link } from '@/i18n/routing';
 

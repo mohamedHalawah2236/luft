@@ -1,4 +1,4 @@
-import MediaPreview from '@/components/pages/Home/sections/MediaPreview';
+import MediaPreview from '@/components/shared/MediaPreview/MediaPreview';
 
 type FeatureSectionCardProps = {
   title: string;

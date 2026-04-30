@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 
-import ImagePlaceholder from '@/components/sections/ImagePlaceholder';
+import ImagePlaceholder from '@/components/shared/MediaPreview/ImagePlaceholder';
 import { Skeleton } from '@/components/ui/skeleton';
 
 import { ALLOWED_IMGS_TYPES, ALLOWED_VIDS_TYPES } from '@/constants/media';

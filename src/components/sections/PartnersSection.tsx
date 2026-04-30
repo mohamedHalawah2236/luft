@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 
 import Autoplay from 'embla-carousel-autoplay';
 
-import MediaPreview from '@/components/pages/Home/sections/MediaPreview';
+import MediaPreview from '@/components/shared/MediaPreview/MediaPreview';
 import {
   Carousel,
   CarouselApi,
