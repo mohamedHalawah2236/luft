@@ -1,3 +1,5 @@
+import MediaPreview from '@/components/pages/Home/sections/MediaPreview';
+
 import { CardItem } from '@/types/page';
 
 export default function CardItemPreview({
@@ -10,8 +12,8 @@ export default function CardItemPreview({
       type='button'
       className='group flex min-w-[19.125rem] max-w-[19.125rem] select-none flex-col gap-4 overflow-hidden max-sm:min-w-[15.625rem] max-sm:max-w-[15.625rem]'
     >
-      <img
-        src={iconUrl}
+      <MediaPreview
+        url={iconUrl}
         className='h-[22.25rem] w-full rounded-2xl transition-all duration-300 group-hover:scale-[0.98] max-sm:h-[18.438rem]'
       />
       {/* Texts */}

@@ -1,3 +1,5 @@
+import MediaPreview from '@/components/pages/Home/sections/MediaPreview';
+
 import { HowItWorksItem } from '@/types/page';
 
 export default function WorkItem({
@@ -7,9 +9,8 @@ export default function WorkItem({
 }: HowItWorksItem) {
   return (
     <div className='flex w-full flex-col items-center gap-4 overflow-hidden'>
-      <img
-        src={iconUrl}
-        alt={title}
+      <MediaPreview
+        url={iconUrl}
         className='h-[22.375rem] w-full rounded-3xl object-cover max-sm:rounded-[2.19rem] md:h-[25rem] xl:h-[30.5rem] xl:rounded-[2.19rem]'
       />
       {/* Texts */}

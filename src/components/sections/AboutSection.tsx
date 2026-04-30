@@ -1,3 +1,5 @@
+import MediaPreview from '@/components/pages/Home/sections/MediaPreview';
+
 type AboutSectionProps = {
   title: string;
   description: string;
@@ -27,9 +29,8 @@ export default function AboutSection({
         </p>
       </div>
 
-      <img
-        src={mediaUrl}
-        alt={title}
+      <MediaPreview
+        url={mediaUrl}
         className='h-[13.3rem] rounded-3xl max-lg:w-[23rem] max-sm:order-1 max-sm:w-full lg:h-[25.563rem] lg:w-[35.69rem]'
       />
     </div>

@@ -43,7 +43,7 @@ export default function MediaPreview({
   return (
     <div
       className={cn(
-        'relative h-[19.8rem] w-[33.25rem] overflow-hidden rounded-2xl',
+        'relative h-[19.8rem] w-[33.25rem] overflow-hidden rounded-sm',
         {
           'flex items-center justify-center bg-grayish-100':
             !url || mediaHasError || isNotSupportedMedia,
@@ -59,7 +59,7 @@ export default function MediaPreview({
         ) : isImageMedia ? (
           <>
             {isLoading && (
-              <Skeleton className='absolute inset-0 z-10 size-full' />
+              <Skeleton className='absolute inset-0 z-10 size-full rounded-none' />
             )}
             <img
               key={url}

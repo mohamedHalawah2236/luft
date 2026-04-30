@@ -1,3 +1,5 @@
+import MediaPreview from '@/components/pages/Home/sections/MediaPreview';
+
 import { BulletRes } from '@/types/page';
 
 export default function BulletCard({ data }: { data: BulletRes }) {
@@ -7,13 +9,11 @@ export default function BulletCard({ data }: { data: BulletRes }) {
 
   return (
     <div className='flex max-w-full gap-2 overflow-hidden xl:flex-col'>
-      {iconUrl && (
-        <img
-          src={iconUrl}
-          alt='title'
-          className='size-6 md:size-8 xl:size-10'
-        />
-      )}
+      <MediaPreview
+        url={iconUrl}
+        className='size-6 md:size-8 xl:size-10'
+        isIcon={true}
+      />
 
       {/* Texts */}
       <div className='flex flex-col gap-1 overflow-hidden'>

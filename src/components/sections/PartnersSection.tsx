@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 
 import Autoplay from 'embla-carousel-autoplay';
 
-import ImageIcon from '@/components/icons/ImageIcon';
+import MediaPreview from '@/components/pages/Home/sections/MediaPreview';
 import {
   Carousel,
   CarouselApi,
@@ -63,17 +63,11 @@ export default function PartnersSection({
                 {/* Guest Info */}
                 <div className='mb-4 flex gap-2'>
                   <div className='size-12 flex-shrink-0 overflow-hidden rounded-full bg-grayish-50'>
-                    {review.iconUrl ? (
-                      <img
-                        src={review.iconUrl}
-                        alt={review.title}
-                        className='size-full object-cover'
-                      />
-                    ) : (
-                      <div className='flex size-full items-center justify-center'>
-                        <ImageIcon className='size-5' />
-                      </div>
-                    )}
+                    <MediaPreview
+                      url={review.iconUrl}
+                      className='size-full object-cover'
+                      isIcon={true}
+                    />
                   </div>
                   <div className='flex flex-1 flex-col gap-1 overflow-hidden'>
                     <h3
