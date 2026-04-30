@@ -1,7 +1,7 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-import ImagePlaceholder from '@/components/sections/ImagePlaceholder';
+import ImagePlaceholder from '@/components/shared/MediaPreview/ImagePlaceholder';
 import { Skeleton } from '@/components/ui/skeleton';
 
 import { ALLOWED_IMGS_TYPES, ALLOWED_VIDS_TYPES } from '@/constants/media';
@@ -11,17 +11,19 @@ import { cn } from '@/lib/utils';
 type MediaPreviewProps = {
   url: string | null;
   className?: string;
-  iconClassName?: string;
+  fallbackIconClassName?: string;
+  isIcon?: boolean;
 };
 
 export default function MediaPreview({
   url,
   className,
-  iconClassName,
+  fallbackIconClassName,
+  isIcon,
 }: MediaPreviewProps) {
   // Strip query strings and hash fragments before extracting the extension
   const rawExt = url
-    ? new URL(url, 'http://x').pathname.split('.').pop()
+    ? new URL(url, 'http://x').pathname.split('.').pop()?.toLowerCase()
     : undefined;
   const extension = rawExt ? `.${rawExt}` : '';
 
@@ -38,16 +40,10 @@ export default function MediaPreview({
     return false;
   });
 
-  useEffect(() => {
-    setMediaHasError(false);
-    setIsLoading(!!url && (isImageMedia || isVideoMedia));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [url]);
-
   return (
     <div
       className={cn(
-        'relative h-[19.8rem] w-[33.25rem] overflow-hidden rounded-2xl',
+        'relative h-[19.8rem] w-[33.25rem] overflow-hidden rounded-sm',
         {
           'flex items-center justify-center bg-grayish-100':
             !url || mediaHasError || isNotSupportedMedia,
@@ -57,11 +53,13 @@ export default function MediaPreview({
     >
       {url ? (
         mediaHasError ? (
-          <ImagePlaceholder messageKey='cantLoadMedia' />
+          <ImagePlaceholder
+            messageKey={!isIcon ? 'cantLoadMedia' : undefined}
+          />
         ) : isImageMedia ? (
           <>
             {isLoading && (
-              <Skeleton className='absolute inset-0 z-10 size-full' />
+              <Skeleton className='absolute inset-0 z-10 size-full rounded-none' />
             )}
             <img
               key={url}
@@ -103,12 +101,14 @@ export default function MediaPreview({
           </>
         ) : (
           <ImagePlaceholder
-            iconClassName={iconClassName}
-            messageKey='mediaNotSupported'
+            iconClassName={fallbackIconClassName}
+            messageKey={!isIcon ? 'mediaNotSupported' : undefined}
           />
         )
       ) : (
-        <ImagePlaceholder messageKey='noMediaUploaded' />
+        <ImagePlaceholder
+          messageKey={!isIcon ? 'noMediaUploaded' : undefined}
+        />
       )}
     </div>
   );

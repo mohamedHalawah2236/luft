@@ -2,9 +2,9 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 
-import Image from 'next/image';
-
 import { Pause, Play, Volume2, VolumeX } from 'lucide-react';
+
+import MediaPreview from '../../../../shared/MediaPreview/MediaPreview';
 
 import { ALLOWED_IMGS_TYPES, ALLOWED_VIDS_TYPES } from '@/constants/media';
 
@@ -85,12 +85,9 @@ const MediaHero = ({ src, className = '', extension }: MediaHeroProps) => {
         </video>
       ) : isImage ? (
         <div className={`relative size-full`}>
-          <Image
-            src={src}
-            alt='hero-media'
-            fill
-            className='!static object-cover'
-            onError={() => setHasError(true)}
+          <MediaPreview
+            url={src}
+            className='absolute inset-0 size-full object-cover'
           />
         </div>
       ) : (

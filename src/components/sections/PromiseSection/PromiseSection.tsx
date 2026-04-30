@@ -1,4 +1,4 @@
-import MediaPreview from '@/components/pages/Home/sections/MediaPreview';
+import MediaPreview from '@/components/shared/MediaPreview/MediaPreview';
 
 import BulletCard from './BulletCard';
 
@@ -32,7 +32,7 @@ export default function PromiseSectionPreview({
           <MediaPreview
             url={mediaUrl}
             className={cn(
-              'h-[37.5rem] w-full max-sm:h-[14rem] xl:w-[46.75rem]',
+              'h-[37.5rem] w-full rounded-2xl max-sm:h-[14rem] xl:w-[46.75rem]',
             )}
           />
         )}
@@ -52,7 +52,7 @@ export default function PromiseSectionPreview({
           <MediaPreview
             url={mediaUrl}
             className={cn(
-              'h-[37.5rem] w-full max-xl:order-1 max-sm:h-[14rem] xl:w-[46.75rem]',
+              'h-[37.5rem] w-full rounded-2xl max-xl:order-1 max-sm:h-[14rem] xl:w-[46.75rem]',
             )}
           />
         )}
