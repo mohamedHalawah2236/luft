@@ -125,6 +125,31 @@ const Carousel = React.forwardRef<
       };
     }, [api, onSelect]);
 
+    // Automatically play/stop the autoplay plugin based on viewport visibility.
+    // This works for any carousel that passes an autoplay plugin — no per-carousel
+    // useEffect needed.
+    React.useEffect(() => {
+      if (!api) return;
+
+      const autoplay = api.plugins()?.autoplay;
+      if (!autoplay) return;
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            autoplay.play();
+          } else {
+            autoplay.stop();
+          }
+        },
+        { threshold: 0.1 },
+      );
+
+      observer.observe(api.rootNode());
+
+      return () => observer.disconnect();
+    }, [api]);
+
     return (
       <CarouselContext.Provider
         value={{

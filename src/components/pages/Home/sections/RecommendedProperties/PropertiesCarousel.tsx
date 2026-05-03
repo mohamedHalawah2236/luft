@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { useTranslations } from 'next-intl';
 
@@ -26,28 +26,6 @@ export default function PropertiesCarousel({
 }: PropertiesCarouselProps) {
   const t = useTranslations('sections.recommendedProperties');
   const [api, setApi] = useState<CarouselApi>();
-
-  useEffect(() => {
-    if (!api) return;
-
-    const autoplay = api.plugins().autoplay;
-    if (!autoplay) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          autoplay.play();
-        } else {
-          autoplay.stop();
-        }
-      },
-      { threshold: 0.1 },
-    );
-
-    observer.observe(api.rootNode());
-
-    return () => observer.disconnect();
-  }, [api]);
 
   return (
     <>
