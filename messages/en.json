@@ -205,7 +205,7 @@
       },
       "propertyInfo": {
         "guests": "{count} Guests",
-        "bedrooms": "{count} Bedrooms",
+        "bedrooms": "{count} Rooms",
         "bathrooms": "{count} Bathrooms"
       },
       "location": {

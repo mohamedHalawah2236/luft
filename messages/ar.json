@@ -208,7 +208,7 @@
       },
       "propertyInfo": {
         "guests": "{count} ضيوف",
-        "bedrooms": "{count} غرف نوم",
+        "bedrooms": "{count} غرف",
         "bathrooms": "{count} حمامات"
       },
       "location": {

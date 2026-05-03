@@ -1,3 +1,4 @@
+import { notFound } from 'next/navigation';
 import { signOut } from 'next-auth/react';
 
 import { concatErrors } from './errors';
@@ -39,34 +40,55 @@ export async function getAllData(
   const language = await getLanguage();
 
   const res = await fetch(`${apiUrl}/${endpoint}`, {
-    cache: 'no-store',
     ...options,
     headers: {
       language,
-      'Content-Type': 'application/json',
       ...(options.headers || {}),
       ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
     },
   });
 
   if (!res.ok) {
+    if (res.status === 404) {
+      notFound();
+    }
+
     if (res.status === 401) {
       signOut({
         redirect: true,
         callbackUrl: '/login',
       });
-      throw new Error('401 Unauthorized');
+      throw new Error('401 Unauthorized', {
+        cause: res.status,
+      });
     }
 
-    throw new Error(
-      `Failed to retrieve data from ${endpoint}, status code: ${res.status}`,
-    );
+    const data = await res.json();
+    if (data.errors) {
+      throw new Error(concatErrors(data), {
+        cause: data.statusCode,
+      });
+    }
+    throw new Error(data.message, {
+      cause: data.statusCode,
+    });
   }
 
   const data = await res.json();
-
   if (data?.isError) {
-    throw new Error(data?.message);
+    if (data.statusCode === 401) {
+      signOut({
+        redirect: true,
+        callbackUrl: '/login',
+      });
+    }
+
+    if (data.statusCode === 404) {
+      notFound();
+    }
+    throw new Error(data?.message, {
+      cause: data.statusCode,
+    });
   }
 
   return data;
@@ -100,6 +122,10 @@ export async function postData(
   });
 
   if (!res.ok) {
+    if (res.status === 404) {
+      notFound();
+    }
+
     if (res.status === 401) {
       signOut({
         redirect: true,
@@ -128,6 +154,10 @@ export async function postData(
         redirect: true,
         callbackUrl: '/login',
       });
+    }
+
+    if (data.statusCode === 404) {
+      notFound();
     }
     throw new Error(data?.message, {
       cause: data.statusCode,
