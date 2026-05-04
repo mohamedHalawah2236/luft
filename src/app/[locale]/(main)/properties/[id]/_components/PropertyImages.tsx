@@ -17,7 +17,6 @@ import {
 } from '@/components/ui/carousel';
 
 import AddToWishlistBtn from './AddToWishlistBtn';
-import ImgDialog from './ImgDialog';
 import ShareBtn from './ShareBtn';
 
 import type { PropertyImage } from '@/types/properties';
@@ -29,6 +28,7 @@ type PropertyImagesProps = {
 export default function PropertyImages({ images }: PropertyImagesProps) {
   const t = useTranslations('pages.propertyDetails.images');
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+  const [activeImgIndex, setActiveImgIndex] = useState(0);
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
@@ -44,108 +44,105 @@ export default function PropertyImages({ images }: PropertyImagesProps) {
   }, [api]);
 
   const coverImage = images.find((img) => img.isCover)?.url ?? '';
-  const otherImages = images.filter((img) => !img.isCover);
 
   const hasShowPhotosBtn = images.length > 5;
+
+  const openGalleryWithImage = (index: number) => {
+    setIsGalleryOpen(true);
+    setActiveImgIndex(index);
+  };
 
   return (
     <>
       <div className='container relative mt-[4.5rem] max-md:hidden md:h-[23.75rem] xl:h-[36.625rem]'>
         <div className='relative flex h-full max-h-full gap-4'>
           {hasShowPhotosBtn && (
-            <>
-              <button
-                onClick={() => setIsGalleryOpen(true)}
-                type='button'
-                style={{ boxShadow: '0px 4px 20px 0px #1B1B1B12' }}
-                className='absolute bottom-4 end-4 z-30 flex w-fit items-center justify-center gap-1 rounded-full bg-white px-1.5 py-2.5 text-grayish-900 max-md:hidden lg:w-[12.5rem] lg:px-0'
-              >
-                <Grip className='size-5' />
-                <span className='leading-5'>{t('showAll')}</span>
-              </button>
-              <Modal
-                isOpen={isGalleryOpen}
-                onClose={() => setIsGalleryOpen(false)}
-                toggle={setIsGalleryOpen}
-                header={
-                  <>
-                    <h4 className='p-6 text-center text-3xl font-medium'>
-                      {t('title')}
-                    </h4>
-                  </>
-                }
-                className='h-[95%] gap-0 overflow-hidden max-md:hidden [&>#modal-content]:h-full'
-              >
-                <div className='h-full w-full px-8 pb-10'>
-                  <Carousel className='flex h-full w-full items-center [&>.overflow-hidden]:h-full [&>.overflow-hidden]:max-h-full [&>.overflow-hidden]:flex-1'>
-                    <CarouselPrevious className='static !size-fit translate-x-0 translate-y-0 border-0 border-transparent bg-transparent p-0 hover:bg-grayish-30 max-sm:hidden' />
-
-                    <CarouselContent className='!m-0 h-full max-h-full'>
-                      <CarouselItem
-                        className='flex max-h-full min-w-full justify-center'
-                        key={coverImage}
-                      >
-                        <img
-                          src={coverImage}
-                          alt=''
-                          className='max-h-full min-h-full'
-                        />
-                      </CarouselItem>
-
-                      {images.map(({ url, id, isCover }, index) => {
-                        if (isCover) return null;
-
-                        return (
-                          <CarouselItem
-                            className='flex max-h-full min-w-full justify-center'
-                            key={id + index}
-                          >
-                            <img
-                              src={url}
-                              alt=''
-                              className='max-h-full min-h-full'
-                            />
-                          </CarouselItem>
-                        );
-                      })}
-                    </CarouselContent>
-                    <CarouselNext className='static !size-fit translate-x-0 translate-y-0 border-0 border-transparent bg-transparent p-0 hover:bg-grayish-30 max-sm:hidden' />
-                  </Carousel>
-                </div>
-              </Modal>
-            </>
+            <button
+              onClick={() => openGalleryWithImage(0)}
+              type='button'
+              style={{ boxShadow: '0px 4px 20px 0px #1B1B1B12' }}
+              className='absolute bottom-4 end-4 z-30 flex w-fit items-center justify-center gap-1 rounded-full bg-white px-1.5 py-2.5 text-grayish-900 max-md:hidden lg:w-[12.5rem] lg:px-0'
+            >
+              <Grip className='size-5' />
+              <span className='leading-5'>{t('showAll')}</span>
+            </button>
           )}
 
-          <ImgDialog src={coverImage}>
+          <button
+            onClick={() => openGalleryWithImage(0)}
+            type='button'
+          >
             <img
               src={coverImage}
               alt=''
               className='h-full rounded-2xl object-cover md:w-[24.5rem] xl:w-[39.75rem]'
             />
-          </ImgDialog>
+          </button>
 
           <div className='grid flex-1 grid-cols-2 grid-rows-2 gap-4'>
-            {Array.from({ length: 4 }).map((_, index) => {
-              const imageUrl = otherImages[index]?.url;
-              const isCover = otherImages[index]?.isCover;
+            {Array.from({ length: 5 }).map((_, index) => {
+              const imageUrl = images[index]?.url;
+              const isCover = images[index]?.isCover;
               if (!imageUrl || isCover) return null;
 
               return (
-                <ImgDialog
+                <button
+                  type='button'
                   key={index}
-                  src={imageUrl}
+                  onClick={() => openGalleryWithImage(index)}
                 >
                   <img
                     src={imageUrl}
                     alt=''
                     className='h-full w-full rounded-2xl object-cover'
                   />
-                </ImgDialog>
+                </button>
               );
             })}
           </div>
         </div>
       </div>
+
+      <Modal
+        isOpen={isGalleryOpen}
+        onClose={() => setIsGalleryOpen(false)}
+        toggle={setIsGalleryOpen}
+        header={
+          <>
+            <h4 className='p-6 text-center text-3xl font-medium'>
+              {t('title')}
+            </h4>
+          </>
+        }
+        className='h-[95%] gap-0 overflow-hidden bg-transparent max-md:hidden [&>#modal-content]:h-full [&>button>svg]:text-grayish-30'
+      >
+        <div className='h-full w-full px-8 pb-10'>
+          <Carousel
+            opts={{ startIndex: activeImgIndex }}
+            className='flex h-full w-full items-center gap-4 [&>.overflow-hidden]:h-full [&>.overflow-hidden]:max-h-full [&>.overflow-hidden]:flex-1'
+          >
+            <CarouselPrevious className='static !size-fit translate-x-0 translate-y-0 border-0 border-transparent bg-grayish-30 p-0 hover:bg-grayish-30 max-sm:hidden' />
+
+            <CarouselContent className='!m-0 h-full max-h-full'>
+              {images.map(({ url, id }, index) => {
+                return (
+                  <CarouselItem
+                    className='flex max-h-full min-w-full justify-center pl-0'
+                    key={id + index}
+                  >
+                    <img
+                      src={url}
+                      alt=''
+                      className='max-h-full min-h-full'
+                    />
+                  </CarouselItem>
+                );
+              })}
+            </CarouselContent>
+            <CarouselNext className='static !size-fit translate-x-0 translate-y-0 border-0 border-transparent bg-grayish-30 p-0 hover:bg-grayish-30 max-sm:hidden' />
+          </Carousel>
+        </div>
+      </Modal>
 
       <Carousel
         setApi={setApi}
