@@ -1,22 +1,16 @@
 'use client';
 
-import { ReactNode, useEffect } from 'react';
+import { ReactNode } from 'react';
 
 import { DefaultSession } from 'next-auth';
-import { SessionProvider, useSession } from 'next-auth/react';
+import { SessionProvider } from 'next-auth/react';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { useSessionError } from '@/hooks/useSessionError';
 
-import { setSessionUpdate } from '@/utils/api';
-
-function SessionUpdateInitializer() {
-  const { update } = useSession();
-
-  useEffect(() => {
-    setSessionUpdate(update);
-  }, [update]);
-
-  return null;
+function SessionErrorHandler({ children }: { children: ReactNode }) {
+  useSessionError();
+  return <>{children}</>;
 }
 
 export default function Providers({
@@ -36,8 +30,11 @@ export default function Providers({
 
   return (
     <SessionProvider session={session}>
-      <SessionUpdateInitializer />
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+      <SessionErrorHandler>
+        <QueryClientProvider client={queryClient}>
+          {children}
+        </QueryClientProvider>
+      </SessionErrorHandler>
     </SessionProvider>
   );
 }

@@ -1,92 +1,12 @@
 import { notFound } from 'next/navigation';
-import { getSession, signOut } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
+
+import { getTokens } from '@/lib/getTokens';
 
 import { concatErrors } from './errors';
 import { getLanguage } from './language';
 
-// Store the session update function
-let sessionUpdateFn: ((data?: any) => Promise<any>) | null = null;
-
-export function setSessionUpdate(updateFn: (data?: any) => Promise<any>) {
-  sessionUpdateFn = updateFn;
-}
-
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-
-let isRefreshing = false;
-let refreshPromise: Promise<{
-  accessToken: string;
-  refreshToken: string;
-}> | null = null;
-
-async function refreshAccessToken(refreshToken: string) {
-  // Prevent multiple simultaneous refresh requests
-  if (isRefreshing && refreshPromise) {
-    return refreshPromise;
-  }
-
-  isRefreshing = true;
-  refreshPromise = (async () => {
-    try {
-      const language = await getLanguage();
-      const response = await fetch(`${apiUrl}/api/auth/refresh-token`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          language,
-        },
-        body: JSON.stringify({ refreshToken }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to refresh token');
-      }
-
-      const data = await response.json();
-
-      return {
-        accessToken: data.result.accessToken,
-        refreshToken: data.result.refreshToken,
-      };
-    } finally {
-      isRefreshing = false;
-      refreshPromise = null;
-    }
-  })();
-
-  return refreshPromise;
-}
-
-async function handleTokenRefresh(
-  makeRequest: (token?: string) => Promise<Response>,
-) {
-  try {
-    const session = await getSession();
-    if (!session?.refreshToken) {
-      throw new Error('No refresh token available');
-    }
-
-    const { accessToken: newAccessToken, refreshToken: newRefreshToken } =
-      await refreshAccessToken(session.refreshToken as string);
-
-    // Update the session with new tokens using the session update function
-    if (sessionUpdateFn) {
-      await sessionUpdateFn({
-        accessToken: newAccessToken,
-        refreshToken: newRefreshToken,
-      });
-    }
-
-    // Retry the request with new token
-    return await makeRequest(newAccessToken);
-  } catch (error) {
-    signOut({
-      redirect: false,
-      callbackUrl: '/login',
-    });
-    throw error;
-  }
-}
 
 export function updateSearchParams(key: string, value: string) {
   const searchParams = new URLSearchParams(location.search);
@@ -121,23 +41,22 @@ export async function getAllData(
 ) {
   const language = await getLanguage();
 
-  const makeRequest = async (token?: string) => {
-    return fetch(`${apiUrl}/${endpoint}`, {
-      ...options,
-      headers: {
-        language,
-        ...(options.headers || {}),
-        ...(token ? { Authorization: `Bearer ${token}` } : {}),
-      },
-    });
-  };
+  // Get fresh tokens from session (triggers JWT callback)
+  const tokens = await getTokens();
+  const token = tokens.accessToken;
 
-  let res = await makeRequest(accessToken);
+  console.log('Token');
+  console.log('#########################');
+  console.log(token);
 
-  // Handle 401 with token refresh
-  if (res.status === 401 && accessToken) {
-    res = await handleTokenRefresh(makeRequest);
-  }
+  const res = await fetch(`${apiUrl}/${endpoint}`, {
+    ...options,
+    headers: {
+      language,
+      ...(options.headers || {}),
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
+  });
 
   if (!res.ok) {
     if (res.status === 404) {
@@ -146,7 +65,7 @@ export async function getAllData(
 
     if (res.status === 401) {
       signOut({
-        redirect: false,
+        redirect: true,
         callbackUrl: '/login',
       });
       throw new Error('401 Unauthorized', {
@@ -169,7 +88,7 @@ export async function getAllData(
   if (data?.isError) {
     if (data.statusCode === 401) {
       signOut({
-        redirect: false,
+        redirect: true,
         callbackUrl: '/login',
       });
     }
@@ -203,23 +122,18 @@ export async function postData(
 ) {
   const language = await getLanguage();
 
-  const makeRequest = async (token?: string) => {
-    return fetch(`${apiUrl}/${endpoint}`, {
-      ...options,
-      headers: {
-        language,
-        ...(options.headers || {}),
-        ...(token ? { Authorization: `Bearer ${token}` } : {}),
-      },
-    });
-  };
+  // Get fresh tokens from session (triggers JWT callback)
+  const tokens = await getTokens();
+  const token = tokens.accessToken;
 
-  let res = await makeRequest(accessToken);
-
-  // Handle 401 with token refresh
-  if (res.status === 401 && accessToken) {
-    res = await handleTokenRefresh(makeRequest);
-  }
+  const res = await fetch(`${apiUrl}/${endpoint}`, {
+    ...options,
+    headers: {
+      language,
+      ...(options.headers || {}),
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
+  });
 
   if (!res.ok) {
     if (res.status === 404) {
@@ -228,7 +142,7 @@ export async function postData(
 
     if (res.status === 401) {
       signOut({
-        redirect: false,
+        redirect: true,
         callbackUrl: '/login',
       });
       throw new Error('401 Unauthorized', {
@@ -251,7 +165,7 @@ export async function postData(
   if (data?.isError) {
     if (data.statusCode === 401) {
       signOut({
-        redirect: false,
+        redirect: true,
         callbackUrl: '/login',
       });
     }
