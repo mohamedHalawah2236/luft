@@ -51,6 +51,14 @@ export const authOptions: NextAuthOptions = {
       }
 
       if (trigger === 'update') {
+        // Handle token refresh updates
+        if (session?.accessToken) {
+          token.accessToken = session.accessToken;
+        }
+        if (session?.refreshToken) {
+          token.refreshToken = session.refreshToken;
+        }
+        // Handle user profile updates
         if (session?.user?.name) {
           token.name = session.user.name;
         }
