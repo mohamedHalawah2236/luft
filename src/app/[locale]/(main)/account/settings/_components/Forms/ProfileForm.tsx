@@ -64,7 +64,7 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
   const { isFetching, isFetched, data, isLoading, isError } =
     useQuery<GetUserProfileRes>({
       queryKey: [profileFormQueryKey],
-      queryFn: () => getProfileData(accessToken),
+      queryFn: () => getProfileData(),
     });
 
   const userData = data?.result;
@@ -73,8 +73,7 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
   const { update } = useSession();
 
   const { mutateAsync, isPending } = useMutation({
-    mutationFn: (values: ProfileFormData) =>
-      updateUserProfile(values, accessToken),
+    mutationFn: (values: ProfileFormData) => updateUserProfile(values),
     onSuccess: (data, variables) => {
       queryClient.invalidateQueries({ queryKey: [profileFormQueryKey] });
       toast.success(tCommon('toaster.dataUpdatedSuccess'));

@@ -1,10 +1,9 @@
 import { notFound } from 'next/navigation';
 import { signOut } from 'next-auth/react';
 
-import { getTokens } from '@/lib/getTokens';
-
-import { concatErrors } from './errors';
-import { getLanguage } from './language';
+import { getValidAccessToken } from '@/lib/tokenRefresh';
+import { concatErrors } from '@/utils/errors';
+import { getLanguage } from '@/utils/language';
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -34,16 +33,11 @@ export function deleteSearchParams(paramName: string, paramValue: string) {
   return `?${searchParams.toString()}`;
 }
 
-export async function getAllData(
-  endpoint: string,
-  options: RequestInit = {},
-  accessToken?: string,
-) {
+export async function getAllData(endpoint: string, options: RequestInit = {}) {
   const language = await getLanguage();
 
-  // Get fresh tokens from session (triggers JWT callback)
-  const tokens = await getTokens();
-  const token = tokens.accessToken;
+  // Get valid access token (refreshes if expired, handles concurrent calls)
+  const token = await getValidAccessToken();
 
   const res = await fetch(`${apiUrl}/${endpoint}`, {
     ...options,
@@ -111,16 +105,11 @@ export async function getAllDataParallel(
   return res;
 }
 
-export async function postData(
-  endpoint: string,
-  options: RequestInit = {},
-  accessToken?: string,
-) {
+export async function postData(endpoint: string, options: RequestInit = {}) {
   const language = await getLanguage();
 
-  // Get fresh tokens from session (triggers JWT callback)
-  const tokens = await getTokens();
-  const token = tokens.accessToken;
+  // Get valid access token (refreshes if expired, handles concurrent calls)
+  const token = await getValidAccessToken();
 
   const res = await fetch(`${apiUrl}/${endpoint}`, {
     ...options,

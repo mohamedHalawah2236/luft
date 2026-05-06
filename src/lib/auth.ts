@@ -3,39 +3,6 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 
 import { AuthUserApiResponse } from '@/types/auth';
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-
-async function refreshAccessToken(token: any) {
-  try {
-    const response = await fetch(`${apiUrl}/api/auth/refresh-token`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ refreshToken: token.refreshToken }),
-    });
-
-    if (!response.ok) {
-      throw new Error('Failed to refresh token');
-    }
-
-    const data = await response.json();
-
-    return {
-      ...token,
-      accessToken: data.result.accessToken,
-      refreshToken: data.result.refreshToken,
-      accessTokenExpiresAt: data.result.accessTokenExpiresAt,
-      refreshTokenExpiresAt: data.result.refreshTokenExpiresAt,
-    };
-  } catch (error) {
-    return {
-      ...token,
-      error: 'RefreshAccessTokenError',
-    };
-  }
-}
-
 export const authOptions: NextAuthOptions = {
   session: {
     strategy: 'jwt',
@@ -91,7 +58,7 @@ export const authOptions: NextAuthOptions = {
       }
 
       if (trigger === 'update') {
-        // Handle token refresh updates
+        // Handle token refresh updates from API layer
         if (session?.accessToken) {
           token.accessToken = session.accessToken;
         }
@@ -112,20 +79,10 @@ export const authOptions: NextAuthOptions = {
           token.picture = session.user.image;
           token.image = session.user.image;
         }
-        // Return early — don't fall through to expiry check after a manual update
-        return token;
       }
 
-      // Return previous token if the access token has not expired yet
-      if (token.accessTokenExpiresAt) {
-        const expiresAt = new Date(token.accessTokenExpiresAt).getTime();
-        if (Date.now() < expiresAt) {
-          return token;
-        }
-      }
-
-      // Access token has expired, try to refresh it
-      return refreshAccessToken(token);
+      // No automatic token refresh here - it's handled in the API layer
+      return token;
     },
     async session({ session, token }) {
       if (session.user) {
@@ -136,11 +93,8 @@ export const authOptions: NextAuthOptions = {
       }
       session.accessToken = token.accessToken;
       session.refreshToken = token.refreshToken;
-
-      // Pass error to client
-      if (token.error) {
-        session.error = token.error;
-      }
+      session.accessTokenExpiresAt = token.accessTokenExpiresAt;
+      session.refreshTokenExpiresAt = token.refreshTokenExpiresAt;
 
       return session;
     },

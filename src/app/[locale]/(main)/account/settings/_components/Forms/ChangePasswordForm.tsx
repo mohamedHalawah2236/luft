@@ -109,7 +109,7 @@ export default function ChangePasswordForm() {
 
   const { mutateAsync } = useMutation({
     mutationFn: async (values: ChangePasswordFormData) =>
-      changeUserPassword(values, session.data?.accessToken),
+      changeUserPassword(values),
     onMutate: () => {
       setServerError(undefined);
     },

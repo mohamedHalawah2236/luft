@@ -75,7 +75,7 @@ export default function VerifyOTPForm({
 
   const { mutateAsync } = useMutation({
     mutationFn: async (values: ChangeUserIdentifierData) =>
-      changeUserIdentifier(values, accessToken),
+      changeUserIdentifier(values),
     onMutate: () => {
       setServerError(undefined);
     },
@@ -95,14 +95,11 @@ export default function VerifyOTPForm({
 
   const { mutate: ResendOTPMutate, isPending: isResendingOtp } = useMutation({
     mutationFn: async () =>
-      resendOtp(
-        {
-          identifier,
-          type: identifierType,
-          otpPurpose,
-        },
-        accessToken,
-      ),
+      resendOtp({
+        identifier,
+        type: identifierType,
+        otpPurpose,
+      }),
     onSuccess: () => {
       setIsResendDisabled(true);
       toast.success(
