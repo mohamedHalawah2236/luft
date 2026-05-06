@@ -6,7 +6,6 @@ import { AuthUserApiResponse } from '@/types/auth';
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 async function refreshAccessToken(token: any) {
-  console.log('refresh-token starts');
   try {
     const response = await fetch(`${apiUrl}/api/auth/refresh-token`, {
       method: 'POST',

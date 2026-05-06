@@ -45,10 +45,6 @@ export async function getAllData(
   const tokens = await getTokens();
   const token = tokens.accessToken;
 
-  console.log('Token');
-  console.log('#########################');
-  console.log(token);
-
   const res = await fetch(`${apiUrl}/${endpoint}`, {
     ...options,
     headers: {
