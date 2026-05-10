@@ -1,9 +1,16 @@
 import { notFound } from 'next/navigation';
+import { getServerSession } from 'next-auth';
 import { signOut } from 'next-auth/react';
 
-import { getValidAccessToken } from '@/lib/tokenRefresh';
+import { authOptions } from '@/lib/auth';
 import { concatErrors } from '@/utils/errors';
 import { getLanguage } from '@/utils/language';
+
+// Dynamic import for client-side session
+async function getClientSession() {
+  const { getSession } = await import('next-auth/react');
+  return getSession();
+}
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -36,8 +43,24 @@ export function deleteSearchParams(paramName: string, paramValue: string) {
 export async function getAllData(endpoint: string, options: RequestInit = {}) {
   const language = await getLanguage();
 
-  // Get valid access token (refreshes if expired, handles concurrent calls)
-  const token = await getValidAccessToken();
+  // Get session (token refresh happens automatically in JWT callback)
+  const isServer = typeof window === 'undefined';
+  const session = isServer
+    ? await getServerSession(authOptions)
+    : await getClientSession();
+
+  // Check for refresh error
+  if (session?.error === 'RefreshAccessTokenError') {
+    if (!isServer) {
+      signOut({
+        redirect: true,
+        callbackUrl: '/login',
+      });
+    }
+    throw new Error('Session expired', { cause: 401 });
+  }
+
+  const token = session?.accessToken;
 
   const res = await fetch(`${apiUrl}/${endpoint}`, {
     ...options,
@@ -108,8 +131,24 @@ export async function getAllDataParallel(
 export async function postData(endpoint: string, options: RequestInit = {}) {
   const language = await getLanguage();
 
-  // Get valid access token (refreshes if expired, handles concurrent calls)
-  const token = await getValidAccessToken();
+  // Get session (token refresh happens automatically in JWT callback)
+  const isServer = typeof window === 'undefined';
+  const session = isServer
+    ? await getServerSession(authOptions)
+    : await getClientSession();
+
+  // Check for refresh error
+  if (session?.error === 'RefreshAccessTokenError') {
+    if (!isServer) {
+      signOut({
+        redirect: true,
+        callbackUrl: '/login',
+      });
+    }
+    throw new Error('Session expired', { cause: 401 });
+  }
+
+  const token = session?.accessToken;
 
   const res = await fetch(`${apiUrl}/${endpoint}`, {
     ...options,
