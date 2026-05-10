@@ -6,7 +6,7 @@ import { getSession } from 'next-auth/react';
  * Token refresh happens automatically in the JWT callback
  */
 export async function getValidSession() {
-  const session = await getSession();
+  const session = await getSession({ broadcast: true });
 
   if (session?.error === 'RefreshAccessTokenError') {
     // Session refresh failed, user needs to re-authenticate

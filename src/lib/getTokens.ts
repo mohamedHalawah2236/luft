@@ -21,7 +21,7 @@ export async function getTokens() {
     };
   } else {
     // Client-side: use getSession
-    const session = await getSession();
+    const session = await getSession({ broadcast: true });
     return {
       accessToken: session?.accessToken,
       refreshToken: session?.refreshToken,

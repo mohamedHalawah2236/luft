@@ -9,7 +9,7 @@ import { getLanguage } from '@/utils/language';
 // Dynamic import for client-side session
 async function getClientSession() {
   const { getSession } = await import('next-auth/react');
-  return getSession();
+  return getSession({ broadcast: true });
 }
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;

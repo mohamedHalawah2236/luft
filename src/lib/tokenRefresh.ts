@@ -95,7 +95,7 @@ export async function getValidAccessToken(): Promise<string | null> {
   // Get current session
   const session = isServer
     ? await getServerSession(authOptions)
-    : await getSession();
+    : await getSession({ broadcast: true });
 
   if (!session) {
     console.log('No session found');
