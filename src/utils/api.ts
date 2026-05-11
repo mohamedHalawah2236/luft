@@ -2,9 +2,10 @@ import { notFound } from 'next/navigation';
 import { getServerSession } from 'next-auth';
 import { signOut } from 'next-auth/react';
 
-import { authOptions } from '@/lib/auth';
 import { concatErrors } from '@/utils/errors';
 import { getLanguage } from '@/utils/language';
+
+import { authOptions } from '@/lib/auth';
 
 // Dynamic import for client-side session
 async function getClientSession() {

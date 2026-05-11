@@ -6,6 +6,7 @@ import { DefaultSession } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
 import { useSessionError } from '@/hooks/useSessionError';
 
 function SessionErrorHandler({ children }: { children: ReactNode }) {
