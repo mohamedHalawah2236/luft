@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { signOut } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 
@@ -43,7 +42,7 @@ export default function ConfirmLogoutModal({
       isActionsDisabled={isPending || isSuccess}
     >
       <div className='flex flex-col items-center gap-6'>
-        <Image
+        <img
           src='images/auth/logoutConfirm.png'
           alt='Logout'
           width={98.73619842529297}

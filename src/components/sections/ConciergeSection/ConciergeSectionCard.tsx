@@ -1,3 +1,5 @@
+import MediaPreview from '@/components/shared/MediaPreview/MediaPreview';
+
 type FeatureSectionCardProps = {
   title: string;
   description: string;
@@ -12,13 +14,11 @@ export default function ConciergeSectionCard({
   return (
     <div className='flex flex-col gap-4 rounded-2xl bg-white p-4 sm:min-w-[17.24rem] xl:gap-6'>
       <div className='flex size-6 items-center justify-center md:size-12'>
-        {iconUrl && (
-          <img
-            src={iconUrl}
-            alt='title'
-            className='size-[1.36rem] md:size-8'
-          />
-        )}
+        <MediaPreview
+          url={iconUrl}
+          className='size-[1.36rem] md:size-8'
+          isIcon={true}
+        />
       </div>
       {/* Texts */}
       <div className='flex flex-col gap-1 overflow-hidden'>

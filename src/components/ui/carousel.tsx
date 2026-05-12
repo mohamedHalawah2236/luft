@@ -38,7 +38,6 @@ const CarouselContext = React.createContext<CarouselContextProps | null>(null);
 
 function useCarousel() {
   const context = React.useContext(CarouselContext);
-  const dir = useLocale() === 'ar' ? 'rtl' : 'ltr';
 
   if (!context) {
     throw new Error('useCarousel must be used within a <Carousel />');
@@ -125,6 +124,31 @@ const Carousel = React.forwardRef<
         api?.off('select', onSelect);
       };
     }, [api, onSelect]);
+
+    // Automatically play/stop the autoplay plugin based on viewport visibility.
+    // This works for any carousel that passes an autoplay plugin — no per-carousel
+    // useEffect needed.
+    React.useEffect(() => {
+      if (!api) return;
+
+      const autoplay = api.plugins()?.autoplay;
+      if (!autoplay) return;
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            autoplay.play();
+          } else {
+            autoplay.stop();
+          }
+        },
+        { threshold: 0.1 },
+      );
+
+      observer.observe(api.rootNode());
+
+      return () => observer.disconnect();
+    }, [api]);
 
     return (
       <CarouselContext.Provider
@@ -261,6 +285,36 @@ const CarouselNext = React.forwardRef<
 });
 CarouselNext.displayName = 'CarouselNext';
 
+import { useCarouselScrollBar } from '@/hooks/useCarouselScrollbar';
+
+type CarouselScrollBarProps = {
+  api: CarouselApi | undefined;
+  id?: string;
+  className?: string;
+};
+
+const CarouselScrollBar = ({ api, id, className }: CarouselScrollBarProps) => {
+  const { value, onChange, canScroll } = useCarouselScrollBar(api);
+
+  if (!canScroll) return null;
+
+  return (
+    <input
+      id={id}
+      type='range'
+      min='0'
+      max='1'
+      step='0.0001'
+      value={value}
+      onChange={onChange}
+      className={cn(
+        'carousel-scroll mx-auto h-2 w-[16.5rem] appearance-none rounded-full bg-grayish-50',
+        className,
+      )}
+    />
+  );
+};
+
 export {
   Carousel,
   type CarouselApi,
@@ -268,4 +322,5 @@ export {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  CarouselScrollBar,
 };

@@ -106,7 +106,10 @@
     },
     "logout": "تسجيل الخروج",
     "currency": "العملة",
-    "mediaNotSupported": "الوسائط غير مدعومة"
+    "night": "/الليلة",
+    "mediaNotSupported": "الوسائط غير مدعومة",
+    "cantLoadMedia": "تعذّر تحميل الوسائط",
+    "noMediaUploaded": "لم يتم رفع أي وسائط"
   },
   "auth": {
     "banner": {
@@ -191,6 +194,51 @@
       "buttons": {
         "startPartnership": "ابدأ شراكتك"
       }
+    },
+    "propertyDetails": {
+      "about": {
+        "title": "عن هذا المكان",
+        "showMore": "عرض المزيد",
+        "showLess": "عرض أقل"
+      },
+      "amenities": {
+        "title": "ما يوفره هذا المكان",
+        "showAll": "عرض جميع المرافق",
+        "showLess": "عرض أقل"
+      },
+      "propertyInfo": {
+        "guests": "{count} ضيوف",
+        "bedrooms": "{count} غرف",
+        "bathrooms": "{count} حمامات"
+      },
+      "location": {
+        "title": "أين ستكون"
+      },
+      "reservation": {
+        "addDatesTitle": "أضف التواريخ للأسعار",
+        "addDatesSubtitle": "اختر تواريخك وعدد ضيوفك لتأمين هذه الإقامة.",
+        "forNights": "لمدة {count} ليالٍ",
+        "checkIn": "تسجيل الوصول",
+        "checkOut": "تسجيل المغادرة",
+        "addDate": "أضف تاريخاً",
+        "guests": "الضيوف",
+        "guestsCount": "{count} ضيوف",
+        "reserve": "احجز الآن"
+      },
+      "reviews": {
+        "showAll": "عرض جميع التقييمات",
+        "showLess": "عرض أقل"
+      },
+      "actions": {
+        "share": "مشاركة",
+        "wishlist": "المفضلة",
+        "linkCopied": "تم نسخ الرابط",
+        "shareProperty": "مشاركة هذا العقار"
+      },
+      "images": {
+        "title": "صور العقار",
+        "showAll": "عرض جميع الصور"
+      }
     }
   },
   "sections": {
@@ -216,7 +264,8 @@
         "send": "إرسال"
       },
       "validations": {
-        "min": "يجب أن تكون الرسالة 10 أحرف على الأقل"
+        "min": "يجب أن تكون الرسالة 10 أحرف على الأقل",
+        "max": "يجب أن تكون الرسالة {max} أحرف على الأكثر"
       },
       "toast": {
         "success": "تم إرسال الرسالة بنجاح",
@@ -272,6 +321,24 @@
     },
     "partners": {
       "luftPartner": "شريك لوفت"
+    },
+    "recommendedProperties": {
+      "title": "إقامات موصى بها لك",
+      "subtitle": "مجموعة مختارة من شققنا الأكثر راحة والأعلى تقييماً.",
+      "card": {
+        "title": "ذا سيرين إسكيب",
+        "description": "ملاذ هادئ مع إطلالات خلابة."
+      }
+    }
+  },
+  "emptyStates": {
+    "notFound": {
+      "title": "عذراً، هذه الصفحة غير موجودة",
+      "description": "الصفحة التي تبحث عنها غير موجودة الآن."
+    },
+    "error": {
+      "title": "نواجه مشكلة حالياً",
+      "description": "خوادمنا غير متاحة مؤقتاً. يرجى المحاولة مرة أخرى بعد قليل."
     }
   }
 }

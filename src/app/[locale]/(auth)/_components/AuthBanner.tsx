@@ -1,6 +1,3 @@
-import React from 'react';
-
-import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
 import AirbnbIcon from '@/components/icons/AirbnbIcon';
@@ -13,11 +10,11 @@ export default function AuthBanner() {
   const t = useTranslations('auth.banner');
 
   return (
-    <div className='relative h-full w-1/2 overflow-hidden rounded-2xl max-lg:hidden xl:w-[41rem]'>
-      <Image
+    <div className='relative h-full w-1/2 overflow-hidden rounded-2xl max-lg:hidden xl-1200:w-[41rem]'>
+      <img
         src='/images/auth/authBanner.jpg'
         alt='Auth Banner'
-        fill
+        className='absolute inset-0 size-full'
       />
       <div className='absolute inset-0 flex size-full flex-col justify-end bg-gradient-to-b from-transparent to-[#15110D] text-center'>
         <div className='mb-16 flex flex-col items-center gap-4'>

@@ -1,12 +1,17 @@
+'use client';
+import { useState } from 'react';
+
 import { useTranslations } from 'next-intl';
 
-import ImageIcon from '@/components/icons/ImageIcon';
+import Autoplay from 'embla-carousel-autoplay';
+
+import MediaPreview from '@/components/shared/MediaPreview/MediaPreview';
 import {
   Carousel,
+  CarouselApi,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
+  CarouselScrollBar,
 } from '@/components/ui/carousel';
 
 import { PartnersSectionRes } from '@/types/page';
@@ -17,6 +22,7 @@ export default function PartnersSection({
   items,
 }: PartnersSectionRes) {
   const t = useTranslations('sections.partners');
+  const [api, setApi] = useState<CarouselApi>();
 
   return (
     <section className='flex flex-col gap-16'>
@@ -36,47 +42,60 @@ export default function PartnersSection({
         </p>
       </div>
 
-      <Carousel className='relative flex w-full items-center gap-4 pb-4 [&>.overflow-hidden]:flex-1'>
-        <CarouselPrevious className='static translate-x-0 translate-y-0 border-0 border-transparent bg-grayish-30 hover:bg-grayish-50' />
-
-        <CarouselContent className='-ms-12 flex-1'>
-          {items.map((review, index) => (
-            <CarouselItem
-              key={index}
-              className='min-w-[20.464rem] max-w-[20.464rem] ps-12'
-            >
-              {/* Guest Info */}
-              <div className='mb-4 flex gap-2'>
-                <div className='size-12 flex-shrink-0 overflow-hidden rounded-full bg-grayish-50'>
-                  {review.iconUrl ? (
-                    <img
-                      src={review.iconUrl}
-                      alt={review.title}
+      <div className='flex flex-col items-center gap-8 md:gap-12 lg:gap-16'>
+        <Carousel
+          setApi={setApi}
+          plugins={[
+            Autoplay({
+              delay: 2500,
+              stopOnInteraction: true,
+              stopOnLastSnap: true,
+            }),
+          ]}
+          className='relative flex w-full items-center gap-4 pb-4 [&>.overflow-hidden]:flex-1'
+        >
+          <CarouselContent className='-ms-6 flex-1 md:-ms-8 lg:-ms-12'>
+            {items.map((review, index) => (
+              <CarouselItem
+                key={index}
+                className='min-w-[20.464rem] max-w-[20.464rem] select-none ps-6 md:ps-8 lg:ps-12'
+              >
+                {/* Guest Info */}
+                <div className='mb-4 flex gap-2'>
+                  <div className='size-12 flex-shrink-0 overflow-hidden rounded-full bg-grayish-50'>
+                    <MediaPreview
+                      url={review.iconUrl}
                       className='size-full object-cover'
+                      isIcon={true}
                     />
-                  ) : (
-                    <div className='flex size-full items-center justify-center'>
-                      <ImageIcon className='size-5' />
-                    </div>
-                  )}
+                  </div>
+                  <div className='flex flex-1 flex-col gap-1 overflow-hidden'>
+                    <h3
+                      title={review.title}
+                      className='line-clamp-1 font-medium text-grayish-900 md:text-lg'
+                    >
+                      {review.title}
+                    </h3>
+                    <p className='text-grayish-400'>{t('luftPartner')}</p>
+                  </div>
                 </div>
-                <div className='flex flex-1 flex-col gap-1 overflow-hidden'>
-                  <h3 className='line-clamp-1 font-medium text-grayish-900 md:text-lg'>
-                    {review.title}
-                  </h3>
-                  <p className='text-grayish-400'>{t('luftPartner')}</p>
-                </div>
-              </div>
 
-              {/* Review Text */}
-              <p className='line-clamp-3 whitespace-pre-wrap text-grayish-400'>
-                {review.reviewText}
-              </p>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselNext className='static translate-x-0 translate-y-0 border-0 border-transparent bg-grayish-30 hover:bg-grayish-50' />
-      </Carousel>
+                {/* Review Text */}
+                <p
+                  title={review.reviewText}
+                  className='line-clamp-3 whitespace-pre-wrap text-grayish-400'
+                >
+                  {review.reviewText}
+                </p>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
+        <CarouselScrollBar
+          id='partners'
+          api={api}
+        />
+      </div>
     </section>
   );
 }

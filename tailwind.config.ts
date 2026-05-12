@@ -19,6 +19,7 @@ export default {
         sm: '600px',
         md: '768px',
         lg: '1024px',
+        'xl-1200': '1200px',
         xl: '1296px',
         '2xl': '1350px',
       },
@@ -172,10 +173,19 @@ export default {
             height: '0',
           },
         },
+        'fade-in': {
+          from: {
+            opacity: '0',
+          },
+          to: {
+            opacity: '1',
+          },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        fade: 'fade-in 0.3s ease-in-out',
       },
     },
   },

@@ -47,7 +47,8 @@ export default function SendMessageSection() {
       .string({ required_error: tCommon('validations.required') })
       .min(1, { message: tCommon('validations.required') })
       .regex(NOT_SPACES_ONLY, tCommon('validations.required'))
-      .min(10, { message: tSendMessage('validations.min') }),
+      .min(10, { message: tSendMessage('validations.min') })
+      .max(2000, { message: tSendMessage('validations.max', { max: 2000 }) }),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -67,8 +68,8 @@ export default function SendMessageSection() {
       toast.success(tSendMessage('toast.success'));
       form.reset();
     },
-    onError: () => {
-      toast.error(tSendMessage('toast.error'));
+    onError: (error) => {
+      toast.error(error?.message || tSendMessage('toast.error'));
     },
   });
 

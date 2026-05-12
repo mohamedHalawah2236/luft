@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 import { useFormContext } from 'react-hook-form';
 
@@ -27,7 +27,7 @@ export default function AuthFormLayout({
   const { isSubmitting } = form.formState;
 
   return (
-    <div className='flex flex-col gap-8'>
+    <div className='flex max-h-full flex-col gap-8 overflow-auto'>
       <div className='flex flex-col gap-2'>
         <h2 className='text-[2rem] font-medium text-grayish-900 max-sm:text-2xl'>
           {title}

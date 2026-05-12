@@ -103,7 +103,10 @@
     },
     "logout": "Logout",
     "currency": "Currency",
-    "mediaNotSupported": "Media not supported"
+    "night": "/night",
+    "mediaNotSupported": "Media not supported",
+    "cantLoadMedia": "Can't load media",
+    "noMediaUploaded": "No media uploaded"
   },
   "auth": {
     "banner": {
@@ -188,6 +191,51 @@
       "buttons": {
         "startPartnership": "Start your partnership"
       }
+    },
+    "propertyDetails": {
+      "about": {
+        "title": "About this Place",
+        "showMore": "Show more",
+        "showLess": "Show less"
+      },
+      "amenities": {
+        "title": "What this place offers",
+        "showAll": "Show all amenities",
+        "showLess": "Show less"
+      },
+      "propertyInfo": {
+        "guests": "{count} Guests",
+        "bedrooms": "{count} Rooms",
+        "bathrooms": "{count} Bathrooms"
+      },
+      "location": {
+        "title": "Where you'll be"
+      },
+      "reservation": {
+        "addDatesTitle": "Add dates for prices",
+        "addDatesSubtitle": "Choose your dates and guests to secure this stay.",
+        "forNights": "for {count} nights",
+        "checkIn": "Check-in",
+        "checkOut": "Check-out",
+        "addDate": "Add Date",
+        "guests": "Guests",
+        "guestsCount": "{count} Guests",
+        "reserve": "Reserve"
+      },
+      "reviews": {
+        "showAll": "Show all reviews",
+        "showLess": "Show less"
+      },
+      "actions": {
+        "share": "Share",
+        "wishlist": "Wishlist",
+        "linkCopied": "Link copied to clipboard",
+        "shareProperty": "Share this property"
+      },
+      "images": {
+        "title": "Property Images",
+        "showAll": "Show All photos"
+      }
     }
   },
   "sections": {
@@ -213,7 +261,8 @@
         "send": "Send"
       },
       "validations": {
-        "min": "Message must be at least 10 characters"
+        "min": "Message must be at least 10 characters",
+        "max": "Message must be at most {max} characters"
       },
       "toast": {
         "success": "Message sent successfully",
@@ -269,6 +318,24 @@
     },
     "partners": {
       "luftPartner": "Luftstay Partner"
+    },
+    "recommendedProperties": {
+      "title": "Stays Recommended For You",
+      "subtitle": "A curated pick of our most comfortable, best-rated apartments.",
+      "card": {
+        "title": "The Serene Escape",
+        "description": "A peaceful retreat with stunning views."
+      }
+    }
+  },
+  "emptyStates": {
+    "notFound": {
+      "title": "Well… this is awkward",
+      "description": "The page you’re looking for isn’t here anymore."
+    },
+    "error": {
+      "title": "We’re having trouble right now",
+      "description": "Our servers are temporarily unavailable. Please try again in a moment."
     }
   }
 }

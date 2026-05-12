@@ -25,7 +25,7 @@ export default async function AppLayout({
   }: LayoutDataResponse = await getLayoutData(locale as Locale);
 
   return (
-    <div className='flex size-full flex-col overflow-auto'>
+    <div className='flex flex-col'>
       <div className='flex flex-col items-center justify-center bg-grayish-50 py-4'>
         <RatedByGuests
           textClassName='leading-5'

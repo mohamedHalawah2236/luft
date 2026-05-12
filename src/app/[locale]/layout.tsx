@@ -94,7 +94,7 @@ export default async function LocaleLayout({
       dir={locale === 'en' ? 'ltr' : 'rtl'}
     >
       <body
-        className={`${switzer.variable} mx-auto size-full h-dvh w-dvw overflow-hidden bg-grayish-30 font-switzer antialiased`}
+        className={`${switzer.variable} mx-auto min-h-screen bg-grayish-30 font-switzer antialiased`}
       >
         <NextIntlClientProvider messages={messages}>
           <Providers session={session!}>

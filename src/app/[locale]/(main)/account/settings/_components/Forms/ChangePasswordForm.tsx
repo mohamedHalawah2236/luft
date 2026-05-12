@@ -2,7 +2,7 @@
 
 import { useContext, useState } from 'react';
 
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 
 import { useForm } from 'react-hook-form';
@@ -117,6 +117,10 @@ export default function ChangePasswordForm() {
     onSuccess: () => {
       setIsOpen(false);
       toast.success(tCommon('toaster.dataUpdatedSuccess'));
+      signOut({
+        redirect: true,
+        callbackUrl: '/login',
+      });
     },
     onError: (error: Error) => setServerError(error.message),
   });

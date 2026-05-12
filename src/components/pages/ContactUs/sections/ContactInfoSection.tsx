@@ -1,3 +1,5 @@
+import MediaPreview from '@/components/shared/MediaPreview/MediaPreview';
+
 import { ContactUsSectionRes } from '@/types/page';
 
 const ContactInfoSection = ({
@@ -25,10 +27,10 @@ const ContactInfoSection = ({
             className='flex flex-col gap-4'
           >
             <div className='flex items-center gap-2'>
-              <img
+              <MediaPreview
+                url={item.iconUrl}
                 className='h-5 w-5 bg-cover bg-center'
-                src={item.iconUrl}
-                alt={item.title}
+                isIcon={true}
               />
               <p className='text-base text-grayish-900'>{item.title}</p>
             </div>
@@ -39,10 +41,10 @@ const ContactInfoSection = ({
 
         <div className='flex flex-col gap-4'>
           <div className='flex items-center gap-2'>
-            <img
+            <MediaPreview
+              url={socialsItem?.iconUrl}
               className='h-5 w-5 bg-cover bg-center'
-              src={socialsItem?.iconUrl}
-              alt=''
+              isIcon={true}
             />
             <p className='text-base text-grayish-900'>{socialsItem?.title}</p>
           </div>
@@ -56,10 +58,10 @@ const ContactInfoSection = ({
                 rel='noopener noreferrer'
                 className='flex size-8 items-center justify-center rounded-full bg-white'
               >
-                <img
-                  src={item.iconUrl}
-                  alt={item.name}
+                <MediaPreview
+                  url={item.iconUrl}
                   className='h-5 w-5'
+                  isIcon={true}
                 />
               </a>
             ))}

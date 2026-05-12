@@ -1,20 +1,21 @@
 'use client';
 
+import { useState } from 'react';
+
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
-import { Star } from 'lucide-react';
+import Autoplay from 'embla-carousel-autoplay';
 
 import AirbnbIcon from '@/components/icons/AirbnbIcon';
+import StarRating from '@/components/icons/StarRating';
 import {
   Carousel,
+  CarouselApi,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
+  CarouselScrollBar,
 } from '@/components/ui/carousel';
-
-import { cn } from '@/lib/utils';
 
 interface Review {
   id: string;
@@ -27,48 +28,9 @@ interface Review {
   text: string;
 }
 
-function StarRating({
-  rating,
-  size = 'sm',
-  className,
-}: {
-  rating: number;
-  size?: 'sm' | 'md';
-  className?: string;
-}) {
-  const sizeClass = size === 'sm' ? 'w-4 h-4' : 'w-6 h-6';
-  return (
-    <div className={cn('flex gap-2', className)}>
-      {[...Array(5)].map((_, i) => {
-        const fillPercentage = Math.max(0, Math.min(100, (rating - i) * 100));
-
-        return (
-          <div
-            key={i}
-            className={`relative ${sizeClass}`}
-          >
-            <Star
-              className={`${sizeClass} fill-transparent stroke-grayish-900 text-transparent`}
-            />
-            {fillPercentage > 0 && (
-              <div
-                className='absolute start-0 top-0 h-full overflow-hidden'
-                style={{ width: `${fillPercentage}%` }}
-              >
-                <Star
-                  className={`${sizeClass} max-w-none fill-grayish-900 stroke-grayish-900 text-grayish-900`}
-                />
-              </div>
-            )}
-          </div>
-        );
-      })}
-    </div>
-  );
-}
-
 export default function TestimonialsSection() {
   const t = useTranslations('sections.testimonials');
+  const [api, setApi] = useState<CarouselApi>();
 
   const reviews: Review[] = [
     {
@@ -244,71 +206,85 @@ export default function TestimonialsSection() {
       </div>
 
       {/* Reviews Carousel */}
-      <Carousel className='flex w-full items-center gap-1 pb-4 [&>.overflow-hidden]:flex-1'>
-        <CarouselPrevious className='static translate-x-0 translate-y-0 border-0 border-transparent hover:bg-grayish-30' />
-
-        <CarouselContent className='-ms-12 flex-1'>
-          {reviews.map((review) => (
-            <CarouselItem
-              key={review.id}
-              className='ms-12 flex min-w-[20.465rem] max-w-[20.465rem] flex-col ps-0'
-            >
-              {/* Guest Info */}
-              <div className='mb-4 flex gap-2'>
-                <div className='h-12 w-12 flex-shrink-0 overflow-hidden rounded-full bg-gray-100'>
-                  <Image
-                    src={review.avatar}
-                    alt={review.guestName}
-                    width={48}
-                    height={48}
-                    className='h-full w-full object-cover'
-                  />
-                </div>
-                <div className='flex-1'>
-                  <h3 className='line-clamp-1 text-lg text-grayish-900'>
-                    {review.guestName}
-                  </h3>
-                  <p className='line-clamp-1 whitespace-pre-wrap text-grayish-400'>
-                    {review.location}
-                  </p>
-                </div>
-              </div>
-
-              {/* Rating and Metadata */}
-              <div className='mb-4 flex items-center gap-2 text-grayish-900'>
-                <StarRating
-                  rating={review.rating}
-                  size='sm'
-                  className='gap-1.5'
-                />
-                <span className='w-1 text-xs text-grayish-400'>•</span>
-                <span className=''>
-                  {t('daysAgo', { days: review.daysAgo })}
-                </span>
-                <span className='w-1 text-xs text-grayish-400'>•</span>
-                <span className='text-grayish-400'>
-                  {t('stayedDays', { days: review.stayedDays })}
-                </span>
-              </div>
-
-              {/* Review Text */}
-              <p
-                title={review.text}
-                className='mb-1 line-clamp-3 flex-1 whitespace-pre-wrap text-grayish-400'
+      <div className='flex flex-col items-center gap-8 md:gap-12 lg:gap-16'>
+        <Carousel
+          setApi={setApi}
+          plugins={[
+            Autoplay({
+              delay: 2500,
+              stopOnInteraction: true,
+              stopOnLastSnap: true,
+            }),
+          ]}
+          className='flex w-full items-center gap-2 pb-4 [&>.overflow-hidden]:flex-1'
+        >
+          <CarouselContent className='-ms-6 flex-1 md:-ms-8 lg:-ms-12'>
+            {reviews.map((review) => (
+              <CarouselItem
+                key={review.id}
+                className='flex min-w-fit select-none flex-col ps-6 md:ps-8 lg:ps-12'
               >
-                {review.text}
-              </p>
+                {/* Guest Info */}
+                <div className='mb-4 flex gap-2'>
+                  <div className='h-12 w-12 flex-shrink-0 overflow-hidden rounded-full bg-gray-100'>
+                    <Image
+                      src={review.avatar}
+                      alt={review.guestName}
+                      width={48}
+                      height={48}
+                      className='h-full w-full object-cover'
+                    />
+                  </div>
+                  <div className='flex-1'>
+                    <h3 className='line-clamp-1 text-lg text-grayish-900'>
+                      {review.guestName}
+                    </h3>
+                    <p className='line-clamp-1 whitespace-pre-wrap text-grayish-400'>
+                      {review.location}
+                    </p>
+                  </div>
+                </div>
 
-              {/* Airbnb Attribution */}
-              <div className='flex items-center gap-2 pt-3'>
-                <span className='text-grayish-900'>{t('ratedOn')}</span>
-                <AirbnbIcon />
-              </div>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselNext className='static translate-x-0 translate-y-0 border-0 border-transparent hover:bg-grayish-30' />
-      </Carousel>
+                {/* Rating and Metadata */}
+                <div className='mb-4 flex min-w-fit items-center gap-2 text-grayish-900'>
+                  <StarRating
+                    rating={review.rating}
+                    size='sm'
+                    className='gap-1.5'
+                  />
+                  <span className='w-1 text-xs text-grayish-400'>•</span>
+                  <span className='whitespace-nowrap'>
+                    {t('daysAgo', { days: review.daysAgo })}
+                  </span>
+                  <span className='w-1 text-xs text-grayish-400'>•</span>
+                  <span className='whitespace-nowrap text-grayish-400'>
+                    {t('stayedDays', { days: review.stayedDays })}
+                  </span>
+                </div>
+
+                {/* Review Text */}
+                <p
+                  title={review.text}
+                  className='mb-1 line-clamp-3 min-w-[20.465rem] max-w-[20.465rem] flex-1 whitespace-pre-wrap text-grayish-400'
+                >
+                  {review.text}
+                </p>
+
+                {/* Airbnb Attribution */}
+                <div className='flex items-center gap-2 pt-3'>
+                  <span className='text-grayish-900'>{t('ratedOn')}</span>
+                  <AirbnbIcon />
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
+        <CarouselScrollBar
+          id='testimonials'
+          api={api}
+          className='bg-grayish-100'
+        />
+      </div>
     </section>
   );
 }
