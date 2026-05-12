@@ -24,12 +24,12 @@ export default function ConciergeSectionCard({
       <div className='flex flex-col gap-1 overflow-hidden'>
         <h4
           title={title}
-          className='line-clamp-1 font-medium text-grayish-900 md:text-lg'
+          className='line-clamp-1 w-fit font-medium text-grayish-900 md:text-lg'
         >
           {title}
         </h4>
         <p
-          className='line-clamp-4 whitespace-pre-wrap text-base leading-5 text-grayish-400'
+          className='line-clamp-4 w-fit whitespace-pre-wrap text-base leading-5 text-grayish-400'
           title={description}
         >
           {description}

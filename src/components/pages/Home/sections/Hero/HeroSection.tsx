@@ -16,13 +16,13 @@ export default function HeroSectionPreview({
         <div className='flex max-w-full flex-1 flex-col gap-4 overflow-hidden'>
           <h3
             title={title}
-            className='line-clamp-3 text-[2rem] font-medium leading-[2.5rem] text-grayish-900 md:text-5xl md:leading-[3.5rem] xl:text-6xl xl:leading-[4.52rem]'
+            className='line-clamp-3 w-fit text-[2rem] font-medium leading-[2.5rem] text-grayish-900 md:text-5xl md:leading-[3.5rem] xl:text-6xl xl:leading-[4.52rem]'
           >
             {title}
           </h3>
           <p
             title={description}
-            className='line-clamp-4 text-grayish-400 md:text-lg'
+            className='line-clamp-4 w-fit text-grayish-400 md:text-lg'
           >
             {description}
           </p>
