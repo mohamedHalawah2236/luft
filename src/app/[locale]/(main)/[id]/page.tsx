@@ -1,7 +1,7 @@
-import AboutPage from '@/components/pages/About/AboutPage';
-import ContactUsPage from '@/components/pages/ContactUs/ContactUsPage';
-import ForOwnersPage from '@/components/pages/ForOwners/ForOwnersPage';
-import HomePage from '@/components/pages/Home/HomePage';
+import AboutPage from '@/components/_pages/About/AboutPage';
+import ContactUsPage from '@/components/_pages/ContactUs/ContactUsPage';
+import ForOwnersPage from '@/components/_pages/ForOwners/ForOwnersPage';
+import HomePage from '@/components/_pages/Home/HomePage';
 
 import {
   AboutPageSections,
