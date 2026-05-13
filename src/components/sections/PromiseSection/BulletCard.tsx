@@ -18,13 +18,13 @@ export default function BulletCard({ data }: { data: BulletRes }) {
       {/* Texts */}
       <div className='flex flex-col gap-1 overflow-hidden'>
         <h6
-          className='line-clamp-1 text-lg font-medium text-grayish-900 md:text-xl xl:text-2xl'
+          className='line-clamp-1 w-fit text-lg font-medium text-grayish-900 md:text-xl xl:text-2xl'
           title={title}
         >
           {title}
         </h6>
         <p
-          className='line-clamp-2 whitespace-pre-wrap text-grayish-400 md:text-lg'
+          className='line-clamp-2 w-fit whitespace-pre-wrap text-grayish-400 md:text-lg'
           title={description}
         >
           {description}

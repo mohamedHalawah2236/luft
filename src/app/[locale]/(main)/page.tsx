@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 
-import HomePage from '@/components/pages/Home/HomePage';
+import HomePage from '@/components/_pages/Home/HomePage';
 
 import { LayoutDataResponse } from '@/types/layout';
 import { HomePageSections, PageApiResponse, PageTypeEnum } from '@/types/page';

@@ -214,6 +214,7 @@ export default function TestimonialsSection() {
               delay: 2500,
               stopOnInteraction: true,
               stopOnLastSnap: true,
+              stopOnMouseEnter: true,
             }),
           ]}
           className='flex w-full items-center gap-2 pb-4 [&>.overflow-hidden]:flex-1'

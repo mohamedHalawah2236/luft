@@ -50,6 +50,7 @@ export default function PartnersSection({
               delay: 2500,
               stopOnInteraction: true,
               stopOnLastSnap: true,
+              stopOnMouseEnter: true,
             }),
           ]}
           className='relative flex w-full items-center gap-4 pb-4 [&>.overflow-hidden]:flex-1'

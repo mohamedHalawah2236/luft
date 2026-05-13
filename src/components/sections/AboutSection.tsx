@@ -17,13 +17,13 @@ export default function AboutSection({
         {/* Texts */}
         <h3
           title={title}
-          className='line-clamp-2 text-[1.75rem] font-medium leading-9 text-grayish-900 md:text-[2rem] md:leading-10 lg:text-5xl lg:leading-[3.625rem]'
+          className='line-clamp-2 w-fit text-[1.75rem] font-medium leading-9 text-grayish-900 md:text-[2rem] md:leading-10 lg:text-5xl lg:leading-[3.625rem]'
         >
           {title}
         </h3>
         <p
           title={description}
-          className='line-clamp-[12] whitespace-pre-wrap text-grayish-400 md:text-lg'
+          className='line-clamp-[12] w-fit whitespace-pre-wrap text-grayish-400 md:text-lg'
         >
           {description}
         </p>
