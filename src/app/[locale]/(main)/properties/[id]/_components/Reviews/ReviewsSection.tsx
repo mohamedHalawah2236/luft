@@ -94,6 +94,7 @@ export default function ReviewsSection({ reviews }: ReviewsSectionProps) {
             delay: 2500,
             stopOnInteraction: true,
             stopOnLastSnap: true,
+            stopOnMouseEnter: true,
           }),
         ]}
         className='flex w-full items-center gap-2 sm:hidden [&>.overflow-hidden]:flex-1'
