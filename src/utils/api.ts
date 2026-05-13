@@ -32,7 +32,7 @@ export function deleteSearchParams(paramName: string, paramValue: string) {
   return `?${searchParams.toString()}`;
 }
 
-export async function getAllData(
+export async function apiFetch(
   endpoint: string,
   options: RequestInit = {},
   accessToken?: string,
@@ -94,75 +94,13 @@ export async function getAllData(
   return data;
 }
 
-export async function getAllDataParallel(
+export async function apiFetchParallel(
   endpoints: string[],
   options: RequestInit = {},
 ) {
   const res = await Promise.all(
-    endpoints.map((endpoint) => getAllData(endpoint, options)),
+    endpoints.map((endpoint) => apiFetch(endpoint, options)),
   );
 
   return res;
-}
-
-export async function postData(
-  endpoint: string,
-  options: RequestInit = {},
-  accessToken?: string,
-) {
-  const language = await getLanguage();
-
-  const res = await fetch(`${apiUrl}/${endpoint}`, {
-    ...options,
-    headers: {
-      language,
-      ...(options.headers || {}),
-      ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
-    },
-  });
-
-  if (!res.ok) {
-    if (res.status === 404) {
-      notFound();
-    }
-
-    if (res.status === 401) {
-      signOut({
-        redirect: true,
-        callbackUrl: '/login',
-      });
-      throw new Error('401 Unauthorized', {
-        cause: res.status,
-      });
-    }
-
-    const data = await res.json();
-    if (data.errors) {
-      throw new Error(concatErrors(data), {
-        cause: data.statusCode,
-      });
-    }
-    throw new Error(data.message, {
-      cause: data.statusCode,
-    });
-  }
-
-  const data = await res.json();
-  if (data?.isError) {
-    if (data.statusCode === 401) {
-      signOut({
-        redirect: true,
-        callbackUrl: '/login',
-      });
-    }
-
-    if (data.statusCode === 404) {
-      notFound();
-    }
-    throw new Error(data?.message, {
-      cause: data.statusCode,
-    });
-  }
-
-  return data;
 }

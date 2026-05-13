@@ -4,10 +4,10 @@ import {
   SendOtpData,
 } from '@/types/settings';
 
-import { getAllData, postData } from '@/utils/api';
+import { apiFetch } from '@/utils/api';
 
 export const getProfileData = (accessToken?: string) =>
-  getAllData('api/auth/view-profile', undefined, accessToken);
+  apiFetch('api/auth/view-profile', undefined, accessToken);
 
 export const updateUserProfile = (
   data: ProfileFormData,
@@ -23,7 +23,7 @@ export const updateUserProfile = (
     }
   });
 
-  return postData(
+  return apiFetch(
     'api/auth/UpdateUserProfile',
     {
       body: formData,
@@ -34,7 +34,7 @@ export const updateUserProfile = (
 };
 
 export const sendOtp = (data: SendOtpData, accessToken: string | undefined) => {
-  return postData(
+  return apiFetch(
     'api/auth/send-otp',
     {
       body: JSON.stringify(data),
@@ -51,7 +51,7 @@ export const resendOtp = (
   data: SendOtpData,
   accessToken: string | undefined,
 ) => {
-  return postData(
+  return apiFetch(
     'api/auth/send-otp',
     {
       body: JSON.stringify({ ...data, isResend: true }),
@@ -68,7 +68,7 @@ export const changeUserIdentifier = (
   data: ChangeUserIdentifierData,
   accessToken: string | undefined,
 ) => {
-  return postData(
+  return apiFetch(
     'api/auth/update-email-or-phone',
     {
       body: JSON.stringify(data),
@@ -85,7 +85,7 @@ export const changeUserPassword = (
   data: { currentPassword: string; newPassword: string },
   accessToken: string | undefined,
 ) => {
-  return postData(
+  return apiFetch(
     'api/auth/change-password',
     {
       body: JSON.stringify(data),

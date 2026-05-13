@@ -7,10 +7,10 @@ import {
   VerifyOtpPreregisterFormData,
 } from '@/types/auth';
 
-import { postData } from '@/utils/api';
+import { apiFetch } from '@/utils/api';
 
 export const sendOtpPreregister = async (userData: SignupFormData) =>
-  postData('api/auth/register/send-otp-preregister', {
+  apiFetch('api/auth/register/send-otp-preregister', {
     method: 'POST',
     body: JSON.stringify(userData),
     headers: {
@@ -19,7 +19,7 @@ export const sendOtpPreregister = async (userData: SignupFormData) =>
   });
 
 export const resendOtpPreregister = async (userData: SignupFormData) =>
-  postData('api/auth/register/resend-otp-preregister', {
+  apiFetch('api/auth/register/resend-otp-preregister', {
     method: 'POST',
     body: JSON.stringify(userData),
     headers: {
@@ -30,7 +30,7 @@ export const resendOtpPreregister = async (userData: SignupFormData) =>
 export const verifyOtpPreregister = async (
   virificationData: VerifyOtpPreregisterFormData,
 ) =>
-  postData('api/auth/register/validate-preregister', {
+  apiFetch('api/auth/register/validate-preregister', {
     method: 'POST',
     body: JSON.stringify(virificationData),
     headers: {
@@ -41,7 +41,7 @@ export const verifyOtpPreregister = async (
 export const setRegisteredUserPassword = async (
   passwordData: SetRegisteredUserPasswordFormData,
 ) =>
-  postData('api/auth/register/complete-register', {
+  apiFetch('api/auth/register/complete-register', {
     method: 'POST',
     body: JSON.stringify(passwordData),
     headers: {
@@ -50,7 +50,7 @@ export const setRegisteredUserPassword = async (
   });
 
 export const sendOtpForgetPassword = async (email: string) =>
-  postData('api/auth/send-otp', {
+  apiFetch('api/auth/send-otp', {
     method: 'POST',
     body: JSON.stringify({
       identifier: email,
@@ -66,7 +66,7 @@ export const validateForgetPasswordOtp = async ({
   email,
   otp,
 }: ValidateForgetPasswordOTPFormData) =>
-  postData('api/auth/validate-otp', {
+  apiFetch('api/auth/validate-otp', {
     method: 'POST',
     body: JSON.stringify({
       identifier: email,
@@ -80,7 +80,7 @@ export const validateForgetPasswordOtp = async ({
   });
 
 export const resetPassword = async (resetPasswordData: ResetPasswordFormData) =>
-  postData('api/auth/reset-password', {
+  apiFetch('api/auth/reset-password', {
     method: 'POST',
     body: JSON.stringify(resetPasswordData),
     headers: {
@@ -89,7 +89,7 @@ export const resetPassword = async (resetPasswordData: ResetPasswordFormData) =>
   });
 
 export const login = async (credentials: LoginFormData) =>
-  postData('api/auth/login', {
+  apiFetch('api/auth/login', {
     method: 'POST',
     body: JSON.stringify({
       emailOrPhone: credentials.email,
@@ -101,7 +101,7 @@ export const login = async (credentials: LoginFormData) =>
   });
 
 export const logout = async (token: string) =>
-  postData('api/auth/logout', {
+  apiFetch('api/auth/logout', {
     method: 'PATCH',
     headers: {
       Authorization: `Bearer ${token}`,
