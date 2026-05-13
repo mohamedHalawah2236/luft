@@ -1,6 +1,7 @@
-import { notFound } from 'next/navigation';
 import { signOut } from 'next-auth/react';
+import { notFound } from 'next/navigation';
 
+import { UserSession } from '@/types/session';
 import { concatErrors } from './errors';
 import { getLanguage } from './language';
 
@@ -32,6 +33,70 @@ export function deleteSearchParams(paramName: string, paramValue: string) {
   return `?${searchParams.toString()}`;
 }
 
+export async function apiRequest(
+  endpoint: string,
+  options: RequestInit = {},
+  session?: UserSession,
+) {
+  const accessToken = session?.accessToken;
+  const refreshToken = session?.refreshToken;
+
+  const language = await getLanguage();
+
+  const res = await fetch(`${apiUrl}/${endpoint}`, {
+    ...options,
+    headers: {
+      language,
+      ...(options.headers || {}),
+      ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+    },
+  });
+
+  if (!res.ok) {
+    if (res.status === 404) {
+      notFound();
+    }
+
+    if (res.status === 401) {
+      signOut({
+        redirect: true,
+        callbackUrl: '/login',
+      });
+      throw new Error('401 Unauthorized', {
+        cause: res.status,
+      });
+    }
+
+    const data = await res.json();
+    if (data.errors) {
+      throw new Error(concatErrors(data), {
+        cause: data.statusCode,
+      });
+    }
+    throw new Error(data.message, {
+      cause: data.statusCode,
+    });
+  }
+
+  const data = await res.json();
+  if (data?.isError) {
+    if (data.statusCode === 401) {
+      signOut({
+        redirect: true,
+        callbackUrl: '/login',
+      });
+    }
+
+    if (data.statusCode === 404) {
+      notFound();
+    }
+    throw new Error(data?.message, {
+      cause: data.statusCode,
+    });
+  }
+
+  return data;
+}
 export async function apiFetch(
   endpoint: string,
   options: RequestInit = {},
@@ -94,7 +159,7 @@ export async function apiFetch(
   return data;
 }
 
-export async function apiFetchParallel(
+export async function getAllDataParallel(
   endpoints: string[],
   options: RequestInit = {},
 ) {

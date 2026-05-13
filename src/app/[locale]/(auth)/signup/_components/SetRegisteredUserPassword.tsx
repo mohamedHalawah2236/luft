@@ -1,15 +1,11 @@
 'use client';
 import React from 'react';
 
-import { signIn } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 
 import SetPasswordForm from '../../_components/SetPasswordForm';
 
-import { ApiResponse } from '@/types';
-import { AuthUserApiResponse } from '@/types/auth';
-
-import { setRegisteredUserPassword } from '@/api/auth';
+import { setRegisteredUserPasswordAction } from '../../actions';
 
 export default function SetRegisteredUserPassword({
   registrationKey,
@@ -24,14 +20,11 @@ export default function SetRegisteredUserPassword({
       description={t('setPassword.description')}
       submitBtnLabel={t('setPassword.buttonLabel')}
       onSubmit={({ password }) =>
-        setRegisteredUserPassword({ password, registrationKey })
+        setRegisteredUserPasswordAction({ password, registrationKey })
       }
-      onSubmissionSuccess={(data) => {
-        signIn('credentials', {
-          redirect: true,
-          callbackUrl: '/',
-          ...(data as ApiResponse<AuthUserApiResponse>).result,
-        });
+      onSubmissionSuccess={() => {
+        // Redirect to home
+        window.location.href = '/';
       }}
     />
   );

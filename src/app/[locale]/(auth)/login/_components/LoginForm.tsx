@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 
 import Link from 'next/link';
-import { signIn } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 
 import { useForm } from 'react-hook-form';
@@ -17,7 +16,7 @@ import { Form } from '@/components/ui/form';
 
 import AuthFormLayout from '../../_components/AuthFormLayout';
 
-import { login } from '@/api/auth';
+import { loginAction } from '../../actions';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 export default function LoginForm() {
@@ -45,16 +44,13 @@ export default function LoginForm() {
   });
 
   const { mutateAsync, isSuccess } = useMutation({
-    mutationFn: login,
+    mutationFn: loginAction,
     onMutate: () => {
       setServerError(undefined);
     },
     onSuccess: (data) => {
-      signIn('credentials', {
-        redirect: true,
-        callbackUrl: '/',
-        ...data.result,
-      });
+      // Redirect to home
+      window.location.href = '/';
     },
     onError: (error: Error) => {
       setServerError(error.message);
