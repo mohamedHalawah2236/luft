@@ -2,9 +2,8 @@
 
 import { ReactNode } from 'react';
 
-import { DefaultSession } from 'next-auth';
-import { SessionProvider } from 'next-auth/react';
-
+import SessionProvider from '@/contexts/SessionContext';
+import { UserSession } from '@/types/session';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 export default function Providers({
@@ -12,7 +11,7 @@ export default function Providers({
   session,
 }: {
   children: ReactNode;
-  session: DefaultSession;
+  session: UserSession;
 }) {
   const queryClient = new QueryClient({
     defaultOptions: {
@@ -23,7 +22,7 @@ export default function Providers({
   });
 
   return (
-    <SessionProvider session={session}>
+    <SessionProvider value={session}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </SessionProvider>
   );

@@ -3,4 +3,11 @@ export type UserSession = {
   accessTokenExpiresAt: number;
   refreshToken: string;
   refreshTokenExpiresAt: number;
+  user: {
+    email: string;
+    id: string;
+    name: string;
+    phone: string;
+    profilePicture: string;
+  };
 };

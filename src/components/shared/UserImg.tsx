@@ -1,6 +1,4 @@
-import { DefaultSession } from 'next-auth';
-import { useSession } from 'next-auth/react';
-
+import useSession from '@/hooks/useSession';
 import { getTextLocale } from '@/utils/language';
 
 import { cn } from '@/lib/utils';
@@ -10,12 +8,10 @@ type UserImgProps = {
 };
 
 export default function UserImg({ className }: UserImgProps) {
-  const session = useSession().data as DefaultSession & {
-    accessToken: string;
-  };
+  const session = useSession();
 
   const userName = session?.user?.name ?? '';
-  const profilePicture = session?.user?.image ?? '';
+  const profilePicture = session?.user?.profilePicture ?? '';
 
   const firstName = userName?.split(' ')[0];
   const lastName = userName?.split(' ')[1];

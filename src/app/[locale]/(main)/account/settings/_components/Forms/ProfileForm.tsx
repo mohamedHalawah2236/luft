@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 
 import { useForm } from 'react-hook-form';
@@ -21,8 +20,8 @@ import EditableField from '../EditableField';
 import ProfileImgInput from '../ProfileImgInput';
 
 import ChangeEmailForm from './ChangeEmail/ChangeEmailForm';
-import ChangePhoneForm from './ChangePhone/ChangePhoneForm';
 import ChangePasswordForm from './ChangePasswordForm';
+import ChangePhoneForm from './ChangePhone/ChangePhoneForm';
 import { profileFormQueryKey, profileFormSchema } from './schemas';
 
 import { GetUserProfileRes, ProfileFormData } from '@/types/settings';
@@ -70,8 +69,7 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
   const userData = data?.result;
 
   const queryClient = useQueryClient();
-  const { update } = useSession();
-
+  const update = () => {};
   const { mutateAsync, isPending } = useMutation({
     mutationFn: (values: ProfileFormData) =>
       updateUserProfile(values, accessToken),
@@ -79,12 +77,12 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
       queryClient.invalidateQueries({ queryKey: [profileFormQueryKey] });
       toast.success(tCommon('toaster.dataUpdatedSuccess'));
       form.reset({ ...variables, file: null });
-      update({
-        user: {
-          name: `${variables.firstName} ${variables.lastName}`,
-          image: data.result,
-        },
-      });
+      // update({
+      //   user: {
+      //     name: `${variables.firstName} ${variables.lastName}`,
+      //     image: data.result,
+      //   },
+      // });
     },
     onError: (error: Error) => {
       console.log(error);

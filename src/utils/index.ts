@@ -1,6 +1,4 @@
-import { getServerSession } from 'next-auth';
-
-import { authOptions } from '@/lib/auth';
+import { getServerSession } from './session';
 
 export const handleDownloadDocument = async (
   filePath: string,
@@ -30,6 +28,6 @@ export const handleDownloadDocument = async (
 };
 
 export const isLoggedIn = async () => {
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession();
   return !!session;
 };

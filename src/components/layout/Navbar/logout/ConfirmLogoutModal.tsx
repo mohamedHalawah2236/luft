@@ -1,6 +1,5 @@
 'use client';
 
-import { signOut } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 
 import { useMutation } from '@tanstack/react-query';
@@ -9,7 +8,8 @@ import ConfirmModal from '@/components/shared/ConfirmModal';
 
 import { SetState } from '@/types';
 
-import { logout } from '@/api/auth';
+import { signOut } from '@/app/[locale]/(auth)/actions';
+import { useRouter } from '@/i18n/routing';
 
 type ConfirmLogoutModalProps = {
   token: string;
@@ -23,14 +23,12 @@ export default function ConfirmLogoutModal({
   setIsOpen,
 }: ConfirmLogoutModalProps) {
   const tLogout = useTranslations('auth.logout');
+  const router = useRouter();
 
   const { mutate, isPending, isSuccess } = useMutation({
-    mutationFn: () => logout(token),
+    mutationFn: signOut,
     onSettled: () => {
-      signOut({
-        redirect: true,
-        callbackUrl: '/login',
-      });
+      router.push('/login');
     },
   });
 

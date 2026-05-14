@@ -1,21 +1,17 @@
-import { DefaultSession, getServerSession } from 'next-auth';
-
 import Logo from '@/components/icons/Logo';
 
-import MobileNavSheet from './Mobile/MobileNavSheet';
-import NavLink from './NavLinks/NavLink';
 import CurrencySelect from './CurrencySelect';
 import LanguageSwitcher from './LanguageSwitcher';
 import LoginNavBtn from './LoginNavBtn';
+import MobileNavSheet from './Mobile/MobileNavSheet';
+import NavLink from './NavLinks/NavLink';
 import UserDropdown from './UserDropdown';
 
 import { Page, SocialMediaLink } from '@/types/layout';
 
-import { isLoggedIn } from '@/utils';
-
 import { Locale } from '@/i18n/i18n.config';
 import { Link } from '@/i18n/routing';
-import { authOptions } from '@/lib/auth';
+import { getServerSession } from '@/utils/session';
 
 export default async function Navbar({
   locale,
@@ -26,10 +22,8 @@ export default async function Navbar({
   navLinks: Page[];
   socialLinks: SocialMediaLink[];
 }) {
-  const isAuth = await isLoggedIn();
-  const session = (await getServerSession(authOptions)) as DefaultSession & {
-    accessToken: string;
-  };
+  const session = await getServerSession();
+  const isAuth = !!session?.accessToken || !!session?.refreshToken;
 
   const userName = session?.user?.name ?? '';
   const token = session?.accessToken ?? '';

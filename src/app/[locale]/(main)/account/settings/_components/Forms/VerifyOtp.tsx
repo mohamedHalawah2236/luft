@@ -2,7 +2,6 @@
 
 import { useContext, useState } from 'react';
 
-import { signOut, useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 
 import { useForm } from 'react-hook-form';
@@ -27,6 +26,8 @@ import {
 
 import { changeUserIdentifier, resendOtp } from '@/api/settings';
 import ResendOTP from '@/app/[locale]/(auth)/_components/ResendOTP';
+import { signOut } from '@/app/[locale]/(auth)/actions';
+import useSession from '@/hooks/useSession';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 type VerifyOTPFormProps = {
@@ -68,7 +69,7 @@ export default function VerifyOTPForm({
   });
 
   const session = useSession();
-  const accessToken = session.data?.accessToken;
+  const accessToken = session?.accessToken;
   const { setIsOpen } = useContext(EditableFieldContext);
 
   const queryClient = useQueryClient();
@@ -80,15 +81,12 @@ export default function VerifyOTPForm({
       setServerError(undefined);
     },
 
-    onSuccess: () => {
+    onSuccess: async () => {
       setIsOpen(false);
       toast.success(tCommon('toaster.dataUpdatedSuccess'));
-      if (identifierType === IDENTIFIER_TYPE.Email)
-        signOut({
-          redirect: true,
-          callbackUrl: '/login',
-        });
-      else queryClient.invalidateQueries({ queryKey: [profileFormQueryKey] });
+      if (identifierType === IDENTIFIER_TYPE.Email) {
+        await signOut();
+      } else queryClient.invalidateQueries({ queryKey: [profileFormQueryKey] });
     },
     onError: (error: Error) => setServerError(error.message),
   });

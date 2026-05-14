@@ -1,6 +1,5 @@
 'use client';
 
-import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 
 import { Heart, Menu } from 'lucide-react';
@@ -23,6 +22,7 @@ import LogoutBtn from './LogoutBtn';
 import MobileNavLink from './MobileNavLink';
 import UserLink from './UserSetting';
 
+import useSession from '@/hooks/useSession';
 import { Page, SocialMediaLink } from '@/types/layout';
 
 function MobileNavSheet({
@@ -34,7 +34,7 @@ function MobileNavSheet({
 }) {
   const t = useTranslations();
   const session = useSession();
-  const token = session?.data?.accessToken ?? '';
+  const token = session?.accessToken ?? '';
 
   return (
     <Sheet>

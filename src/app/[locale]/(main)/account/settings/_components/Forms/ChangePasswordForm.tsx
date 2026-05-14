@@ -2,7 +2,6 @@
 
 import { useContext, useState } from 'react';
 
-import { signOut, useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 
 import { useForm } from 'react-hook-form';
@@ -23,6 +22,8 @@ import { ChangePasswordFormData } from '@/types/settings';
 import { PASSWORD_REGEX } from '@/constants/regex';
 
 import { changeUserPassword } from '@/api/settings';
+import { signOut } from '@/app/[locale]/(auth)/actions';
+import useSession from '@/hooks/useSession';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 export default function ChangePasswordForm() {
@@ -109,18 +110,15 @@ export default function ChangePasswordForm() {
 
   const { mutateAsync } = useMutation({
     mutationFn: async (values: ChangePasswordFormData) =>
-      changeUserPassword(values, session.data?.accessToken),
+      changeUserPassword(values, session?.accessToken),
     onMutate: () => {
       setServerError(undefined);
     },
 
-    onSuccess: () => {
+    onSuccess: async () => {
       setIsOpen(false);
       toast.success(tCommon('toaster.dataUpdatedSuccess'));
-      signOut({
-        redirect: true,
-        callbackUrl: '/login',
-      });
+      await signOut();
     },
     onError: (error: Error) => setServerError(error.message),
   });

@@ -5,6 +5,7 @@ import { cookies } from 'next/headers';
 import { LoginFormData, SetRegisteredUserPasswordFormData } from '@/types/auth';
 
 import { apiFetch } from '@/utils/api';
+import { getServerSession, signOut as clearSession } from '@/utils/session';
 
 const COOKIE_OPTIONS = {
   httpOnly: true,
@@ -26,35 +27,45 @@ export async function loginAction(credentials: LoginFormData) {
       },
     });
 
-    const data = response;
+    const userData = {
+      id: response.result.userId,
+      email: response.result.email,
+      phoneNumber: response.result.phone,
+      name: response.result.fullName,
+      profilePicture: response.result.profilePicture,
+    };
 
-    const accessTokenExpiresAt = new Date(data.result.accessTokenExpiresAt);
+    const accessTokenExpiresAt = new Date(response.result.accessTokenExpiresAt);
 
-    const refreshTokenExpiresAt = new Date(data.result.refreshTokenExpiresAt);
+    const refreshTokenExpiresAt = new Date(
+      response.result.refreshTokenExpiresAt,
+    );
     // Set session cookies
     const cookieStore = await cookies();
 
-    cookieStore.set('accessToken', data.result.accessToken, {
+    cookieStore.set('accessToken', response.result.accessToken, {
       ...COOKIE_OPTIONS,
       expires: accessTokenExpiresAt,
     });
 
-    cookieStore.set('refreshToken', data.result.refreshToken, {
+    cookieStore.set('refreshToken', response.result.refreshToken, {
       ...COOKIE_OPTIONS,
       expires: refreshTokenExpiresAt,
     });
 
     cookieStore.set(
       'refreshTokenExpiresAt',
-      data.result.refreshTokenExpiresAt,
+      response.result.refreshTokenExpiresAt,
       COOKIE_OPTIONS,
     );
 
     cookieStore.set(
       'accessTokenExpiresAt',
-      data.result.accessTokenExpiresAt,
+      response.result.accessTokenExpiresAt,
       COOKIE_OPTIONS,
     );
+
+    cookieStore.set('user', JSON.stringify(userData), COOKIE_OPTIONS);
 
     // Return the same format as the original function
     return response;
@@ -110,6 +121,16 @@ export async function setRegisteredUserPasswordAction(
       COOKIE_OPTIONS,
     );
 
+    const userData = {
+      id: response.result.userId,
+      email: response.result.email,
+      phoneNumber: response.result.phone,
+      name: response.result.fullName,
+      profilePicture: response.result.profilePicture,
+    };
+
+    cookieStore.set('user', JSON.stringify(userData), COOKIE_OPTIONS);
+
     // Return the same format as the original function
     return response;
   } catch (error) {
@@ -117,3 +138,24 @@ export async function setRegisteredUserPasswordAction(
     throw error;
   }
 }
+
+export const signOut = async () => {
+  const session = await getServerSession();
+  const token = session?.accessToken;
+
+  if (token) {
+    try {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/logout`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    } catch (error) {
+      console.error('Failed to call logout API:', error);
+    }
+  }
+
+  await clearSession();
+};

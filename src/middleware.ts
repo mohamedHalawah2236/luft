@@ -1,45 +1,35 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { getToken } from 'next-auth/jwt';
-import { withAuth } from 'next-auth/middleware';
 import createMiddleware from 'next-intl/middleware';
+import { NextRequest, NextResponse } from 'next/server';
 
 import { routing } from './i18n/routing';
+import { getServerSession } from './utils/session';
 
-export default withAuth(
-  async function middleware(request: NextRequest) {
-    const pathname = request.nextUrl.pathname;
-    const targetRoute = pathname.split('/').slice(2).join('/');
-    const isAuth = await getToken({ req: request });
+export default async function middleware(request: NextRequest) {
+  const pathname = request.nextUrl.pathname;
+  const targetRoute = pathname.split('/').slice(2).join('/');
+  const session = await getServerSession();
 
-    const authRoutes = ['login', 'signup', 'forget-password'];
-    const isAuthRoute = authRoutes.some((route) =>
-      targetRoute.startsWith(route),
-    );
+  const isAuth = !!session?.accessToken || !!session?.refreshToken;
 
-    const protectedRoutes = ['account/settings'];
-    const isProtectedRoute = protectedRoutes.some((route) =>
-      targetRoute.startsWith(route),
-    );
+  const authRoutes = ['login', 'signup', 'forget-password'];
+  const isAuthRoute = authRoutes.some((route) => targetRoute.startsWith(route));
 
-    if (isAuth && isAuthRoute) {
-      return NextResponse.redirect(new URL('/', request.url));
-    }
+  const protectedRoutes = ['account/settings'];
+  const isProtectedRoute = protectedRoutes.some((route) =>
+    targetRoute.startsWith(route),
+  );
 
-    if (!isAuth && isProtectedRoute) {
-      const locale = pathname.split('/')[1] || 'en';
-      return NextResponse.redirect(new URL(`/${locale}/login`, request.url));
-    }
+  if (isAuth && isAuthRoute) {
+    return NextResponse.redirect(new URL('/', request.url));
+  }
 
-    return createMiddleware(routing)(request);
-  },
-  {
-    callbacks: {
-      async authorized() {
-        return true;
-      },
-    },
-  },
-);
+  if (!isAuth && isProtectedRoute) {
+    const locale = pathname.split('/')[1] || 'en';
+    return NextResponse.redirect(new URL(`/${locale}/login`, request.url));
+  }
+
+  return createMiddleware(routing)(request);
+}
 
 export const config = {
   // Matcher ignoring `/_next/` and `/api/`

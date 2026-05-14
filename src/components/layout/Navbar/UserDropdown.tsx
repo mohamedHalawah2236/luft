@@ -1,10 +1,8 @@
 'use client';
 import { useState } from 'react';
 
-import { useRouter } from 'next/navigation';
-import { DefaultSession } from 'next-auth';
-import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 
 import { ChevronDown, Heart, Settings } from 'lucide-react';
 
@@ -16,6 +14,7 @@ import ConfirmLogoutModal from './logout/ConfirmLogoutModal';
 
 import { DropDownItem } from '@/types/components';
 
+import useSession from '@/hooks/useSession';
 import { Dir } from '@/i18n/i18n.config';
 import { cn } from '@/lib/utils';
 
@@ -26,9 +25,7 @@ type UserDropdownProps = {
 export default function UserDropdown({ dir }: UserDropdownProps) {
   const router = useRouter();
   const t = useTranslations('common');
-  const session = useSession().data as DefaultSession & {
-    accessToken: string;
-  };
+  const session = useSession();
   const token = session?.accessToken ?? '';
 
   const [isDropdownOpen, setisDropdownOpen] = useState(false);

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 
 import { useForm } from 'react-hook-form';
@@ -20,6 +19,7 @@ import { IDENTIFIER_TYPE, OTP_PURPOSE, SendOtpData } from '@/types/settings';
 import { EGYPTIAN_PHONE } from '@/constants/regex';
 
 import { sendOtp } from '@/api/settings';
+import useSession from '@/hooks/useSession';
 import { handleOnlyNumbersKeyDown } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -54,7 +54,7 @@ export default function RequestOtpForm({
   });
 
   const session = useSession();
-  const accessToken = session.data?.accessToken;
+  const accessToken = session?.accessToken;
 
   const { mutateAsync } = useMutation({
     mutationFn: async (values: SendOtpData) => sendOtp(values, accessToken),

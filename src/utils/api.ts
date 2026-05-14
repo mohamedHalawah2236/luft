@@ -1,6 +1,6 @@
-import { signOut } from 'next-auth/react';
 import { notFound } from 'next/navigation';
 
+import { signOut } from '@/app/[locale]/(auth)/actions';
 import { UserSession } from '@/types/session';
 import { concatErrors } from './errors';
 import { getLanguage } from './language';
@@ -58,10 +58,7 @@ export async function apiRequest(
     }
 
     if (res.status === 401) {
-      signOut({
-        redirect: true,
-        callbackUrl: '/login',
-      });
+      await signOut();
       throw new Error('401 Unauthorized', {
         cause: res.status,
       });
@@ -81,10 +78,7 @@ export async function apiRequest(
   const data = await res.json();
   if (data?.isError) {
     if (data.statusCode === 401) {
-      signOut({
-        redirect: true,
-        callbackUrl: '/login',
-      });
+      await signOut();
     }
 
     if (data.statusCode === 404) {
@@ -119,10 +113,7 @@ export async function apiFetch(
     }
 
     if (res.status === 401) {
-      signOut({
-        redirect: true,
-        callbackUrl: '/login',
-      });
+      await signOut();
       throw new Error('401 Unauthorized', {
         cause: res.status,
       });
@@ -142,10 +133,7 @@ export async function apiFetch(
   const data = await res.json();
   if (data?.isError) {
     if (data.statusCode === 401) {
-      signOut({
-        redirect: true,
-        callbackUrl: '/login',
-      });
+      await signOut();
     }
 
     if (data.statusCode === 404) {

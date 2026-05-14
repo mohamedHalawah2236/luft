@@ -1,12 +1,11 @@
-import Link from 'next/link';
-import { getServerSession } from 'next-auth';
 import { getTranslations } from 'next-intl/server';
+import Link from 'next/link';
 
 import { CircleChevronLeftIcon, CircleChevronRightIcon } from 'lucide-react';
 
 import ProfileForm from './_components/Forms/ProfileForm';
 
-import { authOptions } from '@/lib/auth';
+import { getServerSession } from '@/utils/session';
 
 export default async function SettingsPage({
   params,
@@ -16,7 +15,7 @@ export default async function SettingsPage({
   const t = await getTranslations('settings');
   const { locale } = await params;
   const isRtl = locale === 'ar';
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession();
   const accessToken = session?.accessToken;
 
   return (
