@@ -1,5 +1,13 @@
+import { AuthUserApiResponse } from '@/types/auth';
 import { UserSession } from '@/types/session';
 import { cookies } from 'next/headers';
+
+const COOKIE_OPTIONS = {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === 'production',
+  sameSite: 'lax' as const,
+  path: '/',
+};
 
 export const getServerSession = async (): Promise<UserSession | null> => {
   const cookieStore = await cookies();
@@ -25,6 +33,87 @@ export const getServerSession = async (): Promise<UserSession | null> => {
       : Date.now(),
     user: userData,
   };
+};
+
+/**
+ * Calls the backend refresh-token endpoint, persists the new tokens in cookies,
+ * and returns the updated UserSession.
+ * Returns null (and clears the session) if the refresh fails.
+ *
+ * Use this from Server Components / Server Actions only.
+ * Middleware has its own Edge-safe refresh logic.
+ */
+export const refreshAccessToken = async (): Promise<UserSession | null> => {
+  const cookieStore = await cookies();
+  const refreshToken = cookieStore.get('refreshToken')?.value;
+
+  if (!refreshToken) return null;
+
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/auth/refreshToken`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ refreshToken }),
+      },
+    );
+
+    if (!res.ok) {
+      console.log('Failed to refresh access token');
+
+      await signOut();
+      return null;
+    }
+
+    console.log('Successfully refreshed access token');
+
+    const json = await res.json();
+    // Support both wrapped { result: ... } and unwrapped response shapes.
+    const data: AuthUserApiResponse = json.result ?? json;
+
+    const accessExpiry = new Date(data.accessTokenExpiresAt);
+    const refreshExpiry = new Date(data.refreshTokenExpiresAt);
+
+    const userData = {
+      id: data.userId,
+      email: data.email,
+      phone: data.phone,
+      name: data.fullName,
+      profilePicture: data.profilePicture,
+    };
+
+    cookieStore.set('accessToken', data.accessToken, {
+      ...COOKIE_OPTIONS,
+      expires: accessExpiry,
+    });
+    cookieStore.set('refreshToken', data.refreshToken, {
+      ...COOKIE_OPTIONS,
+      expires: refreshExpiry,
+    });
+    cookieStore.set(
+      'accessTokenExpiresAt',
+      data.accessTokenExpiresAt,
+      COOKIE_OPTIONS,
+    );
+    cookieStore.set(
+      'refreshTokenExpiresAt',
+      data.refreshTokenExpiresAt,
+      COOKIE_OPTIONS,
+    );
+    cookieStore.set('user', JSON.stringify(userData), COOKIE_OPTIONS);
+
+    return {
+      accessToken: data.accessToken,
+      accessTokenExpiresAt: accessExpiry.getTime(),
+      refreshToken: data.refreshToken,
+      refreshTokenExpiresAt: refreshExpiry.getTime(),
+      user: userData,
+    };
+  } catch {
+    await signOut();
+    return null;
+  }
 };
 
 export const setUserSession = async (session: UserSession) => {

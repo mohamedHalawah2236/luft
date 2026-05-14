@@ -1,9 +1,9 @@
 import { notFound } from 'next/navigation';
 
-import { signOut } from '@/app/[locale]/(auth)/actions';
 import { UserSession } from '@/types/session';
 import { concatErrors } from './errors';
 import { getLanguage } from './language';
+import { getServerSession, signOut } from './session';
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -98,12 +98,40 @@ export async function apiFetch(
 ) {
   const language = await getLanguage();
 
+  // If no explicit token was passed, try to get one from the session.
+  // Refresh proactively if the access token is expired but the refresh token is not.
+  let tokenToUse = accessToken;
+  if (!tokenToUse) {
+    const session = await getServerSession();
+    if (session) {
+      const isAccessExpired = Date.now() >= session.accessTokenExpiresAt;
+      const isRefreshExpired = Date.now() >= session.refreshTokenExpiresAt;
+
+      if (isAccessExpired && !isRefreshExpired) {
+        // Call the internal Route Handler — the only context where cookies
+        // can be written from a server-to-server call.
+        const appUrl =
+          process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000';
+        const refreshRes = await fetch(`${appUrl}/api/auth/refresh`, {
+          method: 'POST',
+        });
+        if (refreshRes.ok) {
+          const { accessToken: freshToken } = await refreshRes.json();
+          tokenToUse = freshToken;
+        }
+      } else if (!isAccessExpired) {
+        tokenToUse = session.accessToken;
+      }
+      // If both tokens are expired, tokenToUse stays undefined → unauthenticated request.
+    }
+  }
+
   const res = await fetch(`${apiUrl}/${endpoint}`, {
     ...options,
     headers: {
       language,
       ...(options.headers || {}),
-      ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+      ...(tokenToUse ? { Authorization: `Bearer ${tokenToUse}` } : {}),
     },
   });
 
