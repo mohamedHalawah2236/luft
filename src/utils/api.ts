@@ -5,6 +5,7 @@ import { getLanguage } from './language';
 import { signOut } from './session';
 
 import { UserSession } from '@/types/session';
+import { updateSession } from './events';
 
 let clientSessionCache: UserSession | null = null;
 let sessionFetchPromise: Promise<UserSession | null> | null = null;
@@ -38,9 +39,7 @@ export const getSession = async (): Promise<UserSession | null> => {
       sessionFetchPromise = null;
 
       if (typeof window !== 'undefined') {
-        window.dispatchEvent(
-          new CustomEvent('sessionUpdate', { detail: session }),
-        );
+        updateSession(session);
       }
 
       return session;

@@ -20,13 +20,16 @@ import EditableField from '../EditableField';
 import ProfileImgInput from '../ProfileImgInput';
 
 import ChangeEmailForm from './ChangeEmail/ChangeEmailForm';
-import ChangePhoneForm from './ChangePhone/ChangePhoneForm';
 import ChangePasswordForm from './ChangePasswordForm';
+import ChangePhoneForm from './ChangePhone/ChangePhoneForm';
 import { profileFormQueryKey, profileFormSchema } from './schemas';
 
 import { GetUserProfileRes, ProfileFormData } from '@/types/settings';
 
 import { getProfileData, updateUserProfile } from '@/api/settings';
+import useSession from '@/hooks/useSession';
+import { UserSession } from '@/types/session';
+import { updateSession } from '@/utils/events';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 export default function ProfileForm() {
@@ -41,6 +44,8 @@ export default function ProfileForm() {
       errorRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   }, [serverError]);
+
+  const session = useSession() as UserSession;
 
   const form = useForm<z.infer<ReturnType<typeof profileFormSchema>>>({
     resolver: zodResolver(profileFormSchema(tRoot)),
@@ -65,20 +70,26 @@ export default function ProfileForm() {
   const userData = data?.result;
 
   const queryClient = useQueryClient();
-  const update = () => {};
   const { mutateAsync, isPending } = useMutation({
-    mutationFn: (values: ProfileFormData) =>
-      updateUserProfile(values),
+    mutationFn: (values: ProfileFormData) => updateUserProfile(values),
     onSuccess: (data, variables) => {
       queryClient.invalidateQueries({ queryKey: [profileFormQueryKey] });
       toast.success(tCommon('toaster.dataUpdatedSuccess'));
       form.reset({ ...variables, file: null });
-      // update({
-      //   user: {
-      //     name: `${variables.firstName} ${variables.lastName}`,
-      //     image: data.result,
-      //   },
-      // });
+      updateSession({
+        ...session,
+        user: {
+          ...session.user,
+          name: `${variables.firstName} ${variables.lastName}`,
+          profilePicture: data.result,
+        },
+      });
+
+      // window.dispatchEvent(
+      //   new CustomEvent('sessionUpdate', {
+      //     detail: ,
+      //   }),
+      // );
     },
     onError: (error: Error) => {
       console.log(error);
