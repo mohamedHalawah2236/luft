@@ -36,6 +36,13 @@ export const getSession = async (): Promise<UserSession | null> => {
     .then((session) => {
       clientSessionCache = session;
       sessionFetchPromise = null;
+
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(
+          new CustomEvent('sessionUpdate', { detail: session }),
+        );
+      }
+
       return session;
     })
     .catch((err) => {

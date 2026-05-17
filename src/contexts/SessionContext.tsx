@@ -1,4 +1,6 @@
-import { createContext } from 'react';
+'use client';
+
+import { createContext, useEffect, useState } from 'react';
 
 import { UserSession } from '@/types/session';
 
@@ -11,16 +13,39 @@ export function SessionProvider({
   children: React.ReactNode;
   value: UserSession | null;
 }) {
+  const [session, setSession] = useState<UserSession | null>(value);
+
+  useEffect(() => {
+    setSession(value);
+  }, [value]);
+
+  useEffect(() => {
+    const handleSessionUpdate = (event: CustomEvent<UserSession | null>) => {
+      setSession(event.detail);
+    };
+
+    window.addEventListener(
+      'sessionUpdate',
+      handleSessionUpdate as EventListener,
+    );
+    return () => {
+      window.removeEventListener(
+        'sessionUpdate',
+        handleSessionUpdate as EventListener,
+      );
+    };
+  }, []);
+
   const isAccessTokenExpired =
-    value && Date.now() >= new Date(value.accessTokenExpiresAt).getTime();
+    session && Date.now() >= new Date(session.accessTokenExpiresAt).getTime();
 
   return (
     <SessionContext.Provider
       value={
-        value
+        session
           ? {
-              ...value,
-              accessToken: isAccessTokenExpired ? '' : value.accessToken,
+              ...session,
+              accessToken: isAccessTokenExpired ? '' : session.accessToken,
             }
           : null
       }
