@@ -14,8 +14,6 @@ export async function POST() {
   const cookieStore = await cookies();
   const refreshToken = cookieStore.get('refreshToken')?.value;
 
-  console.log('refreshToken');
-  console.log(refreshToken);
   if (!refreshToken) {
     return NextResponse.json({ error: 'No refresh token' }, { status: 401 });
   }
@@ -29,8 +27,6 @@ export async function POST() {
         body: JSON.stringify({ refreshToken }),
       },
     );
-
-    console.log(res);
 
     if (!res.ok) {
       console.log('Failed to refresh access token');
@@ -46,7 +42,6 @@ export async function POST() {
     console.log('Successfully refreshed access token');
 
     const json = await res.json();
-    console.log(json);
     const data: AuthUserApiResponse = json.result ?? json;
 
     const accessExpiry = new Date(data.accessTokenExpiresAt);

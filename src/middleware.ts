@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import createMiddleware from 'next-intl/middleware';
 
 import { routing } from './i18n/routing';
-import { AuthUserApiResponse } from './types/auth';
 
 /** Deletes all auth cookies from a response (used on forced sign-out). */
 function clearSessionCookies(response: NextResponse) {
@@ -38,7 +37,6 @@ export default async function middleware(request: NextRequest) {
     targetRoute.startsWith(route),
   );
 
-  let freshData: AuthUserApiResponse;
   let refreshSetCookies: string[] = [];
 
   // Attempt to refresh if: access token is expired but refresh token is still valid.
@@ -51,11 +49,6 @@ export default async function middleware(request: NextRequest) {
       },
       body: JSON.stringify({ refreshToken }),
     });
-
-    console.log('responseeeeeeeeeeeeeeeeeeeee');
-
-    freshData = await response.json();
-    console.log(freshData);
 
     if (response.ok) {
       console.log('Successfully refreshed access token');
