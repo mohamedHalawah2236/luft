@@ -6,12 +6,11 @@ import {
 
 import { apiFetch } from '@/utils/api';
 
-export const getProfileData = (accessToken?: string) =>
-  apiFetch('api/auth/view-profile', undefined, accessToken);
+export const getProfileData = () =>
+  apiFetch('api/auth/view-profile');
 
 export const updateUserProfile = (
   data: ProfileFormData,
-  accessToken: string | undefined,
 ) => {
   const formData = new FormData();
 
@@ -29,11 +28,10 @@ export const updateUserProfile = (
       body: formData,
       method: 'PUT',
     },
-    accessToken,
   );
 };
 
-export const sendOtp = (data: SendOtpData, accessToken: string | undefined) => {
+export const sendOtp = (data: SendOtpData) => {
   return apiFetch(
     'api/auth/send-otp',
     {
@@ -43,13 +41,11 @@ export const sendOtp = (data: SendOtpData, accessToken: string | undefined) => {
         'Content-Type': 'application/json',
       },
     },
-    accessToken,
   );
 };
 
 export const resendOtp = (
   data: SendOtpData,
-  accessToken: string | undefined,
 ) => {
   return apiFetch(
     'api/auth/send-otp',
@@ -60,13 +56,11 @@ export const resendOtp = (
         'Content-Type': 'application/json',
       },
     },
-    accessToken,
   );
 };
 
 export const changeUserIdentifier = (
   data: ChangeUserIdentifierData,
-  accessToken: string | undefined,
 ) => {
   return apiFetch(
     'api/auth/update-email-or-phone',
@@ -77,13 +71,11 @@ export const changeUserIdentifier = (
         'Content-Type': 'application/json',
       },
     },
-    accessToken,
   );
 };
 
 export const changeUserPassword = (
   data: { currentPassword: string; newPassword: string },
-  accessToken: string | undefined,
 ) => {
   return apiFetch(
     'api/auth/change-password',
@@ -94,6 +86,5 @@ export const changeUserPassword = (
         'Content-Type': 'application/json',
       },
     },
-    accessToken,
   );
 };

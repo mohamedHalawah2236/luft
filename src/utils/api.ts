@@ -1,9 +1,28 @@
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 
-import { UserSession } from '@/types/session';
 import { concatErrors } from './errors';
 import { getLanguage } from './language';
-import { getServerSession, signOut } from './session';
+
+export const getSession = async () => {
+  if (typeof window === 'undefined') {
+    const { getServerSession } = await import('./session');
+    const session = await getServerSession();
+    return session;
+  }
+
+  const sessionRes = await fetch('/api/auth/session');
+  return sessionRes.json();
+};
+
+async function performSignOut() {
+  if (typeof window === 'undefined') {
+    redirect('/login');
+  } else {
+    // Client-side: Call the local API route to clear HttpOnly cookies
+    await fetch('/api/auth/logout', { method: 'POST' });
+    window.location.href = '/login';
+  }
+}
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -33,15 +52,15 @@ export function deleteSearchParams(paramName: string, paramValue: string) {
   return `?${searchParams.toString()}`;
 }
 
-export async function apiRequest(
+export async function apiFetch(
   endpoint: string,
   options: RequestInit = {},
-  session?: UserSession,
+  // accessToken?: string,
 ) {
-  const accessToken = session?.accessToken;
-  const refreshToken = session?.refreshToken;
-
   const language = await getLanguage();
+
+  const session = await getSession();
+  const accessToken = session?.accessToken;
 
   const res = await fetch(`${apiUrl}/${endpoint}`, {
     ...options,
@@ -58,7 +77,7 @@ export async function apiRequest(
     }
 
     if (res.status === 401) {
-      await signOut();
+      await performSignOut();
       throw new Error('401 Unauthorized', {
         cause: res.status,
       });
@@ -78,90 +97,7 @@ export async function apiRequest(
   const data = await res.json();
   if (data?.isError) {
     if (data.statusCode === 401) {
-      await signOut();
-    }
-
-    if (data.statusCode === 404) {
-      notFound();
-    }
-    throw new Error(data?.message, {
-      cause: data.statusCode,
-    });
-  }
-
-  return data;
-}
-export async function apiFetch(
-  endpoint: string,
-  options: RequestInit = {},
-  accessToken?: string,
-) {
-  const language = await getLanguage();
-
-  // If no explicit token was passed, try to get one from the session.
-  // Refresh proactively if the access token is expired but the refresh token is not.
-  let tokenToUse = accessToken;
-  if (!tokenToUse) {
-    const session = await getServerSession();
-    if (session) {
-      const isAccessExpired = Date.now() >= session.accessTokenExpiresAt;
-      const isRefreshExpired = Date.now() >= session.refreshTokenExpiresAt;
-
-      if (isAccessExpired && !isRefreshExpired) {
-        // Call the internal Route Handler — the only context where cookies
-        // can be written from a server-to-server call.
-        const appUrl =
-          process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000';
-        const refreshRes = await fetch(`${appUrl}/api/auth/refresh`, {
-          method: 'POST',
-        });
-        if (refreshRes.ok) {
-          const { accessToken: freshToken } = await refreshRes.json();
-          tokenToUse = freshToken;
-        }
-      } else if (!isAccessExpired) {
-        tokenToUse = session.accessToken;
-      }
-      // If both tokens are expired, tokenToUse stays undefined → unauthenticated request.
-    }
-  }
-
-  const res = await fetch(`${apiUrl}/${endpoint}`, {
-    ...options,
-    headers: {
-      language,
-      ...(options.headers || {}),
-      ...(tokenToUse ? { Authorization: `Bearer ${tokenToUse}` } : {}),
-    },
-  });
-
-  if (!res.ok) {
-    if (res.status === 404) {
-      notFound();
-    }
-
-    if (res.status === 401) {
-      await signOut();
-      throw new Error('401 Unauthorized', {
-        cause: res.status,
-      });
-    }
-
-    const data = await res.json();
-    if (data.errors) {
-      throw new Error(concatErrors(data), {
-        cause: data.statusCode,
-      });
-    }
-    throw new Error(data.message, {
-      cause: data.statusCode,
-    });
-  }
-
-  const data = await res.json();
-  if (data?.isError) {
-    if (data.statusCode === 401) {
-      await signOut();
+      await performSignOut();
     }
 
     if (data.statusCode === 404) {

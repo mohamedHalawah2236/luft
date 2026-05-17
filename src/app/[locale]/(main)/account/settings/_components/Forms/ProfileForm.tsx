@@ -20,8 +20,8 @@ import EditableField from '../EditableField';
 import ProfileImgInput from '../ProfileImgInput';
 
 import ChangeEmailForm from './ChangeEmail/ChangeEmailForm';
-import ChangePasswordForm from './ChangePasswordForm';
 import ChangePhoneForm from './ChangePhone/ChangePhoneForm';
+import ChangePasswordForm from './ChangePasswordForm';
 import { profileFormQueryKey, profileFormSchema } from './schemas';
 
 import { GetUserProfileRes, ProfileFormData } from '@/types/settings';
@@ -29,11 +29,7 @@ import { GetUserProfileRes, ProfileFormData } from '@/types/settings';
 import { getProfileData, updateUserProfile } from '@/api/settings';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-type ProfileFormProps = {
-  accessToken: string | undefined;
-};
-
-export default function ProfileForm({ accessToken }: ProfileFormProps) {
+export default function ProfileForm() {
   const tCommon = useTranslations('common');
   const tRoot = useTranslations('');
 
@@ -63,7 +59,7 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
   const { isFetching, isFetched, data, isLoading, isError } =
     useQuery<GetUserProfileRes>({
       queryKey: [profileFormQueryKey],
-      queryFn: () => getProfileData(accessToken),
+      queryFn: () => getProfileData(),
     });
 
   const userData = data?.result;
@@ -72,7 +68,7 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
   const update = () => {};
   const { mutateAsync, isPending } = useMutation({
     mutationFn: (values: ProfileFormData) =>
-      updateUserProfile(values, accessToken),
+      updateUserProfile(values),
     onSuccess: (data, variables) => {
       queryClient.invalidateQueries({ queryKey: [profileFormQueryKey] });
       toast.success(tCommon('toaster.dataUpdatedSuccess'));

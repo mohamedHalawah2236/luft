@@ -1,16 +1,17 @@
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
-import { notFound } from 'next/navigation';
 
 import ConnectionListener from '@/components/ConnectionListener';
 import Providers from '@/components/layout/Providers';
 import { Toaster } from '@/components/ui/sonner';
 
+import { getServerSession } from '@/utils/session';
+
 import { switzer } from '@/fonts/fonts';
 import { Locale } from '@/i18n/i18n.config';
 import { routing } from '@/i18n/routing';
-import { getServerSession } from '@/utils/session';
 import { siteConfig } from '@/www/config/site';
 
 export const metadata: Metadata = {

@@ -1,6 +1,5 @@
 import { AuthUserApiResponse } from '@/types/auth';
 import { UserSession } from '@/types/session';
-import { cookies } from 'next/headers';
 
 const COOKIE_OPTIONS = {
   httpOnly: true,
@@ -9,8 +8,14 @@ const COOKIE_OPTIONS = {
   path: '/',
 };
 
+/** Dynamically imports cookies() so this module is safe in client SSR bundles. */
+const getCookies = async () => {
+  const { cookies } = await import('next/headers');
+  return cookies();
+};
+
 export const getServerSession = async (): Promise<UserSession | null> => {
-  const cookieStore = await cookies();
+  const cookieStore = await getCookies();
   const accessToken = cookieStore.get('accessToken')?.value;
   const refreshToken = cookieStore.get('refreshToken')?.value;
 
@@ -44,14 +49,14 @@ export const getServerSession = async (): Promise<UserSession | null> => {
  * Middleware has its own Edge-safe refresh logic.
  */
 export const refreshAccessToken = async (): Promise<UserSession | null> => {
-  const cookieStore = await cookies();
+  const cookieStore = await getCookies();
   const refreshToken = cookieStore.get('refreshToken')?.value;
 
   if (!refreshToken) return null;
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/auth/refreshToken`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/auth/refresh-token`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -117,7 +122,7 @@ export const refreshAccessToken = async (): Promise<UserSession | null> => {
 };
 
 export const setUserSession = async (session: UserSession) => {
-  const cookieStore = await cookies();
+  const cookieStore = await getCookies();
   cookieStore.set('accessToken', session.accessToken);
   cookieStore.set('refreshToken', session.refreshToken);
   cookieStore.set(
@@ -131,7 +136,7 @@ export const setUserSession = async (session: UserSession) => {
 };
 
 export const signOut = async () => {
-  const cookieStore = await cookies();
+  const cookieStore = await getCookies();
   cookieStore.delete('accessToken');
   cookieStore.delete('refreshToken');
   cookieStore.delete('accessTokenExpiresAt');

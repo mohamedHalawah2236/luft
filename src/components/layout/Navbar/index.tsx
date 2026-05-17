@@ -1,17 +1,18 @@
 import Logo from '@/components/icons/Logo';
 
+import MobileNavSheet from './Mobile/MobileNavSheet';
+import NavLink from './NavLinks/NavLink';
 import CurrencySelect from './CurrencySelect';
 import LanguageSwitcher from './LanguageSwitcher';
 import LoginNavBtn from './LoginNavBtn';
-import MobileNavSheet from './Mobile/MobileNavSheet';
-import NavLink from './NavLinks/NavLink';
 import UserDropdown from './UserDropdown';
 
 import { Page, SocialMediaLink } from '@/types/layout';
 
+import { getServerSession } from '@/utils/session';
+
 import { Locale } from '@/i18n/i18n.config';
 import { Link } from '@/i18n/routing';
-import { getServerSession } from '@/utils/session';
 
 export default async function Navbar({
   locale,

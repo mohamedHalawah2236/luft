@@ -27,7 +27,6 @@ import {
 import { changeUserIdentifier, resendOtp } from '@/api/settings';
 import ResendOTP from '@/app/[locale]/(auth)/_components/ResendOTP';
 import { signOut } from '@/app/[locale]/(auth)/actions';
-import useSession from '@/hooks/useSession';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 type VerifyOTPFormProps = {
@@ -68,15 +67,13 @@ export default function VerifyOTPForm({
     },
   });
 
-  const session = useSession();
-  const accessToken = session?.accessToken;
   const { setIsOpen } = useContext(EditableFieldContext);
 
   const queryClient = useQueryClient();
 
   const { mutateAsync } = useMutation({
     mutationFn: async (values: ChangeUserIdentifierData) =>
-      changeUserIdentifier(values, accessToken),
+      changeUserIdentifier(values),
     onMutate: () => {
       setServerError(undefined);
     },
@@ -93,14 +90,11 @@ export default function VerifyOTPForm({
 
   const { mutate: ResendOTPMutate, isPending: isResendingOtp } = useMutation({
     mutationFn: async () =>
-      resendOtp(
-        {
-          identifier,
-          type: identifierType,
-          otpPurpose,
-        },
-        accessToken,
-      ),
+      resendOtp({
+        identifier,
+        type: identifierType,
+        otpPurpose,
+      }),
     onSuccess: () => {
       setIsResendDisabled(true);
       toast.success(

@@ -2,9 +2,11 @@
 
 import { ReactNode } from 'react';
 
-import SessionProvider from '@/contexts/SessionContext';
-import { UserSession } from '@/types/session';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+import SessionProvider from '@/contexts/SessionContext';
+
+import { UserSession } from '@/types/session';
 
 export default function Providers({
   children,

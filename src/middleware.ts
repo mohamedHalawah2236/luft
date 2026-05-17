@@ -1,5 +1,5 @@
-import createMiddleware from 'next-intl/middleware';
 import { NextRequest, NextResponse } from 'next/server';
+import createMiddleware from 'next-intl/middleware';
 
 import { routing } from './i18n/routing';
 import { AuthUserApiResponse } from './types/auth';
@@ -58,9 +58,13 @@ export default async function middleware(request: NextRequest) {
     console.log(freshData);
 
     if (response.ok) {
+      console.log('Successfully refreshed access token');
+
       // Capture the Set-Cookie headers from the internal Route Handler
       refreshSetCookies = response.headers.getSetCookie();
     } else {
+      console.log('Failed to refresh access token');
+
       isAuth = false;
     }
   }
@@ -68,13 +72,17 @@ export default async function middleware(request: NextRequest) {
   // Authenticated user visiting an auth page → redirect to home.
   if (isAuth && isAuthRoute) {
     const response = NextResponse.redirect(new URL('/', request.url));
-    refreshSetCookies.forEach((cookie) => response.headers.append('Set-Cookie', cookie));
+    refreshSetCookies.forEach((cookie) =>
+      response.headers.append('Set-Cookie', cookie),
+    );
     return response;
   }
 
   // Unauthenticated user visiting a protected page → redirect to login.
   if (!isAuth && isProtectedRoute) {
-    const response = NextResponse.redirect(new URL(`/${locale}/login`, request.url));
+    const response = NextResponse.redirect(
+      new URL(`/${locale}/login`, request.url),
+    );
     clearSessionCookies(response);
     return response;
   }
@@ -83,9 +91,11 @@ export default async function middleware(request: NextRequest) {
   const response = createMiddleware(routing)(request);
 
   if (refreshSetCookies.length > 0) {
-    refreshSetCookies.forEach((cookie) => response.headers.append('Set-Cookie', cookie));
+    refreshSetCookies.forEach((cookie) =>
+      response.headers.append('Set-Cookie', cookie),
+    );
   } else if (!isAuth && refreshToken) {
-    // If the token refresh failed entirely, ensure we clear the dead session cookies 
+    // If the token refresh failed entirely, ensure we clear the dead session cookies
     // even if they were visiting a public un-protected route.
     clearSessionCookies(response);
   }

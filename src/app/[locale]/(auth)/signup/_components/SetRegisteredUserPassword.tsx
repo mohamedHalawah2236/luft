@@ -4,7 +4,6 @@ import React from 'react';
 import { useTranslations } from 'next-intl';
 
 import SetPasswordForm from '../../_components/SetPasswordForm';
-
 import { setRegisteredUserPasswordAction } from '../../actions';
 
 export default function SetRegisteredUserPassword({

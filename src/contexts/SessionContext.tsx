@@ -11,8 +11,24 @@ export function SessionProvider({
   children: React.ReactNode;
   value: UserSession | null;
 }) {
+  const isAccessTokenExpired =
+    value && Date.now() >= new Date(value.accessTokenExpiresAt).getTime();
+
+  console.log(isAccessTokenExpired);
+
   return (
-    <SessionContext.Provider {...{ value }}>{children}</SessionContext.Provider>
+    <SessionContext.Provider
+      value={
+        value
+          ? {
+              ...value,
+              accessToken: isAccessTokenExpired ? '' : value.accessToken,
+            }
+          : null
+      }
+    >
+      {children}
+    </SessionContext.Provider>
   );
 }
 

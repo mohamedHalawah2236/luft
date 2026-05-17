@@ -23,7 +23,6 @@ import { PASSWORD_REGEX } from '@/constants/regex';
 
 import { changeUserPassword } from '@/api/settings';
 import { signOut } from '@/app/[locale]/(auth)/actions';
-import useSession from '@/hooks/useSession';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 export default function ChangePasswordForm() {
@@ -105,12 +104,11 @@ export default function ChangePasswordForm() {
     mode: 'onTouched',
   });
 
-  const session = useSession();
   const { setIsOpen } = useContext(EditableFieldContext);
 
   const { mutateAsync } = useMutation({
     mutationFn: async (values: ChangePasswordFormData) =>
-      changeUserPassword(values, session?.accessToken),
+      changeUserPassword(values),
     onMutate: () => {
       setServerError(undefined);
     },

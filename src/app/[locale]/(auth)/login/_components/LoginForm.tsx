@@ -15,8 +15,8 @@ import CustomPasswordInput from '@/components/shared/form/CustomPasswordInput';
 import { Form } from '@/components/ui/form';
 
 import AuthFormLayout from '../../_components/AuthFormLayout';
-
 import { loginAction } from '../../actions';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 
 export default function LoginForm() {

@@ -17,7 +17,6 @@ import { SetState } from '@/types';
 import { IDENTIFIER_TYPE, OTP_PURPOSE, SendOtpData } from '@/types/settings';
 
 import { sendOtp } from '@/api/settings';
-import useSession from '@/hooks/useSession';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 export default function RequestOtpForm({
@@ -50,11 +49,8 @@ export default function RequestOtpForm({
     mode: 'onTouched',
   });
 
-  const session = useSession();
-  const accessToken = session?.accessToken;
-
   const { mutateAsync } = useMutation({
-    mutationFn: async (values: SendOtpData) => sendOtp(values, accessToken),
+    mutationFn: async (values: SendOtpData) => sendOtp(values),
     onMutate: () => {
       setServerError(undefined);
     },
