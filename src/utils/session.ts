@@ -1,6 +1,7 @@
+import { getLanguage } from './language';
+
 import { AuthUserApiResponse } from '@/types/auth';
 import { UserSession } from '@/types/session';
-import { getLanguage } from './language';
 
 const COOKIE_OPTIONS = {
   httpOnly: true,
