@@ -16,12 +16,13 @@ import LoadingError from '@/components/shared/LoadingError';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 
+import { updateUserCookieAction } from '../../actions';
 import EditableField from '../EditableField';
 import ProfileImgInput from '../ProfileImgInput';
 
 import ChangeEmailForm from './ChangeEmail/ChangeEmailForm';
-import ChangePasswordForm from './ChangePasswordForm';
 import ChangePhoneForm from './ChangePhone/ChangePhoneForm';
+import ChangePasswordForm from './ChangePasswordForm';
 import { profileFormQueryKey, profileFormSchema } from './schemas';
 
 import useSession from '@/hooks/useSession';
@@ -33,7 +34,6 @@ import { updateSession } from '@/utils/events';
 
 import { getProfileData, updateUserProfile } from '@/api/settings';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { updateUserCookieAction } from '../../actions';
 
 export default function ProfileForm() {
   const tCommon = useTranslations('common');
