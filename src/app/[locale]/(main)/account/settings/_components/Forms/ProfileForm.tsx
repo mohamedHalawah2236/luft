@@ -20,16 +20,18 @@ import EditableField from '../EditableField';
 import ProfileImgInput from '../ProfileImgInput';
 
 import ChangeEmailForm from './ChangeEmail/ChangeEmailForm';
-import ChangePasswordForm from './ChangePasswordForm';
 import ChangePhoneForm from './ChangePhone/ChangePhoneForm';
+import ChangePasswordForm from './ChangePasswordForm';
 import { profileFormQueryKey, profileFormSchema } from './schemas';
 
+import useSession from '@/hooks/useSession';
+
+import { UserSession } from '@/types/session';
 import { GetUserProfileRes, ProfileFormData } from '@/types/settings';
 
-import { getProfileData, updateUserProfile } from '@/api/settings';
-import useSession from '@/hooks/useSession';
-import { UserSession } from '@/types/session';
 import { updateSession } from '@/utils/events';
+
+import { getProfileData, updateUserProfile } from '@/api/settings';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 export default function ProfileForm() {

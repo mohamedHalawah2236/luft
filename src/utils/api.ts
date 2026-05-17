@@ -1,11 +1,11 @@
 import { notFound } from 'next/navigation';
 
 import { concatErrors } from './errors';
+import { updateSession } from './events';
 import { getLanguage } from './language';
 import { signOut } from './session';
 
 import { UserSession } from '@/types/session';
-import { updateSession } from './events';
 
 let clientSessionCache: UserSession | null = null;
 let sessionFetchPromise: Promise<UserSession | null> | null = null;
