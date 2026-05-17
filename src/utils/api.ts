@@ -83,12 +83,16 @@ export function deleteSearchParams(paramName: string, paramValue: string) {
 export async function apiFetch(
   endpoint: string,
   options: RequestInit = {},
-  // accessToken?: string,
+  isAuth: boolean = true,
 ) {
   const language = await getLanguage();
 
-  const session = await getSession();
-  const accessToken = session?.accessToken;
+  let accessToken;
+
+  if (isAuth) {
+    const session = await getSession();
+    accessToken = session?.accessToken || '';
+  }
 
   const res = await fetch(`${apiUrl}/${endpoint}`, {
     ...options,
