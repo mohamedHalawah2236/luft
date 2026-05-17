@@ -14,19 +14,23 @@ export async function POST() {
   const cookieStore = await cookies();
   const refreshToken = cookieStore.get('refreshToken')?.value;
 
+  console.log('refreshToken');
+  console.log(refreshToken);
   if (!refreshToken) {
     return NextResponse.json({ error: 'No refresh token' }, { status: 401 });
   }
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/auth/refreshToken`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/auth/refresh-token`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ refreshToken }),
       },
     );
+
+    console.log(res);
 
     if (!res.ok) {
       console.log('Failed to refresh access token');
@@ -37,11 +41,12 @@ export async function POST() {
       cookieStore.delete('accessTokenExpiresAt');
       cookieStore.delete('refreshTokenExpiresAt');
       cookieStore.delete('user');
-      return NextResponse.json({ error: 'Refresh failed' }, { status: 401 });
+      return NextResponse.json(null, { status: res.status });
     }
     console.log('Successfully refreshed access token');
 
     const json = await res.json();
+    console.log(json);
     const data: AuthUserApiResponse = json.result ?? json;
 
     const accessExpiry = new Date(data.accessTokenExpiresAt);
@@ -74,11 +79,14 @@ export async function POST() {
     );
     cookieStore.set('user', JSON.stringify(userData), COOKIE_OPTIONS);
 
-    return NextResponse.json({
-      accessToken: data.accessToken,
-      accessTokenExpiresAt: accessExpiry.getTime(),
-    });
+    return NextResponse.json(
+      {
+        accessToken: data.accessToken,
+        accessTokenExpiresAt: accessExpiry.getTime(),
+      },
+      { status: 200 },
+    );
   } catch {
-    return NextResponse.json({ error: 'Internal error' }, { status: 500 });
+    return NextResponse.json(null, { status: 500 });
   }
 }
