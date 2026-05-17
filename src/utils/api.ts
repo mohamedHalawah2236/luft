@@ -4,15 +4,46 @@ import { concatErrors } from './errors';
 import { getLanguage } from './language';
 import { signOut } from './session';
 
-export const getSession = async () => {
+import { UserSession } from '@/types/session';
+
+let clientSessionCache: UserSession | null = null;
+let sessionFetchPromise: Promise<UserSession | null> | null = null;
+
+export const getSession = async (): Promise<UserSession | null> => {
   if (typeof window === 'undefined') {
+    // Server-side: read cookies directly without hitting an endpoint
     const { getServerSession } = await import('./session');
-    const session = await getServerSession();
-    return session;
+    return await getServerSession();
   }
 
-  const sessionRes = await fetch('/api/auth/session');
-  return sessionRes.json();
+  // Client-side: check if we have a valid cached session
+  if (clientSessionCache) {
+    if (
+      Date.now() < new Date(clientSessionCache.accessTokenExpiresAt).getTime()
+    ) {
+      return clientSessionCache;
+    }
+    clientSessionCache = null; // Clear expired cache
+  }
+
+  // Deduplicate concurrent fetch requests
+  if (sessionFetchPromise) {
+    return sessionFetchPromise;
+  }
+
+  sessionFetchPromise = fetch('/api/auth/session')
+    .then((res) => res.json())
+    .then((session) => {
+      clientSessionCache = session;
+      sessionFetchPromise = null;
+      return session;
+    })
+    .catch((err) => {
+      sessionFetchPromise = null;
+      throw err;
+    });
+
+  return sessionFetchPromise;
 };
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
