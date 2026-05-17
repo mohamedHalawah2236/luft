@@ -1,5 +1,6 @@
 import { AuthUserApiResponse } from '@/types/auth';
 import { UserSession } from '@/types/session';
+import { getLanguage } from './language';
 
 const COOKIE_OPTIONS = {
   httpOnly: true,
@@ -136,10 +137,20 @@ export const setUserSession = async (session: UserSession) => {
 };
 
 export const signOut = async () => {
-  const cookieStore = await getCookies();
-  cookieStore.delete('accessToken');
-  cookieStore.delete('refreshToken');
-  cookieStore.delete('accessTokenExpiresAt');
-  cookieStore.delete('refreshTokenExpiresAt');
-  cookieStore.delete('user');
+  if (typeof window === 'undefined') {
+    // Server-side: clear cookies directly, then redirect
+    const cookieStore = await getCookies();
+    cookieStore.delete('accessToken');
+    cookieStore.delete('refreshToken');
+    cookieStore.delete('accessTokenExpiresAt');
+    cookieStore.delete('refreshTokenExpiresAt');
+    cookieStore.delete('user');
+
+    const { redirect } = await import('@/i18n/routing');
+    redirect({ href: '/login', locale: await getLanguage() });
+  } else {
+    // Client-side: call the API route to clear HttpOnly cookies, then navigate
+    await fetch('/api/auth/logout', { method: 'POST', cache: 'no-store' });
+    window.location.href = '/login';
+  }
 };

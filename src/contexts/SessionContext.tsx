@@ -14,8 +14,6 @@ export function SessionProvider({
   const isAccessTokenExpired =
     value && Date.now() >= new Date(value.accessTokenExpiresAt).getTime();
 
-  console.log(isAccessTokenExpired);
-
   return (
     <SessionContext.Provider
       value={

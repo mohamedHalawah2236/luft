@@ -1,7 +1,8 @@
-import { notFound, redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 
 import { concatErrors } from './errors';
 import { getLanguage } from './language';
+import { signOut } from './session';
 
 export const getSession = async () => {
   if (typeof window === 'undefined') {
@@ -13,16 +14,6 @@ export const getSession = async () => {
   const sessionRes = await fetch('/api/auth/session');
   return sessionRes.json();
 };
-
-async function performSignOut() {
-  if (typeof window === 'undefined') {
-    redirect('/login');
-  } else {
-    // Client-side: Call the local API route to clear HttpOnly cookies
-    await fetch('/api/auth/logout', { method: 'POST' });
-    window.location.href = '/login';
-  }
-}
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -77,7 +68,7 @@ export async function apiFetch(
     }
 
     if (res.status === 401) {
-      await performSignOut();
+      await signOut();
       throw new Error('401 Unauthorized', {
         cause: res.status,
       });
@@ -97,7 +88,7 @@ export async function apiFetch(
   const data = await res.json();
   if (data?.isError) {
     if (data.statusCode === 401) {
-      await performSignOut();
+      await signOut();
     }
 
     if (data.statusCode === 404) {
