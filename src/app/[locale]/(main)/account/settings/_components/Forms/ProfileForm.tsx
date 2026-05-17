@@ -20,8 +20,8 @@ import EditableField from '../EditableField';
 import ProfileImgInput from '../ProfileImgInput';
 
 import ChangeEmailForm from './ChangeEmail/ChangeEmailForm';
-import ChangePhoneForm from './ChangePhone/ChangePhoneForm';
 import ChangePasswordForm from './ChangePasswordForm';
+import ChangePhoneForm from './ChangePhone/ChangePhoneForm';
 import { profileFormQueryKey, profileFormSchema } from './schemas';
 
 import useSession from '@/hooks/useSession';
@@ -33,6 +33,7 @@ import { updateSession } from '@/utils/events';
 
 import { getProfileData, updateUserProfile } from '@/api/settings';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { updateUserCookieAction } from '../../actions';
 
 export default function ProfileForm() {
   const tCommon = useTranslations('common');
@@ -87,11 +88,10 @@ export default function ProfileForm() {
         },
       });
 
-      // window.dispatchEvent(
-      //   new CustomEvent('sessionUpdate', {
-      //     detail: ,
-      //   }),
-      // );
+      updateUserCookieAction({
+        name: `${variables.firstName} ${variables.lastName}`,
+        profilePicture: data.result,
+      });
     },
     onError: (error: Error) => {
       console.log(error);
