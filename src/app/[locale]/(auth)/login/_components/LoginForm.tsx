@@ -17,10 +17,12 @@ import { Form } from '@/components/ui/form';
 import AuthFormLayout from '../../_components/AuthFormLayout';
 import { loginAction } from '../../actions';
 
+import { useRouter } from '@/i18n/routing';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 export default function LoginForm() {
   const [serverError, setServerError] = useState<string | undefined>();
+  const router = useRouter();
 
   const tCommon = useTranslations('common');
   const t = useTranslations('auth.login');
@@ -48,9 +50,13 @@ export default function LoginForm() {
     onMutate: () => {
       setServerError(undefined);
     },
-    onSuccess: (data) => {
-      // Redirect to home
-      window.location.href = '/';
+    onSuccess: (result) => {
+      if (result.success) {
+        // Redirect to home
+        router.push('/');
+      } else {
+        setServerError(result.error);
+      }
     },
     onError: (error: Error) => {
       setServerError(error.message);
