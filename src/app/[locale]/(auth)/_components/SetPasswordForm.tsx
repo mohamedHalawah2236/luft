@@ -102,7 +102,13 @@ export default function SetPasswordForm({
       setServerError(undefined);
     },
 
-    onSuccess: onSubmissionSuccess,
+    onSuccess: (result: any) => {
+      if (result?.success === false) {
+        setServerError(result.error);
+      } else if (onSubmissionSuccess) {
+        onSubmissionSuccess(result);
+      }
+    },
     onError: (error: Error) => setServerError(error.message),
   });
 

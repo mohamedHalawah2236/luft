@@ -5,7 +5,7 @@ import { cookies } from 'next/headers';
 import { LoginFormData, SetRegisteredUserPasswordFormData } from '@/types/auth';
 
 import { apiFetch } from '@/utils/api';
-import { getServerSession,signOut as clearSession } from '@/utils/session';
+import { getServerSession, signOut as clearSession } from '@/utils/session';
 
 const COOKIE_OPTIONS = {
   httpOnly: true,
@@ -14,7 +14,13 @@ const COOKIE_OPTIONS = {
   path: '/',
 };
 
-export async function loginAction(credentials: LoginFormData) {
+type ActionResult<T = any> =
+  | { success: true; data: T }
+  | { success: false; error: string };
+
+export async function loginAction(
+  credentials: LoginFormData,
+): Promise<ActionResult> {
   try {
     const response = await apiFetch('api/auth/login', {
       method: 'POST',
@@ -68,16 +74,19 @@ export async function loginAction(credentials: LoginFormData) {
     cookieStore.set('user', JSON.stringify(userData), COOKIE_OPTIONS);
 
     // Return the same format as the original function
-    return response;
-  } catch (error: any) {
-    // Re-throw to maintain error handling
-    throw new Error(error.message);
+    return { success: true, data: response };
+  } catch (error) {
+    // Return error instead of throwing to avoid Next.js sanitization in production
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'An error occurred',
+    };
   }
 }
 
 export async function setRegisteredUserPasswordAction(
   passwordData: SetRegisteredUserPasswordFormData,
-) {
+): Promise<ActionResult> {
   try {
     const response = await apiFetch('api/auth/register/complete-register', {
       method: 'POST',
@@ -132,10 +141,13 @@ export async function setRegisteredUserPasswordAction(
     cookieStore.set('user', JSON.stringify(userData), COOKIE_OPTIONS);
 
     // Return the same format as the original function
-    return response;
+    return { success: true, data: response };
   } catch (error) {
-    // Re-throw to maintain error handling
-    throw error;
+    // Return error instead of throwing to avoid Next.js sanitization in production
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'An error occurred',
+    };
   }
 }
 
