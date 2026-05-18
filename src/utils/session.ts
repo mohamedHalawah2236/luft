@@ -118,7 +118,6 @@ export const refreshAccessToken = async (): Promise<UserSession | null> => {
       user: userData,
     };
   } catch {
-    await signOut();
     return null;
   }
 };
