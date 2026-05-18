@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
@@ -17,11 +17,13 @@ import { Form } from '@/components/ui/form';
 import AuthFormLayout from '../../_components/AuthFormLayout';
 import { loginAction } from '../../actions';
 
+import { useRouter } from '@/i18n/routing';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 export default function LoginForm() {
   const [serverError, setServerError] = useState<string | undefined>();
 
+  const router = useRouter();
   const tCommon = useTranslations('common');
   const t = useTranslations('auth.login');
 
@@ -50,7 +52,7 @@ export default function LoginForm() {
     },
     onSuccess: (data) => {
       // Redirect to home
-      window.location.href = '/';
+      router.push('/');
     },
     onError: (error: Error) => {
       setServerError(error.message);

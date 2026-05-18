@@ -5,7 +5,7 @@ import { cookies } from 'next/headers';
 import { LoginFormData, SetRegisteredUserPasswordFormData } from '@/types/auth';
 
 import { apiFetch } from '@/utils/api';
-import { getServerSession, signOut as clearSession } from '@/utils/session';
+import { getServerSession,signOut as clearSession } from '@/utils/session';
 
 const COOKIE_OPTIONS = {
   httpOnly: true,
@@ -69,9 +69,9 @@ export async function loginAction(credentials: LoginFormData) {
 
     // Return the same format as the original function
     return response;
-  } catch (error) {
+  } catch (error: any) {
     // Re-throw to maintain error handling
-    throw error;
+    throw new Error(error.message);
   }
 }
 
