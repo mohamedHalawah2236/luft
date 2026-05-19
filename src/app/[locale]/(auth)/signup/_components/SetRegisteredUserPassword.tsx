@@ -21,9 +21,13 @@ export default function SetRegisteredUserPassword({
       title={t('setPassword.title')}
       description={t('setPassword.description')}
       submitBtnLabel={t('setPassword.buttonLabel')}
-      onSubmit={({ password }) =>
-        setRegisteredUserPasswordAction({ password, registrationKey })
-      }
+      onSubmit={async ({ password }) => {
+        const result = await setRegisteredUserPasswordAction({ password, registrationKey });
+        if (!result.success) {
+          throw new Error(result.error);
+        }
+        return result.data;
+      }}
       onSubmissionSuccess={() => {
         // Redirect to home
         router.push('/');
