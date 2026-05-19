@@ -18,6 +18,7 @@ import AuthFormLayout from '../../_components/AuthFormLayout';
 import { loginAction } from '../../actions';
 
 import { useRouter } from '@/i18n/routing';
+import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 export default function LoginForm() {
@@ -44,18 +45,20 @@ export default function LoginForm() {
     },
   });
 
-  const { mutateAsync, isSuccess } = useMutation({
-    mutationFn: loginAction,
+  const { mutateAsync, isSuccess, isPending } = useMutation({
+    mutationFn: async (values: z.infer<typeof formSchema>) => {
+      const result = await loginAction(values);
+      if (!result.success) {
+        throw new Error(result.error);
+      }
+      return result.data;
+    },
     onMutate: () => {
       setServerError(undefined);
     },
-    onSuccess: (result) => {
-      if (result.success) {
-        // Redirect to home
-        router.push('/');
-      } else {
-        setServerError(result.error);
-      }
+    onSuccess: () => {
+      // Redirect to home
+      router.push('/');
     },
     onError: (error: Error) => {
       setServerError(error.message);
@@ -83,6 +86,7 @@ export default function LoginForm() {
             label={tCommon('labels.email')}
             type='email'
             placeholder={tCommon('placeholders.email')}
+            disabled={isSuccess}
           />
 
           <div className='flex flex-col gap-3.5'>
@@ -91,10 +95,13 @@ export default function LoginForm() {
               fieldName='password'
               label={tCommon('labels.password')}
               placeholder={tCommon('placeholders.password')}
+              disabled={isSuccess}
             />
             <Link
               href='forget-password'
-              className='self-end font-normal text-grayish-900 underline'
+              className={cn('self-end font-normal text-grayish-900 underline', {
+                'pointer-events-none': isSuccess || isPending,
+              })}
             >
               {t('forgetPasswordLink')}
             </Link>
