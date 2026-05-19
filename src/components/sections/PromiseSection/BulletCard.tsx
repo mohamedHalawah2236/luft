@@ -16,7 +16,7 @@ export default function BulletCard({ data }: { data: BulletRes }) {
       />
 
       {/* Texts */}
-      <div className='flex flex-col gap-1 overflow-hidden'>
+      <div className='flex flex-1 flex-col gap-1 overflow-hidden'>
         <h6
           className='line-clamp-1 w-fit text-lg font-medium text-grayish-900 md:text-xl xl:text-2xl'
           title={title}
