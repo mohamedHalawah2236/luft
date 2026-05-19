@@ -12,6 +12,7 @@ export default {
     extend: {
       fontFamily: {
         switzer: ['var(--font-switzer)'],
+        tajwal: ['var(--font-tajwal)'],
       },
       screens: {
         '2xs': '320px',

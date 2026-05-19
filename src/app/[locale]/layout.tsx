@@ -9,7 +9,7 @@ import { Toaster } from '@/components/ui/sonner';
 
 import { getServerSession } from '@/utils/session';
 
-import { switzer } from '@/fonts/fonts';
+import { switzer, tajwal } from '@/fonts/fonts';
 import { Locale } from '@/i18n/i18n.config';
 import { routing } from '@/i18n/routing';
 import { siteConfig } from '@/www/config/site';
@@ -93,7 +93,7 @@ export default async function LocaleLayout({
       dir={locale === 'en' ? 'ltr' : 'rtl'}
     >
       <body
-        className={`${switzer.variable} mx-auto min-h-screen bg-grayish-30 font-switzer antialiased`}
+        className={`${locale === 'ar' ? tajwal.variable : switzer.variable} mx-auto min-h-screen bg-grayish-30 ${locale === 'ar' ? 'font-tajwal' : 'font-switzer'} antialiased`}
       >
         <NextIntlClientProvider messages={messages}>
           <Providers session={session!}>
