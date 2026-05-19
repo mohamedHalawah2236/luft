@@ -13,7 +13,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import CustomInput from '@/components/shared/form/CustomInput';
 import FormServerError from '@/components/shared/FormServerError';
 import LoadingError from '@/components/shared/LoadingError';
-import { Button } from '@/components/ui/button';
+import SubmitButton from '@/components/shared/SubmitButton';
 import { Form } from '@/components/ui/form';
 
 import { updateUserCookieAction } from '../../actions';
@@ -193,12 +193,13 @@ export default function ProfileForm() {
           </div>
         )}
 
-        <Button
+        <SubmitButton
+          isSubmitting={isPending}
           disabled={!isFormValid || !isFormDirty || isPending}
           className='mt-4 w-[11.5rem] self-end max-sm:w-full md:mt-8'
         >
           {tCommon('buttons.save')}
-        </Button>
+        </SubmitButton>
       </form>
     </Form>
   );
