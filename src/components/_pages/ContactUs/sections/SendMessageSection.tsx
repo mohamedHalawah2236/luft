@@ -10,7 +10,7 @@ import { useMutation } from '@tanstack/react-query';
 
 import CustomInput from '@/components/shared/form/CustomInput';
 import CustomTextarea from '@/components/shared/form/CustomTextarea';
-import { Button } from '@/components/ui/button';
+import SubmitButton from '@/components/shared/SubmitButton';
 import { Form } from '@/components/ui/form';
 
 import { nameSchema } from '@/types/sharedSchemas';
@@ -133,12 +133,12 @@ export default function SendMessageSection() {
                 className='h-36 min-h-[auto] md:h-24 lg:h-36'
               />
             </div>
-            <Button
-              disabled={isPending}
+            <SubmitButton
+              isSubmitting={isPending}
               className='h-14 text-base'
             >
               {tSendMessage('buttons.send')}
-            </Button>
+            </SubmitButton>
           </div>
         </form>
       </Form>
