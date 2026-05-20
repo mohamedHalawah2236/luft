@@ -19,6 +19,8 @@ import { EditableFieldContext } from '@/contexts/EditableFieldContext';
 
 import { ChangePasswordFormData } from '@/types/settings';
 
+import { preventSpaces } from '@/utils';
+
 import { PASSWORD_REGEX } from '@/constants/regex';
 
 import { changeUserPassword } from '@/api/settings';
@@ -140,18 +142,21 @@ export default function ChangePasswordForm() {
           fieldName='currentPassword'
           label={tCommon('labels.currentPassword')}
           placeholder={tCommon('placeholders.password')}
+          onKeyDown={preventSpaces}
         />
         <CustomPasswordInput
           required
           fieldName='password'
           label={tCommon('labels.newPassword')}
           placeholder={tCommon('placeholders.newPassword')}
+          onKeyDown={preventSpaces}
         />
         <CustomPasswordInput
           required
           fieldName='confirmPassword'
           label={tCommon('labels.confirmPassword')}
           placeholder={tCommon('placeholders.confirmPassword')}
+          onKeyDown={preventSpaces}
         />
       </FieldFormLayout>
     </Form>

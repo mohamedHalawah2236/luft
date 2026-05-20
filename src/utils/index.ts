@@ -1,3 +1,5 @@
+import type { KeyboardEvent } from 'react';
+
 import { getServerSession } from './session';
 
 export const handleDownloadDocument = async (
@@ -30,4 +32,12 @@ export const handleDownloadDocument = async (
 export const isLoggedIn = async () => {
   const session = await getServerSession();
   return !!session;
+};
+
+export const preventSpaces = <T extends HTMLElement>(
+  e: KeyboardEvent<T>
+) => {
+  if (e.key === ' ') {
+    e.preventDefault();
+  }
 };

@@ -16,6 +16,8 @@ import FieldFormLayout from '../FieldFormLayout';
 import { SetState } from '@/types';
 import { IDENTIFIER_TYPE, OTP_PURPOSE, SendOtpData } from '@/types/settings';
 
+import { preventSpaces } from '@/utils';
+
 import { sendOtp } from '@/api/settings';
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -94,6 +96,7 @@ export default function RequestOtpForm({
           label={tCommon('labels.newEmail')}
           type='email'
           placeholder={tCommon('placeholders.email')}
+          onKeyDown={preventSpaces}
         />
       </FieldFormLayout>
     </Form>

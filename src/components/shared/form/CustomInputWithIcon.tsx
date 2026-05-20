@@ -48,6 +48,8 @@ function CustomInputWithIcon({
   icon,
   iconAlign,
   showAllErrors,
+  onKeyDown,
+  autoFocus,
 }: CustomInputWithIconProps) {
   const { formState, control, watch } = useFormContext();
   const { isSubmitting, errors } = formState;
@@ -119,6 +121,8 @@ function CustomInputWithIcon({
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                   handleInputChange(event, field)
                 }
+                onKeyDown={onKeyDown}
+                autoFocus={autoFocus}
               />
               {icon && (
                 <InputGroupAddon

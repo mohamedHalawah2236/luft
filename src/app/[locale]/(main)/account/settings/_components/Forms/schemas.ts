@@ -13,9 +13,11 @@ export const profileFormQueryKey = 'user-profile';
 export const profileFormSchema = (tRoot: TFunction) =>
   z.object({
     firstName: nameSchema(tRoot)
+      .trim()
       .min(2, tRoot('common.validations.firstName.min', { min: 2 }))
       .max(50, tRoot('common.validations.firstName.max', { max: 50 })),
     lastName: nameSchema(tRoot)
+      .trim()
       .min(2, tRoot('common.validations.lastName.min', { min: 2 }))
       .max(50, tRoot('common.validations.lastName.max', { max: 50 })),
     email: z.string().email().nullable().optional(),
