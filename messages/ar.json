@@ -109,7 +109,8 @@
     "night": "/الليلة",
     "mediaNotSupported": "الوسائط غير مدعومة",
     "cantLoadMedia": "تعذّر تحميل الوسائط",
-    "noMediaUploaded": "لم يتم رفع أي وسائط"
+    "noMediaUploaded": "لم يتم رفع أي وسائط",
+    "corruptedFile": "الملف تالف"
   },
   "auth": {
     "banner": {

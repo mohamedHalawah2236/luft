@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+
 import { useTranslations } from 'next-intl';
 
 import { EditIcon, Plus } from 'lucide-react';
@@ -27,10 +29,23 @@ export default function ProfileImgInput({
   className,
 }: ProfileImgInputProps) {
   const t = useTranslations('common.buttons');
-  const { watch, setValue } = useFormContext<ProfileFormData>();
+  const tCommon = useTranslations('common');
+  const { watch, setValue, setError, clearErrors } =
+    useFormContext<ProfileFormData>();
+  const [uploadedImgUrl, setUploadedImgUrl] = useState('');
 
   const file = watch('file');
-  const uploadedImgUrl = file ? URL.createObjectURL(file) : '';
+
+  useEffect(() => {
+    if (file) {
+      const objectUrl = URL.createObjectURL(file);
+      setUploadedImgUrl(objectUrl);
+      return () => URL.revokeObjectURL(objectUrl);
+    } else {
+      setUploadedImgUrl('');
+    }
+  }, [file]);
+
   const previewImage = uploadedImgUrl || image;
 
   return (
@@ -53,12 +68,30 @@ export default function ProfileImgInput({
               <FileUploaderButton
                 fieldName='file'
                 disabled={isLoading}
-                onFileSelect={(file) =>
-                  setValue('file', file, {
-                    shouldDirty: true,
-                    shouldValidate: true,
-                  })
-                }
+                onFileSelect={(file) => {
+                  clearErrors('file');
+
+                  const objectUrl = URL.createObjectURL(file);
+                  const img = new Image();
+
+                  img.onload = () => {
+                    setValue('file', file, {
+                      shouldDirty: true,
+                      shouldValidate: true,
+                    });
+                    URL.revokeObjectURL(objectUrl);
+                  };
+
+                  img.onerror = () => {
+                    setError('file', {
+                      type: 'manual',
+                      message: tCommon('corruptedFile'),
+                    });
+                    URL.revokeObjectURL(objectUrl);
+                  };
+
+                  img.src = objectUrl;
+                }}
                 className='mx-auto -mt-2.5'
                 buttonText={image ? t('edit') : t('add')}
                 buttonIcon={
