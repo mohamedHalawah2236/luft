@@ -18,7 +18,6 @@ type ConfirmLogoutModalProps = {
 };
 
 export default function ConfirmLogoutModal({
-  token,
   isOpen,
   setIsOpen,
 }: ConfirmLogoutModalProps) {

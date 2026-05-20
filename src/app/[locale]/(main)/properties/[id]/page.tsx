@@ -36,7 +36,7 @@ export default async function PropertyPage({
   } = property;
 
   return (
-    <div className='flex size-full flex-col bg-grayish-30 sm:pb-16 lg:pb-44'>
+    <div className='flex size-full flex-col bg-grayish-30 md:pb-16 lg:pb-44'>
       <PropertyImages images={images} />
       <div className='container mt-8 md:mt-12 lg:mt-16'>
         <div className='flex justify-between gap-4'>
@@ -73,11 +73,11 @@ export default async function PropertyPage({
             lng={longitude}
           />
         </div>
-        <div className='max-sm:mb-14'>
+        <div className='max-md:mb-14'>
           <NearbyPlaces nearbyPlaces={nearbyPlaces} />
         </div>
       </div>
-      <div className='max-h-fit sm:hidden'>
+      <div className='max-h-fit md:hidden'>
         <ReservationForm
           maxGuests={maximumGuests}
           variant='mobile'
