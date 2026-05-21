@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 
 import { concatErrors } from './errors';
 import { updateSession } from './events';
+import { trimStringValues } from './index';
 import { getLanguage } from './language';
 import { signOut } from './session';
 
@@ -92,6 +93,25 @@ export async function apiFetch(
   if (isAuth) {
     const session = await getSession();
     accessToken = session?.accessToken || '';
+  }
+
+  if (options.body instanceof FormData) {
+    const newFormData = new FormData();
+    for (const [key, value] of options.body.entries()) {
+      if (typeof value === 'string') {
+        newFormData.append(key, value.trim());
+      } else {
+        newFormData.append(key, value);
+      }
+    }
+    options.body = newFormData;
+  } else if (typeof options.body === 'string') {
+    try {
+      const parsedBody = JSON.parse(options.body);
+      options.body = JSON.stringify(trimStringValues(parsedBody));
+    } catch (e) {
+      // Ignore if it's not a valid JSON string
+    }
   }
 
   const res = await fetch(`${apiUrl}/${endpoint}`, {

@@ -34,10 +34,34 @@ export const isLoggedIn = async () => {
   return !!session;
 };
 
-export const preventSpaces = <T extends HTMLElement>(
-  e: KeyboardEvent<T>
-) => {
+export const preventSpaces = <T extends HTMLElement>(e: KeyboardEvent<T>) => {
   if (e.key === ' ') {
     e.preventDefault();
   }
+};
+
+export const trimStringValues = <T>(obj: T): T => {
+  if (typeof obj === 'string') {
+    return obj.trim() as unknown as T;
+  }
+  if (obj !== null && typeof obj === 'object') {
+    if (Array.isArray(obj)) {
+      return obj.map(trimStringValues) as unknown as T;
+    }
+    const result: any = {};
+    for (const key in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        result[key] = trimStringValues((obj as any)[key]);
+      }
+    }
+    return result;
+  }
+  return obj;
+};
+
+export const InputTrimmer = (value: unknown) => {
+  if (typeof value === 'string') {
+    return value.replace(/\s{2,}/g, ' ').trimStart();
+  }
+  return value;
 };

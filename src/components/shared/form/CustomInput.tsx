@@ -16,6 +16,8 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 
+import { InputTrimmer } from '@/utils';
+
 import { cn } from '@/lib/utils';
 
 type CustomInputProps = {
@@ -79,7 +81,7 @@ function CustomInput({
       return;
     }
 
-    field.onChange(inputValue);
+    field.onChange(InputTrimmer(inputValue));
   };
 
   return (

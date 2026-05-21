@@ -17,6 +17,8 @@ import { Form } from '@/components/ui/form';
 import AuthFormLayout from '../../_components/AuthFormLayout';
 import { loginAction } from '../../actions';
 
+import { preventSpaces } from '@/utils';
+
 import { useRouter } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -87,6 +89,7 @@ export default function LoginForm() {
             type='email'
             placeholder={tCommon('placeholders.email')}
             disabled={isSuccess}
+            onKeyDown={preventSpaces}
           />
 
           <div className='flex flex-col gap-3.5'>
@@ -96,6 +99,7 @@ export default function LoginForm() {
               label={tCommon('labels.password')}
               placeholder={tCommon('placeholders.password')}
               disabled={isSuccess}
+              onKeyDown={preventSpaces}
             />
             <Link
               href='forget-password'

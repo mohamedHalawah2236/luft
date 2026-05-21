@@ -14,6 +14,8 @@ import { Form } from '@/components/ui/form';
 
 import AuthFormLayout from './AuthFormLayout';
 
+import { preventSpaces } from '@/utils';
+
 import { PASSWORD_REGEX } from '@/constants/regex';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -136,12 +138,14 @@ export default function SetPasswordForm({
             fieldName='password'
             label={tCommon('labels.newPassword')}
             placeholder={tCommon('placeholders.newPassword')}
+            onKeyDown={preventSpaces}
           />
           <CustomPasswordInput
             required
             fieldName='confirm_password'
             label={tCommon('labels.confirmPassword')}
             placeholder={tCommon('placeholders.confirmPassword')}
+            onKeyDown={preventSpaces}
           />
         </AuthFormLayout>
       </form>
