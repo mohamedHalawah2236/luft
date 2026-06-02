@@ -1,9 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import Link from 'next/link';
-import { signIn } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 
 import { useForm } from 'react-hook-form';
@@ -16,13 +15,17 @@ import CustomPasswordInput from '@/components/shared/form/CustomPasswordInput';
 import { Form } from '@/components/ui/form';
 
 import AuthFormLayout from '../../_components/AuthFormLayout';
+import { loginAction } from '../../actions';
 
-import { login } from '@/api/auth';
+import { preventSpaces } from '@/utils';
+
+import { useRouter } from '@/i18n/routing';
+import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 export default function LoginForm() {
   const [serverError, setServerError] = useState<string | undefined>();
-
+  const router = useRouter();
   const tCommon = useTranslations('common');
   const t = useTranslations('auth.login');
 
@@ -44,17 +47,20 @@ export default function LoginForm() {
     },
   });
 
-  const { mutateAsync, isSuccess } = useMutation({
-    mutationFn: login,
+  const { mutateAsync, isSuccess, isPending } = useMutation({
+    mutationFn: async (values: z.infer<typeof formSchema>) => {
+      const result = await loginAction(values);
+      if (!result.success) {
+        throw new Error(result.error);
+      }
+      return result.data;
+    },
     onMutate: () => {
       setServerError(undefined);
     },
-    onSuccess: (data) => {
-      signIn('credentials', {
-        redirect: true,
-        callbackUrl: '/',
-        ...data.result,
-      });
+    onSuccess: () => {
+      // Redirect to home
+      router.push('/');
     },
     onError: (error: Error) => {
       setServerError(error.message);
@@ -82,6 +88,8 @@ export default function LoginForm() {
             label={tCommon('labels.email')}
             type='email'
             placeholder={tCommon('placeholders.email')}
+            disabled={isSuccess}
+            onKeyDown={preventSpaces}
           />
 
           <div className='flex flex-col gap-3.5'>
@@ -90,10 +98,14 @@ export default function LoginForm() {
               fieldName='password'
               label={tCommon('labels.password')}
               placeholder={tCommon('placeholders.password')}
+              disabled={isSuccess}
+              onKeyDown={preventSpaces}
             />
             <Link
               href='forget-password'
-              className='self-end font-normal text-grayish-900 underline'
+              className={cn('self-end font-normal text-grayish-900 underline', {
+                'pointer-events-none': isSuccess || isPending,
+              })}
             >
               {t('forgetPasswordLink')}
             </Link>

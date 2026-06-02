@@ -106,7 +106,8 @@
     "night": "/night",
     "mediaNotSupported": "Media not supported",
     "cantLoadMedia": "Can't load media",
-    "noMediaUploaded": "No media uploaded"
+    "noMediaUploaded": "No media uploaded",
+    "corruptedFile": "Corrupted File"
   },
   "auth": {
     "banner": {

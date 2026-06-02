@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 
 import { useForm } from 'react-hook-form';
@@ -53,11 +52,8 @@ export default function RequestOtpForm({
     mode: 'onTouched',
   });
 
-  const session = useSession();
-  const accessToken = session.data?.accessToken;
-
   const { mutateAsync } = useMutation({
-    mutationFn: async (values: SendOtpData) => sendOtp(values, accessToken),
+    mutationFn: async (values: SendOtpData) => sendOtp(values),
     onMutate: () => {
       setServerError(undefined);
     },

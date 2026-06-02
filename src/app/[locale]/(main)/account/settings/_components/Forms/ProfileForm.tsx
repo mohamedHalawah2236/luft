@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 
 import { useForm } from 'react-hook-form';
@@ -14,9 +13,10 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import CustomInput from '@/components/shared/form/CustomInput';
 import FormServerError from '@/components/shared/FormServerError';
 import LoadingError from '@/components/shared/LoadingError';
-import { Button } from '@/components/ui/button';
+import SubmitButton from '@/components/shared/SubmitButton';
 import { Form } from '@/components/ui/form';
 
+import { updateUserCookieAction } from '../../actions';
 import EditableField from '../EditableField';
 import ProfileImgInput from '../ProfileImgInput';
 
@@ -25,16 +25,17 @@ import ChangePhoneForm from './ChangePhone/ChangePhoneForm';
 import ChangePasswordForm from './ChangePasswordForm';
 import { profileFormQueryKey, profileFormSchema } from './schemas';
 
+import useSession from '@/hooks/useSession';
+
+import { UserSession } from '@/types/session';
 import { GetUserProfileRes, ProfileFormData } from '@/types/settings';
+
+import { updateSession } from '@/utils/events';
 
 import { getProfileData, updateUserProfile } from '@/api/settings';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-type ProfileFormProps = {
-  accessToken: string | undefined;
-};
-
-export default function ProfileForm({ accessToken }: ProfileFormProps) {
+export default function ProfileForm() {
   const tCommon = useTranslations('common');
   const tRoot = useTranslations('');
 
@@ -46,6 +47,8 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
       errorRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   }, [serverError]);
+
+  const session = useSession() as UserSession;
 
   const form = useForm<z.infer<ReturnType<typeof profileFormSchema>>>({
     resolver: zodResolver(profileFormSchema(tRoot)),
@@ -64,26 +67,30 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
   const { isFetching, isFetched, data, isLoading, isError } =
     useQuery<GetUserProfileRes>({
       queryKey: [profileFormQueryKey],
-      queryFn: () => getProfileData(accessToken),
+      queryFn: () => getProfileData(),
     });
 
   const userData = data?.result;
 
   const queryClient = useQueryClient();
-  const { update } = useSession();
-
   const { mutateAsync, isPending } = useMutation({
-    mutationFn: (values: ProfileFormData) =>
-      updateUserProfile(values, accessToken),
+    mutationFn: (values: ProfileFormData) => updateUserProfile(values),
     onSuccess: (data, variables) => {
       queryClient.invalidateQueries({ queryKey: [profileFormQueryKey] });
       toast.success(tCommon('toaster.dataUpdatedSuccess'));
       form.reset({ ...variables, file: null });
-      update({
+      updateSession({
+        ...session,
         user: {
+          ...session.user,
           name: `${variables.firstName} ${variables.lastName}`,
-          image: data.result,
+          profilePicture: data.result,
         },
+      });
+
+      updateUserCookieAction({
+        name: `${variables.firstName} ${variables.lastName}`,
+        profilePicture: data.result,
       });
     },
     onError: (error: Error) => {
@@ -186,12 +193,13 @@ export default function ProfileForm({ accessToken }: ProfileFormProps) {
           </div>
         )}
 
-        <Button
+        <SubmitButton
+          isSubmitting={isPending}
           disabled={!isFormValid || !isFormDirty || isPending}
           className='mt-4 w-[11.5rem] self-end max-sm:w-full md:mt-8'
         >
           {tCommon('buttons.save')}
-        </Button>
+        </SubmitButton>
       </form>
     </Form>
   );

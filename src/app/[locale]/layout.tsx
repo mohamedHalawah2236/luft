@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getServerSession } from 'next-auth';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 
@@ -8,10 +7,11 @@ import ConnectionListener from '@/components/ConnectionListener';
 import Providers from '@/components/layout/Providers';
 import { Toaster } from '@/components/ui/sonner';
 
-import { switzer } from '@/fonts/fonts';
+import { getServerSession } from '@/utils/session';
+
+import { switzer, tajwal } from '@/fonts/fonts';
 import { Locale } from '@/i18n/i18n.config';
 import { routing } from '@/i18n/routing';
-import { authOptions } from '@/lib/auth';
 import { siteConfig } from '@/www/config/site';
 
 export const metadata: Metadata = {
@@ -62,7 +62,6 @@ export const metadata: Metadata = {
       { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
     ],
   },
-  manifest: `${siteConfig.url}/site.webmanifest`,
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
@@ -86,7 +85,7 @@ export default async function LocaleLayout({
   // side is the easiest way to get started
   const messages = await getMessages();
 
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession();
 
   return (
     <html
@@ -94,7 +93,7 @@ export default async function LocaleLayout({
       dir={locale === 'en' ? 'ltr' : 'rtl'}
     >
       <body
-        className={`${switzer.variable} mx-auto min-h-screen bg-grayish-30 font-switzer antialiased`}
+        className={`${locale === 'ar' ? tajwal.variable : switzer.variable} mx-auto min-h-screen bg-grayish-30 ${locale === 'ar' ? 'font-tajwal' : 'font-switzer'} antialiased`}
       >
         <NextIntlClientProvider messages={messages}>
           <Providers session={session!}>

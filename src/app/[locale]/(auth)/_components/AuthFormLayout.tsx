@@ -4,7 +4,7 @@ import { useFormContext } from 'react-hook-form';
 
 import FormServerError from '@/components/shared/FormServerError';
 import Overlay from '@/components/shared/Overlay';
-import { Button } from '@/components/ui/button';
+import SubmitButton from '@/components/shared/SubmitButton';
 
 type AuthFormLayoutProps = {
   title: string;
@@ -44,14 +44,14 @@ export default function AuthFormLayout({
         <div className='flex flex-col gap-2'>
           {serverError && <FormServerError>{serverError}</FormServerError>}
 
-          <Button
+          <SubmitButton
+            isSubmitting={isSubmitting || isFormRedirecting}
             variant={'default'}
             className='h-12 py-3.5'
             type='submit'
-            disabled={isSubmitting || isFormRedirecting}
           >
             {submitBtnLabel}
-          </Button>
+          </SubmitButton>
         </div>
       </div>
     </div>

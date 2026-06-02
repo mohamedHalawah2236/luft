@@ -4,96 +4,70 @@ import {
   SendOtpData,
 } from '@/types/settings';
 
-import { getAllData, postData } from '@/utils/api';
+import { apiFetch } from '@/utils/api';
 
-export const getProfileData = (accessToken?: string) =>
-  getAllData('api/auth/view-profile', undefined, accessToken);
+export const getProfileData = () => apiFetch('api/auth/view-profile');
 
-export const updateUserProfile = (
-  data: ProfileFormData,
-  accessToken: string | undefined,
-) => {
+export const updateUserProfile = (data: ProfileFormData) => {
   const formData = new FormData();
 
   (Object.keys(data) as (keyof ProfileFormData)[]).forEach((key) => {
-    const value = data[key];
+    let value = data[key];
+
+    if (typeof value === 'string') {
+      value = value.trim();
+    }
 
     if (value !== undefined && value !== null) {
       formData.set(key, value as string | Blob);
     }
   });
 
-  return postData(
-    'api/auth/UpdateUserProfile',
-    {
-      body: formData,
-      method: 'PUT',
-    },
-    accessToken,
-  );
+  return apiFetch('api/auth/UpdateUserProfile', {
+    body: formData,
+    method: 'PUT',
+  });
 };
 
-export const sendOtp = (data: SendOtpData, accessToken: string | undefined) => {
-  return postData(
-    'api/auth/send-otp',
-    {
-      body: JSON.stringify(data),
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+export const sendOtp = (data: SendOtpData) => {
+  return apiFetch('api/auth/send-otp', {
+    body: JSON.stringify(data),
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
     },
-    accessToken,
-  );
+  });
 };
 
-export const resendOtp = (
-  data: SendOtpData,
-  accessToken: string | undefined,
-) => {
-  return postData(
-    'api/auth/send-otp',
-    {
-      body: JSON.stringify({ ...data, isResend: true }),
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+export const resendOtp = (data: SendOtpData) => {
+  return apiFetch('api/auth/send-otp', {
+    body: JSON.stringify({ ...data, isResend: true }),
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
     },
-    accessToken,
-  );
+  });
 };
 
-export const changeUserIdentifier = (
-  data: ChangeUserIdentifierData,
-  accessToken: string | undefined,
-) => {
-  return postData(
-    'api/auth/update-email-or-phone',
-    {
-      body: JSON.stringify(data),
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+export const changeUserIdentifier = (data: ChangeUserIdentifierData) => {
+  return apiFetch('api/auth/update-email-or-phone', {
+    body: JSON.stringify(data),
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
     },
-    accessToken,
-  );
+  });
 };
 
-export const changeUserPassword = (
-  data: { currentPassword: string; newPassword: string },
-  accessToken: string | undefined,
-) => {
-  return postData(
-    'api/auth/change-password',
-    {
-      body: JSON.stringify(data),
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+export const changeUserPassword = (data: {
+  currentPassword: string;
+  newPassword: string;
+}) => {
+  return apiFetch('api/auth/change-password', {
+    body: JSON.stringify(data),
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
     },
-    accessToken,
-  );
+  });
 };

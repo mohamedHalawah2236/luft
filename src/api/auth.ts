@@ -7,104 +7,139 @@ import {
   VerifyOtpPreregisterFormData,
 } from '@/types/auth';
 
-import { postData } from '@/utils/api';
+import { apiFetch } from '@/utils/api';
 
 export const sendOtpPreregister = async (userData: SignupFormData) =>
-  postData('api/auth/register/send-otp-preregister', {
-    method: 'POST',
-    body: JSON.stringify(userData),
-    headers: {
-      'Content-Type': 'application/json',
+  apiFetch(
+    'api/auth/register/send-otp-preregister',
+    {
+      method: 'POST',
+      body: JSON.stringify(userData),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     },
-  });
+    false,
+  );
 
 export const resendOtpPreregister = async (userData: SignupFormData) =>
-  postData('api/auth/register/resend-otp-preregister', {
-    method: 'POST',
-    body: JSON.stringify(userData),
-    headers: {
-      'Content-Type': 'application/json',
+  apiFetch(
+    'api/auth/register/resend-otp-preregister',
+    {
+      method: 'POST',
+      body: JSON.stringify(userData),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     },
-  });
+    false,
+  );
 
 export const verifyOtpPreregister = async (
   virificationData: VerifyOtpPreregisterFormData,
 ) =>
-  postData('api/auth/register/validate-preregister', {
-    method: 'POST',
-    body: JSON.stringify(virificationData),
-    headers: {
-      'Content-Type': 'application/json',
+  apiFetch(
+    'api/auth/register/validate-preregister',
+    {
+      method: 'POST',
+      body: JSON.stringify(virificationData),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     },
-  });
+    false,
+  );
 
 export const setRegisteredUserPassword = async (
   passwordData: SetRegisteredUserPasswordFormData,
 ) =>
-  postData('api/auth/register/complete-register', {
-    method: 'POST',
-    body: JSON.stringify(passwordData),
-    headers: {
-      'Content-Type': 'application/json',
+  apiFetch(
+    'api/auth/register/complete-register',
+    {
+      method: 'POST',
+      body: JSON.stringify(passwordData),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     },
-  });
+    false,
+  );
 
 export const sendOtpForgetPassword = async (email: string) =>
-  postData('api/auth/send-otp', {
-    method: 'POST',
-    body: JSON.stringify({
-      identifier: email,
-      type: 1,
-      otpPurpose: 1,
-    }),
-    headers: {
-      'Content-Type': 'application/json',
+  apiFetch(
+    'api/auth/send-otp',
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        identifier: email,
+        type: 1,
+        otpPurpose: 1,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     },
-  });
+    false,
+  );
 
 export const validateForgetPasswordOtp = async ({
   email,
   otp,
 }: ValidateForgetPasswordOTPFormData) =>
-  postData('api/auth/validate-otp', {
-    method: 'POST',
-    body: JSON.stringify({
-      identifier: email,
-      code: otp,
-      type: 1,
-      otpPurpose: 1,
-    }),
-    headers: {
-      'Content-Type': 'application/json',
+  apiFetch(
+    'api/auth/validate-otp',
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        identifier: email,
+        code: otp,
+        type: 1,
+        otpPurpose: 1,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     },
-  });
+    false,
+  );
 
 export const resetPassword = async (resetPasswordData: ResetPasswordFormData) =>
-  postData('api/auth/reset-password', {
-    method: 'POST',
-    body: JSON.stringify(resetPasswordData),
-    headers: {
-      'Content-Type': 'application/json',
+  apiFetch(
+    'api/auth/reset-password',
+    {
+      method: 'POST',
+      body: JSON.stringify(resetPasswordData),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     },
-  });
+    false,
+  );
 
 export const login = async (credentials: LoginFormData) =>
-  postData('api/auth/login', {
-    method: 'POST',
-    body: JSON.stringify({
-      emailOrPhone: credentials.email,
-      password: credentials.password,
-    }),
-    headers: {
-      'Content-Type': 'application/json',
+  apiFetch(
+    'api/auth/login',
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        emailOrPhone: credentials.email,
+        password: credentials.password,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     },
-  });
+    false,
+  );
 
 export const logout = async (token: string) =>
-  postData('api/auth/logout', {
-    method: 'PATCH',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
+  apiFetch(
+    'api/auth/logout',
+    {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
     },
-  });
+    false,
+  );

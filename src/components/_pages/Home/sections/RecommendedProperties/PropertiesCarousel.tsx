@@ -2,8 +2,6 @@
 
 import { useState } from 'react';
 
-import { useTranslations } from 'next-intl';
-
 import Autoplay from 'embla-carousel-autoplay';
 
 import {
@@ -24,7 +22,6 @@ type PropertiesCarouselProps = {
 export default function PropertiesCarousel({
   properties,
 }: PropertiesCarouselProps) {
-  const t = useTranslations('sections.recommendedProperties');
   const [api, setApi] = useState<CarouselApi>();
 
   return (
@@ -36,7 +33,6 @@ export default function PropertiesCarousel({
             delay: 2500,
             stopOnInteraction: true,
             stopOnLastSnap: true,
-            stopOnMouseEnter: true,
           }),
         ]}
         className='flex w-full items-center gap-2 [&>.overflow-hidden]:flex-1'

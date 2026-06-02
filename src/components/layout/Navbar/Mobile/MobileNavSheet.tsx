@@ -1,6 +1,5 @@
 'use client';
 
-import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 
 import { Heart, Menu } from 'lucide-react';
@@ -23,6 +22,8 @@ import LogoutBtn from './LogoutBtn';
 import MobileNavLink from './MobileNavLink';
 import UserLink from './UserSetting';
 
+import useSession from '@/hooks/useSession';
+
 import { Page, SocialMediaLink } from '@/types/layout';
 
 function MobileNavSheet({
@@ -34,14 +35,14 @@ function MobileNavSheet({
 }) {
   const t = useTranslations();
   const session = useSession();
-  const token = session?.data?.accessToken ?? '';
+  const token = session?.accessToken ?? '';
 
   return (
     <Sheet>
       <SheetTrigger>
         <Menu className='size-6' />
       </SheetTrigger>
-      <SheetContent className='flex w-10/12 min-w-fit flex-col justify-between overflow-auto bg-white p-0 sm:max-w-full [&>button]:end-4 [&>button]:w-fit'>
+      <SheetContent className='flex w-10/12 min-w-fit flex-col justify-between overflow-auto bg-white p-0 sm:max-w-full [&>button]:rtl:left-4 [&>button]:rtl:right-auto [&>button]:w-fit'>
         <div className='flex flex-col gap-4 px-4 pt-4'>
           <div className='flex flex-col gap-4'>
             {navLinks.map(({ title, id }) => (

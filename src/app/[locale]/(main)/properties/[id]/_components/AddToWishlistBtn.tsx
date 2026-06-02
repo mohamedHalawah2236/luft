@@ -1,12 +1,13 @@
 'use client';
 
-import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 
 import { Heart } from 'lucide-react';
 
+import useSession from '@/hooks/useSession';
+
 export default function AddToWishlistBtn() {
-  const { data: session } = useSession();
+  const session = useSession();
   const t = useTranslations('pages.propertyDetails.actions');
 
   if (!session) return null;

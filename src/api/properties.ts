@@ -3,11 +3,11 @@ import {
   RecommendedPropertiesApiRes,
 } from '@/types/properties';
 
-import { getAllData } from '@/utils/api';
+import { apiFetch } from '@/utils/api';
 
 export const getRecommendedProperties =
   (): Promise<RecommendedPropertiesApiRes> =>
-    getAllData(`api/Property/get-all-recommended-properties`);
+    apiFetch(`api/Property/get-all-recommended-properties`, undefined, false);
 
 export const getProperty = (id: string): Promise<GetPropertyApiResponse> =>
-  getAllData(`api/Property/website/get-by-id?id=${id}`);
+  apiFetch(`api/Property/website/get-by-id?id=${id}`, undefined, false);

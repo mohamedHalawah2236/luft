@@ -20,6 +20,8 @@ import {
   UserSignupData,
 } from '@/types/auth';
 
+import { preventSpaces } from '@/utils';
+
 import { NAME_REGEX } from '@/constants/regex';
 
 import { sendOtpPreregister } from '@/api/auth';
@@ -123,6 +125,7 @@ export default function CreateAccountForm({
             label={tCommon('labels.email')}
             placeholder={tCommon('placeholders.email')}
             type='email'
+            onKeyDown={preventSpaces}
           />
         </AuthFormLayout>
       </form>

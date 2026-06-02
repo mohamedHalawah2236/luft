@@ -109,7 +109,8 @@
     "night": "/الليلة",
     "mediaNotSupported": "الوسائط غير مدعومة",
     "cantLoadMedia": "تعذّر تحميل الوسائط",
-    "noMediaUploaded": "لم يتم رفع أي وسائط"
+    "noMediaUploaded": "لم يتم رفع أي وسائط",
+    "corruptedFile": "الملف تالف"
   },
   "auth": {
     "banner": {
@@ -218,8 +219,8 @@
         "addDatesTitle": "أضف التواريخ للأسعار",
         "addDatesSubtitle": "اختر تواريخك وعدد ضيوفك لتأمين هذه الإقامة.",
         "forNights": "لمدة {count} ليالٍ",
-        "checkIn": "تسجيل الوصول",
-        "checkOut": "تسجيل المغادرة",
+        "checkIn": "الوصول",
+        "checkOut": "المغادرة",
         "addDate": "أضف تاريخاً",
         "guests": "الضيوف",
         "guestsCount": "{count} ضيوف",

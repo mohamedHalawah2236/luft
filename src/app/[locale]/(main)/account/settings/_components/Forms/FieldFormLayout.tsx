@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import FormServerError from '@/components/shared/FormServerError';
-import { Button } from '@/components/ui/button';
+import SubmitButton from '@/components/shared/SubmitButton';
 
 import { cn } from '@/lib/utils';
 
@@ -43,15 +43,16 @@ export default function FieldFormLayout({
       <div className='flex flex-col gap-2'>
         {serverError && <FormServerError>{serverError}</FormServerError>}
 
-        <Button
+        <SubmitButton
           variant={'default'}
           className='py-3.5 md:h-12'
           type='button'
           disabled={!isValid || !isDirty || isSubmitting}
+          isSubmitting={isSubmitting}
           onClick={onSubmit}
         >
           {submitBtnLabel}
-        </Button>
+        </SubmitButton>
       </div>
     </div>
   );

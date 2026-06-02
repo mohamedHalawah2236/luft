@@ -1,8 +1,57 @@
 import { notFound } from 'next/navigation';
-import { signOut } from 'next-auth/react';
 
 import { concatErrors } from './errors';
+import { updateSession } from './events';
+import { trimStringValues } from './index';
 import { getLanguage } from './language';
+import { signOut } from './session';
+
+import { UserSession } from '@/types/session';
+
+let clientSessionCache: UserSession | null = null;
+let sessionFetchPromise: Promise<UserSession | null> | null = null;
+
+export const getSession = async (): Promise<UserSession | null> => {
+  if (typeof window === 'undefined') {
+    // Server-side: read cookies directly without hitting an endpoint
+    const { getServerSession } = await import('./session');
+    return await getServerSession();
+  }
+
+  // Client-side: check if we have a valid cached session
+  if (clientSessionCache) {
+    if (
+      Date.now() < new Date(clientSessionCache.accessTokenExpiresAt).getTime()
+    ) {
+      return clientSessionCache;
+    }
+    clientSessionCache = null; // Clear expired cache
+  }
+
+  // Deduplicate concurrent fetch requests
+  if (sessionFetchPromise) {
+    return sessionFetchPromise;
+  }
+
+  sessionFetchPromise = fetch('/api/auth/session')
+    .then((res) => res.json())
+    .then((session) => {
+      clientSessionCache = session;
+      sessionFetchPromise = null;
+
+      if (typeof window !== 'undefined') {
+        updateSession(session);
+      }
+
+      return session;
+    })
+    .catch((err) => {
+      sessionFetchPromise = null;
+      throw err;
+    });
+
+  return sessionFetchPromise;
+};
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -32,12 +81,38 @@ export function deleteSearchParams(paramName: string, paramValue: string) {
   return `?${searchParams.toString()}`;
 }
 
-export async function getAllData(
+export async function apiFetch(
   endpoint: string,
   options: RequestInit = {},
-  accessToken?: string,
+  isAuth: boolean = true,
 ) {
   const language = await getLanguage();
+
+  let accessToken;
+
+  if (isAuth) {
+    const session = await getSession();
+    accessToken = session?.accessToken || '';
+  }
+
+  if (options.body instanceof FormData) {
+    const newFormData = new FormData();
+    for (const [key, value] of options.body.entries()) {
+      if (typeof value === 'string') {
+        newFormData.append(key, value.trim());
+      } else {
+        newFormData.append(key, value);
+      }
+    }
+    options.body = newFormData;
+  } else if (typeof options.body === 'string') {
+    try {
+      const parsedBody = JSON.parse(options.body);
+      options.body = JSON.stringify(trimStringValues(parsedBody));
+    } catch (e) {
+      // Ignore if it's not a valid JSON string
+    }
+  }
 
   const res = await fetch(`${apiUrl}/${endpoint}`, {
     ...options,
@@ -54,10 +129,7 @@ export async function getAllData(
     }
 
     if (res.status === 401) {
-      signOut({
-        redirect: true,
-        callbackUrl: '/login',
-      });
+      await signOut();
       throw new Error('401 Unauthorized', {
         cause: res.status,
       });
@@ -77,10 +149,7 @@ export async function getAllData(
   const data = await res.json();
   if (data?.isError) {
     if (data.statusCode === 401) {
-      signOut({
-        redirect: true,
-        callbackUrl: '/login',
-      });
+      await signOut();
     }
 
     if (data.statusCode === 404) {
@@ -99,70 +168,8 @@ export async function getAllDataParallel(
   options: RequestInit = {},
 ) {
   const res = await Promise.all(
-    endpoints.map((endpoint) => getAllData(endpoint, options)),
+    endpoints.map((endpoint) => apiFetch(endpoint, options)),
   );
 
   return res;
-}
-
-export async function postData(
-  endpoint: string,
-  options: RequestInit = {},
-  accessToken?: string,
-) {
-  const language = await getLanguage();
-
-  const res = await fetch(`${apiUrl}/${endpoint}`, {
-    ...options,
-    headers: {
-      language,
-      ...(options.headers || {}),
-      ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
-    },
-  });
-
-  if (!res.ok) {
-    if (res.status === 404) {
-      notFound();
-    }
-
-    if (res.status === 401) {
-      signOut({
-        redirect: true,
-        callbackUrl: '/login',
-      });
-      throw new Error('401 Unauthorized', {
-        cause: res.status,
-      });
-    }
-
-    const data = await res.json();
-    if (data.errors) {
-      throw new Error(concatErrors(data), {
-        cause: data.statusCode,
-      });
-    }
-    throw new Error(data.message, {
-      cause: data.statusCode,
-    });
-  }
-
-  const data = await res.json();
-  if (data?.isError) {
-    if (data.statusCode === 401) {
-      signOut({
-        redirect: true,
-        callbackUrl: '/login',
-      });
-    }
-
-    if (data.statusCode === 404) {
-      notFound();
-    }
-    throw new Error(data?.message, {
-      cause: data.statusCode,
-    });
-  }
-
-  return data;
 }

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 
 import { useForm } from 'react-hook-form';
@@ -16,6 +15,8 @@ import FieldFormLayout from '../FieldFormLayout';
 
 import { SetState } from '@/types';
 import { IDENTIFIER_TYPE, OTP_PURPOSE, SendOtpData } from '@/types/settings';
+
+import { preventSpaces } from '@/utils';
 
 import { sendOtp } from '@/api/settings';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -50,11 +51,8 @@ export default function RequestOtpForm({
     mode: 'onTouched',
   });
 
-  const session = useSession();
-  const accessToken = session.data?.accessToken;
-
   const { mutateAsync } = useMutation({
-    mutationFn: async (values: SendOtpData) => sendOtp(values, accessToken),
+    mutationFn: async (values: SendOtpData) => sendOtp(values),
     onMutate: () => {
       setServerError(undefined);
     },
@@ -98,6 +96,7 @@ export default function RequestOtpForm({
           label={tCommon('labels.newEmail')}
           type='email'
           placeholder={tCommon('placeholders.email')}
+          onKeyDown={preventSpaces}
         />
       </FieldFormLayout>
     </Form>

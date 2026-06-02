@@ -6,7 +6,7 @@ export default function Loader() {
   const t = useTranslations('common');
 
   return (
-    <div className='flex h-dvh w-dvw flex-col items-center justify-center gap-4'>
+    <div className='max-w-dvw flex h-dvh flex-col items-center justify-center gap-4'>
       <Spinner />
       <p className='font-semibold text-grayish-700 md:text-lg xl:text-xl'>
         {t('loading')}

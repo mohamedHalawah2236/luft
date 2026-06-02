@@ -1,10 +1,9 @@
-import React from 'react';
-
 import { useTranslations } from 'next-intl';
 
 import { Button } from '../ui/button';
 
 import { Modal } from './Modal';
+import SubmitButton from './SubmitButton';
 
 import { ModalProps } from '@/types/components';
 
@@ -37,13 +36,15 @@ export default function ConfirmModal({
       <div className='flex w-full flex-col items-center gap-7'>
         <div>{children}</div>
         <div className='flex w-full items-center gap-3 py-1 max-sm:flex-col'>
-          <Button
+          <SubmitButton
             className='w-24 min-w-fit flex-1 font-medium max-sm:w-full'
             disabled={isActionsDisabled}
             onClick={onConfirm}
+            type='button'
+            isSubmitting={isActionsDisabled}
           >
             {t('confirm')}
-          </Button>
+          </SubmitButton>
           <Button
             className='w-24 min-w-fit flex-1 font-medium max-sm:w-full'
             disabled={isActionsDisabled}
