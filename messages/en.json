@@ -176,7 +176,8 @@
       "changePhone": "Change phone number",
       "changePassword": "Change Password",
       "newEmailOtpSent": "Verify your new email address",
-      "newPhoneOtpSent": "Verify your new phone number"
+      "newPhoneOtpSent": "Verify your new phone number",
+      "verifyPassword": "Verify Your Password"
     },
     "descriptions": {
       "otpSent": "A {numOfDigits}-digit verification code was sent to {identifier}"
