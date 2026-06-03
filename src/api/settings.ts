@@ -71,3 +71,13 @@ export const changeUserPassword = (data: {
     },
   });
 };
+
+export const verifyUserPassword = (password: string) => {
+  return apiFetch('api/auth/verify-password', {
+    body: JSON.stringify({ password }),
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+};

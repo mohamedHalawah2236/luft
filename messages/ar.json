@@ -179,7 +179,8 @@
       "changePhone": "تغيير رقم الهاتف",
       "changePassword": "تغيير كلمة المرور",
       "newEmailOtpSent": "تم إرسال رمز تحقق إلى بريدك الإلكتروني الجديد",
-      "newPhoneOtpSent": "تم إرسال رمز تحقق إلى رقم هاتفك الجديد"
+      "newPhoneOtpSent": "تم إرسال رمز تحقق إلى رقم هاتفك الجديد",
+      "verifyPassword": "التحقق من كلمة المرور"
     },
     "descriptions": {
       "otpSent": "تم إرسال رمز تحقق مكوّن من {numOfDigits} أرقام إلى {identifier}"
